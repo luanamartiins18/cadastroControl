@@ -1,0 +1,65 @@
+.wrapper{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: auto auto;
+    align-content: center;  
+    justify-content: center; 
+}
+
+@media(max-width: 720px){
+    .wrapper{
+        grid-template-columns: auto;
+        grid-template-rows: 40% 60%;
+    }
+}
+
+.login-box{
+    display: grid; 
+    border-radius: 5px;  
+    grid-template-rows: auto auto auto;
+    align-content: center;
+    grid-row-gap: 1rem;
+    margin: 0 3rem;       
+}
+
+div input{
+    padding: 0 1rem;
+    height: 2rem;
+    outline: none;    
+    border: none;  
+}
+
+.input-group{
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 0.2rem;
+    padding: 0.5em;
+    position: relative;     
+}
+
+.login-box > input{
+    background-color: #00CE81;
+    width: 70%;
+    margin: auto;
+    border-radius: 0.5rem;
+    height: 2.5rem;
+    color: white;
+    font-size: 1.25rem;
+}
+
+.login-box > input:hover{
+    background-color: #00DD81;
+    cursor: pointer;
+}
+
+.login-box > input:active{
+    background-color: #00EE81;
+}
+
+.val-false{
+    border: 1px solid red;    
+}
+
+img{
+    pointer-events: none;
+}

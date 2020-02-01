@@ -1,0 +1,21 @@
+<div class = 'wrapper'>
+
+    <img [src] = "logoQintess"/>
+
+        <form [formGroup] = 'loginForm' class = 'login-box'>
+
+            <div [ngClass] = "{'val-false':this.senhaErrada}" class = 'input-group'>
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <input  type = 'text' placeholder = 'RE999999' spellcheck="false" formControlName = "colaborador" />
+            </div>
+
+            <div [ngClass] = "{'val-false':this.senhaErrada}" class = 'input-group'> 
+                <i class="fa fa-lock" aria-hidden="true"></i>
+                <input type = 'password' placeholder = 'Senha' formControlName = "senha" />
+            </div>
+            
+            <input type = 'submit' value = 'Entrar' (click)='checaLogin()' />    
+              
+        </form>       
+    
+</div>

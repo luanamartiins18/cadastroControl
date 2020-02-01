@@ -1,0 +1,82 @@
+.navbar{
+    width: 100vw;
+    height: 7rem;
+    display: grid;
+    grid-template-columns: 50% 50%;     
+}
+
+.navbar::after{
+    content: '';
+    border-bottom: 0.1rem solid rgba(0, 0, 0, 0.6);
+    margin-left: 15%;
+    width: 170%;    
+}
+
+.logo-qintess{
+    height: 5rem;
+    padding: 0.5rem 1rem;
+    pointer-events: none;  
+}
+
+.logo-qintess-red{
+    height: 5rem;
+    padding: 0.5rem 1rem;
+    pointer-events: none;
+    display: none;
+    
+}
+
+.painel-dir{
+    display: grid;
+    grid-template-rows: 25% 75%;       
+    padding: 1rem;
+}
+
+.div-desloga{
+    justify-self: end;    
+}
+
+.btn-desloga{
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    outline: none;    
+}
+
+.dados-pessoais{   
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-row-gap: 1rem;    
+    grid-column-gap: 0.5rem;
+}
+
+@media(max-width: 560px){
+    .dados-pessoais{
+        grid-template-columns: auto;
+    }
+    
+    .navbar::after{
+        margin-top: 1rem;   
+    }
+}
+
+
+ .div-desloga i{
+    padding: 0 0.4rem;
+}
+
+.dados-pessoais span {
+    padding-left: 1rem;
+}
+
+.dados-pessoais i{
+    width: 16px;
+}
+
+*{
+    font-size: 16px;    
+}
+
+span{
+    font-family: arial;
+}
