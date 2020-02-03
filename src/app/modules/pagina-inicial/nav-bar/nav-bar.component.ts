@@ -18,7 +18,7 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  
   deslogaUsuario(){
     this.loginService.deslogaUsuario();
     this.router.navigate(['login']);

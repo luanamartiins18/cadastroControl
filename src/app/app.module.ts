@@ -4,8 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { UsuarioModule } from './usuario/usuario.module';
-import { PaginaInicialModule } from './pagina-inicial/pagina-inicial.module';
+import { UsuarioModule } from './modules/usuario/usuario.module';
+import { PaginaInicialModule } from './modules/pagina-inicial/pagina-inicial.module';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent} from './usuario/login/login.component';
-import { NavBarComponent } from './pagina-inicial/nav-bar/nav-bar.component';
-import { AuthGuardService } from './auth-guard.service'; 
-import { LoginGuardService} from './login-guard-service'; 
+import { LoginComponent} from './modules/usuario/login/login.component';
+import { NavBarComponent } from './modules/pagina-inicial/nav-bar/nav-bar.component';
+import { AuthGuardService } from './AuthGuards/auth-guard.service'; 
+import { LoginGuardService} from './AuthGuards/login-guard-service'; 
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate:[LoginGuardService]},
