@@ -1,4 +1,4 @@
-export class Colaborador {
+export class Usuario {
 
     id: number;
     nome: string;
