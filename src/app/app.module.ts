@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 
 import { UsuarioModule } from './usuario/usuario.module';
 import { PaginaInicialModule } from './pagina-inicial/pagina-inicial.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { PaginaInicialModule } from './pagina-inicial/pagina-inicial.module';
     BrowserModule,
     AppRoutingModule ,
     UsuarioModule,
-    PaginaInicialModule
+    PaginaInicialModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

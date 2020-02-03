@@ -30,16 +30,7 @@ export class LoginComponent implements OnInit {
 
   checaLogin(){
 
-    if(this.loginService.autenticaUsuario(this.loginForm.get('colaborador'), this.loginForm.get('senha'))){
-      
-      this.router.navigate(['home']);
-      this.senhaErrada = false;
-
-    }else{
-
-      this.senhaErrada = true;
-
-    }   
+   this.loginService.autenticaUsuario(this.loginForm.get('colaborador'), this.loginForm.get('senha'), this);
 
   }
 
