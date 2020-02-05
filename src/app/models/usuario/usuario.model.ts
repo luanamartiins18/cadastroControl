@@ -1,17 +1,27 @@
-export class Usuario {
+import { UsuarioInterface } from 'src/app/interfaces/UsuarioInterface';
+import { Contrato } from 'src/app/models/contrato/contrato.model';
+import { Cargo } from 'src/app/models/cargo/cargo.model';
+import { Perfil } from '../perfil/perfil.model';
+import { Sigla } from '../sigla/sigla.model';
 
+export class Usuario implements UsuarioInterface{
+    
     id: number;
     nome: string;
     email: string;
     cpf: string;
-    re: string;
-    codigo_bb: string;
+    codigoRe: string;
+    codigoBB: string;
     empresa: string;
-    demanda: string;
-    celular: string;
-    dt_nascimento: Date;
+    demanda: number;
+    nascimento: Date;
     status: string;
-    contrato: string;
-    acesso: string;
-    
+    contrato: Contrato;
+    cargo: Cargo;
+    perfil: Perfil;
+    celular: string;
+    sigla: Sigla;
+    listaPerfil: Array<Perfil>;   
+
+    constructor(){}
 }

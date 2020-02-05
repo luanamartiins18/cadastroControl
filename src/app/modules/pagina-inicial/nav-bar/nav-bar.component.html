@@ -18,22 +18,22 @@
 
             <div>
                 <i class="fa fa-user"></i>
-                <span >Fulano da silva</span>
+                <span >{{this.usuario.nome | titlecase}}</span>
             </div>
 
             <div>
                 <i class="fa fa-briefcase"></i>
-                <span>ACC/TFA</span>
+                <span>{{this.usuario.cargo.descricao}}</span>
             </div>
 
             <div>
                 <i class="fa fa-address-card"></i>
-                <span >RE999999</span>
-            </div>
+                <span >{{this.usuario.codigoRe}}</span>
+            </div>  
 
             <div>
                 <i class="fa fa-users"></i>
-                <span>Baixa/Mobile</span>
+                <span>{{this.usuario.listaPerfil[0].descricao}}</span>
             </div>
 
         </div>

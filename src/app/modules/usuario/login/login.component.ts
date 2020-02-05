@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login.service';
-import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 
@@ -15,8 +14,7 @@ export class LoginComponent implements OnInit {
   senhaErrada: boolean = false;
   loginForm: FormGroup;
 
-  constructor(private loginService: LoginService,
-              private router:       Router,               
+  constructor(private loginService: LoginService,                          
               private formBuilder:  FormBuilder) { }
 	
   ngOnInit() {
@@ -33,5 +31,4 @@ export class LoginComponent implements OnInit {
    this.loginService.autenticaUsuario(this.loginForm.get('colaborador'), this.loginForm.get('senha'), this);
 
   }
-
 }
