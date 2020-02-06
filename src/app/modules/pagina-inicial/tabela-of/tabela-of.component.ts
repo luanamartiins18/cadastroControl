@@ -15,4 +15,10 @@ export class TabelaOfComponent implements OnInit {
     
   }
 
+  retornaPrimeiroNome(nome: string){
+    let aux = nome.split(" ");
+    let res = aux[0] + " " +  aux[2];    
+    return res;
+  }
+
 }

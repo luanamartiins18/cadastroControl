@@ -21,19 +21,18 @@ export class HomeParentComponent implements OnInit {
       (lstOf: Array<OrdemFornecimento>) => {
         this.listaOf = lstOf;
       }
-    );
-    
+    );    
+ 
     let re = sessionStorage.getItem('colaborador');
-
     this.usuarioService.getUsuario(re).subscribe(
 
       (usuario: Usuario) => {     
-        this.usuario = usuario;
-      }
-      
+        this.usuario = usuario;        
+      }    
+
     );
-    
-  }
+
+  }  
 
   ngOnInit() {
   }

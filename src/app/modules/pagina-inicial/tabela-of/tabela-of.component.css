@@ -1,3 +1,8 @@
 .tam-fonte{
     font-size: 14px;
 }
+
+.linhaTabela:hover{
+    cursor: pointer;
+    background-color: skyblue;
+}
