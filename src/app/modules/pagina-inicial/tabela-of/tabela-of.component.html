@@ -1,30 +1,37 @@
-<table class="table table-dark">
-    <thead>
+<table class="table table-striped table-hover table-sm table-responsive-xl">
+    <thead class = 'thead-dark tam-fonte'>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
+        <th scope="col">OF</th>
+        <th scope="col">Sigla</th>
+        <th scope="col">Gerente Técnico</th>
+        <th scope="col">Responsável Técnico</th>
+        <th scope="col">Data de Abertura</th>
+        <th scope="col">Data Prevista</th>
+        <th scope="col">Data Entregue</th>
+        <th scope="col">Data Aceite</th>
+        <th scope="col">Valor UstiBB</th>
+        <th scope="col">Situação GENTI</th>
+        <th scope="col">Situação OF</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
+      <tr *ngFor = "let ordemF of this.listaOf; let i = index;">
+
+        <th scope="row">{{i+1}}</th>
+        <td>{{ordemF.numeroOFGenti}}</td>
+        <td>{{ordemF.sigla.descricao}}</td>
+        <td>{{ordemF.gerenteTecnico | titlecase}}</td>
+        <td>{{ordemF.responsavelTecnico | titlecase}}</td>
+        <td>{{ordemF.dtAbertura}}</td>
+        <td>{{ordemF.dtAbertura}}</td>
+        <td>{{ordemF.dtAbertura}}</td>
+        <td>{{ordemF.dtAbertura}}</td>
+        <td>{{ordemF.ustiBB}}</td>
+        <td>{{ordemF.situacao.descricao}}</td>
+        <td>{{ordemF.situacaoAlm}}</td>
+
+
       </tr>
     </tbody>
   </table>

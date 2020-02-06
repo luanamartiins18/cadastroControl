@@ -17,7 +17,7 @@ export interface UsuarioInterface{
     contrato: ContratoInterface;
     cargo: CargoInterface;
     sigla: SiglaInterface;
-    listaPerfil: Array<PerfilInterface>
+    listaPerfil: Array<PerfilInterface>;
     celular: string;
 }
 

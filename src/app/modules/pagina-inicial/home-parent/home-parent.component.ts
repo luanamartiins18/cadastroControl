@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from 'src/app/modules/usuario/usuario.service';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
+import { OrdemFornecimento } from 'src/app/models/ordemfornecimento/ordem-fornecimento';
+import { OrdemFornecimentoService } from 'src/app/services/OrdemDeFornecimento/ordem-fornecimento-service';
 
 @Component({
   selector: 'app-home-parent',
@@ -10,8 +12,16 @@ import { Usuario } from 'src/app/models/usuario/usuario.model';
 export class HomeParentComponent implements OnInit {
 
   usuario: Usuario;
+  listaOf: Array<OrdemFornecimento>;
 
-  constructor(private usuarioService: UsuarioService) { 
+  constructor(private usuarioService: UsuarioService,
+              private ofService: OrdemFornecimentoService) { 
+    
+    this.ofService.getOrdemFornecimento().subscribe(
+      (lstOf: Array<OrdemFornecimento>) => {
+        this.listaOf = lstOf;
+      }
+    );
     
     let re = sessionStorage.getItem('colaborador');
 

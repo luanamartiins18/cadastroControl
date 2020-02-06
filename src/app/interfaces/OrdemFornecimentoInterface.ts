@@ -1,8 +1,8 @@
-import { SiglaInterface } from '../interfaces/SiglaInterface';
-import { SituacaoInterface } from '../interfaces/SituacaoInterface';
-import { UsuarioInterface } from '../interfaces/UsuarioInterface';
+import { SiglaInterface } from './SiglaInterface';
+import { SituacaoInterface } from './SituacaoInterface';
+import { UsuarioInterface } from './UsuarioInterface';
 
-export interface OrdemFornecimento {
+export interface OrdemFornecimentoInterface {
     id: number;
     numeroOF: string;
     numeroOFGenti: string;
