@@ -119,25 +119,25 @@
         <h5>Responsável OF</h5>
     </div>
 
-    <form>
+    <form [formGroup] = "formColab" (ngSubmit)='onSubmit(formColab.value)'>
         <div class = 'container mt-2'>
             <div class = 'form-group row'>
                 
                 <div class = 'col-sm-6'>  
                     <label class = "font-weight-bold">Colaborador</label>              
-                    <select class = 'form-control' >
-                        <option *ngFor = 'let colaborador of this.listaUsuarios;' value = 'colaborador.sigla.id'>{{colaborador.nome | titlecase}}</option>
+                    <select class = 'form-control' formControlName='colaborador' >
+                        <option *ngFor = 'let colaborador of this.listaUsuarios;' [value] = 'colaborador.sigla.id'>{{colaborador.nome | titlecase}}</option>
                     </select>
 
                 </div>    
                 
                 <div class = 'col-sm-6'>
                     <label class = "font-weight-bold" >Situação</label>
-                    <select class = 'form-control'>
+                    <select class = 'form-control' formControlName='situacao'>
                         <option hidden disabled selected value> 
                             Selecione uma situação
                         </option>
-                        <option *ngFor = 'let sit of this.listaSituacao;' value = 'sit.id'>
+                        <option *ngFor = 'let sit of this.listaSituacao;' [value] = 'sit.id'>
                             {{sit.descricao}}
                         </option>
                     </select>

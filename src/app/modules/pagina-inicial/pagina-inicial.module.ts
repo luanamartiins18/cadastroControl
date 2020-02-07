@@ -7,13 +7,14 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { GerenciarUsuariosComponent } from './gerenciar-usuarios/gerenciar-usuarios.component';
 import { DefaultComponent } from './default/default.component';
 import { DetalhaOfComponent } from './detalha-of/detalha-of.component';
-
+import {  ReactiveFormsModule } from '@angular/forms'
 
 
 @NgModule({
   declarations: [HeaderComponent, TabelaOfComponent, HomeParentComponent, NavbarComponent, GerenciarUsuariosComponent, DefaultComponent, DetalhaOfComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
   entryComponents: [TabelaOfComponent]
 })
