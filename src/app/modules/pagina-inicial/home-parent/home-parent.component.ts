@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { UsuarioService } from 'src/app/modules/usuario/usuario.service';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
 import { OrdemFornecimento } from 'src/app/models/ordemfornecimento/ordem-fornecimento';
@@ -13,23 +13,26 @@ export class HomeParentComponent implements OnInit {
 
   usuario: Usuario;
   listaOf: Array<OrdemFornecimento>;
+  acesso: string;
+  opContainer: string = 'default';
+  ofDetalha: OrdemFornecimento;  
 
   constructor(private usuarioService: UsuarioService,
-              private ofService: OrdemFornecimentoService) { 
+              private ofService: OrdemFornecimentoService) {     
     
+
     this.ofService.getOrdemFornecimento().subscribe(
       (lstOf: Array<OrdemFornecimento>) => {
         this.listaOf = lstOf;
-      }
+      }      
     );    
  
     let re = sessionStorage.getItem('colaborador');
     this.usuarioService.getUsuario(re).subscribe(
 
       (usuario: Usuario) => {     
-        this.usuario = usuario;        
+        this.usuario = usuario;           
       }    
-
     );
 
   }  

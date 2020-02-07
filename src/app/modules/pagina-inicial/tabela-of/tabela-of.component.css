@@ -6,3 +6,13 @@
     cursor: pointer;
     background-color: skyblue;
 }
+
+.qtd-of{
+    text-align: end;
+    margin: 0.5rem;
+}
+
+.custom-footer{
+    height: 6rem;
+    margin-top: 4rem; 
+}

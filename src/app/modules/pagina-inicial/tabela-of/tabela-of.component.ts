@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { OrdemFornecimento } from 'src/app/models/ordemfornecimento/ordem-fornecimento';
+import { HomeParentComponent } from '../home-parent/home-parent.component';
 
 @Component({
   selector: 'tabela-of',
@@ -8,7 +9,7 @@ import { OrdemFornecimento } from 'src/app/models/ordemfornecimento/ordem-fornec
 })
 export class TabelaOfComponent implements OnInit {
   @Input() listaOf: Array<OrdemFornecimento>;
-
+  @Input() parent: HomeParentComponent;
   constructor() { }
 
   ngOnInit() {
@@ -19,6 +20,11 @@ export class TabelaOfComponent implements OnInit {
     let aux = nome.split(" ");
     let res = aux[0] + " " +  aux[2];    
     return res;
+  }
+
+  detalhaOf(row: OrdemFornecimento){
+    this.parent.opContainer = 'detalha';
+    this.parent.ofDetalha = row; 
   }
 
 }

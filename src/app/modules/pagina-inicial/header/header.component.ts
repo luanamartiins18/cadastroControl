@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
   
   logoQintess: string = './assets/Qintess-logo-alt.jpg';
   logoQintessRed: string = './assets/qintes-logo-reduzido.jpg';
+  logoBB: string = './assets/bb-logo.jpg'
   @Input() usuario: Usuario;
    
   constructor(private loginService: LoginService,              

@@ -1,19 +1,18 @@
+
+
 <div class = 'container-fluid'>
 
-    <div class = 'row'>
-        <div class = 'col-md-12'>
+    <header [usuario] = "this.usuario"></header>
+    <navbar [usuario] = "this.usuario" [parent] = "this"></navbar>
 
-            <div>
-                <header [usuario] = "this.usuario"></header>
-            </div>
-
-        </div>
+    <div [ngSwitch] = 'this.opContainer'>
+        
+        <tabela-of *ngSwitchCase='"tabela"' [listaOf] = "this.listaOf" [parent] = "this"></tabela-of>
+        <gerenciar-usuarios *ngSwitchCase = '"usuario"'></gerenciar-usuarios>
+        <detalha-of *ngSwitchCase = '"detalha"' [ordemF] = 'this.ofDetalha' [parent] = "this"></detalha-of>
+        <default-qintess *ngSwitchDefault></default-qintess>
+        
     </div>
-
-    
-    <div class = "table-responsive-lg tabela-of" *ngIf = "this.usuario.cargo.id == 2">
-        <tabela-of [listaOf] = "this.listaOf"></tabela-of>
-    </div>    
 
 </div>
 
