@@ -1,8 +1,8 @@
 import { UsuarioInterface } from 'src/app/interfaces/UsuarioInterface';
 import { Contrato } from 'src/app/models/contrato/contrato.model';
 import { Cargo } from 'src/app/models/cargo/cargo.model';
-import { Perfil } from '../perfil/perfil.model';
-import { Sigla } from '../sigla/sigla.model';
+import { ListaSigla } from '../ListaSigla/lista-sigla.model';
+import { ListaPerfil } from '../ListaPerfil/lista-perfil.model';
 
 export class Usuario implements UsuarioInterface{
     
@@ -17,11 +17,10 @@ export class Usuario implements UsuarioInterface{
     nascimento: Date;
     status: string;
     contrato: Contrato;
-    cargo: Cargo;
-    perfil: Perfil;
+    cargo: Cargo;  
+    listaSiglas: ListaSigla[];
+    listaPerfil: ListaPerfil[];
     celular: string;
-    sigla: Sigla;
-    listaPerfil: Array<Perfil>;   
-
+   
     constructor(){}
 }

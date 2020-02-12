@@ -1,8 +1,8 @@
-<div class = 'qtd-of'>
-  {{this.listaOf.length}} OFs em execução
+<div class = 'qtd-of pr-5 mt-5'>
+  <b>{{this.listaOf.length}} </b>OFs em execução
 </div>
 
-<div class = 'table-responsive'>
+<div class = 'table-responsive px-5'>
   <table class="table table-striped table-fixed">
       <thead class = 'thead-dark tam-fonte'>
         <tr>  
@@ -22,7 +22,7 @@
       </thead>
       
       <tbody>
-        <tr *ngFor = "let ordemF of this.listaOf; let i = index;" (click) = 'this.detalhaOf(ordemF)' class = "linhaTabela">
+        <tr *ngFor = "let ordemF of this.listaOf;" (click) = 'this.detalhaOf(ordemF)' class = "linhaTabela">
           <td #row>{{ordemF.numeroOFGenti}}</td>
           <td>{{ordemF.sigla.descricao}}</td>
           <td>{{this.retornaPrimeiroNome(ordemF.gerenteTecnico) | titlecase}}</td>
@@ -32,8 +32,8 @@
           <td>{{ordemF.dtAbertura | date: 'dd/MM/yyyy' : '+180'}}</td>
           <td>{{ordemF.dtAbertura | date: 'dd/MM/yyyy' : '+180'}}</td>
           <td>{{ordemF.ustiBB}}</td>
-          <td>{{ordemF.situacao.descricao}}</td>
-          <td>{{ordemF.situacaoAlm}}</td>
+          <td>{{ordemF.situacaoGenti.descricao}}</td>
+          <td>{{ordemF.situacao?.descricao}}</td>
 
         </tr>
       </tbody>

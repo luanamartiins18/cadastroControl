@@ -108,8 +108,8 @@
             </div>    
             
             <div class = 'col-sm-4 mt-2'>
-                <label class = "font-weight-bold" >Situação</label>
-                <input readonly class = 'form-control' [value] = "ordemF.situacao.descricao" />  
+                <label class = "font-weight-bold" >Situação - GENTI</label>
+                <input readonly class = 'form-control' [value] = "ordemF.situacaoGenti.descricao" />  
             </div>   
             
         </div>
@@ -124,29 +124,38 @@
             <div class = 'form-group row'>
                 
                 <div class = 'col-sm-6'>  
-                    <label class = "font-weight-bold">Colaborador</label>              
-                    <select class = 'form-control' formControlName='colaborador' >
-                        <option *ngFor = 'let colaborador of this.listaUsuarios;' [value] = 'colaborador.sigla.id'>{{colaborador.nome | titlecase}}</option>
-                    </select>
+                    <label class = "font-weight-bold">Colaborador</label> 
+
+                    <div class = 'custom-control custom-checkbox' formArrayName='colaborador' *ngFor = 'let usuario of this.listaUsuarios; let i = index'>
+
+                        <input [value] = 'usuario.id' [formControlName] = 'i' type = 'checkbox' class = 'custom-control-input' [id] = 'i' />                     
+                        <Label class = 'custom-control-label custom-pointer' [for] = 'i'>{{usuario.nome | titlecase}}</Label>
+                    </div>
 
                 </div>    
                 
                 <div class = 'col-sm-6'>
+
                     <label class = "font-weight-bold" >Situação</label>
+
                     <select class = 'form-control' formControlName='situacao'>
                         <option hidden disabled selected value> 
                             Selecione uma situação
                         </option>
+
                         <option *ngFor = 'let sit of this.listaSituacao;' [value] = 'sit.id'>
                             {{sit.descricao}}
                         </option>
                     </select>
+
                 </div>  
 
                 <div class = 'col-sm-4 col-sm-4 mt-4'></div>
+
                 <div class = 'col-sm-4 col-sm-4 mt-4'>                
-                    <input type = 'submit' class = 'form-control' />  
+                    <input type = 'submit' class = 'form-control' value = "Enviar"/>                      
                 </div>  
+
                 <div class = 'col-sm-4 mt-4'></div>
 
             </div>

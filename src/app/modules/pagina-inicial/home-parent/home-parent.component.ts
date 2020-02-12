@@ -23,7 +23,7 @@ export class HomeParentComponent implements OnInit {
 
     this.ofService.getOrdemFornecimento().subscribe(
       (lstOf: Array<OrdemFornecimento>) => {
-        this.listaOf = lstOf;
+        this.listaOf = lstOf;       
       }      
     );    
  
@@ -31,7 +31,7 @@ export class HomeParentComponent implements OnInit {
     this.usuarioService.getUsuario(re).subscribe(
 
       (usuario: Usuario) => {     
-        this.usuario = usuario;           
+        this.usuario = usuario; 
       }    
     );
 

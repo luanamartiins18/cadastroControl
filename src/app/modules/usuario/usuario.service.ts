@@ -12,15 +12,12 @@ export class UsuarioService {
 
   getUsuarioBySigla(id: number){
 
-    let paramId: string = id.toString();
-    let params = {id: paramId};
-    return this.http.get<Array<Usuario>>(environment.api + 'usuario-sigla', {params: params});
+    let paramId: string = id.toString();   
+    return this.http.get<Array<Usuario>>(environment.api + 'sigla/' + paramId + '/usuarios');
 
   }
 
-  getUsuario(re: string){
-
-    let params = {re: re};    
-    return this.http.get<Usuario>(environment.api + 'usuario', {params: params});
+  getUsuario(re: string){ 
+    return this.http.get<Usuario>(environment.api + 'usuario/' + re);
   }
 }

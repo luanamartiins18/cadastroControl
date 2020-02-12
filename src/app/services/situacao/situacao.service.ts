@@ -12,7 +12,7 @@ export class SituacaoService {
 
   getSituacoes(){
 
-    return this.http.get<Array<Situacao>>(environment.api + '/situacao');
+    return this.http.get<Array<Situacao>>(environment.api + '/situacoes');
 
   }
   

@@ -8,6 +8,8 @@ import { UsuarioModule } from './modules/usuario/usuario.module';
 import { PaginaInicialModule } from './modules/pagina-inicial/pagina-inicial.module';
 import { HttpClientModule } from '@angular/common/http';
 import { TabelaOfComponent } from 'src/app/modules/pagina-inicial/tabela-of/tabela-of.component';
+import { NotifierModule } from "angular-notifier";
+
 
 @NgModule({
   declarations: [
@@ -18,7 +20,18 @@ import { TabelaOfComponent } from 'src/app/modules/pagina-inicial/tabela-of/tabe
     AppRoutingModule ,
     UsuarioModule,
     PaginaInicialModule,
-    HttpClientModule
+    HttpClientModule, 
+    
+    NotifierModule.withConfig({
+      position: {
+        horizontal: {
+          position: 'right'
+        },
+        vertical: {
+          position: 'top'
+        }
+      }
+    })
   ],
   entryComponents: [TabelaOfComponent],
   providers: [],

@@ -1,8 +1,9 @@
 import { SiglaInterface } from './SiglaInterface';
-import { SituacaoInterface } from './SituacaoInterface';
+import { ListaUsuario } from './ListaUsuarioInterface';
 import { UsuarioInterface } from './UsuarioInterface';
+import { SituacaoInterface } from './SituacaoInterface';
 
-export interface OrdemFornecimentoInterface {
+export interface OrdemFornecimentoInterface {    
     id: number;
     numeroOF: string;
     numeroOFGenti: string;
@@ -22,9 +23,10 @@ export interface OrdemFornecimentoInterface {
     dtRecusa: Date;
     dtAceite: Date;
     situacao: SituacaoInterface;
-    situacaoAlm: SituacaoInterface;
+    situacaoGenti: SituacaoInterface;
     sigla: SiglaInterface;
-    usuario: UsuarioInterface;
+    usuario: UsuarioInterface;  
+    listaUsuarios: ListaUsuario[];
     responsavelTecnico: string;
     gerenteTecnico: string;
 }

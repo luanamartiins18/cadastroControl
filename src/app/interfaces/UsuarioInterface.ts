@@ -1,7 +1,8 @@
 import { CargoInterface } from '../interfaces/CargoInterface';
 import { ContratoInterface } from '../interfaces/ContratoInterface';
-import { SiglaInterface } from './SiglaInterface';
-import { PerfilInterface } from './PerfilInterface';
+import { ListaSiglaInterface } from './ListaSiglaInterface';
+import { ListaPerfilInterface } from './ListaPerfilInterface';
+
 
 export interface UsuarioInterface{
     id: number;
@@ -16,8 +17,8 @@ export interface UsuarioInterface{
     status: string;
     contrato: ContratoInterface;
     cargo: CargoInterface;
-    sigla: SiglaInterface;
-    listaPerfil: Array<PerfilInterface>;
+    listaSiglas: ListaSiglaInterface[];
+    listaPerfil: ListaPerfilInterface[];
     celular: string;
 }
 

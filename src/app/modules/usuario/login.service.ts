@@ -26,8 +26,7 @@ export class LoginService {
       data=>{
        
         if(data.status == 200){
-          
-          console.log(objComponent);
+
           sessionStorage.setItem('colaborador', colaborador); 
           this.router.navigate(['home']); 
           component.senhaErrada = false;
@@ -46,7 +45,6 @@ export class LoginService {
   usuarioEstaLogado(){
     
     let colaborador = sessionStorage.getItem('colaborador');
-    console.log(colaborador);
     return colaborador === null ? false : true;
 
   }

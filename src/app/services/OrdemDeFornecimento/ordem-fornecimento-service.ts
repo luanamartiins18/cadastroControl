@@ -21,14 +21,12 @@ export class OrdemFornecimentoService {
   constructor(private http: HttpClient) {}
 
   getOrdemFornecimento(){
-    return this.http.get<Array<OrdemFornecimento>>(environment.api + 'ordemfornecimento');
+    return this.http.get<Array<OrdemFornecimento>>(environment.api + 'ordens-fornecimento');
   }
 
-  enviaSit(req: string, id: number): Observable<string>{
-
-    let reqFinal = {colabSit: req, id: id};
+  enviaSit(value): Observable<string>{
    
-    return this.http.post<string>(environment.api + 'seta-situacao', reqFinal, httpOptions);
+    return this.http.post<string>(environment.api + '/ordem-fornecimento/usuario-situacao', value, httpOptions);
   }
 
 }
