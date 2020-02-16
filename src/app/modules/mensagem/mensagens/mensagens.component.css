@@ -1,0 +1,17 @@
+.custom-pointer label{
+    cursor: pointer;
+}
+
+a{
+    cursor: pointer;
+}
+
+.custom-size{
+    height: 26rem;
+    overflow: auto;
+    margin-top: 2rem;
+}
+
+table{
+    width: 100%;
+}

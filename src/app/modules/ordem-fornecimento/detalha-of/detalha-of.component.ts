@@ -4,12 +4,10 @@ import { Usuario } from 'src/app/models/usuario/usuario.model';
 import { UsuarioService } from '../../usuario/usuario.service';
 import { Situacao } from 'src/app/models/situacao/situacao.model';
 import { SituacaoService } from 'src/app/services/situacao/situacao.service';
-import { HomeParentComponent } from '../home-parent/home-parent.component';
-import { FormBuilder, FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { OrdemFornecimentoService } from 'src/app/services/OrdemDeFornecimento/ordem-fornecimento-service';
 import { NotifierService } from 'angular-notifier';
-import { resolveSanitizationFn } from '@angular/compiler/src/render3/view/template';
-
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'detalha-of',
@@ -17,17 +15,19 @@ import { resolveSanitizationFn } from '@angular/compiler/src/render3/view/templa
   styleUrls: ['./detalha-of.component.css']
 })
 export class DetalhaOfComponent implements OnInit {
-  @Input() ordemF: OrdemFornecimento;
-  @Input() parent: HomeParentComponent;
 
+  ordemF: OrdemFornecimento;
   formColab: FormGroup;  
   listaUsuarios: Array<Usuario>;
   listaSituacao: Array<Situacao>;
-  
+  pagCarregada;
+    
   constructor(private usuarioService: UsuarioService,
               private situacaoService: SituacaoService,
               private ofService: OrdemFornecimentoService,
-              private notifier: NotifierService) { 
+              private notifier: NotifierService,
+              private route: ActivatedRoute,
+              private router: Router) { 
   
   this.formColab = new FormGroup({
     colaborador: new FormArray([]),
@@ -37,32 +37,60 @@ export class DetalhaOfComponent implements OnInit {
   }
   ngOnInit() {
     
+    this.pagCarregada = false;
+    let ofId = this.route.snapshot.paramMap.get('id');
+    
+    /*
+      Ordem de carregamento:
+      -> Of
+      -> Usuarios da sigla da of
+      -> Usuarios relacionados a of
+      -> situacao da of
+    */
+    this.ofService.getOrdemFornecimentoById(ofId).subscribe(
+      (of: OrdemFornecimento)=>{
+        this.ordemF = of;
+
+        this.usuarioService.getUsuarioBySigla(this.ordemF.sigla.id).subscribe(
+          (listaUsu) =>{
+            if(listaUsu.status == 200){
+              this.listaUsuarios = (listaUsu.body as Usuario[]); 
+            }          
+    
+            this.ofService.getUsuariosOf(this.ordemF.id).subscribe(
+              (data)=>{            
+    
+                this.criaCheckbox(data.body);
+                
+                this.ofService.getSituacaoOf(this.ordemF.id).subscribe(
+                  (res)=>{   
+                    this.formColab.controls.situacao.setValue(res.body);  
+                    this.pagCarregada = true; 
+                });
+            });  
+        });
+    });
+    
     this.situacaoService.getSituacoes().subscribe(
       (listaSit: Array<Situacao>) => {
         this.listaSituacao = listaSit;
-      }
-    );
+    });
     
-    this.usuarioService.getUsuarioBySigla(this.ordemF.sigla.id).subscribe(
-      (listaUsu: Array<Usuario>) =>{
-        this.listaUsuarios = listaUsu;        
-        this.criaCheckbox();
-      }
-    );   
+
   }
 
-  criaCheckbox(){
-
+  criaCheckbox(data){  
     this.listaUsuarios.forEach(
       (el, i) => {
-        const control = new FormControl();
-        (this.formColab.controls.colaborador as FormArray).push(control);  
-      }      
-    );
-  }
+        let usuOf = false;   
+        
+        if(data.includes(el.id)){         
+          usuOf = true;
+        }
 
-  voltaConsultaOf(){
-    this.parent.opContainer = 'tabela';
+        const control = new FormControl(usuOf);
+        (this.formColab.controls.colaborador as FormArray).push(control);        
+      });
   }
 
   valida(value){
@@ -84,7 +112,6 @@ export class DetalhaOfComponent implements OnInit {
     let resLista: Array<Number> = new Array<Number>();    
 
     for(let i=0; i<this.listaUsuarios.length; i++){
-      console.log(value.colaborador[i]);
       if(value.colaborador[i]){
         resLista.push(this.listaUsuarios[i].id);
       }
@@ -94,27 +121,25 @@ export class DetalhaOfComponent implements OnInit {
   }
 
   onSubmit(){    
+    console.log(this.formColab.controls.situacao);
 
     if(this.valida(this.formColab.value)){
      
       let bodyReq = this.formataDados(this.formColab.value);
+     
       this.ofService.enviaSit(bodyReq).subscribe(
-        (res:string) => {
-          console.log(res);
+        (data) => {
+          if(data.status == 200){
+            this.notifier.notify("success", "Dados alterados com sucesso!");
+            this.router.navigate(['ordem-fornecimento']);
+          }else{
+            this.notifier.notify("error", "Um erro aconteceu, contate o administrador do sistema");
+          }
         }
       );
 
     }else{      
       this.notifier.notify("error", "Você deve selecionar ao menos um usuário e uma situação");
     }
-
-
-    
-
-
-    
-
   }
-
-
 }

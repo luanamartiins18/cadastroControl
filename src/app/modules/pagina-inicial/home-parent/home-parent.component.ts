@@ -12,30 +12,18 @@ import { OrdemFornecimentoService } from 'src/app/services/OrdemDeFornecimento/o
 export class HomeParentComponent implements OnInit {
 
   usuario: Usuario;
-  listaOf: Array<OrdemFornecimento>;
-  acesso: string;
-  opContainer: string = 'default';
-  ofDetalha: OrdemFornecimento;  
 
   constructor(private usuarioService: UsuarioService,
               private ofService: OrdemFornecimentoService) {     
-    
-
-    this.ofService.getOrdemFornecimento().subscribe(
-      (lstOf: Array<OrdemFornecimento>) => {
-        this.listaOf = lstOf;       
-      }      
-    );    
  
     let re = sessionStorage.getItem('colaborador');
     this.usuarioService.getUsuario(re).subscribe(
-
       (usuario: Usuario) => {     
         this.usuario = usuario; 
-      }    
-    );
+      });
 
   }  
+
 
   ngOnInit() {
   }

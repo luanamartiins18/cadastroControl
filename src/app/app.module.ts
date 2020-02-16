@@ -7,21 +7,24 @@ import { AppComponent } from './app.component';
 import { UsuarioModule } from './modules/usuario/usuario.module';
 import { PaginaInicialModule } from './modules/pagina-inicial/pagina-inicial.module';
 import { HttpClientModule } from '@angular/common/http';
-import { TabelaOfComponent } from 'src/app/modules/pagina-inicial/tabela-of/tabela-of.component';
+import { TabelaOfComponent } from 'src/app/modules/ordem-fornecimento/tabela-of/tabela-of.component';
 import { NotifierModule } from "angular-notifier";
-
+import { NgSelectModule } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
-  imports: [
+  imports: [   
     BrowserModule,
     AppRoutingModule ,
     UsuarioModule,
     PaginaInicialModule,
-    HttpClientModule, 
-    
+    HttpClientModule,   
+    NgSelectModule,
+    FormsModule,
     NotifierModule.withConfig({
       position: {
         horizontal: {
@@ -31,7 +34,8 @@ import { NotifierModule } from "angular-notifier";
           position: 'top'
         }
       }
-    })
+    }),
+    BrowserAnimationsModule
   ],
   entryComponents: [TabelaOfComponent],
   providers: [],

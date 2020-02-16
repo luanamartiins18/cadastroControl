@@ -4,11 +4,23 @@ import { LoginComponent} from './modules/usuario/login/login.component';
 import { HomeParentComponent } from './modules/pagina-inicial/home-parent/home-parent.component';
 import { AuthGuardService } from './AuthGuards/auth-guard.service'; 
 import { LoginGuardService} from './AuthGuards/login-guard-service'; 
+import { MensagensComponent } from './modules/mensagem/mensagens/mensagens.component';
+import { NovaMensagemComponent } from './modules/mensagem/nova-mensagem/nova-mensagem.component';
+import { TabelaOfComponent } from './modules/ordem-fornecimento/tabela-of/tabela-of.component';
+import { DetalhaOfComponent } from './modules/ordem-fornecimento/detalha-of/detalha-of.component';
+
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate:[LoginGuardService]},
-  {path: '', redirectTo: '/login', pathMatch: 'full'},
-  {path: 'home', component: HomeParentComponent, canActivate:[AuthGuardService]}  
+  {path: '', component: HomeParentComponent, canActivate:[AuthGuardService],
+    children: [
+      {path: 'mensagens', component: MensagensComponent, canActivate:[AuthGuardService]},
+      {path: 'nova-mensagem', component: NovaMensagemComponent, canActivate:[AuthGuardService]},
+      {path: 'ordem-fornecimento', component: TabelaOfComponent, canActivate:[AuthGuardService]},       
+      {path: 'ordem-fornecimento/:id', component: DetalhaOfComponent, canActivate:[AuthGuardService]}     
+    ]
+  }
+
 ];
 
 @NgModule({

@@ -13,7 +13,7 @@ export class UsuarioService {
   getUsuarioBySigla(id: number){
 
     let paramId: string = id.toString();   
-    return this.http.get<Array<Usuario>>(environment.api + 'sigla/' + paramId + '/usuarios');
+    return this.http.get(environment.api + 'sigla/' + paramId + '/usuarios', {observe: 'response'});
 
   }
 

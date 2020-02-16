@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GerenciarUsuariosComponent } from './gerenciar-usuarios.component';
+import { NovaMensagemComponent } from './nova-mensagem.component';
 
-describe('GerenciarUsuariosComponent', () => {
-  let component: GerenciarUsuariosComponent;
-  let fixture: ComponentFixture<GerenciarUsuariosComponent>;
+describe('NovaMensagemComponent', () => {
+  let component: NovaMensagemComponent;
+  let fixture: ComponentFixture<NovaMensagemComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GerenciarUsuariosComponent ]
+      declarations: [ NovaMensagemComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GerenciarUsuariosComponent);
+    fixture = TestBed.createComponent(NovaMensagemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

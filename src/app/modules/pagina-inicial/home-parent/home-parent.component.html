@@ -1,17 +1,10 @@
 <div class = 'container-fluid'>
 
     <header [usuario] = "this.usuario"></header>
-    <navbar [usuario] = "this.usuario" [parent] = "this"></navbar>
+    <navbar [usuario] = "this.usuario"></navbar>
 
-    <div [ngSwitch] = 'this.opContainer'>
-        
-        <tabela-of *ngSwitchCase='"tabela"' [listaOf] = "this.listaOf" [parent] = "this"></tabela-of>
-        <gerenciar-usuarios *ngSwitchCase = '"usuario"'></gerenciar-usuarios>
-        <detalha-of *ngSwitchCase = '"detalha"' [ordemF] = 'this.ofDetalha' [parent] = "this"></detalha-of>
-        <default-qintess *ngSwitchDefault></default-qintess>
-        
-    </div>
-
+    <router-outlet></router-outlet>
+    
 </div>
 
 

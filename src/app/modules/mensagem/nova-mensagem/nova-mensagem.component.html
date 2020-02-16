@@ -1,0 +1,55 @@
+<div class = 'container-fluid mt-3'>
+
+    <ul class="nav nav-tabs">
+
+        <li class="nav-item">
+            <a [routerLink]="['/../mensagens']" class="nav-link">
+                Mensagens Enviadas
+            </a>
+        </li> 
+
+        <li class="nav-item">
+          <a [routerLink]="['/../nova-mensagem']" class="nav-link active">
+            Nova Mensagem
+            </a>
+        </li>   
+    </ul>
+
+    <div>
+        <div class = 'container mt-3'>
+            <div class = 'form-group row pl-4'>
+                
+                <div class = 'col-sm-6'>  
+                    <label class = "font-weight-bold">Sigla</label> 
+
+                    <div class = 'pt-2 custom-control custom-checkbox custom-pointer'>    
+                        <input type = 'checkbox' class = 'custom-control-input' id  = 'check_geral' />                     
+                        <Label class = 'custom-control-label' for = 'check_geral'>Geral</Label>
+                    </div> 
+                    
+                    <div class = 'pt-2'>    
+                        <Label class = "font-weight-bold">Título</Label>
+                        <input type = 'text' class = 'form-control' />                          
+                    </div>
+                    
+                </div> 
+    
+                <div class = 'col-sm-6'></div>
+    
+                <div class = 'col-sm-6 mt-3'>  
+                    <label class = "font-weight-bold">Mensagem</label>              
+                    <textarea class = 'form-control' placeholder="Digite a mensagem"></textarea>
+                </div> 
+                <div class = 'col-sm-6'></div>
+    
+                <div class = 'col-sm-4 mt-3 p'>  
+                    <input type = "submit" value = "Enviar" class = 'form-control'/>               
+                </div> 
+                <div class = 'col-sm-8'></div>
+    
+            </div>
+        </div>
+
+    </div>
+      
+</div>

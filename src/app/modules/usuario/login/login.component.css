@@ -63,3 +63,7 @@ div input{
 img{
     pointer-events: none;
 }
+
+i{
+    padding-top: 0.5rem;
+}

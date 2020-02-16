@@ -10,10 +10,18 @@ import { HomeParentComponent } from '../home-parent/home-parent.component';
 export class NavbarComponent implements OnInit {
 
   @Input() usuario: Usuario;
-  @Input() parent: HomeParentComponent;
 
   constructor() { }
 
   ngOnInit() { }
+
+  admGestor(id){
+    return (id == 2 || id == 1);
+  }
+
+  gestor(id){
+    return (id == 1);
+  }
+
 
 }
