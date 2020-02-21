@@ -22,7 +22,7 @@ export interface OrdemFornecimentoInterface {
     dtDevolvida: Date;
     dtRecusa: Date;
     dtAceite: Date;
-    situacao: SituacaoInterface;
+    situacaoUsu: SituacaoInterface;
     situacaoGenti: SituacaoInterface;
     sigla: SiglaInterface;
     usuario: UsuarioInterface;  

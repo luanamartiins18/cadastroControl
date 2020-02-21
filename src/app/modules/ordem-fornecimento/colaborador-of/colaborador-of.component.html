@@ -1,0 +1,80 @@
+<div *ngIf='this.listaOf; else carregando'>
+    
+  <div *ngIf = 'this.listaOf.length > 0; else semOf'>
+   
+    <div class = 'qtd-of'>
+      <b>{{ this.listaOf.length }} OF(s) </b>  em execução para você
+    </div>
+
+    <div class = 'custom-size'>
+      <table mat-table [dataSource]="this.listaOf" class = 'mat-elevation-z8' >
+        
+        <ng-container matColumnDef="numOf">
+            <th mat-header-cell *matHeaderCellDef> Número da OF </th>
+            <td mat-cell *matCellDef="let element"> {{element.numOF}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="sigla">
+          <th class = 'pr-4' mat-header-cell *matHeaderCellDef> Sigla </th>
+          <td mat-cell *matCellDef="let element"> {{element.sigla}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="tema">
+          <th mat-header-cell *matHeaderCellDef> Tema </th>
+          <td mat-cell *matCellDef="let element"> {{element.tema}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="responsavelT">
+          <th mat-header-cell *matHeaderCellDef> Responsável Técnico </th>
+          <td mat-cell *matCellDef="let element"> {{this.primeiroNome(element.responsavelT) | titlecase}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="gerenteT">
+          <th mat-header-cell *matHeaderCellDef> Gerente Técnico </th>
+          <td mat-cell *matCellDef="let element"> {{this.primeiroNome(element.gerenteT) | titlecase}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="situacaoAlm">
+          <th class = 'pr-4' mat-header-cell *matHeaderCellDef> Situação ALM </th>
+          <td mat-cell *matCellDef="let element"> {{element.situacaoAlm}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dtEncaminhamento">
+          <th mat-header-cell *matHeaderCellDef> Data Encaminhamento </th>
+          <td mat-cell *matCellDef="let element"> {{element.dtEncaminhamento | date: 'dd/MM/yyyy - HH:mm' : '+0000'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dtAbertura">
+          <th mat-header-cell *matHeaderCellDef> Data Abertura </th>
+          <td mat-cell *matCellDef="let element"> {{element.dtAbertura | date: 'dd/MM/yyyy' : '+0000'}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="dtPrevisao">
+          <th mat-header-cell *matHeaderCellDef> Data Prevista </th>
+          <td mat-cell *matCellDef="let element"> {{element.dtPrevisao | date: 'dd/MM/yyyy' : '+0000'}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="colunas; sticky: true"></tr> 
+        <tr class = 'custom-row' mat-row *matRowDef="let row; columns: colunas;" ></tr>
+        
+        
+     </table>
+    </div>
+    
+</div>  
+
+<ng-template #semOf>
+    <div class = 'text-secondary mt-3 ml-4'>
+        Não há nenhuma Ordem de Fornecimento para você no momento
+    </div>
+</ng-template>
+
+</div>
+<ng-template #carregando>
+
+  <div class = 'container-fluid d-flex justify-content-center align-items-center mt-5'>
+    <i class="fa fa-refresh fa-spin fa-4x" aria-hidden="true"></i>
+  </div>
+    
+</ng-template>

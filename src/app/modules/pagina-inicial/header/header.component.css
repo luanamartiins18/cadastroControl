@@ -16,6 +16,7 @@
     background-color: white;
     cursor: pointer;
     outline: none;    
+    padding: none;
 }
 
 .dados-pessoais{   

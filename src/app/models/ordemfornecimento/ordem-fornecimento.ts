@@ -23,7 +23,7 @@ export class OrdemFornecimento implements OrdemFornecimentoInterface{
     dtDevolvida: Date;
     dtRecusa: Date;
     dtAceite: Date;
-    situacao: Situacao;
+    situacaoUsu: Situacao;
     situacaoGenti: Situacao;
     sigla: Sigla;
     usuario: Usuario;  

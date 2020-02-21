@@ -3,13 +3,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { OrdemFornecimento } from 'src/app/models/ordemfornecimento/ordem-fornecimento';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { stringify } from 'querystring';
 
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json'
   })
-
 };
 
 @Injectable({
@@ -21,6 +19,10 @@ export class OrdemFornecimentoService {
 
 
   constructor(private http: HttpClient) {}
+
+  getOrdemFornUsu(id){
+    return this.http.get<Array<any>>(environment.api + 'ordens-fornecimento/usuario/'+id);
+  }
 
   getOrdemFornecimentoById(id){
     return this.http.get<OrdemFornecimento>(environment.api + 'ordem-fornecimento/'+id);

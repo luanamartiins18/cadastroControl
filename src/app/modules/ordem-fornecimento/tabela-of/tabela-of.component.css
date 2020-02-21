@@ -2,17 +2,39 @@
     font-size: 14px;
 }
 
-.linhaTabela:hover{
-    cursor: pointer;
-    background-color: skyblue;
-}
-
 .qtd-of{
+    margin: auto;  
     text-align: end;
-    margin: 0.5rem;
+    padding-top: 1rem;
 }
 
 .custom-footer{
     height: 6rem;
     margin-top: 4rem; 
+}
+
+table{
+    width: 100%;
+}
+
+.custom-row{
+    cursor: pointer;
+}
+
+.custom-size{
+    height: 24rem;
+    overflow: auto;
+    margin-top: 2rem;
+}
+tr.mat-header-row{
+    background-color: rgb(99, 99, 99);
+}
+
+th.mat-header-cell{
+    color: white;
+    font-size: 0.9rem;
+}
+
+tr.mat-row:hover{
+    background-color: rgba(0, 0, 0, 0.1);
 }

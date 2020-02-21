@@ -1,4 +1,4 @@
-<div class = 'navbar navbar-expand-md navbar-dark bg-dark custom-padding'>  
+<div class = 'navbar navbar-expand-md navbar-dark bg-dark'>  
     <ul class = 'navbar-nav'>
 
         <li class = 'nav-item' *ngIf = 'this.admGestor(this.usuario?.cargo.id)'>
@@ -6,12 +6,21 @@
         </li>
 
         <li class = 'nav-item' *ngIf = 'this.admGestor(this.usuario?.cargo.id)'>
-            <a class = 'nav-link' (click) = "this.parent.opContainer = 'usuario';">Gerenciar Usuários</a> 
+            <a class = 'nav-link'>Gerenciar Usuários</a> 
         </li>
 
         <li class = 'nav-item' *ngIf = 'this.gestor(this.usuario?.cargo.id)'>
             <a class = 'nav-link' [routerLink]="['/../mensagens']" > Mensagens</a> 
         </li>
+
+        <li class = 'nav-item' *ngIf = 'this.colaborador(this.usuario?.cargo.id)'>
+            <a class = 'nav-link' >Mensagens</a> 
+        </li>
+
+        <li class = 'nav-item' *ngIf = 'this.colaborador(this.usuario?.cargo.id)'>
+            <a class = 'nav-link' [routerLink]="['/../ordem-fornecimento/usuario/'+this.usuario.id]" >Ordens de Fornecimento</a> 
+        </li>
+
     </ul>
 
 </div>

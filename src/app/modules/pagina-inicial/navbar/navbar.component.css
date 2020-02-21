@@ -4,4 +4,17 @@
 
 a{
     cursor: pointer;
+    color: white !important;
+}
+
+li:hover{
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+div{
+    padding: 0;
+}
+
+li{
+    padding: 0.5rem;
 }

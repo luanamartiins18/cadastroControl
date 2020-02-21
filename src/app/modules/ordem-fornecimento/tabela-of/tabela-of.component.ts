@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { OrdemFornecimento } from 'src/app/models/ordemfornecimento/ordem-fornecimento';
 import { OrdemFornecimentoService } from 'src/app/services/OrdemDeFornecimento/ordem-fornecimento-service';
 
@@ -10,6 +10,8 @@ import { OrdemFornecimentoService } from 'src/app/services/OrdemDeFornecimento/o
 export class TabelaOfComponent implements OnInit {
 
   listaOf: Array<OrdemFornecimento>;
+  colunas = ['numOf', 'sigla', 'referencia', 'responsavelT', 'gerenteT', 'situacaoAlm', 'situacaoGenti', 'dtEncaminhamento', 'dtAbertura', 'dtPrevisao', 'dtEntrega', 'dtAceite']
+
 
   constructor(private ofService: OrdemFornecimentoService) { }
 
@@ -25,7 +27,7 @@ export class TabelaOfComponent implements OnInit {
     );  
   }
 
-  retornaPrimeiroNome(nome: string){
+  primeiroNome(nome: string){
     let aux = nome.split(" ");
     let res = aux[0] + " " +  aux[2];    
     return res;

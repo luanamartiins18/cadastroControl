@@ -138,7 +138,7 @@
                     
                     <div class = 'col-sm-6'>
     
-                        <label class = "font-weight-bold" >Situação {{this.situ}}</label>
+                        <label class = "font-weight-bold" >Situação</label>
                         
                         <select class = 'form-control' formControlName='situacao'>                         
     
@@ -149,9 +149,15 @@
     
                     </div>  
     
-                    <div class = 'col-sm-4 col-sm-4 mt-4'></div>
+                    <div class = 'col-sm-4 mt-3'>
+                        <label class = "font-weight-bold" >Referência OF</label>
+                        <input type = 'text' formControlName = 'referencia' mask="00/0000" class = 'form-control' placeholder="mes/ano" />
+                    </div>
+
+                    <div class = 'col-sm-8'></div>
+                    <div class = 'col-sm-4 mt-4'></div>
     
-                    <div class = 'col-sm-4 col-sm-4 mt-4'>                
+                    <div class = 'col-sm-4 mt-4'>                
                         <input type = 'submit' class = 'form-control' value = "Enviar"/>                      
                     </div>  
     

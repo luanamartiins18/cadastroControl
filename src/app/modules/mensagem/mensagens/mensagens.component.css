@@ -15,3 +15,7 @@ a{
 table{
     width: 100%;
 }
+
+.custom-row{
+    cursor: pointer;
+}

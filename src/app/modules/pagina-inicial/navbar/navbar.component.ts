@@ -23,5 +23,9 @@ export class NavbarComponent implements OnInit {
     return (id == 1);
   }
 
+  colaborador(id){
+    return (id == 3);
+  }
+
 
 }

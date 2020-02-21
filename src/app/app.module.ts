@@ -12,6 +12,11 @@ import { NotifierModule } from "angular-notifier";
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MensagemModule } from './modules/mensagem/mensagem.module';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { OrdemFornecimentoModule } from './modules/ordem-fornecimento/ordem-fornecimento.module';
+import { OrdemFornecimentoService } from './services/OrdemDeFornecimento/ordem-fornecimento-service';
+
 
 @NgModule({
   declarations: [
@@ -25,6 +30,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,   
     NgSelectModule,
     FormsModule,
+    MensagemModule,
+    NgbModule,
+    OrdemFornecimentoModule,
     NotifierModule.withConfig({
       position: {
         horizontal: {

@@ -31,7 +31,8 @@ export class DetalhaOfComponent implements OnInit {
   
   this.formColab = new FormGroup({
     colaborador: new FormArray([]),
-    situacao: new FormControl()
+    situacao: new FormControl(),
+    referencia: new FormControl()
   });
 
   }
@@ -64,7 +65,15 @@ export class DetalhaOfComponent implements OnInit {
                 
                 this.ofService.getSituacaoOf(this.ordemF.id).subscribe(
                   (res)=>{   
-                    this.formColab.controls.situacao.setValue(res.body);  
+              
+                    if(typeof(res.body['fk_situacao_usu']) != 'object'){
+                      this.formColab.controls.situacao.setValue(res.body['fk_situacao_usu']);  
+                    }
+                    
+                    if(typeof(res.body['fk_situacao_usu']) != 'object'){
+                      this.formColab.controls.referencia.setValue(res.body['referencia']);
+                    }
+                  
                     this.pagCarregada = true; 
                 });
             });  
@@ -94,7 +103,11 @@ export class DetalhaOfComponent implements OnInit {
   }
 
   valida(value){
-   
+    
+    if(value.referencia == null || value.referencia.length < 6){
+      return false;
+    }
+
     if(value.situacao == null) {
       return false;
     }
@@ -117,7 +130,12 @@ export class DetalhaOfComponent implements OnInit {
       }
     }
 
-    return {usu: resLista, sit: Number(value.situacao), of: this.ordemF.id};
+    let ref = "";  
+    if(value.referencia != ""){
+      ref = value.referencia.substring(0, 2) + '/' + value.referencia.substring(2,6);
+    }
+    
+    return {usu: resLista, sit: Number(value.situacao), of: this.ordemF.id, ref: ref};
   }
 
   onSubmit(){    
@@ -126,7 +144,7 @@ export class DetalhaOfComponent implements OnInit {
     if(this.valida(this.formColab.value)){
      
       let bodyReq = this.formataDados(this.formColab.value);
-     
+      console.log(bodyReq);
       this.ofService.enviaSit(bodyReq).subscribe(
         (data) => {
           if(data.status == 200){
@@ -139,7 +157,7 @@ export class DetalhaOfComponent implements OnInit {
       );
 
     }else{      
-      this.notifier.notify("error", "Você deve selecionar ao menos um usuário e uma situação");
+      this.notifier.notify("error", "Você deve selecionar ao menos um usuário, uma situação e especificar a data de referência");
     }
   }
 }
