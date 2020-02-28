@@ -1,0 +1,71 @@
+.custom-icon, select, option{
+    cursor: pointer;
+}
+
+.custom-row{
+    background-color: rgba(0, 0, 0, 0.05);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.custom-row input[type='text'], textarea, select{
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+textarea{
+    height: 38px;
+}
+
+textarea:focus{
+    height: 6rem;
+}
+
+.linha-tarefa{
+    background-color: rgba(0, 0, 0, 0.05);
+    margin-bottom: 1rem;
+    padding: 0.25rem;
+}
+
+table{
+    width: 100%;    
+}
+
+tr.mat-header-row{
+    width: 80%;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    background-color: rgb(99, 99, 99);
+}
+
+th.mat-header-cell{
+    color: white;
+    font-size: 0.9rem;
+}
+
+tr.mat-row:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.total{
+    font-weight: bold;
+}
+
+.custom-link{
+    cursor: pointer;
+}
+
+.custom-link:hover{
+    color: black;
+}
+
+.deletar{
+    color:rgb(236, 75, 75);
+}
+
+.editar{
+    color: rgb(99, 99, 99);
+    margin-left: 1rem;
+}
+
+.custom-display{
+    display: inline;
+}

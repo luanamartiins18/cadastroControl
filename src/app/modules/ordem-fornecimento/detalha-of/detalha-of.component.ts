@@ -103,7 +103,7 @@ export class DetalhaOfComponent implements OnInit {
   }
 
   valida(value){
-    
+    console.log(value);
     if(value.referencia == null || value.referencia.length < 6){
       return false;
     }

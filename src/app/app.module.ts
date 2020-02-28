@@ -16,6 +16,7 @@ import { MensagemModule } from './modules/mensagem/mensagem.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { OrdemFornecimentoModule } from './modules/ordem-fornecimento/ordem-fornecimento.module';
 import { OrdemFornecimentoService } from './services/OrdemDeFornecimento/ordem-fornecimento-service';
+import { TarefaModule } from './modules/tarefa/tarefa.module';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { OrdemFornecimentoService } from './services/OrdemDeFornecimento/ordem-f
     MensagemModule,
     NgbModule,
     OrdemFornecimentoModule,
+    TarefaModule,
     NotifierModule.withConfig({
       position: {
         horizontal: {

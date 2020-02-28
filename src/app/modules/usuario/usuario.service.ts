@@ -20,4 +20,10 @@ export class UsuarioService {
   getUsuario(re: string){ 
     return this.http.get<Usuario>(environment.api + 'usuario/' + re);
   }
+
+  getPerfilUsuario(id: string){
+    return this.http.get<Array<any>>(environment.api + 'usuario/' + id + '/perfil');
+  }
+
+
 }

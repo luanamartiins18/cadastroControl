@@ -11,15 +11,15 @@ export class ColaboradorOfComponent implements OnInit {
 
   colunas = ['numOf', 'sigla', 'situacaoAlm', 'tema', 'responsavelT', 'gerenteT', 'dtEncaminhamento', 'dtAbertura', 'dtPrevisao'];
   listaOf: Array<any>;
-
+  idUsu;
   constructor(private ofs: OrdemFornecimentoService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
 
-    let idUsu = this.route.snapshot.paramMap.get('id');
+    this.idUsu = this.route.snapshot.paramMap.get('id');
 
-    this.ofs.getOrdemFornUsu(idUsu).subscribe(
+    this.ofs.getOrdemFornUsu(this.idUsu).subscribe(
       (data)=>{  
         this.listaOf = data;
       }

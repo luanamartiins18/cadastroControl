@@ -27,17 +27,12 @@ export class HeaderComponent implements OnInit, OnChanges {
     let usuAtual: Usuario = changes.usuario.currentValue;
 
     if(usuAtual != null){
-      let primeiro = true;
+     
 
       for(let perfil of usuAtual.listaPerfil){
         if(perfil.status == 1){
 
-          if(primeiro){ 
-            this.lisPerfil = perfil.perfil.descricao;        
-            primeiro = false;    
-          }else{
-            this.lisPerfil += '/' + perfil.perfil.descricao;
-          }
+          this.lisPerfil = perfil.perfil.descricao;       
         }
       }
     }
