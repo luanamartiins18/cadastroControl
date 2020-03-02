@@ -24,14 +24,16 @@ export class TarefasUsuarioComponent implements OnInit {
   listaTarefas: Array<any>;
   perfil: string;
   form: FormGroup;
-  valorTarefas: number;
+  valorPlanejado: number;
+  valorExecutado: number;
   trfAtual;
   listaSituacoes: Array<any>;
   sitForm: FormArray;
   opFormTrf: String = "Salvar";
+  numOf;
 
 
-  colunas = ['historia', 'artefato', 'quantidade', 'sprint', 'numTarefa', 'situacao', 'complexidade', 'valor', 'acoes'];
+  colunas = ['historia', 'artefato', 'sprint', 'numTarefa', 'situacao', 'quantidade', 'complexidade', 'valor', 'acoes'];
 
   constructor(private route: ActivatedRoute,
               private ts: TarefaService,
@@ -61,6 +63,12 @@ export class TarefasUsuarioComponent implements OnInit {
     this.carregaForm();
     this.buscaTarefas();
     this.carregaSituacoes();
+
+    this.ts.getNumOf(this.idOf).subscribe(
+      (data)=>{
+        this.numOf = data;
+      }
+    );
 
   }
 
@@ -101,7 +109,8 @@ export class TarefasUsuarioComponent implements OnInit {
     this.ts.alteraSitTarefa(param).subscribe(
       (data)=>{
         if(data.status == 200){
-          this.nt.notify("success", "Situção da tarefa alterado com sucesso");
+          this.nt.notify("success", "Situação da tarefa alterada com sucesso");
+          this.buscaTarefas();
         }
       }
     );
@@ -120,6 +129,7 @@ export class TarefasUsuarioComponent implements OnInit {
       (data)=>{
         if(data.status == 200){
           this.nt.notify("success", "Tarefa excluída com sucesso");
+          this.resetForm();
         }
         this.buscaTarefas();
       }
@@ -135,7 +145,8 @@ export class TarefasUsuarioComponent implements OnInit {
   }
 
   buscaTarefas(){
-    this.valorTarefas = 0;
+    this.valorPlanejado = 0;
+    this.valorExecutado = 0;
     this.listaTarefas = new Array<any>();
 
     this.ts.getTarefasUsu(this.idUsu, this.idOf).subscribe(
@@ -143,7 +154,15 @@ export class TarefasUsuarioComponent implements OnInit {
         this.listaTarefas = data;
         
         for(let i of this.listaTarefas){
-          this.valorTarefas += i.valor;
+          if(i.fk_situacao == 8 || i.fk_situacao == 4){
+            this.valorExecutado += i.valor;
+          }
+
+          if(i.fk_situacao != 2 && i.fk_situacao != 5){
+            this.valorPlanejado += i.valor;
+          }
+
+
         }
 
       })
@@ -202,6 +221,8 @@ export class TarefasUsuarioComponent implements OnInit {
     this.listaDisciplinas = new Array<any>();
     this.form.controls.disciplina.enable(); 
     this.form.controls.disciplina.setValue(0);
+    this.form.controls.item.disable();
+    this.form.controls.item.setValue(0);
 
     for(let i of this.listaDisciplinasAux){
  
@@ -250,7 +271,7 @@ export class TarefasUsuarioComponent implements OnInit {
             this.nt.notify("error", error.error.text);
           }
         );    
-      }else{
+      }else{       
         let aux = this.form.value;
         aux.idTrfOf = this.trfAtual;
         this.ts.atualizaTarefaOf(aux).subscribe(
@@ -259,6 +280,7 @@ export class TarefasUsuarioComponent implements OnInit {
               this.nt.notify("success", "Tarefa Alterada com sucesso");
               this.buscaTarefas();
               this.form.reset();
+              this.opFormTrf = "Salvar";
             }
           }
         );

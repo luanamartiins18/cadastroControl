@@ -1,11 +1,11 @@
 .custom-size{
     height: 26rem;
     overflow: auto;
-    margin-top: 2rem;
+    margin-top: 0.25rem;
 }
 
 table{
-    width: 90%;
+    width: 100%;
     margin: auto;
 }
 
@@ -21,10 +21,10 @@ tr.mat-header-row{
 
 .qtd-of{
     margin: auto;
-    width: 90%;
-    text-align: end;
+    width: 100%;
     padding-right: 12px;
     padding-top: 1rem;
+    text-align: end;
 }
 
 tr.mat-row{
@@ -33,9 +33,14 @@ tr.mat-row{
 
 th.mat-header-cell{
     color: white;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 
 tr.mat-row:hover{
     background-color: rgba(0, 0, 0, 0.1);
+}
+
+.perExec{
+    font-size: 0.75rem;
+    color: rgba(0, 0, 0, 0.65);
 }

@@ -44,4 +44,8 @@ export class OrdemFornecimentoService {
     return this.http.get<number>(environment.api + 'ordem-fornecimento/' + id.toString() + "/situacao", {observe: 'response'});
   }
 
+  getValorTarefasOf(idUsu, idOf){
+    return this.http.get<Array<any>>(environment.api + 'usuario/'+idUsu+'/ordem-forn/'+idOf+'/valor-tarefa');
+  }
+
 }

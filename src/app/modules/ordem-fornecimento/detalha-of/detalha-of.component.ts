@@ -103,7 +103,6 @@ export class DetalhaOfComponent implements OnInit {
   }
 
   valida(value){
-    console.log(value);
     if(value.referencia == null || value.referencia.length < 6){
       return false;
     }
@@ -129,22 +128,16 @@ export class DetalhaOfComponent implements OnInit {
         resLista.push(this.listaUsuarios[i].id);
       }
     }
-
-    let ref = "";  
-    if(value.referencia != ""){
-      ref = value.referencia.substring(0, 2) + '/' + value.referencia.substring(2,6);
-    }
     
-    return {usu: resLista, sit: Number(value.situacao), of: this.ordemF.id, ref: ref};
+    return {usu: resLista, sit: Number(value.situacao), of: this.ordemF.id, ref: value.referencia};
   }
 
   onSubmit(){    
-    console.log(this.formColab.controls.situacao);
 
     if(this.valida(this.formColab.value)){
      
       let bodyReq = this.formataDados(this.formColab.value);
-      console.log(bodyReq);
+ 
       this.ofService.enviaSit(bodyReq).subscribe(
         (data) => {
           if(data.status == 200){
@@ -157,7 +150,9 @@ export class DetalhaOfComponent implements OnInit {
       );
 
     }else{      
-      this.notifier.notify("error", "Você deve selecionar ao menos um usuário, uma situação e especificar a data de referência");
+      this.notifier.notify("error", "Você deve selecionar ao menos um usuário, uma situação e especificar a data de referência no formato especificado");
     }
   }
+
 }
+

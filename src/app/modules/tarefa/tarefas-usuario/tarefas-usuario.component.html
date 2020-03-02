@@ -4,25 +4,33 @@
     <div class = 'container px-0 mt-2'>
         <div class = 'row'>
             <div class = 'col-sm-6'>
-                <h4 class = 'text-secondary custom-display'>Nova Tarefa</h4>
-                <i (click) = 'this.resetForm();' placement="top" ngbTooltip = "Resetar Formulário" *ngIf = 'this.opFormTrf == "Atualizar" ' class="custom-icon ml-2 fa fa-refresh fa-2x fa-rotate-90" aria-hidden="true"></i>
-                <hr>
+                <h5 class = 'text-secondary'>Ordem de Fornecimento - {{this.numOf}}</h5>
+               
             </div>
-        </div>
-        
+        </div>        
     </div>
-   
 
-    <div class = ' mt-3 container'>
+    <div class = ' mt-2 container'>
       
-        <div [formGroup] = 'form' class = 'mt-3 row custom-row mat-elevation-z8'>
+        <div [formGroup] = 'form' class = ' row custom-row mat-elevation-z8'>
 
-            <div class = 'col-sm-2'>
+            
+            <div class = 'container mt-2'>
+                <div class = 'row'>
+                    <div class = 'col-sm-12'>
+                        <h5 class = 'custom-display'>Nova Tarefa</h5>
+                        <i (click) = 'this.resetForm();' placement="top" ngbTooltip = "Resetar Formulário" *ngIf = 'this.opFormTrf == "Atualizar" ' class="custom-icon ml-2 fa fa-refresh fa-rotate-90" aria-hidden="true"></i>
+                        <hr>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class = 'col-sm-2 mt-2'>
                 <label class = 'font-weight-bold'>
-                    História
+                    Nº Tarefa
                 </label>
-    
-                <input formControlName = 'historia' class = 'form-control' type = 'text' />
+                <input formControlName = 'numTarefa' mask = '000000000000' type = 'text' class = 'form-control'/> 
             </div>
             
             <div class = 'col-sm-2'>
@@ -105,11 +113,13 @@
                 </select>   
             </div>
 
-            <div class = 'col-sm-2 mt-2'>
+
+            <div class = 'col-sm-2'>
                 <label class = 'font-weight-bold'>
-                    Nº Tarefa
+                    História
                 </label>
-                <input formControlName = 'numTarefa' mask = '000000000000' type = 'text' class = 'form-control'/> 
+    
+                <input formControlName = 'historia' class = 'form-control' type = 'text' />
             </div>
 
             <div class = 'col-sm-2 mt-2'>
@@ -123,7 +133,7 @@
              <div class = 'col-sm-5'></div>
 
             <div class = 'col-sm-2 mt-3 text-success d-flex justify-content-center'>
-                <button (click) = 'this.submit();' class = 'form-control bg-success text-white'>
+                <button [ngClass] = "{'bg-success': this.opFormTrf == 'Salvar', 'bg-primary': this.opFormTrf == 'Atualizar'}" (click) = 'this.submit();' class = 'form-control text-white'>
                     {{this.opFormTrf}} Tarefa
                 </button>
             </div>           
@@ -133,7 +143,7 @@
     <div class = 'container px-0 mt-4'>
         <div class = 'row'>
             <div class = 'col-sm-6'>
-                <h4 class = 'text-secondary'>Minhas Tarefas</h4>
+                <h5 class = 'text-secondary'>Minhas Tarefas</h5>
                 <hr>
             </div>
         </div>        
@@ -189,13 +199,20 @@
                 <ng-container matColumnDef="complexidade">
                     <th mat-header-cell *matHeaderCellDef> Complexidade </th>
                     <td mat-cell *matCellDef="let element"> {{element.complexidade}} </td>
-                    <td mat-footer-cell *matFooterCellDef> <span class = 'total'>Total</span> </td>
+                    <td mat-footer-cell *matFooterCellDef>
+                         <div class = 'total mt-2'>Planejado</div> 
+                         <div class = 'total'>Executado</div> 
+                    </td>
                 </ng-container>
 
                 <ng-container matColumnDef="valor">
                     <th mat-header-cell *matHeaderCellDef> Valor </th>
                     <td mat-cell *matCellDef="let element"> {{element.valor}} </td>                   
-                    <td mat-footer-cell *matFooterCellDef> {{this.valorTarefas}} </td>
+                    <td mat-footer-cell *matFooterCellDef>
+                        <div class = 'total mt-2'>{{this.valorPlanejado}} </div>
+                        <div class = 'total'>{{this.valorExecutado}} </div>
+                         
+                    </td>
                 </ng-container>
 
                 <ng-container matColumnDef="acoes">
@@ -222,9 +239,9 @@
 
 
     <ng-template #naoHaTarefas>
-        <div class = 'container mt-4'>
+        <div class = 'container'>
 
-            <div class="alert alert-primary" role="alert">
+            <div class="alert alert-warning" role="alert">
                 Você ainda não possui tarefas cadastradas nessa Ordem de Fornecimento
             </div>            
         

@@ -32,9 +32,14 @@ tr.mat-header-row{
 
 th.mat-header-cell{
     color: white;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 
 tr.mat-row:hover{
     background-color: rgba(0, 0, 0, 0.1);
+}
+
+.perExec{
+    font-size: 0.75rem;
+    color: rgba(0, 0, 0, 0.65);
 }

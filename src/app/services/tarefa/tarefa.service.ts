@@ -44,4 +44,8 @@ export class TarefaService {
     return this.http.post(environment.api + "tarefa/atualiza", param, {headers: httpOptions.headers, observe: 'response'});
   }
 
+  getNumOf(id){
+    return this.http.get<string>(environment.api + 'ordem-forn/' + id + '/numero');
+  }
+
 }

@@ -9,8 +9,8 @@ import { OrdemFornecimentoService } from 'src/app/services/OrdemDeFornecimento/o
 })
 export class TabelaOfComponent implements OnInit {
 
-  listaOf: Array<OrdemFornecimento>;
-  colunas = ['numOf', 'sigla', 'referencia', 'responsavelT', 'gerenteT', 'situacaoAlm', 'situacaoGenti', 'dtEncaminhamento', 'dtAbertura', 'dtPrevisao', 'dtEntrega', 'dtAceite']
+  listaOf: Array<any>;
+  colunas = ['numOf', 'sigla', 'referencia', 'responsavelT', 'gerenteT', 'situacaoAlm', 'situacaoGenti', 'dtAbertura', 'dtPrevisao', 'dtEntrega', 'dtAceite', 'valorExecutado', 'valorPlanejado']
 
 
   constructor(private ofService: OrdemFornecimentoService) { }
@@ -22,7 +22,12 @@ export class TabelaOfComponent implements OnInit {
   carregaDadosOf(){
     this.ofService.getOrdemFornecimento().subscribe(
       (lstOf: Array<OrdemFornecimento>) => {
-        this.listaOf = lstOf;       
+        this.listaOf = lstOf;      
+        for(let i of this.listaOf){
+          if(i.valorPlanejado != 0)
+            i.perExecutado = (i.valorExecutado*100) / i.valorPlanejado;
+        }
+
       }      
     );  
   }
@@ -32,5 +37,17 @@ export class TabelaOfComponent implements OnInit {
     let res = aux[0] + " " +  aux[2];    
     return res;
   }
+
+  
+  formataReferencia(ref: string){
+    if(ref != null && typeof(ref) == 'string')
+      return ref.substring(0, 2) + '/' + ref.substring(2, 6);
+    else return "";
+  }
+
+  ehNulo(el){
+    return typeof(el) != "string" ? "" : el;
+  }
+
 
 }
