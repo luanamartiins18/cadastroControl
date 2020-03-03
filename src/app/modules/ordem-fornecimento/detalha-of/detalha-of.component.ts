@@ -103,7 +103,7 @@ export class DetalhaOfComponent implements OnInit {
   }
 
   valida(value){
-    if(value.referencia == null || value.referencia.length < 6){
+    if(value.referencia == null || value.referencia.length < 6 || typeof(value.referencia) != "string"){
       return false;
     }
 
@@ -133,6 +133,7 @@ export class DetalhaOfComponent implements OnInit {
   }
 
   onSubmit(){    
+    console.log(this.formColab.value);
 
     if(this.valida(this.formColab.value)){
      

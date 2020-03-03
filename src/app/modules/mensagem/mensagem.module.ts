@@ -18,11 +18,12 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/
 import { DetalhaMensagemComponent } from './detalha-mensagem/detalha-mensagem.component';
 import { MensagensColaboradorComponent } from './mensagens-colaborador/mensagens-colaborador.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HistoricoColaboradorComponent } from './historico-colaborador/historico-colaborador.component';
 
 
 
 @NgModule({
-  declarations: [MensagensComponent, NovaMensagemComponent, DetalhaMensagemComponent, MensagensColaboradorComponent],
+  declarations: [MensagensComponent, NovaMensagemComponent, DetalhaMensagemComponent, MensagensColaboradorComponent, HistoricoColaboradorComponent],
   imports: [
     CommonModule,
     MatTableModule,

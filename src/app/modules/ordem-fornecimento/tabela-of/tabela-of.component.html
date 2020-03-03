@@ -3,10 +3,9 @@
     <b>{{this.listaOf.length}} OF(s) </b>em execução
   </div>
 
-
-  <div class = 'custom-size'>
-    <table mat-table [dataSource]="this.listaOf" class = 'mat-elevation-z8 ' >
-      
+<div class = 'mat-elevation-z8 '>
+  <div class = 'custom-size' >
+    <table mat-table [dataSource]="this.listaOf"  >      
       <ng-container matColumnDef="numOf">
           <th mat-header-cell *matHeaderCellDef> Nº OF </th>
           <td mat-cell *matCellDef="let element"> {{element.numeroOFGenti}} </td>
@@ -68,8 +67,7 @@
           {{element.valorExecutado}}
 
           <span class = 'perExec'>
-            {{element.perExecutado == null ? "" :  element.perExecutado | number: '1.0-2' }}
-            {{element.perExecutado == null ? "" : "% executado"}}
+            {{element.perExecutado == null ? "" :  '(' + (element.perExecutado | number: '1.0-2').toString()+'% Executado)' }}            
           </span> 
         
         </td>
@@ -85,6 +83,9 @@
       
    </table>
   </div>
+</div>
+
+
 
 </div>
 

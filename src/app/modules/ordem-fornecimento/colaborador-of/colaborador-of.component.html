@@ -58,10 +58,8 @@
           <th mat-header-cell *matHeaderCellDef> Vlr Executado </th>
           <td mat-cell *matCellDef="let element"> 
             {{element.valorExecutado == undefined ? "N/A" : element.valorExecutado}}
-            <span class = 'perExec'>
-              {{element.valorExecutado== 0 ? "" : "("}}
-              {{element.valorExecutado == 0 ? "" : element.perExecutado | number: '1.0-2' }}
-              {{element.valorExecutado == 0 ? "" : "% Executado)"}}
+            <span class = 'perExec'>              
+              {{element.valorExecutado == 0 ? "" : '(' + (element.perExecutado | number: '1.0-2').toString() + '% Executado)' }}              
             </span>
           </td>
         </ng-container>
@@ -71,27 +69,14 @@
           <td mat-cell *matCellDef="let element"> 
             {{element.valorPrevisto == undefined ? "N/A" : element.valorPrevisto }}
            </td>
-
-           <td mat-footer-cell *matFooterCellDef>
-             Valor Executado total
-            {{element.valorExecutadoTotal == undefined ? "N/A" : element.valorExecutadoTotal}}
-            <span class = 'perExec'>
-              {{element.valorExecutadoTotal == 0 ? "" : "("}}
-              {{element.valorExecutadoTotal == 0 ? "" : element.perExecutadoTotal | number: '1.0-2' }}
-              {{element.valorExecutadoTotal == 0 ? "" : "% Executado)"}}
-            </span>
-           </td>
-
         </ng-container>
 
         <ng-container matColumnDef="valorExecutadoTotal">
           <th mat-header-cell *matHeaderCellDef> Vlr Executado Total </th>
           <td mat-cell *matCellDef="let element"> 
             {{element.valorExecutadoTotal == undefined ? "N/A" : element.valorExecutadoTotal}}
-            <span class = 'perExec'>
-              {{element.valorExecutadoTotal== 0 ? "" : "("}}
-              {{element.valorExecutadoTotal == 0 ? "" : element.perExecutadoTotal | number: '1.0-2' }}
-              {{element.valorExecutadoTotal == 0 ? "" : "% Executado)"}}
+            <span class = 'perExec'>             
+              {{element.valorExecutadoTotal == 0 ? "" : ' - (' + (element.perExecutadoTotal | number: '1.0-0').toString() + '% Executado)' }}             
             </span>
           </td>
         </ng-container>

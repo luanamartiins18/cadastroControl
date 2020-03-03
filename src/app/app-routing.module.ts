@@ -12,6 +12,7 @@ import { DefaultComponent } from './modules/pagina-inicial/default/default.compo
 import { DetalhaMensagemComponent } from './modules/mensagem/detalha-mensagem/detalha-mensagem.component';
 import { ColaboradorOfComponent } from './modules/ordem-fornecimento/colaborador-of/colaborador-of.component';
 import { TarefasUsuarioComponent } from './modules/tarefa/tarefas-usuario/tarefas-usuario.component';
+import { HistoricoColaboradorComponent } from './modules/mensagem/historico-colaborador/historico-colaborador.component';
 
 
 const routes: Routes = [
@@ -25,7 +26,8 @@ const routes: Routes = [
       {path: 'ordem-fornecimento', component: TabelaOfComponent, canActivate:[AuthGuardService]},       
       {path: 'ordem-fornecimento/:id', component: DetalhaOfComponent, canActivate:[AuthGuardService]},
       {path: 'ordem-fornecimento/usuario/:id', component: ColaboradorOfComponent, canActivate:[AuthGuardService]}, 
-      {path: 'usuario/:idUsu/ordem-forn/:idOf', component: TarefasUsuarioComponent, canActivate:[AuthGuardService]} 
+      {path: 'usuario/:idUsu/ordem-forn/:idOf', component: TarefasUsuarioComponent, canActivate:[AuthGuardService]},
+      {path: 'mensagens/usuario/:id', component: HistoricoColaboradorComponent, canActivate: [AuthGuardService]} 
     ]
   }
 

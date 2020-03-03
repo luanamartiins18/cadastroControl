@@ -50,7 +50,7 @@ export class DetalhaMensagemComponent implements OnInit {
     this.ms.alteraStatusMsg(param).subscribe(
       (data)=>{
         if(data.status == 200){
-          this.nt.notify("success", "Situação da mensagem alterado com sucesso");
+          this.nt.notify("success", "Situação da mensagem alterada com sucesso");
           this.carregaMensagens();
           this.router.navigate([this.router.url]);
         }else{

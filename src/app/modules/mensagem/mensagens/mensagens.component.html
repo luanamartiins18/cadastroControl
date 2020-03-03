@@ -1,5 +1,5 @@
-<div *ngIf = 'this.mensagens; else carregando'>
-    <div class = 'container-fluid mt-3'>
+<div *ngIf = 'this.mensagens; else carregando' class = 'pb-2'> 
+    <div class = 'container-fluid mt-2'>
 
         <ul class="nav nav-tabs">
     
@@ -17,7 +17,7 @@
         </ul>
         
 
-        <div *ngIf = 'this.mensagens.length > 0; else semMensagens' class = 'custom-size'>
+        <div *ngIf = 'this.mensagens.length > 0; else semMensagens' class = 'custom-size mat-elevation-z8 '>
         
             <table mat-table [dataSource]="this.mensagens">
                 

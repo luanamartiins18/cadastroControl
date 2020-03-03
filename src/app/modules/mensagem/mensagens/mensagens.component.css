@@ -19,3 +19,16 @@ table{
 .custom-row{
     cursor: pointer;
 }
+
+tr.mat-header-row{
+    background-color: rgb(99, 99, 99);
+}
+
+th.mat-header-cell{
+    color: white;
+    font-size: 0.8rem;
+}
+
+tr.mat-row:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+}
