@@ -1,46 +1,84 @@
-.custom-size{
-    height: 26rem;
+.table-wrapper{
     overflow: auto;
     margin-top: 0.25rem;
+    margin: auto;    
+}
+
+.page-width{
+    width: 90%;
+    margin: auto;
 }
 
 table{
-    width: 100%;
-    margin: auto;
+    width: 100rem;
+    border-collapse: unset;
 }
 
 .custom-row{
     cursor: pointer;
 }
 
-tr.mat-header-row{
-    width: 80%;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
-    background-color: rgb(99, 99, 99);
-}
-
 .qtd-of{
-    margin: auto;
-    width: 100%;
+    margin: auto;   
     padding-right: 12px;
-    padding-top: 1rem;
     text-align: end;
+    font-size: 0.85rem;
 }
 
 tr.mat-row{
-    height: 4rem;
+    height: 3.5rem; 
 }
 
 th.mat-header-cell{
-    color: white;
-    font-size: 0.8rem;
+    padding: 1rem;
 }
 
+
 tr.mat-row:hover{
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgb(240, 240, 240);
+}
+
+tr.mat-row:hover .mat-table-sticky{
+    background-color: rgb(240, 240, 240);
 }
 
 .perExec{
-    font-size: 0.75rem;
+    font-size: 0.70rem;
     color: rgba(0, 0, 0, 0.65);
+}
+
+td.mat-cell{
+    padding-left: 1rem;    
+    padding-right: 1rem;   
+}
+
+.mat-table-sticky:first-child {
+    border-right: 1px solid #e0e0e0;
+  }
+  
+.mat-table-sticky:last-child {
+    border-left: 1px solid #e0e0e0;
+    padding-right: 10rem;
+}
+
+th.mat-table-sticky:first-child {
+    border-right: none;
+  }
+  
+th.mat-table-sticky:last-child {
+    border-left: none;
+    padding-right: 10rem;
+}
+
+.exec-font{
+    font-size: 0.75rem;
+}
+
+td.mat-table-sticky:last-child {
+    padding-right: 0;
+}
+
+th{
+    border-bottom: 0.15rem solid black !important;
+    font-size: 0.85rem;
 }

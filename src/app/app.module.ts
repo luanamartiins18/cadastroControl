@@ -36,6 +36,9 @@ import { TarefaModule } from './modules/tarefa/tarefa.module';
     OrdemFornecimentoModule,
     TarefaModule,
     NotifierModule.withConfig({
+      behaviour:{
+        autoHide: 2000
+      },
       position: {
         horizontal: {
           position: 'right'

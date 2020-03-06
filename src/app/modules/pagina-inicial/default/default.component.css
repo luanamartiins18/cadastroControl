@@ -5,3 +5,7 @@ div{
 img{
     pointer-events: none;
 }
+
+.custom-size{
+    height: 60vh;
+}

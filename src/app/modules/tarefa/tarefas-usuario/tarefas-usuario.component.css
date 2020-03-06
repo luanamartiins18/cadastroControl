@@ -3,21 +3,13 @@
 }
 
 .custom-row{
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba(0, 0, 0, 0.1);
     padding-top: 1rem;
     padding-bottom: 1rem;
 }
 
 .custom-row input[type='text'], textarea, select{
     border: 1px solid rgba(0, 0, 0, 0.2);
-}
-
-textarea{
-    height: 38px;
-}
-
-textarea:focus{
-    height: 6rem;
 }
 
 .linha-tarefa{
@@ -68,4 +60,35 @@ tr.mat-row:hover{
 
 .custom-display{
     display: inline;
+}
+
+input{
+    font-size: 1rem;
+}
+
+.lista-itens-guia{
+    height: 30rem;
+    overflow: auto;
+}
+
+.item-guia{
+    cursor: pointer;
+    padding: 0.25rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.item-guia:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+
+hr{
+    padding: 0;
+}
+
+.item-selecionado{    
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 0.80rem;
 }

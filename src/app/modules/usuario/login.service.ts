@@ -3,13 +3,14 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import * as CryptoJS from 'crypto-js';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { NotifierService } from 'angular-notifier';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  constructor(private httpClient: HttpClient, private router: Router) { }
+  constructor(private httpClient: HttpClient, private router: Router, private nt: NotifierService) { }
 
   autenticaUsuario(colaborador, senha, component){
     let objComponent = component;
@@ -36,6 +37,8 @@ export class LoginService {
       err => {
         if(err.status == 401){
           component.senhaErrada = true;
+          this.nt.notify("error", "Código de usuário ou senha inválido");
+
         }
       }
       

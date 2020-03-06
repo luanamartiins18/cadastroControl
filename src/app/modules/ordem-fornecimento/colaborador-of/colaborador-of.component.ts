@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ColaboradorOfComponent implements OnInit {
 
-  colunas = ['numOf', 'sigla', 'situacaoAlm', 'tema', 'responsavelT', 'gerenteT', 'dtAbertura', 'dtPrevisao','dtEncaminhamento', 'valorExecutadoTotal', 'valorPrevistoTotal'];
+  colunas = ['numOf', 'sigla', 'situacaoAlm', 'tema', 'responsavelT', 'gerenteT', 'dtAbertura', 'dtPrevisao','dtEncaminhamento', 'execucao'];
   listaOf: Array<any>;
   idUsu;
 

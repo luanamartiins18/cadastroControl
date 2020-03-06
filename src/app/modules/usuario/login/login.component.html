@@ -1,21 +1,40 @@
-<div class = 'wrapper'>
+<div class = 'wrapper d-flex justify-content-center align-items-center flex-column'>
 
-    <img [src] = "logoQintess"/>
+    <div class = 'custom-pos'>
 
-        <form [formGroup] = 'loginForm' class = 'login-box'>
-
-            <div [ngClass] = "{'val-false':this.senhaErrada}" class = 'input-group'>
-                <i class="fa fa-user" aria-hidden="true"></i>
-                <input  type = 'text' placeholder = 'RE999999' spellcheck="false" formControlName = "colaborador" />
-            </div>
-
-            <div [ngClass] = "{'val-false':this.senhaErrada}" class = 'input-group'> 
-                <i class="fa fa-lock" aria-hidden="true"></i>
-                <input type = 'password' placeholder = 'Senha' formControlName = "senha" />
-            </div>
-            
-            <input type = 'submit' value = 'Entrar' (click)='checaLogin()' />    
-              
-        </form>       
+        <div class = 'd-flex justify-content-center test'>
+            <img [src] = "logoQintess"/>            
+        </div>
     
+        <div class = 'mat-elevation-z8 login-box'>  
+    
+            <div class = 'd-flex justify-content-center mb-3'>            
+                <h3 class = 'text-secondary'>Login</h3>
+            </div>
+    
+            <form [formGroup] = 'loginForm'>
+    
+                <div [ngClass] = "{'val-false':this.senhaErrada}" class = 'login'>
+                    <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                    <input  type = 'text' placeholder = 'RE999999' spellcheck="false" formControlName = "colaborador" />
+                </div>
+    
+                <div [ngClass] = "{'val-false':this.senhaErrada}" class = 'senha mt-3'> 
+                    <i class="fa fa-lock" aria-hidden="true"></i>
+                    <input type = 'password' placeholder = 'Senha' formControlName = "senha" />
+                </div>
+                
+                <div class = 'd-flex justify-content-center mt-4'>
+                    <input class = 'enviar text-white px-2 btn btn-block' type = 'submit' value = 'Entrar' (click)='checaLogin()' />   
+                </div>
+                 
+                  
+            </form>
+            
+        </div>
+    </div>
+
+    
+
+
 </div>

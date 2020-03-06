@@ -7,6 +7,7 @@ import { DefaultComponent } from './default/default.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MensagemModule } from '../mensagem/mensagem.module';
 import { RouterModule } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [HeaderComponent, HomeParentComponent, NavbarComponent, DefaultComponent],
@@ -14,7 +15,8 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     ReactiveFormsModule,
     MensagemModule, 
-    RouterModule
+    RouterModule,
+    NgbModule
   ],
   entryComponents: []
 })

@@ -1,5 +1,5 @@
 .logo-qintess{
-    height: 4rem;
+    height: 2rem;
     pointer-events: none;  
 }
 
@@ -15,7 +15,7 @@
 .dados-pessoais{   
     display: grid;
     grid-template-columns: auto auto;
-    grid-row-gap: 1rem;    
+    grid-row-gap: 0.25rem;    
     grid-column-gap: 1rem;
 }
 

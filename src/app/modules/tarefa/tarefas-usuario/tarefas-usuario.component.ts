@@ -31,6 +31,9 @@ export class TarefasUsuarioComponent implements OnInit {
   sitForm: FormArray;
   opFormTrf: String = "Salvar";
   numOf;
+  page = 1;
+  pageSize = 15;
+  itemSelecionado = "";
 
 
   colunas = ['historia', 'artefato', 'sprint', 'numTarefa', 'situacao', 'quantidade', 'complexidade', 'valor', 'acoes'];
@@ -204,6 +207,9 @@ export class TarefasUsuarioComponent implements OnInit {
   }
 
   setaItem(){
+
+    this.itemSelecionado = "";
+
     this.listaItensGuia = new Array<any>();
     this.form.controls.item.setValue(0);
     this.form.controls.item.enable();
@@ -223,6 +229,7 @@ export class TarefasUsuarioComponent implements OnInit {
     this.form.controls.disciplina.setValue(0);
     this.form.controls.item.disable();
     this.form.controls.item.setValue(0);
+    this.itemSelecionado = '';
 
     for(let i of this.listaDisciplinasAux){
  
@@ -290,6 +297,10 @@ export class TarefasUsuarioComponent implements OnInit {
 
   }
 
+  setaItemModal(item, id){
+    this.form.controls.item.setValue(id);
+    this.itemSelecionado = item;
+  }
 
   validaForm(value){
 
