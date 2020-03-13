@@ -10081,7 +10081,8 @@ export class ListagemGuiaComponent implements OnInit {
           "descricao": "Teste e Homolocação de Software",
           "perfil": "Baixa/Alta"
       }
-  ]
+  ] 
+    this.filtraDisciplina(1);
 
     this.paginator._intl.itemsPerPageLabel = 'Tarefas por página';
     this.paginator._intl.getRangeLabel = (page: number, pageSize: number, length: number) => {
