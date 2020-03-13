@@ -1,0 +1,72 @@
+.wrapper{
+    height: 74vh;
+}
+
+table{
+    width: 100%;
+}
+
+.mat-card{
+    padding: 0 !important;
+}
+
+.sidenav-el{
+    cursor: pointer; 
+    border: none;
+}
+
+.sidenav-el:hover{
+    font-weight: 450;
+}
+
+tr.example-detail-row {
+    height: 0;
+  }
+
+.example-element-row td {
+    border-bottom-width: 0;
+}
+
+.example-element-detail {
+    overflow: hidden;
+    display: flex;
+}
+
+tr{
+    cursor: pointer;
+}
+
+tr.example-expanded-row:hover{
+    background-color: rgb(247, 247, 247);
+}
+
+td.mat-cell{    
+    padding-right: 0.5rem;
+}
+
+th{
+    background-color: #333333;
+    color: white;
+    font-size: 1rem;
+}
+
+.fonte-item-guia th{
+    font-size: 0.75rem;
+}
+
+/*Alterando as cores do filtro*/
+::ng-deep .mat-focused .mat-form-field-label {
+    color: rgb(49, 49, 49) !important;
+}
+  
+::ng-deep.mat-form-field-underline {    
+    background-color: rgb(49, 49, 49) !important;
+  } 
+  
+::ng-deep.mat-form-field-ripple {   
+   background-color: rgb(49, 49, 49) !important;
+}
+
+.t{
+    overflow-x: hidden !important;
+}

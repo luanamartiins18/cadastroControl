@@ -15,8 +15,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MensagemModule } from './modules/mensagem/mensagem.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { OrdemFornecimentoModule } from './modules/ordem-fornecimento/ordem-fornecimento.module';
-import { OrdemFornecimentoService } from './services/OrdemDeFornecimento/ordem-fornecimento-service';
 import { TarefaModule } from './modules/tarefa/tarefa.module';
+import { GuiaModule } from './modules/guia/guia.module';
 
 
 @NgModule({
@@ -35,6 +35,7 @@ import { TarefaModule } from './modules/tarefa/tarefa.module';
     NgbModule,
     OrdemFornecimentoModule,
     TarefaModule,
+    GuiaModule,
     NotifierModule.withConfig({
       behaviour:{
         autoHide: 2000

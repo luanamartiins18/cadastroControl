@@ -74,7 +74,8 @@ input{
 .item-guia{
     cursor: pointer;
     padding: 0.25rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    margin: 0.25rem;
 }
 
 .item-guia:hover{
@@ -90,5 +91,4 @@ hr{
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    font-size: 0.80rem;
 }

@@ -3,6 +3,8 @@ import { Usuario } from 'src/app/models/usuario/usuario.model';
 import { HomeParentComponent } from '../home-parent/home-parent.component';
 import { LoginService } from '../../usuario/login.service';
 import { Router } from '@angular/router';
+import { ListagemGuiaComponent } from '../../guia/listagem-guia/listagem-guia.component';
+
 
 @Component({
   selector: 'navbar',
