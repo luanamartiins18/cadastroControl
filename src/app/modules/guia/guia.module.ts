@@ -11,6 +11,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatPaginatorModule } from '@angular/material/paginator';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [ListagemGuiaComponent],
@@ -25,7 +27,8 @@ import { MatInputModule } from '@angular/material/input';
     MatExpansionModule,
     MatPaginatorModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    NgbModule
   ]
 })
 export class GuiaModule { }

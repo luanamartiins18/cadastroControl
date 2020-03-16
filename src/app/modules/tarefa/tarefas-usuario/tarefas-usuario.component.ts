@@ -495,6 +495,10 @@ export class TarefasUsuarioComponent implements OnInit {
     return res;
   }
 
+  teste(row){
+    console.log(row);
+  }
+
 
 
 

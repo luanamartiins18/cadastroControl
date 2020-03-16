@@ -27,7 +27,6 @@ export class LoginService {
       data=>{
        
         if(data.status == 200){
-
           sessionStorage.setItem('colaborador', colaborador); 
           this.router.navigate(['home']); 
           component.senhaErrada = false;

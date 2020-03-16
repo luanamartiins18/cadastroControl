@@ -92,3 +92,7 @@ hr{
     overflow: hidden;
     white-space: nowrap;
 }
+
+.clickable-row{
+    cursor: pointer;
+}

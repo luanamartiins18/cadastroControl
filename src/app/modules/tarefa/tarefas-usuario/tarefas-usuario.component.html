@@ -278,31 +278,31 @@
                     <table mat-table [dataSource]="this.listaTarefas" class = 'mat-elevation-z8' >
                         <ng-container matColumnDef="numTarefa">
                             <th mat-header-cell *matHeaderCellDef> Nº Tarefa </th>
-                            <td mat-cell *matCellDef="let element"> {{element.numTarefa}} </td>
+                            <td (click) = 'this.tarefaAtual(element.id); this.editaTarefa(element);' mat-cell *matCellDef="let element"> {{element.numTarefa}} </td>
                             <td mat-footer-cell *matFooterCellDef></td>
                         </ng-container>           
                 
                         <ng-container matColumnDef="artefato">
                             <th class = 'pr-4' mat-header-cell *matHeaderCellDef> Artefato </th>
-                            <td mat-cell *matCellDef="let element"> {{element.artefato}} </td>
+                            <td (click) = 'this.tarefaAtual(element.id); this.editaTarefa(element);' mat-cell *matCellDef="let element"> {{element.artefato}} </td>
                             <td mat-footer-cell *matFooterCellDef></td>
                         </ng-container>
                 
                         <ng-container matColumnDef="sprint">
                             <th mat-header-cell *matHeaderCellDef> Sprint </th>
-                            <td mat-cell *matCellDef="let element"> {{element.sprint}} </td>
+                            <td (click) = 'this.tarefaAtual(element.id); this.editaTarefa(element);' mat-cell *matCellDef="let element"> {{element.sprint}} </td>
                             <td mat-footer-cell *matFooterCellDef></td>
                         </ng-container>
                 
                         <ng-container matColumnDef="quantidade">
                             <th mat-header-cell *matHeaderCellDef> Quantidade </th>
-                            <td mat-cell *matCellDef="let element"> {{element.quantidade}} </td>
+                            <td (click) = 'this.tarefaAtual(element.id); this.editaTarefa(element);' mat-cell *matCellDef="let element"> {{element.quantidade}} </td>
                             <td mat-footer-cell *matFooterCellDef></td>
                         </ng-container>
         
                         <ng-container matColumnDef="historia">
                             <th mat-header-cell *matHeaderCellDef> História </th>
-                            <td mat-cell *matCellDef="let element"> {{element.historia}} </td>
+                            <td (click) = 'this.tarefaAtual(element.id); this.editaTarefa(element);' mat-cell *matCellDef="let element"> {{element.historia}} </td>
                             <td mat-footer-cell *matFooterCellDef></td>
                         </ng-container>
                         
@@ -321,7 +321,7 @@
         
                         <ng-container matColumnDef="complexidade">
                             <th mat-header-cell *matHeaderCellDef> Complexidade </th>
-                            <td mat-cell *matCellDef="let element"> {{element.complexidade}} </td>
+                            <td (click) = 'this.tarefaAtual(element.id); this.editaTarefa(element);' mat-cell *matCellDef="let element"> {{element.complexidade}} </td>
                             <td mat-footer-cell *matFooterCellDef>
                                  <div class = 'total mt-2'>Planejado</div> 
                                  <div class = 'total'>Executado</div> 
@@ -330,7 +330,7 @@
         
                         <ng-container matColumnDef="valor">
                             <th mat-header-cell *matHeaderCellDef> Valor </th>
-                            <td mat-cell *matCellDef="let element"> {{element.valor}} </td>                   
+                            <td (click) = 'this.tarefaAtual(element.id); this.editaTarefa(element);' mat-cell *matCellDef="let element"> {{element.valor}} </td>                   
                             <td mat-footer-cell *matFooterCellDef>
                                 <div class = 'total mt-2'>{{this.valorPlanejado}} </div>
                                 <div class = 'total'>{{this.valorExecutado}} </div>
@@ -342,17 +342,14 @@
                             <th mat-header-cell *matHeaderCellDef> Opções </th>
         
                             <td mat-cell *matCellDef="let element">
-                                <i (click) = 'open(content); this.tarefaAtual(element.id);' class="fa fa-trash-o fa-2x deletar custom-icon" aria-hidden="true" placement="top" ngbTooltip = "Excluir"></i>
-                                <i (click) = 'this.tarefaAtual(element.id); this.editaTarefa(element);' class="fa fa-pencil-square-o fa-2x editar custom-icon" aria-hidden="true" placement="top" ngbTooltip = "Editar"></i>
+                                <i (click) = 'open(content); this.tarefaAtual(element.id);' class="fa fa-times fa-2x deletar custom-icon" aria-hidden="true" placement="top" ngbTooltip = "Excluir"></i>
                             </td>                      
         
                             <td mat-footer-cell *matFooterCellDef></td>
                         </ng-container>
-        
-                        
-                        
+                                
                         <tr mat-header-row *matHeaderRowDef="colunas; sticky: true"></tr> 
-                        <tr mat-row *matRowDef="let row; columns: colunas;" ></tr>    
+                        <tr class = 'clickable-row' mat-row *matRowDef="let row; columns: colunas;" ></tr>    
                         <tr mat-footer-row *matFooterRowDef="colunas;"></tr>            
                         
                     </table>

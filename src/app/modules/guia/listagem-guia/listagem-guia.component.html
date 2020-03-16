@@ -1,8 +1,8 @@
-<div class = 'container px-0 pt-3 fix-max-width t'>
+<div class = 'px-5 pt-3'>
     
-    <mat-card>
+    <mat-card class = 'mat-elevation-z4'>
 
-        <mat-card-title class = 'mat-elevation-z8'>
+        <mat-card-title>
 
             <div class = 'pt-3 pl-3 pb-2'>
                 Guia de Métricas
@@ -17,19 +17,19 @@
             <mat-card-content class = 'mat-elevation-z4 mt-4'> 
                 <mat-sidenav-container autosize>
 
-                    <mat-sidenav opened mode="side">
+                    <mat-sidenav opened mode="side" class = 'mat-elevation-z4'>
 
                         <ul class="list-group list-group-flush">
                             <li (click) = 'this.filtraDisciplina(i.id);' class="list-group-item sidenav-el" *ngFor = 'let i of this.listaDisciplinasGuia'>
                                 {{i.id + ' - ' + i.descricao}}                                 
-                            </li>                          
+                            </li>  
                         </ul>       
                                    
     
                     </mat-sidenav>
 
                     <mat-sidenav-content>
-                        <div class = 'wrapper mt-2'>
+                        <div class = 'wrapper mt-2 ml-4'>
                             <mat-form-field>
                                 <mat-label>Filtrar</mat-label>
                                 <input matInput (keyup)="applyFilter($event)" placeholder="Ex. 2.1.2">
@@ -39,7 +39,22 @@
                        
                                 <ng-container matColumnDef="tarefa">
                                     <th mat-header-cell *matHeaderCellDef> Tarefa </th>
-                                    <td mat-cell *matCellDef="let element"> {{element.tarefa + ' - ' + element.descricao_tarefa}} </td>
+                                    <td mat-cell *matCellDef="let element">
+
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-sm-11 px-0"
+                                                [class.example-expanded-row]="expandedElement === element"
+                                                (click)="expandedElement = expandedElement === element ? null : element">
+                                                    {{element.tarefa + ' - ' + element.descricao_tarefa}} 
+                                                </div>
+                                                <div (click) = 'this.open(content, element);'  class="col-sm-1 d-flex justify-content-center">
+                                                    <i class="fa fa-2x fa-ellipsis-h" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </td>
                                 </ng-container>   
 
                                 <ng-container matColumnDef="expandedDetail">
@@ -83,14 +98,12 @@
                             
                                 <tr mat-header-row *matHeaderRowDef="colunas; sticky: true"></tr>
                                 <tr mat-row *matRowDef="let element; columns: colunas;"
-                                class="example-element-row"
-                                [class.example-expanded-row]="expandedElement === element"
-                                (click)="expandedElement = expandedElement === element ? null : element">></tr>
+                                class="example-element-row"></tr>
 
                                 <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
     
                             </table>
-                            <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
+                            <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons class = 'mat-elevation-z4'></mat-paginator>
                         </div>
 
                     </mat-sidenav-content>
@@ -105,4 +118,100 @@
     </mat-card>
 
 </div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h5 class="modal-title" id="modal-basic-title">Editar Tarefa</h5>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        
+        <div class = 'container'>
+
+            <div class = 'row'>
+                <div class = 'col-sm-2'>
+                    Tarefa
+                </div>
+                <div class = 'col-sm-10'>
+                    <input type="text" class = 'form-control' value = {{this.trfSelecionada.tarefa}} />
+                </div>
+            </div>
+
+            <div class = 'row mt-1'>
+                <div class = 'col-sm-2'>
+                    Descrição
+                </div>
+                <div class = 'col-sm-10'>
+                    <textarea class = 'form-control'>{{this.trfSelecionada.descricao_tarefa}}</textarea>
+                </div>
+            </div>           
+
+            <div class = 'row' *ngFor = 'let i of this.agrupaComplexidadesTrf(this.trfSelecionada.itens)'>
+
+                <div class = 'col-sm-12'>
+
+                    <mat-expansion-panel class = 'mat-elevation-z4 mt-2'>
+                        <mat-expansion-panel-header class = 'bg-secondary'>
+                            <mat-panel-title class = 'text-light'>
+                                {{i}}
+                            </mat-panel-title> 
+                        </mat-expansion-panel-header>         
+
+                        <div class = 'container'>
+                            <div class = 'row'>                       
+
+                                <table class="table mat-elevation-z4 mt-2 fonte-item-guia">
+                                    <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Valor</th>  
+                                        <th scope="col">Componente</th> 
+                                        <th scope="col">Descrição</th>      
+                                        <th scope="col">Quantidade</th>                                                
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr *ngFor='let j of this.filtraTrfPorComplexidade(this.trfSelecionada.itens, i)'>                                                        
+                                        <td>
+                                            <input class = 'form-control form-control-sm' type="text" value = {{j.valor}}/>
+                                        </td>     
+                                        <td>
+                                            <input class = 'form-control form-control-sm' type="text" value = {{this.filtraVlrNull(j.componente)}} />
+                                        </td>  
+                                        <td>
+                                            <textarea class = 'form-control form-control-sm' value = {{j.descricao_complex}}></textarea>
+                                        </td>   
+                                        <td>
+                                            <input class = 'form-control form-control-sm' type="text" value = {{this.filtraVlrNull(j.quantidade)}} />
+                                        </td>  
+
+                                      </tr>                                                 
+                                    </tbody>
+                                </table>   
+                            </div>
+
+
+
+
+                        </div>
+               
+
+
+
+
+
+                    </mat-expansion-panel> 
+
+                </div>
+            </div>   
+        </div>
+    </div>  
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="c('Save click')">Cancelar</button>
+        <button type="button" class="btn btn-success" (click)="c('Save click');">Salvar</button>
+    </div>
+ 
+</ng-template>
 

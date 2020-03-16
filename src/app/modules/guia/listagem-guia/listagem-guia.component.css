@@ -1,5 +1,5 @@
 .wrapper{
-    height: 74vh;
+    height: 70vh;
 }
 
 table{
@@ -65,8 +65,4 @@ th{
   
 ::ng-deep.mat-form-field-ripple {   
    background-color: rgb(49, 49, 49) !important;
-}
-
-.t{
-    overflow-x: hidden !important;
 }
