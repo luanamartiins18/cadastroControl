@@ -6,6 +6,8 @@
 
             <div class = 'pt-3 pl-3 pb-2'>
                 Guia de Métricas
+                <i [routerLink] = '["/nova-tarefa"]' class="text-primary pl-2 fa fa-plus cursor-pointer" aria-hidden="true"></i>
+
             </div>
             <mat-divider></mat-divider>
         </mat-card-title>
@@ -83,7 +85,7 @@
                                                       <tr *ngFor='let j of this.filtraTrfPorComplexidade(element.itens, i)'>                                                        
                                                         <td>{{j.valor}}</td>     
                                                         <td>{{this.isNull(j.componente) ? "N/A" : j.componente}}</td>  
-                                                        <td>{{j.descricao_complex}}</td>                                                     
+                                                        <td>{{this.isNull(j.descricao_complex) ? "N/A" : j.descricao_complex}}</td>                                                     
                                                       </tr>                                                 
                                                     </tbody>
                                                 </table>                                          
@@ -136,7 +138,7 @@
                     Tarefa
                 </div>
                 <div class = 'col-sm-10'>
-                    <input type="text" class = 'form-control' value = {{this.trfSelecionada.tarefa}} />
+                    <input readonly type="text" class = 'form-control' value = {{this.trfSelecionada.tarefa}} />
                 </div>
             </div>
 
@@ -145,9 +147,18 @@
                     Descrição
                 </div>
                 <div class = 'col-sm-10'>
-                    <textarea class = 'form-control'>{{this.trfSelecionada.descricao_tarefa}}</textarea>
+                    <textarea (keyup) = "this.atualizaTrfSelecionada('N/A', 'N/A', 'descricao_trf', $event.target.value)" class = 'form-control'>{{this.trfSelecionada.descricao_tarefa}}</textarea>
                 </div>
-            </div>           
+            </div>    
+            
+            <div class = 'row mt-1'>
+                <div class = 'col-sm-2'>
+                    Plataforma
+                </div>
+                <div class = 'col-sm-10'>
+                    <textarea (keyup) = "this.atualizaTrfSelecionada('N/A', 'N/A', 'plataforma', $event.target.value)" class = 'form-control'>{{this.filtraVlrNull(this.trfSelecionada.plataforma)}}</textarea>
+                </div>
+            </div> 
 
             <div class = 'row' *ngFor = 'let i of this.agrupaComplexidadesTrf(this.trfSelecionada.itens)'>
 
@@ -175,16 +186,17 @@
                                     <tbody>
                                       <tr *ngFor='let j of this.filtraTrfPorComplexidade(this.trfSelecionada.itens, i)'>                                                        
                                         <td>
-                                            <input class = 'form-control form-control-sm' type="text" value = {{j.valor}}/>
+                                            <input (keyup) = "this.atualizaTrfSelecionada(i, j.componente, 'valor', $event.target.value)" class = 'form-control form-control-sm' type="text" value = {{j.valor}} />
                                         </td>     
                                         <td>
-                                            <input class = 'form-control form-control-sm' type="text" value = {{this.filtraVlrNull(j.componente)}} />
+                                            <input (keyup) = "this.atualizaTrfSelecionada(i, j.componente, 'componente', $event.target.value)" class = 'form-control form-control-sm' type="text" value = {{this.filtraVlrNull(j.componente)}} />
+                                        </td>                                          
+                                        <td>
+                                            <textarea (keyup) = "this.atualizaTrfSelecionada(i, j.componente, 'descricao_complex', $event.target.value)" class = 'form-control form-control-sm' value = {{this.filtraVlrNull(j.descricao_complex)}}></textarea>
                                         </td>  
                                         <td>
-                                            <textarea class = 'form-control form-control-sm' value = {{j.descricao_complex}}></textarea>
-                                        </td>   
-                                        <td>
-                                            <input class = 'form-control form-control-sm' type="text" value = {{this.filtraVlrNull(j.quantidade)}} />
+                                            <input (keyup) = "this.atualizaTrfSelecionada(i, j.componente, 'quantidade', $event.target.value)" class = 'form-control form-control-sm' type="text" value = {{this.filtraVlrNull(j.quantidade)}} />
+                                           
                                         </td>  
 
                                       </tr>                                                 
@@ -210,7 +222,7 @@
     </div>  
     <div class="modal-footer">
         <button type="button" class="btn btn-danger" (click)="c('Save click')">Cancelar</button>
-        <button type="button" class="btn btn-success" (click)="c('Save click');">Salvar</button>
+        <button type="button" class="btn btn-success" (click)="this.submit(); c('Save click');">Salvar</button>
     </div>
  
 </ng-template>

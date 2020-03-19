@@ -1,0 +1,12 @@
+.form-label{
+    font-size: 0.85rem;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.thead-gray{
+    background-color: #636363;
+    color: white;
+}

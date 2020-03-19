@@ -5,6 +5,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-listagem-guia',
@@ -37,11 +38,11 @@ export class ListagemGuiaComponent implements OnInit {
 
   constructor(private guia: GuiaService,
               private ts: TarefaService,
-              private modalService: NgbModal) { }
+              private modalService: NgbModal,
+              private nt: NotifierService) { }
 
   ngOnInit() {
-    this.carregaItensGuia();        
-    this.carregaDisciplinas(); 
+    this.inicializaPagina();
     this.paginator._intl.itemsPerPageLabel = 'Tarefas por página';
     this.paginator._intl.getRangeLabel = (page: number, pageSize: number, length: number) => {
       let qtdPaginas = Math.ceil((length) / (pageSize));  
@@ -49,6 +50,11 @@ export class ListagemGuiaComponent implements OnInit {
     
     };
    
+  }
+
+  inicializaPagina(){
+    this.carregaItensGuia();        
+    this.carregaDisciplinas(); 
   }
 
   open(content, element) {
@@ -125,6 +131,41 @@ export class ListagemGuiaComponent implements OnInit {
 
   filtraVlrNull(vlr){
     return this.isNull(vlr) ? "N/A" : vlr;
+  }
+
+  submit(){
+
+    this.guia.atualizaTarefaGuia(this.trfSelecionada).subscribe(
+      (data)=>{
+        if(data.status == 200){
+          console.log(data);
+          this.inicializaPagina();
+          this.nt.notify("success", "Dados da Tarefa alterados com sucesso");
+        }else{
+          this.nt.notify("error", "Houve um erro ao gravar as informações, favor contatar o administrador do sistema");
+        }
+     
+      }
+    );
+  }
+
+  atualizaTrfSelecionada(complexidade, componente, item, valor){
+    if(item == 'descricao_trf') this.trfSelecionada.descricao_tarefa = valor;
+    else if(item == 'plataforma') this.trfSelecionada.plataforma = valor;
+    else{
+
+      for(let i of this.trfSelecionada.itens){
+        //Se a complexidade for igual ou o item não tem componente ou esse é o componente certo
+        if(i.complexidade == complexidade && (i.componente == componente || this.isNull(componente))){          
+          if(item == 'valor') i.valor                         = +valor;
+          if(item == 'componente') i.componente               = valor;
+          if(item == 'quantidade') i.quantidade               = +valor;
+          if(item == 'descricao_complex') i.descricao_complex = valor;  
+          break;
+        }
+      }
+    }
+
   }
 
 }

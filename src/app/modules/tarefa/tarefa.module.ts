@@ -6,18 +6,22 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { MatTableModule } from '@angular/material/table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NovaTarefaComponent } from './nova-tarefa/nova-tarefa.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
 
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 @NgModule({
-  declarations: [TarefasUsuarioComponent],
+  declarations: [TarefasUsuarioComponent, NovaTarefaComponent],
   imports: [
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
     NgxMaskModule.forRoot(options),
     MatTableModule,
-    NgbModule
+    NgbModule,
+    MatCardModule
   ],
   exports: [
     TarefasUsuarioComponent

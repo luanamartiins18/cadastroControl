@@ -16,6 +16,14 @@ export class TarefaService {
 
   constructor(private http: HttpClient) { }
 
+  getUnidadesMedidas(){
+    return this.http.get<Array<any>>(environment.api +  "unidades-medidas");
+  }
+
+  getComplexidades(){
+    return this.http.get<Array<any>>(environment.api +  "complexidades");
+  }
+
   getDisciplinas(){
     return this.http.get<Array<any>>(environment.api +  "disciplinas");
   }
