@@ -29,10 +29,18 @@ export class NovaTarefaComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.criaFormulario();    
+    this.onChanges();
+
+  }
+
+  criaFormulario(){
+
     this.form = new FormGroup({
       disciplina: new FormControl('', Validators.required),
       atividade:  new FormControl('', Validators.required),
-      plataforma: new FormControl(),
+      plataforma: new FormControl(''),
       descTarefa: new FormControl('', Validators.required),
       itens:      new FormArray([], Validators.required)
     });
@@ -45,10 +53,6 @@ export class NovaTarefaComponent implements OnInit {
       desc_complex: new FormControl('', Validators.required),
       quantidade:   new FormControl('')
     });
-
-
-    
-    this.onChanges();
   }
 
   validaFormItens(){
@@ -87,7 +91,23 @@ export class NovaTarefaComponent implements OnInit {
     
 
     formItensAux.patchValue(this.formItens.value);
-    this.formItens.reset();
+
+    //Preenchendo os campos não obrigatórios com null
+    if(formItensAux.value.quantidade !=  ""){
+      formItensAux.controls.quantidade.setValue(+formItensAux.value.quantidade);
+    }else{
+      formItensAux.controls.quantidade.setValue(-1);
+    }
+    
+    this.formItens = new FormGroup({
+      complexidade: new FormControl('', Validators.required),
+      componente:   new FormControl(''),
+      valor:        new FormControl('', Validators.required),
+      uni_medida:   new FormControl('', Validators.required),
+      desc_complex: new FormControl('', Validators.required),
+      quantidade:   new FormControl('')
+    });
+
     (this.form.controls.itens as FormArray).push(formItensAux);       
   }
 
@@ -145,12 +165,12 @@ export class NovaTarefaComponent implements OnInit {
       this.nt.notify("error", "Há campos à preencher no cadastro da tarefa");
       
     }else{
-
-      console.log(this.form.value);
+ 
       this.gs.insereTarefaGuia(this.form.value).subscribe(
         (data) => {
           if(data.status == 200){
             this.nt.notify("success", "Tarefa inserida com sucesso");
+            this.criaFormulario();
           }else{
             this.nt.notify("error", "Houve um erro ao gravar as tarefas, favor contatar o administrador do sistema")
           }
