@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ComponentFactoryResolver } from '@angular/core';
 import { FormArray, FormGroup, FormControl, FormControlName, Validators } from '@angular/forms';
 import { TarefaService } from '../../../services/tarefa/tarefa.service';
-import { initialConfig } from 'ngx-mask';
 import { NotifierService } from 'angular-notifier';
 import { GuiaService } from 'src/app/services/guia/guia.service';
 
@@ -22,6 +21,11 @@ export class NovaTarefaComponent implements OnInit {
   complexidades;
   uniMedidas;
 
+  atividades;
+  atividadesRepository;
+
+  novaAtividade = false;
+
   constructor(private ts: TarefaService,
               private nt: NotifierService, 
               private gs: GuiaService) {
@@ -32,7 +36,48 @@ export class NovaTarefaComponent implements OnInit {
 
     this.criaFormulario();    
     this.onChanges();
+    this.getAtividades();
 
+  }
+
+  verificaAtividade(event){    
+
+    let flag = true;
+
+    for(let i of this.atividades){
+      if(i.atividade == event.atividade){
+        flag = false;
+        break;
+      }
+    }
+
+    if(flag){
+      this.novaAtividade = true;
+    }else{
+      this.novaAtividade = false;
+    }
+
+  }
+
+  getAtividades(){
+    this.gs.getAtividades().subscribe(
+      data => {
+        this.atividadesRepository = data;
+        this.atividades = data;
+      }
+    );
+  } 
+
+  filtraAtividadePorDisciplina(event){
+
+    this.atividades = this.atividadesRepository.filter(
+      dsclp => {        
+        return dsclp.disciplina == event.target.value;
+      }
+    );    
+    
+    this.form.controls.atividade.setValue(null);
+    
   }
 
   criaFormulario(){

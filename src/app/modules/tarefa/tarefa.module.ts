@@ -9,6 +9,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NovaTarefaComponent } from './nova-tarefa/nova-tarefa.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
 
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
@@ -21,7 +23,9 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     NgxMaskModule.forRoot(options),
     MatTableModule,
     NgbModule,
-    MatCardModule
+    MatCardModule, 
+    NgSelectModule,
+    FormsModule
   ],
   exports: [
     TarefasUsuarioComponent

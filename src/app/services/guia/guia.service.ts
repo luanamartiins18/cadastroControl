@@ -30,5 +30,7 @@ export class GuiaService {
     return this.http.post(environment.api + "tarefa-guia", body, {headers: httpOptions.headers, observe: 'response'});
   }
 
-
+  getAtividades(){
+    return this.http.get(environment.api + 'atividades');
+  }
 }
