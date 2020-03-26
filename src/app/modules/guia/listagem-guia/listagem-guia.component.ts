@@ -6,6 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotifierService } from 'angular-notifier';
+import { UsuarioService } from '../../usuario/usuario.service';
 
 @Component({
   selector: 'app-listagem-guia',
@@ -33,16 +34,21 @@ export class ListagemGuiaComponent implements OnInit {
   trfSelecionada;
   page = 1;
   pageSize = 1;
+  cargoUsuario;
+  versaoAtualGuia;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(private guia: GuiaService,
               private ts: TarefaService,
               private modalService: NgbModal,
-              private nt: NotifierService) { }
+              private nt: NotifierService, 
+              private us: UsuarioService) { }
 
   ngOnInit() {
     this.inicializaPagina();
+    this.getCargoUsuario();
+    this.getVersaoAtualGuia();
     this.paginator._intl.itemsPerPageLabel = 'Tarefas por página';
     this.paginator._intl.getRangeLabel = (page: number, pageSize: number, length: number) => {
       let qtdPaginas = Math.ceil((length) / (pageSize));  
@@ -50,6 +56,24 @@ export class ListagemGuiaComponent implements OnInit {
     
     };
    
+  }
+
+  getCargoUsuario(){
+    let re: string = sessionStorage.getItem("colaborador");
+    console.log(re);
+    this.us.getCargoUsuario(re).subscribe(
+      data => {
+        this.cargoUsuario = data;
+      }
+    );    
+  }
+
+  getVersaoAtualGuia(){
+    this.guia.getVersaoAtualGuia().subscribe(
+      data => {
+        this.versaoAtualGuia = data['descricao'];
+      }
+    );
   }
 
   inicializaPagina(){
@@ -167,5 +191,8 @@ export class ListagemGuiaComponent implements OnInit {
     }
 
   }
-
+  openModalVersao(content) {
+    this.modalService.open(content);
+  }
 }
+

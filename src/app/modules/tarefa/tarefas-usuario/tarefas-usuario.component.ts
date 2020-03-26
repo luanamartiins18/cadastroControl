@@ -39,6 +39,7 @@ export class TarefasUsuarioComponent implements OnInit {
   listaComponentesTrf = [];
   listaComplexidadesTrf = [];
   tarefaSelecionada;
+  trfPossuiQuantidade = false;
 
 
   colunas = ['numTarefa', 'historia', 'artefato', 'sprint', 'situacao', 'quantidade', 'complexidade', 'valor', 'acoes'];
@@ -86,8 +87,7 @@ export class TarefasUsuarioComponent implements OnInit {
     );
 
     this.form.get("disciplina").valueChanges.subscribe(
-      (valor) => {
-      
+      (valor) => {        
         if(this.form.controls.disciplina.value != 0 && this.form.controls.disciplina.value != null){
           this.btnItem = true;
         }else{
@@ -122,7 +122,7 @@ export class TarefasUsuarioComponent implements OnInit {
   }
 
   editaTarefa(tarefa){  
-    
+
     this.tabAtiva = 'nova-tarefa';
     this.opFormTrf = "Atualizar"
     this.form.controls.historia.setValue(tarefa.historia);
@@ -138,14 +138,30 @@ export class TarefasUsuarioComponent implements OnInit {
     }else{
       this.form.controls.perfil.setValue(1);
     }
-
-    this.form.controls.disciplina.setValue(tarefa.disciplina); 
-    this.filtraItensGuia();
-    this.form.controls.item.setValue(tarefa.idTrfGuia);
     
-    this.itemSelecionado = this.getItemName(this.form.controls.item.value);
+   
+    this.filtraDisciplinas();    
+    this.form.controls.disciplina.setValue(tarefa.disciplina); 
+    this.form.controls.item.setValue(tarefa.idTrfGuia);   
+    this.filtraItensGuia();
+    this.selecionaTarefa(this.getItem(this.form.controls.item.value));
+    this.form.controls.componente.setValue(tarefa.componente);
+    this.form.controls.complexidade.setValue(tarefa.complexidade);  
+    
   }
 
+  getItem(id){
+    let res = null;
+  
+    for(let i of this.listaItensGuiaAux){
+
+      if(i.id_tarefa == id){
+        res = i;        
+        break;
+      }
+    }
+    return res;
+  }
 
   alteraSituacaoTrf(idSit, idTrf){
 
@@ -159,7 +175,6 @@ export class TarefasUsuarioComponent implements OnInit {
       }
     );
   }
-
   
   excluiTarefa(){
     this.ts.deletaTarefa(this.trfAtual).subscribe(
@@ -180,7 +195,6 @@ export class TarefasUsuarioComponent implements OnInit {
       }
     );
   }
-
 
   tarefaAtual(trf){
     this.trfAtual = trf;
@@ -244,7 +258,6 @@ export class TarefasUsuarioComponent implements OnInit {
   setaTab(op){
     this.tabAtiva = op;
   }
-
   //Se todos os items possuírem quantidade, então essa tarefa é controlada por quantidade
   possuiQuantidade(trf){
   
@@ -271,7 +284,6 @@ export class TarefasUsuarioComponent implements OnInit {
 
     return true;        
   }
-
 
   filtraItensGuia(){
 
@@ -317,11 +329,11 @@ export class TarefasUsuarioComponent implements OnInit {
   }
 
   selecionaTarefa(trf){
+    console.log(trf);
 
     this.tarefaSelecionada = trf; 
 
     this.listaComponentesTrf = [];
-    this.form.controls.componente.setValue("");
 
     this.listaComplexidadesTrf = [];
     this.form.controls.complexidade.setValue("");
@@ -334,6 +346,12 @@ export class TarefasUsuarioComponent implements OnInit {
       this.carregaComplexidadesTarefa(trf);
     }
 
+    if(this.possuiQuantidade(trf)){
+      this.trfPossuiQuantidade = true;
+    }else{
+      this.trfPossuiQuantidade = false;
+      this.form.controls.quantidade.setValue("");
+    }
   
     this.itemSelecionado = trf.tarefa + ' - ' + trf.descricao_tarefa;
     this.form.controls.componente.setValue("");
@@ -482,24 +500,5 @@ export class TarefasUsuarioComponent implements OnInit {
   
     return true;
   }
-
-  getItemName(id){
-    let res = "";
-  
-    for(let i of this.listaItensGuiaAux){
-      if(i.id == id){
-        res = i.item;        
-        break;
-      }
-    }
-    return res;
-  }
-
-  teste(row){
-    console.log(row);
-  }
-
-
-
 
 }

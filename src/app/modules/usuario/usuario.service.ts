@@ -25,5 +25,8 @@ export class UsuarioService {
     return this.http.get<Array<any>>(environment.api + 'usuario/' + id + '/perfil');
   }
 
+  getCargoUsuario(re: String){
+    return this.http.get(environment.api + 'usuario/' + re + '/cargo');
+  }
 
 }

@@ -33,4 +33,9 @@ export class GuiaService {
   getAtividades(){
     return this.http.get(environment.api + 'atividades');
   }
+
+  getVersaoAtualGuia(){
+    return this.http.get(environment.api + "versao-guia");
+  }
+
 }

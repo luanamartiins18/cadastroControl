@@ -26,14 +26,14 @@ export class NavbarComponent implements OnInit {
     let usuAtual: Usuario = changes.usuario.currentValue;
 
     if(usuAtual != null){
-     
-
+          
       for(let perfil of usuAtual.listaPerfil){
         if(perfil.status == 1){
 
           this.lisPerfil = perfil.perfil.descricao;       
         }
       }
+      
     }
 
   }

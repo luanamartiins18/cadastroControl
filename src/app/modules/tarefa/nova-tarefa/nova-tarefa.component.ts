@@ -3,6 +3,7 @@ import { FormArray, FormGroup, FormControl, FormControlName, Validators } from '
 import { TarefaService } from '../../../services/tarefa/tarefa.service';
 import { NotifierService } from 'angular-notifier';
 import { GuiaService } from 'src/app/services/guia/guia.service';
+import { UsuarioService } from '../../usuario/usuario.service';
 
 @Component({
   selector: 'app-nova-tarefa',

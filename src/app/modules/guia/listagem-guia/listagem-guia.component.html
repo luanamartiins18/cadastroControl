@@ -5,8 +5,29 @@
         <mat-card-title>
 
             <div class = 'pt-3 pl-3 pb-2'>
-                Guia de Métricas
-                <i [routerLink] = '["/nova-tarefa"]' class="text-primary pl-2 fa fa-plus cursor-pointer" aria-hidden="true"></i>
+                Guia de Métricas         
+
+                <span class = 'lead text-muted small-text' *ngIf = 'this.versaoAtualGuia'>
+                    Versão: {{this.versaoAtualGuia}}
+                </span>
+
+                <div class = 'float-right fonte-menu-guia pr-3' *ngIf = 'this.cargoUsuario.id != 3'>
+                    <div
+                        (click) = 'this.openModalVersao(modalVersao);'
+                        class="pl-2 cursor-pointer op-menu-guia" 
+                        aria-hidden="true">
+                        Versão
+                    </div>                  
+                </div>
+
+                <div class = 'float-right fonte-menu-guia pr-3' *ngIf = 'this.cargoUsuario.id != 3'>
+                    <div
+                        [routerLink] = '["/nova-tarefa"]' 
+                        class="pl-2 cursor-pointer op-menu-guia" 
+                        aria-hidden="true">
+                        Nova Tarefa
+                    </div>                  
+                </div>
 
             </div>
             <mat-divider></mat-divider>
@@ -51,7 +72,11 @@
                                                     {{element.tarefa + ' - ' + element.descricao_tarefa}} 
                                                 </div>
                                                 <div (click) = 'this.open(content, element);'  class="col-sm-1 d-flex justify-content-center">
-                                                    <i class="fa fa-2x fa-ellipsis-h" aria-hidden="true"></i>
+                                                    <i 
+                                                        class="fa fa-2x fa-ellipsis-h" 
+                                                        aria-hidden="true"
+                                                        *ngIf = 'this.cargoUsuario.id != 3'>
+                                                    </i>
                                                 </div>
                                             </div>
                                         </div>
@@ -227,3 +252,20 @@
  
 </ng-template>
 
+<ng-template #modalVersao let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Deletar Tarefa</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <i class="d-flex justify-content-center fa fa-exclamation-circle fa-4x deletar" aria-hidden="true"></i>
+      <h4 class="d-flex justify-content-center" >Você tem certeza?</h4>
+      <p class = 'text-muted d-flex justify-content-center'>A tarefa será deletada permanentemente</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary" (click)="c('Save click')">Cancelar</button>
+      <button type="button" class="btn btn-outline-danger" (click)="c('Save click'); this.excluiTarefa();">Excluir Tarefa</button>
+    </div>
+</ng-template>

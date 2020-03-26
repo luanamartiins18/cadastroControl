@@ -59,11 +59,10 @@
                 </div>  
                 <hr>
 
-                <div>
+                <div *ngIf = 'this.lisPerfil != null'>
                     <i class="pr-2 fa fa-users"></i>
                     <span>{{this.lisPerfil}}</span>
-                </div>                
-                
+                </div> 
 
                 <button (click) = 'this.deslogaUsuario();' class = 'btn btn-danger btn-block'>
                     Sair

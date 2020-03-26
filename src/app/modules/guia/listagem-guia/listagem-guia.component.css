@@ -70,3 +70,35 @@ th{
 .cursor-pointer{
     cursor: pointer;
 }
+
+.vr{
+    border-left: 1px solid #616161;
+    padding-left: 4px;
+    padding-right: 4px;
+    height: 4px;
+}
+
+.small-text{
+    font-size: 0.80rem;
+}
+
+.fonte-menu-guia{
+    font-size: 1rem;
+    color: #4d4c4c;
+}
+
+.op-menu-guia::after{
+    display: block;
+    content: " ";
+    border-bottom: solid 1px black;
+    transform: scaleX(0);
+    transition: transform 250ms ease-in-out;
+}
+
+.op-menu-guia:hover::after{
+    transform: scaleX(0.75);    
+}
+
+.op-menu-guia:hover{
+    color: rgb(0, 0, 0) !important;
+}

@@ -50,7 +50,6 @@
         
                     <div class = 'col-sm-12 d-flex justify-content-center mb-3'>
                         <h5>Dados da Tarefa</h5>   
-                        <i (click) = 'this.resetForm();' placement="top" ngbTooltip = "Resetar Formulário" *ngIf = 'this.opFormTrf == "Atualizar" ' class="custom-icon ml-2 fa fa-refresh fa-rotate-90" aria-hidden="true"></i>                                             
                     </div>
 
                     <div class = 'col-sm-2 d-flex justify-content-end'>
@@ -212,17 +211,17 @@
                           </div>                       
                     </div>             
         
-                    <div class = 'col-sm-2 mt-2 d-flex justify-content-end'>
+                    <div class = 'col-sm-2 mt-2 d-flex justify-content-end' *ngIf = 'this.trfPossuiQuantidade'>
                         <label class = 'font-weight-bold'>
                             Quantidade
                         </label>                        
                     </div>
 
-                    <div class = 'col-sm-3 mt-2'>                       
+                    <div class = 'col-sm-3 mt-2' *ngIf = 'this.trfPossuiQuantidade'>                       
                         <input formControlName = 'quantidade' mask = '000000000000' type = 'text' class = 'form-control form-control-sm'/> 
                     </div>
-                    <div class = 'col-sm-2'></div>
-                    
+                    <div class = 'col-sm-2' *ngIf = 'this.trfPossuiQuantidade'></div>
+                    <div class = 'col-sm-7' *ngIf = '!this.trfPossuiQuantidade'></div>
 
                     <div *ngIf = 'this.listaComponentesTrf.length > 0' class = 'col-sm-2 mt-2 d-flex justify-content-end'>
                         <label class = 'font-weight-bold'>
@@ -261,12 +260,24 @@
 
 
 
-                     <div class = 'col-sm-5'></div>                  
-                    <div class = 'col-sm-2 mt-4 text-success d-flex justify-content-center'>
-                        <button [ngClass] = "{'bg-success': this.opFormTrf == 'Salvar', 'bg-primary': this.opFormTrf == 'Atualizar'}" (click) = 'this.submit();' class = 'form-control text-white'>
+                     <div class = 'col-sm-4'></div>                  
+                    <div class = 'col-sm-4 mt-4 text-success d-flex justify-content-center'>
+                       
+                        <button 
+                            (click) = 'this.resetForm();' 
+                            class="form-control bg-danger text-white mr-2">
+                            Cancelar
+                        </button>  
+
+                        <button 
+                            [ngClass] = "{'bg-success': this.opFormTrf == 'Salvar', 'bg-primary': this.opFormTrf == 'Atualizar'}" 
+                            (click) = 'this.submit();' 
+                            class = 'form-control text-white'>
                             {{this.opFormTrf}} Tarefa
                         </button>
                     </div>           
+
+
                 </div>
             </div>
         </div>
