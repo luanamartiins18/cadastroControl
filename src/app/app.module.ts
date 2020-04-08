@@ -17,7 +17,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { OrdemFornecimentoModule } from './modules/ordem-fornecimento/ordem-fornecimento.module';
 import { TarefaModule } from './modules/tarefa/tarefa.module';
 import { GuiaModule } from './modules/guia/guia.module';
-
+import { RelatoriosModule } from './modules/relatorios/relatorios.module';
 
 @NgModule({
   declarations: [
@@ -36,6 +36,7 @@ import { GuiaModule } from './modules/guia/guia.module';
     OrdemFornecimentoModule,
     TarefaModule,
     GuiaModule,
+    RelatoriosModule,
     NotifierModule.withConfig({
       behaviour:{
         autoHide: 2000

@@ -135,7 +135,7 @@
                     </div>
 
                     <div class = 'col-sm-3 mt-3'>                        
-                        <select (change) = 'this.filtraDisciplinas(); this.form.controls.disciplina.enable()' formControlName = 'perfil' class = 'form-control form-control-sm'>
+                        <select formControlName = 'perfil' class = 'form-control form-control-sm'>
                            
                             <option value = '1'>
                                 Baixa
@@ -321,14 +321,25 @@
                             <th mat-header-cell *matHeaderCellDef> Situação </th>
                             <td class = 'pr-5' mat-cell *matCellDef="let element"> 
                                
-                                <select class = 'form-control'>
-                                    <option (click) = 'this.alteraSituacaoTrf(i.id, element.id);' [selected] = '(i.id == element.fk_situacao) ? "selected": "" ' *ngFor = 'let i of this.listaSituacoes' [value] = 'i.id'>
+                                <select class = 'form-control' (change) = 'this.alteraSituacaoTrf($event.target.value, element.id);'>
+                                    <option 
+                                        (click) = 'this.alteraSituacaoTrf(i.id, element.id);' 
+                                        [selected] = '(i.id == element.fk_situacao) ? "selected": "" ' 
+                                        *ngFor = 'let i of this.listaSituacoes' 
+                                        [value] = 'i.id'>
                                         {{i.descricao}}
                                     </option>
                                 </select>
                             </td>
                             <td mat-footer-cell *matFooterCellDef></td>
                         </ng-container>
+
+                        <ng-container matColumnDef="tarefa">
+                            <th mat-header-cell *matHeaderCellDef> Tarefa </th>
+                            <td (click) = 'this.tarefaAtual(element.id); this.editaTarefa(element);' mat-cell *matCellDef="let element"> {{element.tarefa}} </td>
+                            <td mat-footer-cell *matFooterCellDef></td>
+                        </ng-container>
+                        
         
                         <ng-container matColumnDef="complexidade">
                             <th mat-header-cell *matHeaderCellDef> Complexidade </th>

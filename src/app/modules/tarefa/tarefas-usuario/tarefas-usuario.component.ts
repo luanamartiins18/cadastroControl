@@ -42,7 +42,7 @@ export class TarefasUsuarioComponent implements OnInit {
   trfPossuiQuantidade = false;
 
 
-  colunas = ['numTarefa', 'historia', 'artefato', 'sprint', 'situacao', 'quantidade', 'complexidade', 'valor', 'acoes'];
+  colunas = ['numTarefa', 'historia', 'artefato', 'sprint', 'situacao', 'tarefa', 'quantidade', 'complexidade', 'valor', 'acoes'];
 
   constructor(private route: ActivatedRoute,
               private ts: TarefaService,
@@ -78,11 +78,14 @@ export class TarefasUsuarioComponent implements OnInit {
         if(valor != null && valor != 0){
           this.form.controls.disciplina.enable();
           this.form.controls.disciplina.setValue(0);
+          console.log("ativa disciplina");
         }else{
           this.form.controls.disciplina.disable();
-          this.form.controls.disciplina.setValue(0);          
+          this.form.controls.disciplina.setValue(0);     
+          console.log('desativa disciplina');     
         }
-        
+        this.filtraDisciplinas(); 
+        this.form.controls.disciplina.enable()        
       }
     );
 
@@ -164,13 +167,16 @@ export class TarefasUsuarioComponent implements OnInit {
   }
 
   alteraSituacaoTrf(idSit, idTrf){
-
+   
     let param = {idTrf: idTrf, idSit: idSit};
+    console.log(param);
     this.ts.alteraSitTarefa(param).subscribe(
       (data)=>{
         if(data.status == 200){
           this.nt.notify("success", "Situação da tarefa alterada com sucesso");
           this.buscaTarefas();
+        }else{
+          this.nt.notify("success", "Houve um erro ao atualizar a situação da tarefa");
         }
       }
     );
@@ -242,11 +248,12 @@ export class TarefasUsuarioComponent implements OnInit {
          
           (data)=>{
             if(data['descricao'] == 'Alta'){
+              this.form.controls.perfil.setValue(2);  
               this.form.controls.perfil.disable();
-              this.form.controls.perfil.setValue(2);        
+                    
             }else if(data['descricao'] == 'Baixa'){
-              this.form.controls.perfil.disable();
-              this.form.controls.perfil.setValue(1);           
+              this.form.controls.perfil.setValue(1);  
+              this.form.controls.perfil.disable();                       
             } 
 
           }
@@ -350,7 +357,7 @@ export class TarefasUsuarioComponent implements OnInit {
       this.trfPossuiQuantidade = true;
     }else{
       this.trfPossuiQuantidade = false;
-      this.form.controls.quantidade.setValue("");
+      this.form.controls.quantidade.setValue(null);
     }
   
     this.itemSelecionado = trf.tarefa + ' - ' + trf.descricao_tarefa;
@@ -439,14 +446,14 @@ export class TarefasUsuarioComponent implements OnInit {
   }
 
   submit(){  
-
-    if(!this.validaForm(this.form.value)){
+    console.log(this.form.getRawValue());
+    if(!this.validaForm(this.form.getRawValue())){
       this.nt.notify("error", "Todos os campos devem ser preenchidos");
     }else{     
 
       this.tabAtiva = 'minhas-tarefas';
 
-      let aux = this.form.value;
+      let aux = this.form.getRawValue();
       aux.numItemGuia = this.buscaItemGuia();   
           
       if(aux.numItemGuia == null){
@@ -490,11 +497,10 @@ export class TarefasUsuarioComponent implements OnInit {
   }
 
   validaForm(value){
-
+    
     if(value.artefato   == null || value.artefato == "")  return false;
     if(value.disciplina == null)  return false;
-    if(value.historia   == null || value.historia == "")  return false;
-    if(value.perfil     == null)  return false;    
+    if(value.historia   == null || value.historia == "")  return false;        
     if(value.sprint     == null)  return false;
     if(value.numTarefa  == null || value.numTarefa == "")  return false;
   

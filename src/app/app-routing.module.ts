@@ -15,6 +15,9 @@ import { TarefasUsuarioComponent } from './modules/tarefa/tarefas-usuario/tarefa
 import { HistoricoColaboradorComponent } from './modules/mensagem/historico-colaborador/historico-colaborador.component';
 import { ListagemGuiaComponent } from './modules/guia/listagem-guia/listagem-guia.component';
 import { NovaTarefaComponent } from './modules/tarefa/nova-tarefa/nova-tarefa.component';
+import { OrdemFornecimentoRelatorioComponent } from './modules/relatorios/ordem-fornecimento-relatorio/ordem-fornecimento-relatorio.component';
+import { ContainerRelatoriosComponent } from './modules/relatorios/container-relatorios/container-relatorios.component';
+import { OrcamentoEntregaComponent } from './modules/relatorios/orcamento-entrega/orcamento-entrega.component';
 
 
 const routes: Routes = [
@@ -31,7 +34,13 @@ const routes: Routes = [
       {path: 'usuario/:idUsu/ordem-forn/:idOf', component: TarefasUsuarioComponent, canActivate:[AuthGuardService]},
       {path: 'mensagens/usuario/:id', component: HistoricoColaboradorComponent, canActivate: [AuthGuardService]},
       {path: 'guia', component: ListagemGuiaComponent, canActivate: [AuthGuardService]},
-      {path: 'nova-tarefa', component: NovaTarefaComponent, canActivate: [AuthGuardService]}
+      {path: 'nova-tarefa', component: NovaTarefaComponent, canActivate: [AuthGuardService]},
+      {path: 'relatorios', component: ContainerRelatoriosComponent, canActivate: [AuthGuardService],
+        children: [
+          {path: 'ordem-fornecimento', component: OrdemFornecimentoRelatorioComponent, canActivate: [AuthGuardService]},
+          {path: 'ordem-fornecimento/:id', component: OrcamentoEntregaComponent, canActivate: [AuthGuardService]}
+        ]
+      }
     ]
   }
 

@@ -103,7 +103,7 @@ export class NovaTarefaComponent implements OnInit {
 
   validaFormItens(){
     if(this.formItens.status == 'INVALID'){
-      console.log(this.formItens);
+
       this.nt.notify("error", "Há campos à preencher cadastro do item");
       return false;
     }
@@ -211,7 +211,7 @@ export class NovaTarefaComponent implements OnInit {
       this.nt.notify("error", "Há campos à preencher no cadastro da tarefa");
       
     }else{
- 
+     
       this.gs.insereTarefaGuia(this.form.value).subscribe(
         (data) => {
           if(data.status == 200){

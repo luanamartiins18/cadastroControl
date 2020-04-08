@@ -38,4 +38,8 @@ export class GuiaService {
     return this.http.get(environment.api + "versao-guia");
   }
 
+  atualizaVersaoGuia(body){
+    return this.http.put(environment.api + "versao-guia", body, {headers: httpOptions.headers, observe: 'response'});
+  }
+
 }
