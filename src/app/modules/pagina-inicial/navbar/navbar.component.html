@@ -27,12 +27,16 @@
 
         <li class = 'nav-item' *ngIf = 'this.colaborador(this.usuario?.cargo.id)'>
             <a class = 'nav-link' [routerLink] = "['/../mensagens/usuario/' + this.usuario.id]">Mensagens</a> 
-        </li>    
+        </li> 
         
         <li class = 'nav-item'>
             <a class = 'nav-link' [routerLink] = "['/guia']">Guia</a> 
         </li>  
 
+        <li class = 'nav-item' *ngIf = 'this.admGestor(this.usuario?.cargo.id)'>
+            <a class = 'nav-link' [routerLink] = "['/relatorios']">Relatórios</a> 
+        </li>
+        
         <li class="nav-item" ngbDropdown>
 
             <span class="nav-link" style="cursor: pointer" ngbDropdownToggle id="navbarDropdown2" role="button">
@@ -71,15 +75,6 @@
             </div>
 
         </li>
-
-
-        
-
-            
-
-
-        
-       
 
     </ul>
 

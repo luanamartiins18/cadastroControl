@@ -25,6 +25,7 @@ import { UsuarioService } from '../../../services/usuario/usuario.service';
 
 export class ListagemGuiaComponent implements OnInit {
 
+  valorVersao = "";
   listaItensGuia;
   listaItensGuiaAux; 
   listaDisciplinasGuia;  
@@ -35,7 +36,7 @@ export class ListagemGuiaComponent implements OnInit {
   page = 1;
   pageSize = 1;
   cargoUsuario;
-  versaoAtualGuia;
+  versaoAtualGuia = "";
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -158,7 +159,7 @@ export class ListagemGuiaComponent implements OnInit {
   }
 
   submit(){
-
+    console.log(this.trfSelecionada);
     this.guia.atualizaTarefaGuia(this.trfSelecionada).subscribe(
       (data)=>{
         if(data.status == 200){
@@ -193,6 +194,31 @@ export class ListagemGuiaComponent implements OnInit {
   }
   openModalVersao(content) {
     this.modalService.open(content);
+    document.getElementById("inputVersaoGuia").focus();
   }
+  
+  submitVersaoGuia(){
+
+    let versaoGuiaObj = {"versao": this.valorVersao};
+
+    this.guia.atualizaVersaoGuia(versaoGuiaObj).subscribe(
+      data => {
+        if(data.status == 200){
+          this.nt.notify("success", "Versão do guia atualizada com sucesso");
+          this.getVersaoAtualGuia();
+        }else{
+          this.nt.notify("error", "Houve um erro ao gravar as informações");
+        }
+      }
+    );
+  }
+
+  onEnter(evt){
+    if(evt.key == 'Enter'){
+      console.log(document.getElementById("btnCancelar").click());
+      this.submitVersaoGuia();
+    }
+  }
+
 }
 

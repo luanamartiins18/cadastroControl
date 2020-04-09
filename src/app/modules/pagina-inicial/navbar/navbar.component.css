@@ -44,6 +44,7 @@ li{
 .custom-nav{
     background-color: rgba(0,0 ,0, 0.8) !important;
     padding-left: 1rem;
+    min-height: 10vh;
 }
 
 a::after{

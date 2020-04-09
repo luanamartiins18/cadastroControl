@@ -18,6 +18,9 @@ import { ListagemGuiaComponent } from './modules/guia/listagem-guia/listagem-gui
 import { NovaTarefaComponent } from './modules/tarefa/nova-tarefa/nova-tarefa.component';
 import { NovoUsuarioComponent } from './modules/usuario/novo-usuario/novo-usuario.component';
 import { DetalhaUsuarioComponent } from './modules/usuario/detalha-usuario/detalha-usuario.component';
+import { OrdemFornecimentoRelatorioComponent } from './modules/relatorios/ordem-fornecimento-relatorio/ordem-fornecimento-relatorio.component';
+import { ContainerRelatoriosComponent } from './modules/relatorios/container-relatorios/container-relatorios.component';
+import { OrcamentoEntregaComponent } from './modules/relatorios/orcamento-entrega/orcamento-entrega.component';
 
 
 const routes: Routes = [
@@ -39,6 +42,12 @@ const routes: Routes = [
       {path: 'nova-tarefa', component: NovaTarefaComponent, canActivate: [AuthGuardService]},
       {path: 'novo-usuario/:id', component: NovoUsuarioComponent, canActivate: [AuthGuardService]},
       {path: 'novo-usuario', component: NovoUsuarioComponent, canActivate: [AuthGuardService]},
+      {path: 'relatorios', component: ContainerRelatoriosComponent, canActivate: [AuthGuardService],
+        children: [
+          {path: 'ordem-fornecimento', component: OrdemFornecimentoRelatorioComponent, canActivate: [AuthGuardService]},
+          {path: 'ordem-fornecimento/:id', component: OrcamentoEntregaComponent, canActivate: [AuthGuardService]}
+        ]
+      }
     ]
   }
 

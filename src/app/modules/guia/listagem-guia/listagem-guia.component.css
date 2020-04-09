@@ -102,3 +102,7 @@ th{
 .op-menu-guia:hover{
     color: rgb(0, 0, 0) !important;
 }
+
+.sm-width{
+    max-width: 12rem;
+}

@@ -1,0 +1,199 @@
+<div class = 'wrapper' *ngIf = 'this.relatorioOrcamento && this.relatorioEntrega; else carregando'>
+
+    <div class = 'title px-5 py-5'>
+        <mat-card class = 'px-4'>
+            <mat-card-title class = 'mb-3'>              
+                
+            
+                <h4 class = 'd-inline' *ngIf = 'this.btnSelecionado == "orcamento" '>
+                    Relatório de Orçamento - OF {{this.numeroOf | number}}
+                </h4>   
+
+                <h4 class = 'd-inline' *ngIf = 'this.btnSelecionado == "entrega" '>
+                    Relatório de Entrega - {{this.numeroOf | number}}
+                </h4> 
+            
+                
+                <div class = 'd-inline pull-right'>
+                    <button 
+                        (click) = 'this.setaBotao("orcamento")'                        
+                        class = 'btn btn-cinza'
+                        [ngClass] = '{"btn-selecionado": this.btnSelecionado == "orcamento"}'>
+                        <i class="fa fa-money label-btn-cinza mr-1" aria-hidden="true"></i>
+                        <span class = 'label-btn-cinza fonte-btn-cinza'>Orçamento</span>
+                    </button>
+                    <button 
+                        (click) = 'this.setaBotao("entrega")' 
+                        class = 'btn btn-cinza ml-2'
+                        [ngClass] = '{"btn-selecionado": this.btnSelecionado == "entrega"}'>
+                        <i class="fa fa-briefcase label-btn-cinza mr-1" aria-hidden="true"></i>
+                        <span class = 'label-btn-cinza fonte-btn-cinza'>Entrega</span>
+                    </button>
+
+                </div>
+                
+            </mat-card-title>
+            
+            <mat-card-content>
+                <div *ngIf = 'this.btnSelecionado == "orcamento"'>        
+                    
+                    <div 
+                        *ngFor = 'let i of this.relatorioOrcamento.listaUsuOf' 
+                        class = 'card mt-4'>
+
+                        <div class="card-header py-2">
+                            <h6 class = 'mb-0'>
+                                {{i.nome | titlecase}}
+                            </h6>
+                        </div>      
+
+                        <div 
+                            *ngFor = 'let j of i.listaTarefas; let count = index;' 
+                            class = 'card-body mat-elevation-z1 px-4 py-3'>
+                            <h6>
+                                {{j.tarefa + ' - ' + j.listaItens[0].descricaoTarefa}}
+                            </h6>
+
+                            <table class="table table-sm border">
+                                <thead class="thead-light">
+                                    <tr>                                      
+                                        <th scope="col">Complexidade</th>
+                                        <th scope="col">Quantidade de Artefatos</th>
+                                        <th scope="col">USTI BB</th>
+                                    </tr>
+                                </thead>                                
+                                <tbody>
+                                    <tr *ngFor = 'let k of j.listaItens'>                                     
+                                        <td class = 'border-right'>{{k.complexidade}}</td>
+                                        <td class = 'border-right'>{{k.qtdArtefatos}}</td>
+                                        <td>{{k.vlrUstiBB}}</td>
+                                    </tr>                                  
+                                </tbody>
+                            </table>                       
+                            <div 
+                                *ngIf = 'count == i.listaTarefas.length - 1' 
+                                class = 'd-flex justify-content-end'>
+                                <span class = 'font-weight-bold'>Subtotal por colaborador</span>                                 
+                                <span class = 'ml-2'>{{i.somaUstiBB}}</span>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <div class = 'd-flex justify-content-end px-4 py-3 mb-4'>
+                    
+                        <span class = 'font-weight-bold'>Valor Total</span>
+                        <span class = 'ml-2'>{{this.relatorioEntrega.listaUsuOf.somaGeral}}</span>
+                        
+                    </div>
+
+                    <div class = 'd-flex justify-content-end'>
+                        <button    
+                            (click) = 'getRelatorioOrcamentoXlsx();'                                                            
+                            class = 'btn btn-verde'>
+                            <i class="label-btn-cinza fa fa-table mr-2" aria-hidden="true"></i>
+                            <span class = 'label-btn-cinza fonte-btn-cinza'>
+                                Exportar xlsx
+                            </span>
+                        </button>  
+
+                        <button              
+                            (click) = 'getRelatorioOrcamentoTxt();'                       
+                            class = 'btn btn-primary ml-2'>
+                            <i class="label-btn-cinza fa fa-file-text mr-2" aria-hidden="true"></i>
+                            <span class = 'label-btn-cinza fonte-btn-cinza'>Exportar txt</span>
+                        </button>  
+                    </div>  
+                           
+                </div>
+
+                <div *ngIf = 'this.btnSelecionado == "entrega"'>  
+                    <div 
+                        *ngFor = 'let i of this.relatorioEntrega.listaUsuOf' 
+                        class = 'card mt-4'>
+
+                        <div class="card-header py-2">
+                            <h6 class = 'mb-0'>
+                                {{i.nome | titlecase}}
+                            </h6>
+                        </div>      
+
+                        <div 
+                            *ngFor = 'let j of i.listaTarefas; let count = index' 
+                            class = 'card-body mat-elevation-z1 px-4 py-3'>
+                            <h6>
+                                {{j.tarefa + ' - ' + j.listaItens[0].descricaoTarefa}}
+                            </h6>
+
+                            <table class="table table-sm border">
+                                <thead class="thead-light">
+                                    <tr>                                      
+                                        <th scope="col">Complexidade</th>
+                                        <th scope="col">Tarefa</th>
+                                        <th scope="col">História</th>
+                                        <th scope="col">Sprint</th>                            
+                                        <th scope="col">USTI BB</th>
+                                        <th scope="col">ALM</th>
+                                        <th scope="col">Artefato</th>
+                                    </tr>
+                                </thead>                                
+                                <tbody>
+                                    <tr *ngFor = 'let k of j.listaItens'>                                     
+                                        <td class = 'border-right'>{{k.complexidade}}</td>
+                                        <td class = 'border-right'>{{k.numTarefa}}</td>
+                                        <td class = 'border-right'>{{k.historia}}</td>
+                                        <td class = 'border-right'>{{k.sprint}}</td>
+                                        <td class = 'border-right'>{{k.vlrUstiBB}}</td>
+                                        <td class = 'border-right'>{{k.alm}}</td>
+                                        <td class = 'border-right'>{{k.artefato}}</td>
+                                    </tr>                                  
+                                </tbody>
+                            </table>
+                            <div 
+                                *ngIf = 'count == i.listaTarefas.length - 1' 
+                                class = 'd-flex justify-content-end'>
+                                <span class = 'font-weight-bold'>Subtotal por colaborador</span>                                 
+                                <span class = 'ml-2'>{{i.somaUstiBB}}</span>
+                            </div>                            
+
+                        </div>
+
+                    </div> 
+                    <div class = 'd-flex justify-content-end px-4 py-3 mb-4'>
+                    
+                        <span class = 'font-weight-bold'>Valor Total</span>
+                        <span class = 'ml-2'>{{this.relatorioEntrega.listaUsuOf.somaGeral}}</span>
+                        
+                    </div>        
+
+                    <div class = 'd-flex justify-content-end'>
+                        <button               
+                            (click) = 'this.getRelatorioEntregaXlsx();'                      
+                            class = 'btn btn-verde'>
+                            <i class="label-btn-cinza fa fa-table mr-2" aria-hidden="true"></i>
+                            <span class = 'label-btn-cinza fonte-btn-cinza'>Exportar xlsx</span>
+                        </button>  
+
+                        <button      
+                            (click) = 'this.getRelatorioEntregaTxt();'                               
+                            class = 'btn btn-primary ml-2'>
+                            <i class="label-btn-cinza fa fa-file-text mr-2" aria-hidden="true"></i>
+                            <span class = 'label-btn-cinza fonte-btn-cinza'>Exportar txt</span>
+                        </button>  
+                    </div>  
+                           
+                </div>
+                            
+            </mat-card-content>
+        </mat-card>
+        
+    </div>  
+
+</div>
+
+<ng-template #carregando>
+  <div class = 'wrapper d-flex justify-content-center align-items-center'>
+    
+    <i class="fa fa-refresh fa-spin fa-5x" aria-hidden="true"></i>
+
+  </div>
+</ng-template>
