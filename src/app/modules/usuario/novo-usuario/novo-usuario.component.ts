@@ -152,13 +152,16 @@ export class NovoUsuarioComponent implements OnInit {
         this.router.navigate(['usuarios']);
       }
       else {
-        this.notifier.notify("error", "Houve um erro no cadastro do usuario, favor contatar o administrador do sistema.");
+        this.notifier.notify("error", "Houve um erro na atualização do usuario, favor contatar o administrador do sistema.");
       }
     }, err => {
       if (err.error.errors) {
         err.error.errors.forEach(element => {
           this.notifier.notify("error", element.defaultMessage);
         });
+      }
+      else if(err.error.message){
+        this.notifier.notify("error", err.error.message);
       }
       else {
         this.notifier.notify("error", "Ocorreu um erro inesperado, por favor tente novamente.");
