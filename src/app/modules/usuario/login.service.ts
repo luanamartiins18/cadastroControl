@@ -20,28 +20,9 @@ export class LoginService {
 
     let parametros = {re: colaborador, senha: senha};
 
-    let req = this.httpClient. get<any>(environment.api + "validaUsuario", {observe: 'response', params: parametros});
+    return this.httpClient. get<any>(environment.api + "validaUsuario", {observe: 'response', params: parametros});
     
-    req.subscribe(
-      
-      data=>{
-       
-        if(data.status == 200){
-          sessionStorage.setItem('colaborador', colaborador); 
-          this.router.navigate(['home']); 
-          component.senhaErrada = false;
-        }
-      },
-
-      err => {
-        if(err.status == 401){
-          component.senhaErrada = true;
-          this.nt.notify("error", "Código de usuário ou senha inválido");
-
-        }
-      }
-      
-    );
+   
   }
 
   usuarioEstaLogado(){

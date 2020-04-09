@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { OrdemFornecimento } from 'src/app/models/ordemfornecimento/ordem-fornecimento';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
-import { UsuarioService } from '../../usuario/usuario.service';
+import { UsuarioService } from '../../../services/usuario/usuario.service';
 import { Situacao } from 'src/app/models/situacao/situacao.model';
 import { SituacaoService } from 'src/app/services/situacao/situacao.service';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';

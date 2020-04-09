@@ -42,7 +42,7 @@ export class DetalhaMensagemComponent implements OnInit {
   alteraStatusMsg(acao){
    
     let param = {
-      idMsg: this.listaUsuMsg[0].idM,
+      idMsg: this.listaUsuMsg[0].idMsg,
       acao: acao
     };
 

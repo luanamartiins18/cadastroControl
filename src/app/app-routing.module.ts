@@ -5,6 +5,7 @@ import { HomeParentComponent } from './modules/pagina-inicial/home-parent/home-p
 import { AuthGuardService } from './AuthGuards/auth-guard.service'; 
 import { LoginGuardService} from './AuthGuards/login-guard-service'; 
 import { MensagensComponent } from './modules/mensagem/mensagens/mensagens.component';
+import { UsuariosComponent } from './modules/usuario/usuarios/usuarios.component';
 import { NovaMensagemComponent } from './modules/mensagem/nova-mensagem/nova-mensagem.component';
 import { TabelaOfComponent } from './modules/ordem-fornecimento/tabela-of/tabela-of.component';
 import { DetalhaOfComponent } from './modules/ordem-fornecimento/detalha-of/detalha-of.component';
@@ -15,6 +16,8 @@ import { TarefasUsuarioComponent } from './modules/tarefa/tarefas-usuario/tarefa
 import { HistoricoColaboradorComponent } from './modules/mensagem/historico-colaborador/historico-colaborador.component';
 import { ListagemGuiaComponent } from './modules/guia/listagem-guia/listagem-guia.component';
 import { NovaTarefaComponent } from './modules/tarefa/nova-tarefa/nova-tarefa.component';
+import { NovoUsuarioComponent } from './modules/usuario/novo-usuario/novo-usuario.component';
+import { DetalhaUsuarioComponent } from './modules/usuario/detalha-usuario/detalha-usuario.component';
 
 
 const routes: Routes = [
@@ -23,15 +26,19 @@ const routes: Routes = [
     children: [
       {path: 'home', component: DefaultComponent, canActivate:[AuthGuardService]},
       {path: 'mensagens', component: MensagensComponent, canActivate:[AuthGuardService]},
+      {path: 'usuarios', component: UsuariosComponent, canActivate:[AuthGuardService]},
       {path: 'nova-mensagem', component: NovaMensagemComponent, canActivate:[AuthGuardService]},
       {path: 'mensagem/:id', component: DetalhaMensagemComponent, canActivate:[AuthGuardService]},
+      {path: 'usuarios/:id', component: DetalhaUsuarioComponent, canActivate:[AuthGuardService]},
       {path: 'ordem-fornecimento', component: TabelaOfComponent, canActivate:[AuthGuardService]},       
       {path: 'ordem-fornecimento/:id', component: DetalhaOfComponent, canActivate:[AuthGuardService]},
       {path: 'ordem-fornecimento/usuario/:id', component: ColaboradorOfComponent, canActivate:[AuthGuardService]}, 
       {path: 'usuario/:idUsu/ordem-forn/:idOf', component: TarefasUsuarioComponent, canActivate:[AuthGuardService]},
       {path: 'mensagens/usuario/:id', component: HistoricoColaboradorComponent, canActivate: [AuthGuardService]},
       {path: 'guia', component: ListagemGuiaComponent, canActivate: [AuthGuardService]},
-      {path: 'nova-tarefa', component: NovaTarefaComponent, canActivate: [AuthGuardService]}
+      {path: 'nova-tarefa', component: NovaTarefaComponent, canActivate: [AuthGuardService]},
+      {path: 'novo-usuario/:id', component: NovoUsuarioComponent, canActivate: [AuthGuardService]},
+      {path: 'novo-usuario', component: NovoUsuarioComponent, canActivate: [AuthGuardService]},
     ]
   }
 

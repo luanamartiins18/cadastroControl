@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { TarefaService } from 'src/app/services/tarefa/tarefa.service';
 import { NotifierService } from 'angular-notifier';
-import { UsuarioService } from '../../usuario/usuario.service';
+import { UsuarioService } from '../../../services/usuario/usuario.service';
 import { NgbModalConfig, NgbModal, NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 import { SituacaoService } from 'src/app/services/situacao/situacao.service';
 

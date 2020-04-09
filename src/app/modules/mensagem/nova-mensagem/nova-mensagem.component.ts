@@ -3,9 +3,9 @@ import { Sigla } from 'src/app/models/sigla/sigla.model';
 import { SiglaService } from 'src/app/services/sigla/sigla.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NotifierService } from 'angular-notifier';
-import { UsuarioService } from '../../usuario/usuario.service';
 import { MensagemService } from 'src/app/services/mensagem/mensagem.service';
 import { Router } from '@angular/router';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 
 @Component({
   selector: 'app-nova-mensagem',

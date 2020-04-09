@@ -1,0 +1,113 @@
+<div *ngIf='usuario; else carregando'>
+
+  <div class='container-fluid mt-3'>
+    <form>
+      <div class='container '>
+        <div class='form-group row pl-4'>
+
+          <div class='col-sm-6'>
+            <Label class="font-weight-bold">Nome</Label>
+            <input disabled class='form-control' value={{usuario.nome.toUpperCase()}} type='text' class='form-control' />
+          </div>
+
+          <div class='col-sm-6'>
+            <Label class="font-weight-bold">CPF</Label>
+            <input disabled class='form-control' value={{usuario.cpf}} type='text' class='form-control' />
+          </div>
+
+          <div class='col-sm-6'>
+            <Label class="font-weight-bold">E-mail</Label>
+            <input disabled class='form-control' value={{usuario.email}} type='text' class='form-control' />
+          </div>
+
+          <div class='col-sm-6'>
+            <Label class="font-weight-bold">Celular</Label>
+            <input disabled class='form-control' value={{usuario.celular}} type='text' class='form-control' />
+          </div>
+
+          <div class='col-sm-6'>
+            <Label class="font-weight-bold">Data de Nascimento</Label>
+            <input disabled class='form-control' [value]="usuario?.nascimento | date: 'dd/MM/yyyy'" type='text'
+              class='form-control' />
+          </div>
+
+          <div class='col-sm-6'>
+            <Label class="font-weight-bold">Perfil</Label>
+            <input disabled class='form-control' value={{listToString(usuario.listaPerfil)}} type='text'
+              class='form-control' />
+          </div>
+
+          <div class='col-sm-6'>
+            <Label class="font-weight-bold">Cargo</Label>
+            <input disabled class='form-control' value={{usuario?.cargo?.descricao}} type='text' class='form-control' />
+          </div>
+
+          <div class='col-sm-6'>
+            <Label class="font-weight-bold">Sigla</Label>
+            <input disabled class='form-control' value={{listToString(usuario.listaSiglas)}} type='text'
+              class='form-control' />
+          </div>
+
+          <div class='col-sm-6'>
+            <Label class="font-weight-bold">Código RE</Label>
+            <input disabled class='form-control' value={{usuario?.codigoRe}} type='text' class='form-control' />
+          </div>
+
+          <div class='col-sm-6'>
+            <Label class="font-weight-bold">Código BB</Label>
+            <input disabled class='form-control' value={{usuario?.codigoBB}} type='text' class='form-control' />
+          </div>
+
+          <div class='col-sm-6'>
+            <Label class="font-weight-bold">Empresa</Label>
+            <input disabled class='form-control' value={{usuario?.empresa}} type='text' class='form-control' />
+          </div>
+
+          <div class='col-sm-6'>
+            <Label class="font-weight-bold">Demanda</Label>
+            <input disabled class='form-control' value={{usuario?.demanda}} type='text' class='form-control' />
+          </div>
+
+          <div class='col-sm-6'>
+            <Label class="font-weight-bold">Contrato</Label>
+            <input disabled class='form-control' value={{usuario?.contrato?.descricao}} type='text'
+              class='form-control' />
+          </div>
+
+          <div class='col-sm-6'>
+            <Label class="font-weight-bold">Status</Label>
+            <input disabled class='form-control' value={{usuario?.status}} type='text' class='form-control' />
+          </div>
+
+          <div class='col-sm-3 mt-3 p'>
+            <input (click)='editaUsuario()' type="submit" value="Editar" class='form-control bg-success text-light' />
+          </div>
+
+          <div *ngIf='usuario.status == "Ativo"; else inativo' class='col-sm-3 mt-3 p'>
+            <button (click)='alteraStatus("desativar");' class='form-control bg-danger text-light'>Desligar
+              Usuário</button>
+          </div>
+
+          <ng-template #inativo>
+            <div class='col-sm-3 mt-3 p'>
+              <button (click)='alteraStatus("ativar");' class='form-control bg-primary text-light'>Ativar
+                Usuário</button>
+            </div>
+
+          </ng-template>
+
+        </div>
+
+      </div>
+
+    </form>
+
+  </div>
+
+  <ng-template #carregando>
+
+    <div class='container-fluid d-flex justify-content-center align-items-center mt-5'>
+      <i class="fa fa-refresh fa-spin fa-4x" aria-hidden="true"></i>
+    </div>
+
+  </ng-template>

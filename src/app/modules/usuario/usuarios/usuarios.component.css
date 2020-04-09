@@ -1,0 +1,34 @@
+.custom-pointer label{
+  cursor: pointer;
+}
+
+a{
+  cursor: pointer;
+}
+
+.custom-size{
+  height: 26rem;
+  overflow: auto;
+  margin-top: 2rem;
+}
+
+table{
+  width: 100%;
+}
+
+.custom-row{
+  cursor: pointer;
+}
+
+tr.mat-header-row{
+  background-color: rgb(99, 99, 99);
+}
+
+th.mat-header-cell{
+  color: white;
+  font-size: 0.8rem;
+}
+
+tr.mat-row:hover{
+  background-color: rgba(0, 0, 0, 0.1);
+}

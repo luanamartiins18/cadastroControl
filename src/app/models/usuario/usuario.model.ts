@@ -6,21 +6,41 @@ import { ListaPerfil } from '../ListaPerfil/lista-perfil.model';
 
 export class Usuario implements UsuarioInterface{
     
-    id: number;
-    nome: string;
-    email: string;
-    cpf: string;
-    codigoRe: string;
-    codigoBB: string;
-    empresa: string;
-    demanda: number;
-    nascimento: Date;
-    status: string;
-    contrato: Contrato;
-    cargo: Cargo;  
+    id?: number;
+    nome?: string;
+    email?: string;
+    cpf?: string;
+    codigoRe?: string;
+    codigoBB?: string;
+    empresa?: string;
+    demanda?: number;
+    nascimento?: Date;
+    status?: string;
+    contrato?: Contrato;
+    cargo?: Cargo;  
     listaSiglas: ListaSigla[];
     listaPerfil: ListaPerfil[];
-    celular: string;
+    celular?: string;
+    primeiroAcesso: boolean;
+    senha?: string;
    
-    constructor(){}
+    constructor(
+      id?: number,
+      nome?: string,
+      email?: string,
+      cpf: string = "",
+      codigoRe?: string,
+      codigoBB?: string,
+      empresa?: string,
+      demanda?: number,
+      nascimento?: Date,
+      status?: string,
+      contrato?: Contrato,
+      cargo?: Cargo,
+      listaSiglas: ListaSigla[] = [],
+      listaPerfil: ListaPerfil[] = [],
+      celular: string = "",
+      primeiroAcesso?: boolean,
+      senha?: string,
+    ){}
 }

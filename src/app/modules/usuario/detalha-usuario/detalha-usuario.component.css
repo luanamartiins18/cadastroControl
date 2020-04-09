@@ -1,0 +1,37 @@
+i{
+  cursor: pointer;   
+}
+
+.custom-size{
+  height: 36rem;   
+  overflow: auto;
+}
+
+@media(max-height: 720px){
+  
+  .custom-size{
+      height: 24rem;     
+  }
+}
+
+.visualizado i{     
+  color: green !important;
+}
+
+.custom-icon span{
+  margin-left: 1.5rem;
+}
+
+.custom-icon i{
+  color: grey;
+  margin-right: -8px;
+  cursor: auto;
+}
+
+table{
+  width: 100%;
+}
+
+.custom-button{
+  max-width: 12rem;
+}

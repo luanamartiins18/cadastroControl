@@ -1,0 +1,102 @@
+<div class='container-fluid mt-3'>
+
+  <ul class="nav nav-tabs">
+
+    <li class="nav-item">
+      <a [routerLink]="['/../usuarios']" class="nav-link">
+        Lista de Usuários
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a [routerLink]="['/../novo-usuario']" class="nav-link active">
+        Cadastro
+      </a>
+    </li>
+  </ul>
+
+  <form [formGroup]='form'>
+    <div class='container '>
+      <div class='form-group row pl-4'>
+
+        <div class='col-sm-6'>
+          <Label class="font-weight-bold">Nome</Label>
+          <input formControlName='nome' type='text' class='form-control' [(ngModel)]='usuario.nome' />
+        </div>
+
+        <div class='col-sm-6'>
+          <Label class="font-weight-bold">CPF</Label>
+          <input mask="000.000.000-00" [showMaskTyped]="true" formControlName='cpf' [(ngModel)]='usuario.cpf'
+            type='text' class='form-control' />
+        </div>
+
+        <div class='col-sm-6'>
+          <Label class="font-weight-bold">E-mail</Label>
+          <input formControlName='email' [(ngModel)]='usuario.email' type='email' class='form-control' />
+        </div>
+
+        <div class='col-sm-6'>
+          <Label class="font-weight-bold">Celular</Label>
+          <input mask="(00) 00000-0000" [showMaskTyped]="true" [dropSpecialCharacters]="false" formControlName='celular'
+            [(ngModel)]='usuario.celular' type='text' class='form-control' />
+        </div>
+
+        <div class='col-sm-6'>
+          <Label class="font-weight-bold">Data de Nascimento</Label>
+          <input formControlName='nascimento' [(ngModel)]='usuario.nascimento' type='date' class='form-control' />
+        </div>
+
+        <div class='col-sm-6'>
+          <label class="font-weight-bold">Perfil</label>
+          <ng-multiselect-dropdown [placeholder]="'Selecione um ou mais'" [data]="listaPerfil"
+            formControlName='listaPerfil' [(ngModel)]="usuario.listaPerfil" [settings]="dropdownSettings">
+          </ng-multiselect-dropdown>
+        </div>
+
+        <div class='col-sm-6'>
+          <label class="font-weight-bold">Cargo</label>
+          <select formControlName='cargo' class='form-control' [(ngModel)]="usuario.cargo">
+            <option [ngValue]="item" class='form-control' [selected]=" usuario.cargo && usuario.cargo.id==item.id"
+              *ngFor='let item of this.listaCargo'>{{item.descricao}}</option>
+          </select>
+        </div>
+
+        <div class='col-sm-6'>
+          <label class="font-weight-bold">Sigla</label>
+          <ng-multiselect-dropdown [placeholder]="'Selecione um ou mais'" [data]="listaSiglas"
+            formControlName="listaSiglas" [(ngModel)]="usuario.listaSiglas" [settings]="dropdownSettings">
+          </ng-multiselect-dropdown>
+        </div>
+
+        <div class='col-sm-6 '>
+          <Label class="font-weight-bold">Código RE</Label>
+          <input formControlName='codigoRe' [(ngModel)]="usuario.codigoRe" type='text' class='form-control' />
+        </div>
+
+        <div class='col-sm-6 '>
+          <Label class="font-weight-bold">Código BB</Label>
+          <input formControlName='codigoBB' [(ngModel)]="usuario.codigoBB" type='text' class='form-control' />
+        </div>
+
+        <div class='col-sm-6 '>
+          <Label class="font-weight-bold">Empresa</Label>
+          <input formControlName='empresa' [(ngModel)]="usuario.empresa" type='text' class='form-control' />
+        </div>
+
+        <div class='col-sm-6 '>
+          <Label class="font-weight-bold">Demanda</Label>
+          <input formControlName='demanda' [(ngModel)]="usuario.demanda" type='number' class='form-control' />
+        </div>
+
+        <div class='col-sm-2 mt-3 p'>
+          <input (click)='submit()' type="submit" value="Enviar" class='form-control bg-success text-light' />
+        </div>
+        <div class='col-sm-4'></div>
+
+      </div>
+
+    </div>
+
+  </form>
+
+</div>

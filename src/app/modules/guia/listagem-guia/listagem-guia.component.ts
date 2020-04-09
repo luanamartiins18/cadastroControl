@@ -6,7 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotifierService } from 'angular-notifier';
-import { UsuarioService } from '../../usuario/usuario.service';
+import { UsuarioService } from '../../../services/usuario/usuario.service';
 
 @Component({
   selector: 'app-listagem-guia',
