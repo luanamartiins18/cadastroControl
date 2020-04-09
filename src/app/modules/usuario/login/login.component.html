@@ -37,7 +37,8 @@
 
   <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Primeiro Acesso</h4>
+      <h4 class="modal-title" id="modal-basic-title">
+        <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Primeiro Acesso</h4>
       <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -52,7 +53,8 @@
         <div class='form-group row pl-4'>
           <div class='col-sm-6'>
             <Label class="font-weight-bold">Nova senha</Label>
-            <input placeholder='mínimo 6 digitos' type='password' formControlName="senha" class='form-control' [(ngModel)]='usuario.senha' />
+            <input placeholder='mínimo 6 digitos' type='password' formControlName="senha" class='form-control'
+              [(ngModel)]='usuario.senha' />
           </div>
           <div class='col-sm-6'>
             <Label class="font-weight-bold">Digite novamente</Label>
