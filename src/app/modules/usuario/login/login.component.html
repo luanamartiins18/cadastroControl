@@ -16,7 +16,7 @@
 
         <div [ngClass]="{'val-false':this.senhaErrada}" class='login'>
           <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-          <input type='text' placeholder='RE999999' spellcheck="false" formControlName="colaborador" />
+          <input type='text' placeholder='RE999999' spellcheck="false" formControlName="codigoRe" />
         </div>
 
         <div [ngClass]="{'val-false':this.senhaErrada}" class='senha mt-3'>
@@ -27,7 +27,6 @@
         <div class='d-flex justify-content-center mt-4'>
           <input class='enviar text-white px-2 btn btn-block' type='submit' value='Entrar' (click)='checaLogin()' />
         </div>
-
 
       </form>
 

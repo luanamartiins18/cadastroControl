@@ -73,7 +73,6 @@ export class NovoUsuarioComponent implements OnInit {
       listaSiglas: [this.usuario.listaSiglas,[Validators.required]],
       codigoRe: [this.usuario.codigoRe,[Validators.required]],
       codigoBB: [this.usuario.codigoBB,[Validators.required]],
-      empresa: [this.usuario.empresa,[Validators.required]],
       demanda: [this.usuario.demanda],
     });
   }

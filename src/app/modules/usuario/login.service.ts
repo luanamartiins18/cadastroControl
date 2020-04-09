@@ -1,26 +1,33 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import * as CryptoJS from 'crypto-js';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+  })
+
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  constructor(private httpClient: HttpClient, private router: Router, private nt: NotifierService) { }
+  constructor(private http: HttpClient) { }
 
-  autenticaUsuario(colaborador, senha, component){
+  autenticaUsuario(codigoRe, senha, component):any{
     let objComponent = component;
 
-    colaborador = colaborador.value;    
+    codigoRe = codigoRe.value;    
     senha = CryptoJS.SHA256(senha.value).toString();
 
-    let parametros = {re: colaborador, senha: senha};
+    let parametros = {codigoRe: codigoRe, senha: senha};
 
-    return this.httpClient. get<any>(environment.api + "validaUsuario", {observe: 'response', params: parametros});
+    return this.http.post(environment.api + "validaUsuario", parametros, { headers: httpOptions.headers, observe: 'response' });
     
    
   }
