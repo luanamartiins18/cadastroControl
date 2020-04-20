@@ -37,4 +37,8 @@ export class RelatorioService {
     return this.http.get(environment.api + "relatorio-entrega/txt/" + idOf, {responseType: 'blob'});
   }
 
+  getRelatorioTeste(){
+    return this.http.get(environment.api + 'relatorio-teste', {responseType: 'blob'});
+  }
+
 }

@@ -7,7 +7,7 @@ a{
 }
 
 .custom-size{
-    height: 26rem;
+    max-height: 26rem;
     overflow: auto;
     margin-top: 2rem;
 }
