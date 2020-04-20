@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
 
     this.loginForm = this.formBuilder.group({
-      colaborador: ["", [Validators.required]],
+      codigoRe: ["", [Validators.required]],
       senha: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(80)]],
     });
 
@@ -46,7 +46,12 @@ export class LoginComponent implements OnInit {
   }
 
   checaLogin() {
-    this.loginService.autenticaUsuario(this.loginForm.get('colaborador'), this.loginForm.get('senha'), this).subscribe(
+
+    if (this.loginForm.invalid) {
+      return this.nt.notify("error", "Preencha todos os campos");
+    }
+
+    this.loginService.autenticaUsuario(this.loginForm.get('codigoRe'), this.loginForm.get('senha'), this).subscribe(
       data => {
         if (data.status == 200) {
           this.usuario = data.body;
@@ -59,8 +64,10 @@ export class LoginComponent implements OnInit {
         }
       },
       err => {
-        if (err.status == 401) {
-          this.senhaErrada = true;
+        this.senhaErrada = true;
+        if (err.error.message) {
+          this.nt.notify("error", err.error.message);
+        } else {
           this.nt.notify("error", "Usuário ou senha inválida");
         }
       }
@@ -70,7 +77,7 @@ export class LoginComponent implements OnInit {
 
   private alteraSenha() {
 
-    if (this.senhaForm.invalid){
+    if (this.senhaForm.invalid) {
       this.senhaForm.reset();
       return this.nt.notify("error", "Crie  uma senha com pelo menos 6 caracteres.");
 
@@ -104,7 +111,7 @@ export class LoginComponent implements OnInit {
 
 
   private loginSucess() {
-    sessionStorage.setItem('colaborador', this.loginForm.get('colaborador').value);
+    sessionStorage.setItem('colaborador', this.loginForm.get('codigoRe').value);
     this.router.navigate(['home']);
     this.senhaErrada = false;
   }
