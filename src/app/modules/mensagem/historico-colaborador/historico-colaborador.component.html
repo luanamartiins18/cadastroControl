@@ -28,7 +28,7 @@
                     <div class = 'desc-msg mt-3'>
                         {{i.responsavel | titlecase}} 
                         Em
-                        {{i.dtCriacao | date: 'dd/MM/yyyy - HH:mm' : '+0000'}}
+                        {{i.dtCriacao | date: 'dd/MM/yyyy - HH:mm' : '-0600'}}
                     </div>
 
                     <div *ngIf = 'i.tpMsg == "GERAL"; else msgSigla ' class = 'desc-msg'>
