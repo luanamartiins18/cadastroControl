@@ -26,9 +26,10 @@
                 <li 
                     class="list-group-item cursor-pointer"
                     (click) = 'selecionaOp(2);'
-                    [ngClass] = '{"selected-op": this.selectedOp == 2}'>
+                    [ngClass] = '{"selected-op": this.selectedOp == 2}'
+                    [routerLink] = '["sigla"]'>
 
-                    Relatório 2
+                    Sigla/Referência
                 </li>   
                 
                 <li 

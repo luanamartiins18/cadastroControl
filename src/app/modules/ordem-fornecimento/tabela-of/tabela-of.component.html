@@ -1,9 +1,15 @@
 <div *ngIf='this.listaOf; else carregando'>
-  <div class = 'qtd-of'>
-    <b>{{this.listaOf.length}} OF(s) </b>em execução
+
+  <div>
+    <div class = 'mx-4 mt-3 mb-0'>
+      <h5>Ordens de Fornecimento</h5>        
+    </div>
+    <div class = 'mx-4'>   
+      <b>{{this.listaOf.length}} OF(s) </b>em execução
+    </div>
   </div>
 
-<div class = 'mat-elevation-z8 '>
+<div class = 'mat-elevation-z8 mx-4'>
   <div class = 'custom-size' >
     <table mat-table [dataSource]="this.listaOf"  >      
       <ng-container matColumnDef="numOf">

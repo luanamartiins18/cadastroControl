@@ -114,8 +114,11 @@
                                                       </tr>                                                 
                                                     </tbody>
                                                 </table>                                          
-
                                             </mat-expansion-panel> 
+                                           
+
+
+
                                         </div>
 
                                       </div>
@@ -159,6 +162,7 @@
         <div class = 'container'>
 
             <div class = 'row'>
+
                 <div class = 'col-sm-2'>
                     Tarefa
                 </div>
@@ -184,18 +188,20 @@
                     <textarea (keyup) = "this.atualizaTrfSelecionada('N/A', 'N/A', 'plataforma', $event.target.value)" class = 'form-control'>{{this.filtraVlrNull(this.trfSelecionada.plataforma)}}</textarea>
                 </div>
             </div> 
+            <hr>
+            <h5 class = 'mt-3'>
+                Itens da Tarefa
+            </h5>
 
-            <div class = 'row' *ngFor = 'let i of this.agrupaComplexidadesTrf(this.trfSelecionada.itens)'>
+            <div class = 'row' *ngFor = 'let i of this.agrupaComplexidadesTrf(this.trfSelecionada.itens); let ind = index;'>
 
-                <div class = 'col-sm-12'>
-
-                    <mat-expansion-panel class = 'mat-elevation-z4 mt-2'>
+                <div class = 'col-sm-11'>
+                    <mat-expansion-panel class = ' mat-elevation-z4 mt-2'>
                         <mat-expansion-panel-header class = 'bg-secondary'>
                             <mat-panel-title class = 'text-light'>
                                 {{i}}
-                            </mat-panel-title> 
+                            </mat-panel-title>                             
                         </mat-expansion-panel-header>         
-
                         <div class = 'container'>
                             <div class = 'row'>                       
 
@@ -228,25 +234,21 @@
                                     </tbody>
                                 </table>   
                             </div>
-
-
-
-
                         </div>
-               
-
-
-
-
-
-                    </mat-expansion-panel> 
-
+                    </mat-expansion-panel>  
+                </div>
+                <div class = 'col-sm-1 d-flex align-items-center'>
+                    <i 
+                        class="fa fa-times fa-2x text-danger cursor-pointer" 
+                        aria-hidden="true" 
+                        (click) = 'this.openModalApagarItem(modalApagarItem, this.trfSelecionada.itens[ind].id_item);'>
+                    </i>
                 </div>
             </div>   
         </div>
     </div>  
     <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="c('Save click')">Cancelar</button>
+        <button id = 'btnFecharModalEditar' type="button" class="btn btn-danger" (click)="c('Save click')">Cancelar</button>
         <button type="button" class="btn btn-success" (click)="this.submit(); c('Save click');">Salvar</button>
     </div>
  
@@ -274,6 +276,24 @@
     <div class="modal-footer">
       <button id ='btnCancelar' type="button" class="btn btn-outline-secondary" (click)="c('Save click')">Cancelar</button>
       <button type="button" class="btn btn-outline-primary" (click)="c('Save click'); this.submitVersaoGuia();">Atualizar Versão</button>
+    </div>
+</ng-template>
+
+<ng-template #modalApagarItem let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Deletar Item</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <i class="d-flex justify-content-center fa fa-exclamation-circle fa-4x deletar" aria-hidden="true"></i>
+      <h4 class="d-flex justify-content-center" >Você tem certeza?</h4>
+      <p class = 'text-muted d-flex justify-content-center'>O item será deletada permanentemente</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary" (click)="c('Save click')">Cancelar</button>
+      <button type="button" class="btn btn-outline-danger" (click)="c('Save click'); this.excluiItem();">Excluir Item</button>
     </div>
 </ng-template>
 

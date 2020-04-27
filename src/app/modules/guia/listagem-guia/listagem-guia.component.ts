@@ -37,6 +37,7 @@ export class ListagemGuiaComponent implements OnInit {
   pageSize = 1;
   cargoUsuario;
   versaoAtualGuia = "";
+  itemSelecionadoApagar;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -85,6 +86,7 @@ export class ListagemGuiaComponent implements OnInit {
   open(content, element) {
     this.trfSelecionada = element; 
     this.modalService.open(content, { size: 'lg' });
+    console.log(this.trfSelecionada)
   }
 
   carregaItensGuia(){
@@ -218,6 +220,26 @@ export class ListagemGuiaComponent implements OnInit {
       console.log(document.getElementById("btnCancelar").click());
       this.submitVersaoGuia();
     }
+  }
+
+  openModalApagarItem(content, item){
+    this.modalService.open(content);
+    this.itemSelecionadoApagar = item;
+    console.log(document.getElementById("modalApagarItem"));
+  }
+
+  excluiItem(){
+    this.guia.deletaItemGuia(this.itemSelecionadoApagar).subscribe(
+      data => {
+        if(data.status == 200){
+          this.nt.notify("success", "Item excluído com sucesso");
+          this.inicializaPagina();          
+        }else{
+          this.nt.notify("error", "Falha ao excluir o item");
+        }
+        document.getElementById("btnFecharModalEditar").click();
+      }
+    );
   }
 
 }

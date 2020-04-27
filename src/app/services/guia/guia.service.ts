@@ -42,4 +42,8 @@ export class GuiaService {
     return this.http.put(environment.api + "versao-guia", body, {headers: httpOptions.headers, observe: 'response'});
   }
 
+  deletaItemGuia(idItemTrf){    
+    return this.http.delete(environment.api + "item-guia/" + idItemTrf, {observe: "response"});
+  }
+
 }
