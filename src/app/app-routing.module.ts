@@ -21,6 +21,7 @@ import { DetalhaUsuarioComponent } from './modules/usuario/detalha-usuario/detal
 import { OrdemFornecimentoRelatorioComponent } from './modules/relatorios/ordem-fornecimento-relatorio/ordem-fornecimento-relatorio.component';
 import { ContainerRelatoriosComponent } from './modules/relatorios/container-relatorios/container-relatorios.component';
 import { OrcamentoEntregaComponent } from './modules/relatorios/orcamento-entrega/orcamento-entrega.component';
+import { RelatorioSiglaComponent } from './modules/relatorios/relatorio-sigla/relatorio-sigla.component';
 
 
 const routes: Routes = [
@@ -45,7 +46,8 @@ const routes: Routes = [
       {path: 'relatorios', component: ContainerRelatoriosComponent, canActivate: [AuthGuardService],
         children: [
           {path: 'ordem-fornecimento', component: OrdemFornecimentoRelatorioComponent, canActivate: [AuthGuardService]},
-          {path: 'ordem-fornecimento/:id', component: OrcamentoEntregaComponent, canActivate: [AuthGuardService]}
+          {path: 'ordem-fornecimento/:id', component: OrcamentoEntregaComponent, canActivate: [AuthGuardService]},
+          {path: 'sigla', component: RelatorioSiglaComponent, canActivate: [AuthGuardService]}
         ]
       }
     ]

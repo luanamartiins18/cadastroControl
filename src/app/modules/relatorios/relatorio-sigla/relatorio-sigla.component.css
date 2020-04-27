@@ -1,0 +1,22 @@
+.wrapper{
+    min-height: 90vh;
+    min-width: 85vw;
+    overflow: auto;
+}
+
+.title{
+    height: 8vh;
+}
+
+table{
+    width: 100%;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+    margin-left: 0.25rem;
+}
+
+.cursor-pointer:hover{
+    color: rgb(255, 111, 111);    
+}

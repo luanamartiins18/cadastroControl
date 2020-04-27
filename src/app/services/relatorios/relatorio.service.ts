@@ -41,4 +41,30 @@ export class RelatorioService {
     return this.http.get(environment.api + 'relatorio-teste', {responseType: 'blob'});
   }
 
+  getRelatorioSiglaReferencia(){
+    
+    return [
+        {
+            "numero_of": "17382",
+            "colaborador": "ERIKA ALMEIDA DE ESPINDOLA",
+            "status_of": "Concluída",
+            "valor_ustibb":	"40",	
+            "valor": "2440",
+            "referencia": "012020",
+            "sigla": "CMN",
+            "idOrf": "2"
+        },
+        {
+            "numero_of": "17157",
+            "colaborador": "ERIKA ALMEIDA DE ESPINDOLA",
+            "status_of": "Em Execução",
+            "valor_ustibb":	"0.5",	
+            "valor": "30.5",
+            "referencia": "082020",
+            "sigla": "ACC",
+            "idOrf": "3"
+        }  
+    ]
+  }
+
 }
