@@ -19,8 +19,10 @@
     </ul>
 
     <div class="input-group mt-3 p">
-      <span class="input-group-addon"><i class="fa fa-search fa-fw"></i></span>
-      <input (keyup)="searchAllField($event)" class="form-control" type="text" placeholder="Pesquisar entre os campos">
+      <input (keyup)="searchAllField($event)" class="form-control" placeholder="Pesquisar entre os campos">
+      <div class="input-group-append">
+        <span class="input-group-text" ><i class="fa fa-search fa-fw"></i></span>
+      </div>
     </div>
 
     <div *ngIf='this.usuariosSearch.length > 0; else semUsuarios' class='custom-size mat-elevation-z8 '>

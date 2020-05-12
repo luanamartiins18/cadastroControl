@@ -103,7 +103,7 @@ export class DetalhaOfComponent implements OnInit {
   }
 
   valida(value){
-    if(value.referencia == null || value.referencia.length < 6 || typeof(value.referencia) != "string"){
+    if(value.referencia == null || value.referencia.length < 6 || typeof(value.referencia) != "string" || parseInt(value.referencia.substring(0,2))>12 || parseInt(value.referencia.substring(0,2))<=0){
       return false;
     }
 

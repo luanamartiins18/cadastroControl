@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { RelatorioFiltro } from 'src/app/models/relatorio/relatorio.filtro.model';
 
 @Injectable({
   providedIn: 'root'
@@ -41,12 +42,17 @@ export class RelatorioService {
     return this.http.get(environment.api + 'relatorio-teste', { responseType: 'blob' });
   }
 
-  getRelatorioSiglaReferencia(filtro: any) {
-    return this.http.get<any[]>(environment.api + "relatorio-sigla-referencia/reduzido", { params: filtro });
+  getRelatorioSiglaReferencia(filtro: RelatorioFiltro, agrupamento: string = "") {
+    return this.http.get<any[]>(`${environment.api}relatorio-sigla-referencia/${agrupamento}`, { params: this.paramsFilter(filtro) });
   }
 
-  getRelatorioSiglaReferenciaXlsx() {
-    return this.http.get(environment.api + "relatorio-sigla-referencia/xlsx", { responseType: 'blob' });
+  getRelatorioSiglaReferenciaEvolvido(filtro: RelatorioFiltro, numero_of) {
+    filtro.numero_of = numero_of;
+    return this.http.get<any[]>(`${environment.api}relatorio-sigla-referencia/`, { params: this.paramsFilter(filtro) });
+  }
+
+  getRelatorioSiglaReferenciaXlsx(filtro: RelatorioFiltro) {
+    return this.http.get(environment.api + "relatorio-sigla-referencia/xlsx", { responseType: 'blob',params: this.paramsFilter(filtro) });
   }
   getRelatorioSiglaReferencias() {
 
@@ -72,6 +78,20 @@ export class RelatorioService {
         "idOrf": "3"
       }
     ]
+  }
+
+  private paramsFilter(filtro: RelatorioFiltro) {
+    let params: any = {};
+    if (filtro.numero_of) {
+      params['numero_of'] = filtro.numero_of;
+    }
+    if (filtro.sigla) {
+      params['sigla'] = filtro.sigla;
+    }
+    if (filtro.referencia) {
+      params['referencia'] = filtro.referencia;
+    }
+    return params;
   }
 
 }

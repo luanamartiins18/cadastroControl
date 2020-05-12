@@ -1,7 +1,6 @@
 <div class='wrapper' *ngIf='this.relatorioExpandido; else carregando'>
-
   <div class='title px-5 py-5'>
-    <mat-card class='px-4'>
+    <mat-card class='px-4 '>
       <mat-card-title class='mb-3'>
         <h4>
           Relatório por Sigla/Referência
@@ -28,7 +27,6 @@
             </div>
           </div>
         </div>
-
         <div class='card-body px-0 py-0'>
           <table mat-table [dataSource]="this.relatorioReduzido">
             <ng-container matColumnDef="sigla">
@@ -51,19 +49,35 @@
               <th mat-header-cell *matHeaderCellDef> Referência </th>
               <td mat-cell *matCellDef="let element"> {{element.referencia | mask: "00/0000"}} </td>
             </ng-container>
-
             <tr mat-header-row *matHeaderRowDef="this.colunasReduzido"></tr>
             <tr (click)='detalha(row);' class='custom-row' mat-row *matRowDef="let row; columns: this.colunasReduzido;">
             </tr>
           </table>
+          <table class="table mt-2 mb-2 mat-elevation-z4 fonte-item-guia mb-3">
+            <thead>
+              <tr>
+                <th scope="col">Total Qtd OF</th>
+                <th scope="col">Ustibb</th>
+                <th scope="col">Valor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{qtd}}</td>
+                <td>{{valor_ustibb}}</td>
+                <td>R$ {{valor}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class='d-flex justify-content-end px-3 py-3'>
+            <button (click)='this.getRelatorioSiglaReferenciaXlsx(filtro);' class="btn btn-success">
+              <i class="label-btn-cinza fa fa-table mr-2" aria-hidden="true"></i>
+              <span class='label-btn-cinza fonte-btn-cinza'>Exportar xlsx</span>
+            </button>
+          </div>
         </div>
       </mat-card-content>
-
-      <button (click)='this.getRelatorioSiglaReferenciaXlsx();' class="btn btn-success">
-        <i class="label-btn-cinza fa fa-table mr-2" aria-hidden="true"></i>
-        <span class='label-btn-cinza fonte-btn-cinza'>Exportar xlsx</span>
-      </button>
-
     </mat-card>
   </div>
 
@@ -72,44 +86,82 @@
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">
-      <i class="fa fa-list-alt" aria-hidden="true"></i> Relatório Sigla</h4>
+      <i class="fa fa-list-alt" aria-hidden="true"></i> Relatório Sigla </h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
 
   <div class="modal-body">
-    <div *ngIf='this.relatorioExpandido; else carregando'>
-      <table mat-table [dataSource]="this.relatorioReduzido">
-        <ng-container matColumnDef="sigla">
-          <th mat-header-cell *matHeaderCellDef> Sigla </th>
-          <td mat-cell *matCellDef="let element"> {{element.sigla}} </td>
-        </ng-container>
-        <ng-container matColumnDef="qtd">
-          <th mat-header-cell *matHeaderCellDef> Qtd OF </th>
-          <td mat-cell *matCellDef="let element"> {{element.qtd}} </td>
-        </ng-container>
-        <ng-container matColumnDef="valor_ustibb">
-          <th mat-header-cell *matHeaderCellDef> UstiBB </th>
-          <td mat-cell *matCellDef="let element"> {{element.valor_ustibb}} </td>
-        </ng-container>
-        <ng-container matColumnDef="valor">
-          <th mat-header-cell *matHeaderCellDef> Valor </th>
-          <td mat-cell *matCellDef="let element"> R$ {{element.valor}} </td>
-        </ng-container>
-        <ng-container matColumnDef="referencia">
-          <th mat-header-cell *matHeaderCellDef> Referência </th>
-          <td mat-cell *matCellDef="let element"> {{element.referencia | mask: "00/0000"}} </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="this.colunasReduzido"></tr>
-        <tr (click)='expandir(row);' class='custom-row' mat-row *matRowDef="let row; columns: this.colunasReduzido;">
-        </tr>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let item of relatorioExpandido" (opened)="expandir(item)">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <table>
+              <thead class="thead-light">
+              <tr>
+                <th>OF</th>
+                <th>Ustibb</th>
+                <th>Valor</th>
+                <th>Status</th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class = 'border-right'>{{item.numero_of}}</td>
+                  <td class = 'border-right'>{{item.valor_ustibb}}</td>
+                  <td class = 'border-right'> R$ {{item.valor}}</td>
+                  <td class = 'border-right'>{{item.status_of}}</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </mat-panel-title>
+          <mat-panel-description>
+            Envolvidos {{item.sigla}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <hr>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Colaborador</th>
+              <th scope="col">Ustibb</th>
+              <th scope="col">Valor</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let envolvido of item.relatorioEnvolvidos">
+            <tr>
+              <td>{{envolvido.colaborador}}</td>
+              <td>{{envolvido.valor_ustibb}}</td>
+              <td>R$ {{envolvido.valor}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-expansion-panel>
+
+      <table class="table mt-2 mb-2 mat-elevation-z4 fonte-item-guia mb-3">
+        <thead>
+          <tr>
+            <th scope="col">Subtotal Qtd OF</th>
+            <th scope="col">Ustibb</th>
+            <th scope="col">Valor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{qtdDetalhada}}</td>
+            <td>{{valor_ustibbDetalhada}}</td>
+            <td>R$ {{valorDetalhada}}</td>
+          </tr>
+        </tbody>
       </table>
-    </div>
+
+    </mat-accordion>
   </div>
 
   <div class="modal-footer">
-    <button (click)='this.getRelatorioSiglaReferenciaXlsx();' class="btn btn-success">
+    <button (click)='this.getRelatorioSiglaReferenciaXlsx(filtroDetalhado);' class="btn btn-success">
       <i class="label-btn-cinza fa fa-table mr-2" aria-hidden="true"></i>
       <span class='label-btn-cinza fonte-btn-cinza'>Exportar xlsx</span>
     </button>
