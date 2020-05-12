@@ -8,7 +8,6 @@ const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
   })
-
 };
 
 @Injectable({
@@ -22,7 +21,6 @@ export class UsuarioService {
 
     let paramId: string = id.toString();
     return this.http.get(environment.api + 'sigla/' + paramId + '/usuarios', { observe: 'response' });
-
   }
 
   getUsuario(re: string) {

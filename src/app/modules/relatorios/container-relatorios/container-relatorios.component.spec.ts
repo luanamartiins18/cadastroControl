@@ -8,9 +8,9 @@ describe('ContainerRelatoriosComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ContainerRelatoriosComponent ]
+      declarations: [ContainerRelatoriosComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

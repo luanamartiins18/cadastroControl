@@ -1,4 +1,4 @@
 export interface SiglaInterface {
-    id: number;
-    descricao: string;
+  id: number;
+  descricao: string;
 }

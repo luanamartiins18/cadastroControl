@@ -8,9 +8,9 @@ describe('HistoricoColaboradorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HistoricoColaboradorComponent ]
+      declarations: [HistoricoColaboradorComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

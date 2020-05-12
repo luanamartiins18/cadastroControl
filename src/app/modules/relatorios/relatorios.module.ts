@@ -16,11 +16,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-import { MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
-import { MatExpansionModule} from '@angular/material/expansion'; 
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 registerLocaleData(localePt, 'pt-BR');
@@ -33,8 +33,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     RouterModule,
     MatCheckboxModule,
     NgxMaskModule.forRoot(options),
-    NgMultiSelectDropDownModule.forRoot(), 
-    ReactiveFormsModule, 
+    NgMultiSelectDropDownModule.forRoot(),
+    ReactiveFormsModule,
     MatCardModule,
     MatDividerModule,
     MatSidenavModule,
@@ -47,6 +47,6 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     MatInputModule,
     FormsModule
   ],
-  providers: [{provide: LOCALE_ID, useValue: 'pt-BR'}]
+  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }]
 })
 export class RelatoriosModule { }

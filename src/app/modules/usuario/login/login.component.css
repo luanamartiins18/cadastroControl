@@ -1,8 +1,7 @@
 .wrapper{
     width: 100vw;
     height: 100vh;
-    
-}
+    }
 
 .val-false{
     border-bottom: 1px solid red !important;    

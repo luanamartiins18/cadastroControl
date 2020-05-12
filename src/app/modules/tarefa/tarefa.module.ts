@@ -23,7 +23,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     NgxMaskModule.forRoot(options),
     MatTableModule,
     NgbModule,
-    MatCardModule, 
+    MatCardModule,
     NgSelectModule,
     FormsModule
   ],

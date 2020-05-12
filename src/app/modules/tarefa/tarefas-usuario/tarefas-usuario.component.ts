@@ -40,92 +40,80 @@ export class TarefasUsuarioComponent implements OnInit {
   listaComplexidadesTrf = [];
   tarefaSelecionada;
   trfPossuiQuantidade = false;
-
-
   colunas = ['numTarefa', 'historia', 'artefato', 'sprint', 'situacao', 'tarefa', 'quantidade', 'complexidade', 'valor', 'acoes'];
 
   constructor(private route: ActivatedRoute,
-              private ts: TarefaService,
-              private nt: NotifierService,
-              private us: UsuarioService,
-              config: NgbModalConfig, 
-              private modalService: NgbModal,
-              private ss: SituacaoService) {}
+    private ts: TarefaService,
+    private nt: NotifierService,
+    private us: UsuarioService,
+    config: NgbModalConfig,
+    private modalService: NgbModal,
+    private ss: SituacaoService) { }
 
   ngOnInit() {
 
     this.idUsu = this.route.snapshot.paramMap.get("idUsu");
     this.idOf = this.route.snapshot.paramMap.get("idOf");
-
     this.form = new FormGroup({
-      historia:     new FormControl(),
-      sprint:       new FormControl(),
-      observacao:   new FormControl(),
-      artefato:     new FormControl(),
-      perfil:       new FormControl(),
-      disciplina:   new FormControl(),
-      item:         new FormControl(),
-      quantidade:   new FormControl(),
-      numTarefa:    new FormControl(),
-      componente:   new FormControl(),
+      historia: new FormControl(),
+      sprint: new FormControl(),
+      observacao: new FormControl(),
+      artefato: new FormControl(),
+      perfil: new FormControl(),
+      disciplina: new FormControl(),
+      item: new FormControl(),
+      quantidade: new FormControl(),
+      numTarefa: new FormControl(),
+      componente: new FormControl(),
       complexidade: new FormControl()
-      
     });
     this.form.controls.disciplina.disable();
-
     this.form.get("perfil").valueChanges.subscribe(
-      (valor) => {       
-        if(valor != null && valor != 0){
+      (valor) => {
+        if (valor != null && valor != 0) {
           this.form.controls.disciplina.enable();
           this.form.controls.disciplina.setValue(0);
           console.log("ativa disciplina");
-        }else{
+        } else {
           this.form.controls.disciplina.disable();
-          this.form.controls.disciplina.setValue(0);     
-          console.log('desativa disciplina');     
+          this.form.controls.disciplina.setValue(0);
+          console.log('desativa disciplina');
         }
-        this.filtraDisciplinas(); 
-        this.form.controls.disciplina.enable()        
+        this.filtraDisciplinas();
+        this.form.controls.disciplina.enable()
       }
     );
 
     this.form.get("disciplina").valueChanges.subscribe(
-      (valor) => {        
-        if(this.form.controls.disciplina.value != 0 && this.form.controls.disciplina.value != null){
+      (valor) => {
+        if (this.form.controls.disciplina.value != 0 && this.form.controls.disciplina.value != null) {
           this.btnItem = true;
-        }else{
+        } else {
           this.btnItem = false;
         }
-
         this.itemSelecionado = "";
-        this.listaComponentesTrf = [];   
+        this.listaComponentesTrf = [];
         this.listaComplexidadesTrf = [];
-        this.tarefaSelecionada = null;  
-
+        this.tarefaSelecionada = null;
       }
     );
-
     this.carregaForm();
     this.buscaTarefas();
     this.carregaSituacoes();
-
     this.ts.getNumOf(this.idOf).subscribe(
-      (data)=>{
+      (data) => {
         this.numOf = data;
       }
     );
-
   }
 
-  resetForm(){ 
+  resetForm() {
     this.form.reset();
     this.opFormTrf = "Salvar"
     this.form.controls.perfil.setValue(0);
-
   }
 
-  editaTarefa(tarefa){  
-
+  editaTarefa(tarefa) {
     this.tabAtiva = 'nova-tarefa';
     this.opFormTrf = "Atualizar"
     this.form.controls.historia.setValue(tarefa.historia);
@@ -134,58 +122,50 @@ export class TarefasUsuarioComponent implements OnInit {
     this.form.controls.artefato.setValue(tarefa.artefato);
     this.form.controls.numTarefa.setValue(tarefa.numTarefa);
     this.form.controls.quantidade.setValue(tarefa.quantidade);
-    
-  
-    if(tarefa.perfil == "Alta"){
+    if (tarefa.perfil == "Alta") {
       this.form.controls.perfil.setValue(2);
-    }else{
+    } else {
       this.form.controls.perfil.setValue(1);
     }
-    
-   
-    this.filtraDisciplinas();    
-    this.form.controls.disciplina.setValue(tarefa.disciplina); 
-    this.form.controls.item.setValue(tarefa.idTrfGuia);   
+    this.filtraDisciplinas();
+    this.form.controls.disciplina.setValue(tarefa.disciplina);
+    this.form.controls.item.setValue(tarefa.idTrfGuia);
     this.filtraItensGuia();
     this.selecionaTarefa(this.getItem(this.form.controls.item.value));
     this.form.controls.componente.setValue(tarefa.componente);
-    this.form.controls.complexidade.setValue(tarefa.complexidade);  
-    
+    this.form.controls.complexidade.setValue(tarefa.complexidade);
   }
 
-  getItem(id){
+  getItem(id) {
     let res = null;
-  
-    for(let i of this.listaItensGuiaAux){
-
-      if(i.id_tarefa == id){
-        res = i;        
+    for (let i of this.listaItensGuiaAux) {
+      if (i.id_tarefa == id) {
+        res = i;
         break;
       }
     }
     return res;
   }
 
-  alteraSituacaoTrf(idSit, idTrf){
-   
-    let param = {idTrf: idTrf, idSit: idSit};
+  alteraSituacaoTrf(idSit, idTrf) {
+    let param = { idTrf: idTrf, idSit: idSit };
     console.log(param);
     this.ts.alteraSitTarefa(param).subscribe(
-      (data)=>{
-        if(data.status == 200){
+      (data) => {
+        if (data.status == 200) {
           this.nt.notify("success", "Situação da tarefa alterada com sucesso");
           this.buscaTarefas();
-        }else{
+        } else {
           this.nt.notify("success", "Houve um erro ao atualizar a situação da tarefa");
         }
       }
     );
   }
-  
-  excluiTarefa(){
+
+  excluiTarefa() {
     this.ts.deletaTarefa(this.trfAtual).subscribe(
-      (data)=>{
-        if(data.status == 200){
+      (data) => {
+        if (data.status == 200) {
           this.nt.notify("success", "Tarefa excluída com sucesso");
           this.resetForm();
         }
@@ -194,15 +174,15 @@ export class TarefasUsuarioComponent implements OnInit {
     );
   }
 
-  carregaSituacoes(){
+  carregaSituacoes() {
     this.ss.getSituacoes().subscribe(
-      (data) =>{
+      (data) => {
         this.listaSituacoes = data;
       }
     );
   }
 
-  tarefaAtual(trf){
+  tarefaAtual(trf) {
     this.trfAtual = trf;
   }
 
@@ -210,21 +190,18 @@ export class TarefasUsuarioComponent implements OnInit {
     this.modalService.open(content);
   }
 
-  buscaTarefas(){
+  buscaTarefas() {
     this.valorPlanejado = 0;
     this.valorExecutado = 0;
     this.listaTarefas = new Array<any>();
-
     this.ts.getTarefasUsu(this.idUsu, this.idOf).subscribe(
       (data => {
         this.listaTarefas = data;
-        
-        for(let i of this.listaTarefas){
-          if(i.fk_situacao == 8 || i.fk_situacao == 4){
+        for (let i of this.listaTarefas) {
+          if (i.fk_situacao == 8 || i.fk_situacao == 4) {
             this.valorExecutado += i.valor;
           }
-
-          if(i.fk_situacao != 2 && i.fk_situacao != 5){
+          if (i.fk_situacao != 2 && i.fk_situacao != 5) {
             this.valorPlanejado += i.valor;
           }
         }
@@ -232,257 +209,202 @@ export class TarefasUsuarioComponent implements OnInit {
     );
   }
 
-  carregaForm(){    
-
+  carregaForm() {
     this.ts.getItensGuia().subscribe(
-      (data)=>{
+      (data) => {
         this.listaItensGuiaAux = data;
       }
     );
-
     this.ts.getDisciplinas().subscribe(
-      (data)=>{        
+      (data) => {
         this.listaDisciplinasAux = data;
-
         this.us.getPerfilUsuario(this.idUsu).subscribe(
-         
-          (data)=>{
-            if(data['descricao'] == 'Alta'){
-              this.form.controls.perfil.setValue(2);  
+          (data) => {
+            if (data['descricao'] == 'Alta') {
+              this.form.controls.perfil.setValue(2);
               this.form.controls.perfil.disable();
-                    
-            }else if(data['descricao'] == 'Baixa'){
-              this.form.controls.perfil.setValue(1);  
-              this.form.controls.perfil.disable();                       
-            } 
 
+            } else if (data['descricao'] == 'Baixa') {
+              this.form.controls.perfil.setValue(1);
+              this.form.controls.perfil.disable();
+            }
           }
-        );    
+        );
       }
     );
   }
 
-  setaTab(op){
+  setaTab(op) {
     this.tabAtiva = op;
   }
   //Se todos os items possuírem quantidade, então essa tarefa é controlada por quantidade
-  possuiQuantidade(trf){
-  
-    for(let i of trf.itens){
-
-      if(typeof (i.quantidade) == 'object'){
+  possuiQuantidade(trf) {
+    for (let i of trf.itens) {
+      if (typeof (i.quantidade) == 'object') {
         return false;
-      } 
-
+      }
     }
-
     return true;
   }
 
-  possuiComponente(trf){
-    
-    for(let i of trf.itens){
-
-      if(typeof (i.componente) == 'object'){
+  possuiComponente(trf) {
+    for (let i of trf.itens) {
+      if (typeof (i.componente) == 'object') {
         return false;
-      } 
-
+      }
     }
-
-    return true;        
+    return true;
   }
 
-  filtraItensGuia(){
-
+  filtraItensGuia() {
     this.listaItensGuia = new Array<any>();
-
-    for(let i of this.listaItensGuiaAux){
-      if(i.disciplina == this.form.controls.disciplina.value){
+    for (let i of this.listaItensGuiaAux) {
+      if (i.disciplina == this.form.controls.disciplina.value) {
         this.listaItensGuia.push(i);
       }
     }
- 
   }
 
-  filtraDisciplinas(){
+  filtraDisciplinas() {
     //Disciplina default
     this.listaDisciplinas = new Array<any>({
       id: 0,
       descricao: "Selecione uma Disciplina"
     });
-
-    for(let i of this.listaDisciplinasAux){
- 
-      if(this.form.controls.perfil.value == 1){
-
-        if(i.perfil == 'Baixa'){
+    for (let i of this.listaDisciplinasAux) {
+      if (this.form.controls.perfil.value == 1) {
+        if (i.perfil == 'Baixa') {
           this.listaDisciplinas.push(i);
         }
-
       }
- 
-      if(this.form.controls.perfil.value == 2){     
-         
-        if(i.perfil == 'Alta'){
+      if (this.form.controls.perfil.value == 2) {
+        if (i.perfil == 'Alta') {
           this.listaDisciplinas.push(i);
         }
-
       }
-      
-      if(i.perfil == 'Baixa/Alta'){
+      if (i.perfil == 'Baixa/Alta') {
         this.listaDisciplinas.push(i);
       }
     }
   }
 
-  selecionaTarefa(trf){
+  selecionaTarefa(trf) {
     console.log(trf);
-
-    this.tarefaSelecionada = trf; 
-
+    this.tarefaSelecionada = trf;
     this.listaComponentesTrf = [];
-
     this.listaComplexidadesTrf = [];
     this.form.controls.complexidade.setValue("");
-
-    if(this.possuiComponente(trf)){
+    if (this.possuiComponente(trf)) {
       this.carregaComponentesTarefa(trf);
-    }    
-
-    if(!this.possuiQuantidade(trf)){
+    }
+    if (!this.possuiQuantidade(trf)) {
       this.carregaComplexidadesTarefa(trf);
     }
-
-    if(this.possuiQuantidade(trf)){
+    if (this.possuiQuantidade(trf)) {
       this.trfPossuiQuantidade = true;
-    }else{
+    } else {
       this.trfPossuiQuantidade = false;
       this.form.controls.quantidade.setValue(null);
     }
-  
     this.itemSelecionado = trf.tarefa + ' - ' + trf.descricao_tarefa;
     this.form.controls.componente.setValue("");
   }
 
-  carregaComponentesTarefa(trf){
-    let setComponentes = new Set();    
-
-    for(let i of trf.itens){
+  carregaComponentesTarefa(trf) {
+    let setComponentes = new Set();
+    for (let i of trf.itens) {
       setComponentes.add(i.componente);
     }
-    
-    for(let i of setComponentes){
+    for (let i of setComponentes) {
       this.listaComponentesTrf.push(i);
     }
   }
 
-  carregaComplexidadesTarefa(trf){
-    let setComplexidades = new Set();    
-
-    for(let i of trf.itens){
+  carregaComplexidadesTarefa(trf) {
+    let setComplexidades = new Set();
+    for (let i of trf.itens) {
       setComplexidades.add(i.complexidade);
     }
-    
     this.listaComplexidadesTrf.push('Selecione uma Complexidade');
-    for(let i of setComplexidades){
+    for (let i of setComplexidades) {
       this.listaComplexidadesTrf.push(i);
     }
   }
 
-  buscaItemGuia(){
+  buscaItemGuia() {
     let itens = this.tarefaSelecionada.itens;
     let numTarefaSelecionada: string;
-
     //busca pela quantidade dentro do componente informado
-    if(this.possuiComponente(this.tarefaSelecionada) && this.possuiQuantidade(this.tarefaSelecionada)){
-        
-      for(let i of itens){
-
-        if(this.form.controls.componente.value == i.componente){
-          numTarefaSelecionada = i.id_item;  
-
-          if(this.form.controls.quantidade.value <= i.quantidade){
+    if (this.possuiComponente(this.tarefaSelecionada) && this.possuiQuantidade(this.tarefaSelecionada)) {
+      for (let i of itens) {
+        if (this.form.controls.componente.value == i.componente) {
+          numTarefaSelecionada = i.id_item;
+          if (this.form.controls.quantidade.value <= i.quantidade) {
             break;
-          }  
+          }
         }
-      }      
+      }
     }
-
     //busca pelo componente e complexidade
-    if(this.possuiComponente(this.tarefaSelecionada) && !this.possuiQuantidade(this.tarefaSelecionada)){
-      
-      for(let i of itens){
-        if(i.componente   == this.form.controls.componente.value &&
-           i.complexidade == this.form.controls.complexidade.value){
-
-              numTarefaSelecionada = i.id_item;
-           }
-      }
-    }
-
-    //busca pela quantidade
-    if(!this.possuiComponente(this.tarefaSelecionada) && this.possuiQuantidade(this.tarefaSelecionada)){
-      
-      for(let i of itens){        
-        numTarefaSelecionada = i.id_item;  
-        if(this.form.controls.quantidade.value <= i.quantidade){
-          break;
-        }   
-      }
-    }
-
-    //busca pela complexidade
-    if(!this.possuiComponente(this.tarefaSelecionada) && !this.possuiQuantidade(this.tarefaSelecionada)){
-     
-      for(let i of itens){  
-        if(i.complexidade == this.form.controls.complexidade.value){
+    if (this.possuiComponente(this.tarefaSelecionada) && !this.possuiQuantidade(this.tarefaSelecionada)) {
+      for (let i of itens) {
+        if (i.componente == this.form.controls.componente.value &&
+          i.complexidade == this.form.controls.complexidade.value) {
           numTarefaSelecionada = i.id_item;
         }
-      }   
-
-    } 
-
+      }
+    }
+    //busca pela quantidade
+    if (!this.possuiComponente(this.tarefaSelecionada) && this.possuiQuantidade(this.tarefaSelecionada)) {
+      for (let i of itens) {
+        numTarefaSelecionada = i.id_item;
+        if (this.form.controls.quantidade.value <= i.quantidade) {
+          break;
+        }
+      }
+    }
+    //busca pela complexidade
+    if (!this.possuiComponente(this.tarefaSelecionada) && !this.possuiQuantidade(this.tarefaSelecionada)) {
+      for (let i of itens) {
+        if (i.complexidade == this.form.controls.complexidade.value) {
+          numTarefaSelecionada = i.id_item;
+        }
+      }
+    }
     return numTarefaSelecionada;
   }
 
-  submit(){  
+  submit() {
     console.log(this.form.getRawValue());
-    if(!this.validaForm(this.form.getRawValue())){
+    if (!this.validaForm(this.form.getRawValue())) {
       this.nt.notify("error", "Todos os campos devem ser preenchidos");
-    }else{     
-
+    } else {
       this.tabAtiva = 'minhas-tarefas';
-
       let aux = this.form.getRawValue();
-      aux.numItemGuia = this.buscaItemGuia();   
-          
-      if(aux.numItemGuia == null){
+      aux.numItemGuia = this.buscaItemGuia();
+      if (aux.numItemGuia == null) {
         this.nt.notify("error", "Houve um erro ao identificar o item do guia, favor contatar ao admistrador do sistema");
       }
-
-      if(this.opFormTrf == "Salvar"){
-
+      if (this.opFormTrf == "Salvar") {
         aux.usu = this.idUsu;
-        aux.of = this.idOf; 
-
+        aux.of = this.idOf;
         this.ts.insereTarefa(aux).subscribe(
-          (data)=>{
-            if(data.status == 200){             
+          (data) => {
+            if (data.status == 200) {
               this.nt.notify("success", "Tarefa " + this.form.controls.numTarefa.value + " salva com sucesso");
               this.buscaTarefas();
               this.form.reset();
             }
           },
-          (error)=>{
+          (error) => {
             this.nt.notify("error", error.error.text);
           }
-        );  
-          
-      }else{ 
+        );
+      } else {
         aux.idTrfOf = this.trfAtual;
         this.ts.atualizaTarefaOf(aux).subscribe(
-          (data)=>{
-            if(data.status == 200){
+          (data) => {
+            if (data.status == 200) {
               this.nt.notify("success", "Tarefa " + this.form.controls.numTarefa.value + " Alterada com sucesso");
               this.buscaTarefas();
               this.form.reset();
@@ -490,21 +412,16 @@ export class TarefasUsuarioComponent implements OnInit {
             }
           }
         );
-        
-      }  
+      }
     }
-
   }
 
-  validaForm(value){
-    
-    if(value.artefato   == null || value.artefato == "")  return false;
-    if(value.disciplina == null)  return false;
-    if(value.historia   == null || value.historia == "")  return false;        
-    if(value.sprint     == null)  return false;
-    if(value.numTarefa  == null || value.numTarefa == "")  return false;
-  
+  validaForm(value) {
+    if (value.artefato == null || value.artefato == "") return false;
+    if (value.disciplina == null) return false;
+    if (value.historia == null || value.historia == "") return false;
+    if (value.sprint == null) return false;
+    if (value.numTarefa == null || value.numTarefa == "") return false;
     return true;
   }
-
 }

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/json'
+    'Content-Type': 'application/json'
   })
 };
 
@@ -14,38 +14,36 @@ const httpOptions = {
   providedIn: 'root'
 })
 
-
 export class OrdemFornecimentoService {
 
+  constructor(private http: HttpClient) { }
 
-  constructor(private http: HttpClient) {}
-
-  getOrdemFornUsu(id){
-    return this.http.get<Array<any>>(environment.api + 'ordens-fornecimento/usuario/'+id);
+  getOrdemFornUsu(id) {
+    return this.http.get<Array<any>>(environment.api + 'ordens-fornecimento/usuario/' + id);
   }
 
-  getOrdemFornecimentoById(id){
-    return this.http.get<OrdemFornecimento>(environment.api + 'ordem-fornecimento/'+id);
+  getOrdemFornecimentoById(id) {
+    return this.http.get<OrdemFornecimento>(environment.api + 'ordem-fornecimento/' + id);
   }
 
-  getOrdemFornecimento(){
+  getOrdemFornecimento() {
     return this.http.get<Array<OrdemFornecimento>>(environment.api + 'ordens-fornecimento');
   }
 
-  enviaSit(value): Observable<any>{   
-    return this.http.post<any>(environment.api + 'ordem-fornecimento/usuario-situacao', value, {headers: httpOptions.headers, observe: 'response'});
+  enviaSit(value): Observable<any> {
+    return this.http.post<any>(environment.api + 'ordem-fornecimento/usuario-situacao', value, { headers: httpOptions.headers, observe: 'response' });
   }
 
-  getUsuariosOf(id: number){
-    return this.http.get<Array<number>>(environment.api + 'ordem-fornecimento/' + id.toString() + "/usuarios", {observe: 'response'});
+  getUsuariosOf(id: number) {
+    return this.http.get<Array<number>>(environment.api + 'ordem-fornecimento/' + id.toString() + "/usuarios", { observe: 'response' });
   }
 
-  getSituacaoOf(id: number){
-    return this.http.get<number>(environment.api + 'ordem-fornecimento/' + id.toString() + "/situacao", {observe: 'response'});
+  getSituacaoOf(id: number) {
+    return this.http.get<number>(environment.api + 'ordem-fornecimento/' + id.toString() + "/situacao", { observe: 'response' });
   }
 
-  getValorTarefasOf(idUsu, idOf){
-    return this.http.get<Array<any>>(environment.api + 'usuario/'+idUsu+'/ordem-forn/'+idOf+'/valor-tarefa');
+  getValorTarefasOf(idUsu, idOf) {
+    return this.http.get<Array<any>>(environment.api + 'usuario/' + idUsu + '/ordem-forn/' + idOf + '/valor-tarefa');
   }
 
 }

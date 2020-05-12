@@ -9,41 +9,27 @@ const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
   })
-
 };
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-
   constructor(private http: HttpClient) { }
-
-  autenticaUsuario(codigoRe, senha, component):any{
+  autenticaUsuario(codigoRe, senha, component): any {
     let objComponent = component;
-
-    codigoRe = codigoRe.value;    
+    codigoRe = codigoRe.value;
     senha = CryptoJS.SHA256(senha.value).toString();
-
-    let parametros = {codigoRe: codigoRe, senha: senha};
-
+    let parametros = { codigoRe: codigoRe, senha: senha };
     return this.http.post(environment.api + "validaUsuario", parametros, { headers: httpOptions.headers, observe: 'response' });
-    
-   
   }
 
-  usuarioEstaLogado(){
-    
+  usuarioEstaLogado() {
     let colaborador = sessionStorage.getItem('colaborador');
     return colaborador === null ? false : true;
-
   }
 
-  deslogaUsuario(){
-
+  deslogaUsuario() {
     sessionStorage.removeItem('colaborador');
-
   }
-
-
 }

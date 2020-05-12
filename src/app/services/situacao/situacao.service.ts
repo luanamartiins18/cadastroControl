@@ -10,8 +10,7 @@ export class SituacaoService {
 
   constructor(private http: HttpClient) { }
 
-  getSituacoes(){
+  getSituacoes() {
     return this.http.get<Array<Situacao>>(environment.api + '/situacoes');
-  }  
-  
+  }
 }

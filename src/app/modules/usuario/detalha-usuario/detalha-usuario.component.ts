@@ -13,7 +13,6 @@ export class DetalhaUsuarioComponent implements OnInit {
 
   id: String;
   usuario: Usuario = new Usuario();
-
   colunas = ['nome', 'email', 'cpf', 'celular', 'cargo', 'nascimento', 'codigoRe', 'codigoBB', 'empresa', 'demanda', 'contrato', 'status', 'listaPerfil', 'listaSiglas'];
 
   constructor(
@@ -28,7 +27,6 @@ export class DetalhaUsuarioComponent implements OnInit {
 
   carregaUsuarios() {
     this.id = this.route.snapshot.paramMap.get('id');
-
     this.us.getUsuarioId(this.id).subscribe(
       (usuario) => {
         this.usuario = usuario;
@@ -42,13 +40,10 @@ export class DetalhaUsuarioComponent implements OnInit {
   }
 
   alteraStatus(acao) {
-
     let param = {
       id: this.usuario.id,
       acao: acao
     };
-
-
     this.us.alteraStatus(param).subscribe(
       (data) => {
         if (data.status == 200) {
@@ -65,5 +60,4 @@ export class DetalhaUsuarioComponent implements OnInit {
   listToString(lista: any[]) {
     return lista ? lista.map(obj => obj.descricao).toString() : "";
   }
-
 }

@@ -8,9 +8,9 @@ describe('ListagemGuiaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListagemGuiaComponent ]
+      declarations: [ListagemGuiaComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,97 +1,56 @@
-<div *ngIf = 'this.listaUsuMsg; else carregando'>
-
-    <i [routerLink] = '["/../mensagens"]' class="fa fa-arrow-left ico fa-2x"></i> 
-
-
-    <div class = 'container-fluid mt-3'>
-    
-
-        <div class = 'row'>
-
-            <div class = 'col-sm-4'>
-
-                <div class = 'col-sm-12'>
-
-                    <div class = 'font-weight-bold'>Título</div>    
-                    <textarea disabled class = 'form-control' disabled rows='1'>{{this.listaUsuMsg[0].titulo}}</textarea>
-        
-                </div>
-
-                <div class = 'col-sm-12 mt-3'>
-
-                    <div class = 'font-weight-bold'>Corpo</div>    
-                    <textarea disabled class = 'form-control' disabled rows='4'>{{this.listaUsuMsg[0].corpo}}</textarea>
-        
-                </div>                
-
-                <div *ngIf = 'this.listaUsuMsg[0].status == 1; else inativo' class = 'col-sm-12 mt-3 d-flex justify-content-center'>
-                    <button (click) = 'this.alteraStatusMsg("desativar");' class = 'custom-button bg-danger form-control text-white'>Inativar Mensagem</button>
-                </div>
-
-                <ng-template #inativo>
-                    <div class = 'col-sm-12 mt-3 d-flex justify-content-center'>
-                        <button (click) = 'this.alteraStatusMsg("ativar");' class = 'custom-button bg-success form-control text-white'>Reativar Mensagem</button>
-                    </div>
-
-                </ng-template>
-
-
-
-
-            </div>
-
-            <div class = 'col-sm-8'>
-                <div class = 'custom-size'>  
-
-                    <table mat-table [dataSource]="this.listaUsuMsg">
-                        
-                        <ng-container matColumnDef="nomeUsu">
-                            <th mat-header-cell *matHeaderCellDef> Usuário </th>
-                            <td mat-cell *matCellDef="let element"> {{element.nomeUsu | titlecase}} </td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="visualizado">
-                            <th mat-header-cell *matHeaderCellDef> Visualizado </th>
-                            <td mat-cell *matCellDef="let element"> 
-                                
-                                <div class = 'custom-icon' [ngClass] = "{'visualizado': this.visualizado(element.dtLeitura)}">
-                                    <i class="fa fa-check" aria-hidden="true"></i>
-                                    <i class="fa fa-check" aria-hidden="true"></i>
-                                    <span *ngIf = 'this.visualizado(element.dtLeitura)'>                                    
-                                        {{element.dtLeitura | date: 'dd/MM/yyyy - HH:mm' : '-0600'}}
-                                    </span>                                
-                                </div>
-
-
-                            </td>
-                        </ng-container>
-                    
-                        <tr mat-header-row *matHeaderRowDef="colunas; sticky: true"></tr> 
-                        <tr class = 'custom-row' mat-row *matRowDef="let row; columns: colunas;" ></tr>                    
-            
-                    </table>
-
-                </div> 
-
-            </div>
-
-
-    
-
+<div *ngIf='this.listaUsuMsg; else carregando'>
+  <i [routerLink]='["/../mensagens"]' class="fa fa-arrow-left ico fa-2x"></i>
+  <div class='container-fluid mt-3'>
+    <div class='row'>
+      <div class='col-sm-4'>
+        <div class='col-sm-12'>
+          <div class='font-weight-bold'>Título</div>
+          <textarea disabled class='form-control' disabled rows='1'>{{this.listaUsuMsg[0].titulo}}</textarea>
         </div>
-
-        
-        
-
-
-
+        <div class='col-sm-12 mt-3'>
+          <div class='font-weight-bold'>Corpo</div>
+          <textarea disabled class='form-control' disabled rows='4'>{{this.listaUsuMsg[0].corpo}}</textarea>
+        </div>
+        <div *ngIf='this.listaUsuMsg[0].status == 1; else inativo' class='col-sm-12 mt-3 d-flex justify-content-center'>
+          <button (click)='this.alteraStatusMsg("desativar");'
+            class='custom-button bg-danger form-control text-white'>Inativar Mensagem</button>
+        </div>
+        <ng-template #inativo>
+          <div class='col-sm-12 mt-3 d-flex justify-content-center'>
+            <button (click)='this.alteraStatusMsg("ativar");'
+              class='custom-button bg-success form-control text-white'>Reativar Mensagem</button>
+          </div>
+        </ng-template>
+      </div>
+      <div class='col-sm-8'>
+        <div class='custom-size'>
+          <table mat-table [dataSource]="this.listaUsuMsg">
+            <ng-container matColumnDef="nomeUsu">
+              <th mat-header-cell *matHeaderCellDef> Usuário </th>
+              <td mat-cell *matCellDef="let element"> {{element.nomeUsu | titlecase}} </td>
+            </ng-container>
+            <ng-container matColumnDef="visualizado">
+              <th mat-header-cell *matHeaderCellDef> Visualizado </th>
+              <td mat-cell *matCellDef="let element">
+                <div class='custom-icon' [ngClass]="{'visualizado': this.visualizado(element.dtLeitura)}">
+                  <i class="fa fa-check" aria-hidden="true"></i>
+                  <i class="fa fa-check" aria-hidden="true"></i>
+                  <span *ngIf='this.visualizado(element.dtLeitura)'>
+                    {{element.dtLeitura | date: 'dd/MM/yyyy - HH:mm' : '-0600'}}
+                  </span>
+                </div>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="colunas; sticky: true"></tr>
+            <tr class='custom-row' mat-row *matRowDef="let row; columns: colunas;"></tr>
+          </table>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
-
 <ng-template #carregando>
-
-    <div class = 'container-fluid d-flex justify-content-center align-items-center mt-5'>
-      <i class="fa fa-refresh fa-spin fa-4x" aria-hidden="true"></i>
-    </div>
-    
+  <div class='container-fluid d-flex justify-content-center align-items-center mt-5'>
+    <i class="fa fa-refresh fa-spin fa-4x" aria-hidden="true"></i>
+  </div>
 </ng-template>

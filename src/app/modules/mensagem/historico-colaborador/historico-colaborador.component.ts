@@ -14,23 +14,19 @@ export class HistoricoColaboradorComponent implements OnInit {
   page = 1;
   pageSize = 3;
 
-
   constructor(private route: ActivatedRoute,
-              private ms: MensagemService) { }
+    private ms: MensagemService) { }
 
   ngOnInit() {
     this.idUsu = this.route.snapshot.paramMap.get("id");
     this.buscaMensagens();
-
   }
 
-  buscaMensagens(){
+  buscaMensagens() {
     this.ms.getHistoricoMsgColaborador(this.idUsu).subscribe(
       (data => {
         this.listaMsg = data;
       })
     );
   }
-  
-
 }

@@ -8,9 +8,9 @@ describe('MensagensColaboradorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MensagensColaboradorComponent ]
+      declarations: [MensagensColaboradorComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -8,9 +8,9 @@ describe('OrcamentoEntregaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OrcamentoEntregaComponent ]
+      declarations: [OrcamentoEntregaComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -32,30 +32,24 @@ export class LoginComponent implements OnInit {
     private nt: NotifierService) { }
 
   ngOnInit() {
-
     this.loginForm = this.formBuilder.group({
       codigoRe: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(80)]],
       senha: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(80)]],
     });
-
     this.senhaForm = this.formBuilder.group({
       senha: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(80)]],
       confSenha: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(80)]],
     });
-
   }
 
   checaLogin() {
-
     if (this.loginForm.invalid) {
       return this.nt.notify("error", "Preencha todos os campos");
     }
-
     this.loginService.autenticaUsuario(this.loginForm.get('codigoRe'), this.loginForm.get('senha'), this).subscribe(
       data => {
         if (data.status == 200) {
           this.usuario = data.body;
-
           if (this.usuario.primeiroAcesso) {
             this.modalService.open(this.modalContent);
           } else {
@@ -72,23 +66,18 @@ export class LoginComponent implements OnInit {
         }
       }
     );
-
   }
 
   private alteraSenha() {
-
     if (this.senhaForm.invalid) {
       this.senhaForm.reset();
       return this.nt.notify("error", "Crie  uma senha com pelo menos 6 caracteres.");
-
     }
     if (this.senhaForm.value.senha != this.senhaForm.value.confSenha) {
       this.senhaForm.reset();
       return this.nt.notify("error", "As senhas não estão iguais.");
     }
-
     this.usuario.senha = CryptoJS.SHA256(this.usuario.senha).toString();
-
     this.usuarioService.alteraSenha(this.usuario).subscribe((data) => {
       if (data.status == 200) {
         this.nt.notify("success", "Senha criada com sucesso!");
@@ -108,7 +97,6 @@ export class LoginComponent implements OnInit {
       }
     });
   }
-
 
   private loginSucess() {
     sessionStorage.setItem('colaborador', this.loginForm.get('codigoRe').value);

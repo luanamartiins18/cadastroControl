@@ -1,4 +1,4 @@
 export interface ContratoInterface {
-    id: number;
-    descricao: string;
+  id: number;
+  descricao: string;
 }

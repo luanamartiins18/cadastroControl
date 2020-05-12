@@ -1,310 +1,271 @@
-<div class = 'container mt-4'>
-   
-        <mat-card class = 'mat-elevation-z8'>
-            <mat-card-title>
-                Nova Tarefa   
-            </mat-card-title>
-            <hr>
-            <mat-card-content> 
-                
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="tarefa-tab" data-toggle="tab" href="#tarefa" role="tab" aria-controls="tarefa" aria-selected="true">
-                            Dados da Tarefa
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="itens-tab" data-toggle="tab" href="#itens" role="tab" aria-controls="itens" aria-selected="false">
-                            Itens da Tarefa
-                        </a>
-                    </li>            
-                </ul>
-            
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="tarefa" role="tabpanel" aria-labelledby="tarefa-tab">
-                        <form [formGroup] = 'form'> 
-                            <div class = 'container pt-3 px-4 pb-3'>
-                                <div class = 'row'>
-                
-                                    <div class = 'col-sm-6'>
-                                        <div class = 'container'>
-                                            <div class = 'row'>
-                                                <div class = 'col-sm-2'>
-                                                    <span class = 'form-label'>
-                                                        Disciplina
-                                                    </span>
-                                                </div>
-                                                <div class = 'col-sm-10'>
-                                                    <select (change) = 'filtraAtividadePorDisciplina($event);' formControlName = 'disciplina' class = 'form-control form-control-sm'>
-                                                        <option *ngFor = 'let i of this.disciplinas; let ind = index;' [value]="i.id" >
-                                                            {{i.id + ' - ' + i.descricao}}
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class = 'row mt-2'>
-                                                <div class = 'col-sm-2'>
-                                                    <span class = 'form-label'>
-                                                        Atividade                                                  
-                                                    </span>
-                                                </div>
-                                                <div class = 'col-sm-10'>
-                                                    <ng-select [items]="this.atividades"
-                                                        bindLabel="atividade"
-                                                        bindValue="atividade"
-                                                        [(ngModel)]="atividadeSelecionada"
-                                                        addTag = 'true'
-                                                        formControlName = 'atividade'
-                                                        (change) = 'this.verificaAtividade($event)'>
-                                                    </ng-select>
-                                                    <span *ngIf = 'this.novaAtividade' class = 'small-text text-warning'>
-                                                        Uma nova atividade será criada 
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                
-                                    <div class = 'col-sm-6'>
-                                        
-                                        <div class = 'container'>
-                                            <div class = 'row'>
-                                                <div class = 'col-sm-2'>
-                                                    <span class = 'form-label'>
-                                                        Descrição
-                                                    </span>
-                                                </div>
-                                                <div class = 'col-sm-10'>
-                                                    <textarea formControlName = 'descTarefa' class = 'form-control form-control-sm'></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                
-                                    </div>
-                
-                                </div>
-                
-                                <div class = 'row mt-2'>
-                                    <div class = 'col-sm-6'>
-                                        <div class = 'container'>
-                                            <div class = 'row'>
-                                                <div class = 'col-sm-2'>
-                                                    <span class = 'form-label'>
-                                                        Plataforma
-                                                    </span>
-                                                </div>
-                                                <div class = 'col-sm-10'>
-                                                    <input formControlName = 'plataforma' type="text" class = 'form-control form-control-sm'/>
-                                                </div>
-                
-                                            </div>
-                                        </div>
-                
-                                    </div>
-                                    
-                                    <div class = 'col-sm-6'>
-                                    </div>
-                
-                                </div>
-                
-                            </div>
-                        </form>
+<div class='container mt-4'>
+  <mat-card class='mat-elevation-z8'>
+    <mat-card-title>
+      Nova Tarefa
+    </mat-card-title>
+    <hr>
+    <mat-card-content>
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="tarefa-tab" data-toggle="tab" href="#tarefa" role="tab" aria-controls="tarefa"
+            aria-selected="true">
+            Dados da Tarefa
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="itens-tab" data-toggle="tab" href="#itens" role="tab" aria-controls="itens"
+            aria-selected="false">
+            Itens da Tarefa
+          </a>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="tarefa" role="tabpanel" aria-labelledby="tarefa-tab">
+          <form [formGroup]='form'>
+            <div class='container pt-3 px-4 pb-3'>
+              <div class='row'>
+
+                <div class='col-sm-6'>
+                  <div class='container'>
+                    <div class='row'>
+                      <div class='col-sm-2'>
+                        <span class='form-label'>
+                          Disciplina
+                        </span>
+                      </div>
+                      <div class='col-sm-10'>
+                        <select (change)='filtraAtividadePorDisciplina($event);' formControlName='disciplina'
+                          class='form-control form-control-sm'>
+                          <option *ngFor='let i of this.disciplinas; let ind = index;' [value]="i.id">
+                            {{i.id + ' - ' + i.descricao}}
+                          </option>
+                        </select>
+                      </div>
                     </div>
-                    
-                    <div class="tab-pane fade" id="itens" role="tabpanel" aria-labelledby="itens-tab">
-                        <form [formGroup] = 'formItens'> 
-                            <div class = 'container pt-3 px-4 pb-3'>
-                                <div class = 'row'>
-                
-                                    <div class = 'col-sm-6'>
-                                        <div class = 'container'>
-                                            <!-- Complexidade -->
-                                            <div class = 'row'>
-                                                <div class = 'col-sm-3'>
-                                                    <span class = 'form-label'>
-                                                        Complexidade
-                                                    </span>
-                                                </div>
-                                                <div class = 'col-sm-9'>
-                                                    <select formControlName = 'complexidade' class = 'form-control form-control-sm'>
-                                                        <option *ngFor = 'let i of this.complexidades' [value]="i.id">
-                                                            {{i.descricao}}
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <!-- Componente -->
-                                            <div class = 'row mt-2'>
-                                                <div class = 'col-sm-3'>
-                                                    <span class = 'form-label'>
-                                                        Componente
-                                                    </span>
-                                                </div>
-                                                <div class = 'col-sm-9'>
-                                                    <input formControlName = 'componente' type="text" class = 'form-control form-control-sm' />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- descrição da complexidade -->
-                                    <div class = 'col-sm-6'>
-                                        
-                                        <div class = 'container'>
-                                            <div class = 'row'>
-                                                <div class = 'col-sm-3'>
-                                                    <span class = 'form-label'>
-                                                        Descrição
-                                                    </span>
-                                                </div>
-                                                <div class = 'col-sm-9'>
-                                                    <textarea formControlName = 'desc_complex' class = 'form-control form-control-sm'></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                
-                                    </div>
-                
-                                </div>
-                
-                                <div class = 'row mt-2'>
-                                    <!-- Valor-->
-                                    <div class = 'col-sm-6'>
-                                        <div class = 'container'>
-                                            <div class = 'row'>
-                                                <div class = 'col-sm-3'>
-                                                    <span class = 'form-label'>
-                                                        Valor
-                                                    </span>
-                                                </div>
-                                                <div class = 'col-sm-9'>
-                                                    <input mask = '99999' formControlName = 'valor' type="text" class = 'form-control form-control-sm'/>
-                                                </div>
-                
-                                            </div>
-                                        </div>
-                
-                                    </div>
-                                    <!-- Quantidade -->
-                                    <div class = 'col-sm-6'>
-                                        <div class = 'container'>
-                                            <div class = 'row'>
-                                                <div class = 'col-sm-3'>
-                                                    <span class = 'form-label'>
-                                                        Quantidade
-                                                    </span>
-                                                </div>
-                                                <div class = 'col-sm-9'>
-                                                    <input mask = '99999' formControlName = 'quantidade' type="text" class = 'form-control form-control-sm'/>
-                                                </div>
-                
-                                            </div>
-                                        </div>
-                
-                                    </div>
-                                </div>    
-                                <!-- Unidade de Medida -->
-                                <div class = 'row mt-2'>                            
-                                    
-                                    <div class = 'col-sm-6'>
-                                        <div class = 'container'>
-                                            <div class = 'row'>
-                                                <div class = 'col-sm-3'>
-                                                    <span class = 'form-label'>
-                                                        Unidade de Medida
-                                                    </span>
-                                                </div>
-                                                <div class = 'col-sm-9'>
-                                                    <select formControlName = 'uni_medida' class = 'form-control form-control-sm'>
-                                                        <option *ngFor = 'let i of this.uniMedidas' [value]="i.id">{{i.descricao}}</option>
-                                                    </select>
-                                                </div>
-                                            </div>                                    
-                                        </div>
-                                    </div>  
-                                    <div class = 'col-sm-6'></div>
-
-                                </div>    
-
-                                <div class = 'row d-flex justify-content-center'>                                    
-                                    <div class = 'col-sm-3'>
-                                        <input (click) = 'this.adicionaItens();' type="text" type = 'submit' class = 'form-control bg-primary text-white' value = 'Adicionar'/>
-
-                                    </div>                                    
-                                </div>
-
-                                <div class = 'row mt-3'>
-                                    <div class = 'col-sm-12'>
-                                        <table *ngIf = 'this.form.controls.itens.length > 0; else listaItensVazia' class="table">
-                                            <thead class="thead-gray">
-                                                <tr>
-                                                    <th class = 'font-weight-normal' scope="col">Complexidade</th>
-                                                    <th class = 'font-weight-normal' scope="col">Componente</th>
-                                                    <th class = 'font-weight-normal' scope="col">Valor</th>
-                                                    <th class = 'font-weight-normal' scope="col">Unidade de Medida</th>
-                                                    <th class = 'font-weight-normal' scope="col">Descrição</th>
-                                                    <th class = 'font-weight-normal' scope="col">Quantidade</th>
-                                                    <th class = 'font-weight-normal' scope="col">Ação</th>
-                                              </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr *ngFor = 'let i of this.form.value.itens; let ind = index;'>
-                                                    <td>
-                                                        {{this.converteIdLabel(this.complexidades, i.complexidade)}}
-                                                    </td>
-    
-                                                    <td>
-                                                        {{i.componente == "" ? ' N/A ' : i.componente}}
-                                                    </td>
-    
-                                                    <td>
-                                                        {{i.valor}}
-                                                    </td>
-    
-                                                    <td>
-                                                        {{this.converteIdLabel(this.uniMedidas, i.uni_medida)}}
-                                                    </td>
-    
-                                                    <td>
-                                                        {{i.desc_complex}}
-                                                    </td>
-    
-                                                    <td>
-                                                        {{i.quantidade == -1 ? ' N/A ' : i.quantidade}}
-                                                    </td>
-    
-                                                    <td class = 'd-flex justify-content-center'>
-                                                        <i (click) = 'this.form.controls.itens.removeAt(ind);' class="cursor-pointer text-danger fa-2x fa fa-times" aria-hidden="true"></i>
-                                                    </td>
-                                                </tr>                                    
-                                            </tbody>
-                                        </table>  
-                                        <ng-template #listaItensVazia>
-                                            <div class="alert alert-warning" role="alert">
-                                                Essa tarefa não possui nenhum item ainda
-                                            </div>
-                                        </ng-template>
-
-                                    </div>                                   
-                                </div>
-                            </div>
-                        </form>
-                    </div>             
+                    <div class='row mt-2'>
+                      <div class='col-sm-2'>
+                        <span class='form-label'>
+                          Atividade
+                        </span>
+                      </div>
+                      <div class='col-sm-10'>
+                        <ng-select [items]="this.atividades" bindLabel="atividade" bindValue="atividade"
+                          [(ngModel)]="atividadeSelecionada" addTag='true' formControlName='atividade'
+                          (change)='this.verificaAtividade($event)'>
+                        </ng-select>
+                        <span *ngIf='this.novaAtividade' class='small-text text-warning'>
+                          Uma nova atividade será criada
+                        </span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-
-            </mat-card-content>
-
-            <mat-card-footer>
-                <div class = 'container pb-3'>
-                    <div class = 'row d-flex justify-content-center'>                        
-                        <div class = 'col-sm-3'>
-                            <input (click) = 'this.submit();' type="submit" class = 'form-control bg-success text-white' value = 'Enviar'/>
-                        </div>                        
+                <div class='col-sm-6'>
+                  <div class='container'>
+                    <div class='row'>
+                      <div class='col-sm-2'>
+                        <span class='form-label'>
+                          Descrição
+                        </span>
+                      </div>
+                      <div class='col-sm-10'>
+                        <textarea formControlName='descTarefa' class='form-control form-control-sm'></textarea>
+                      </div>
                     </div>
-                </div>                   
-               
-            </mat-card-footer>
-
-        </mat-card>
-
+                  </div>
+                </div>
+              </div>
+              <div class='row mt-2'>
+                <div class='col-sm-6'>
+                  <div class='container'>
+                    <div class='row'>
+                      <div class='col-sm-2'>
+                        <span class='form-label'>
+                          Plataforma
+                        </span>
+                      </div>
+                      <div class='col-sm-10'>
+                        <input formControlName='plataforma' type="text" class='form-control form-control-sm' />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class='col-sm-6'>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="tab-pane fade" id="itens" role="tabpanel" aria-labelledby="itens-tab">
+          <form [formGroup]='formItens'>
+            <div class='container pt-3 px-4 pb-3'>
+              <div class='row'>
+                <div class='col-sm-6'>
+                  <div class='container'>
+                    <!-- Complexidade -->
+                    <div class='row'>
+                      <div class='col-sm-3'>
+                        <span class='form-label'>
+                          Complexidade
+                        </span>
+                      </div>
+                      <div class='col-sm-9'>
+                        <select formControlName='complexidade' class='form-control form-control-sm'>
+                          <option *ngFor='let i of this.complexidades' [value]="i.id">
+                            {{i.descricao}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <!-- Componente -->
+                    <div class='row mt-2'>
+                      <div class='col-sm-3'>
+                        <span class='form-label'>
+                          Componente
+                        </span>
+                      </div>
+                      <div class='col-sm-9'>
+                        <input formControlName='componente' type="text" class='form-control form-control-sm' />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- descrição da complexidade -->
+                <div class='col-sm-6'>
+                  <div class='container'>
+                    <div class='row'>
+                      <div class='col-sm-3'>
+                        <span class='form-label'>
+                          Descrição
+                        </span>
+                      </div>
+                      <div class='col-sm-9'>
+                        <textarea formControlName='desc_complex' class='form-control form-control-sm'></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class='row mt-2'>
+                <!-- Valor-->
+                <div class='col-sm-6'>
+                  <div class='container'>
+                    <div class='row'>
+                      <div class='col-sm-3'>
+                        <span class='form-label'>
+                          Valor
+                        </span>
+                      </div>
+                      <div class='col-sm-9'>
+                        <input mask='99999' formControlName='valor' type="text" class='form-control form-control-sm' />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Quantidade -->
+                <div class='col-sm-6'>
+                  <div class='container'>
+                    <div class='row'>
+                      <div class='col-sm-3'>
+                        <span class='form-label'>
+                          Quantidade
+                        </span>
+                      </div>
+                      <div class='col-sm-9'>
+                        <input mask='99999' formControlName='quantidade' type="text"
+                          class='form-control form-control-sm' />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Unidade de Medida -->
+              <div class='row mt-2'>
+                <div class='col-sm-6'>
+                  <div class='container'>
+                    <div class='row'>
+                      <div class='col-sm-3'>
+                        <span class='form-label'>
+                          Unidade de Medida
+                        </span>
+                      </div>
+                      <div class='col-sm-9'>
+                        <select formControlName='uni_medida' class='form-control form-control-sm'>
+                          <option *ngFor='let i of this.uniMedidas' [value]="i.id">{{i.descricao}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class='col-sm-6'></div>
+              </div>
+              <div class='row d-flex justify-content-center'>
+                <div class='col-sm-3'>
+                  <input (click)='this.adicionaItens();' type="text" type='submit'
+                    class='form-control bg-primary text-white' value='Adicionar' />
+                </div>
+              </div>
+              <div class='row mt-3'>
+                <div class='col-sm-12'>
+                  <table *ngIf='this.form.controls.itens.length > 0; else listaItensVazia' class="table">
+                    <thead class="thead-gray">
+                      <tr>
+                        <th class='font-weight-normal' scope="col">Complexidade</th>
+                        <th class='font-weight-normal' scope="col">Componente</th>
+                        <th class='font-weight-normal' scope="col">Valor</th>
+                        <th class='font-weight-normal' scope="col">Unidade de Medida</th>
+                        <th class='font-weight-normal' scope="col">Descrição</th>
+                        <th class='font-weight-normal' scope="col">Quantidade</th>
+                        <th class='font-weight-normal' scope="col">Ação</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor='let i of this.form.value.itens; let ind = index;'>
+                        <td>
+                          {{this.converteIdLabel(this.complexidades, i.complexidade)}}
+                        </td>
+                        <td>
+                          {{i.componente == "" ? ' N/A ' : i.componente}}
+                        </td>
+                        <td>
+                          {{i.valor}}
+                        </td>
+                        <td>
+                          {{this.converteIdLabel(this.uniMedidas, i.uni_medida)}}
+                        </td>
+                        <td>
+                          {{i.desc_complex}}
+                        </td>
+                        <td>
+                          {{i.quantidade == -1 ? ' N/A ' : i.quantidade}}
+                        </td>
+                        <td class='d-flex justify-content-center'>
+                          <i (click)='this.form.controls.itens.removeAt(ind);'
+                            class="cursor-pointer text-danger fa-2x fa fa-times" aria-hidden="true"></i>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <ng-template #listaItensVazia>
+                    <div class="alert alert-warning" role="alert">
+                      Essa tarefa não possui nenhum item ainda
+                    </div>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-footer>
+      <div class='container pb-3'>
+        <div class='row d-flex justify-content-center'>
+          <div class='col-sm-3'>
+            <input (click)='this.submit();' type="submit" class='form-control bg-success text-white' value='Enviar' />
+          </div>
+        </div>
+      </div>
+    </mat-card-footer>
+  </mat-card>
 </div>
-

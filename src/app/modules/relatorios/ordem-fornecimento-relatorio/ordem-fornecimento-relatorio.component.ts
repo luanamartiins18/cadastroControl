@@ -11,18 +11,15 @@ export class OrdemFornecimentoRelatorioComponent implements OnInit {
 
   listaOrdensForn;
   colunas = ['num_of', 'referencia', 'sigla', 'responsavel_t', 'gerente_t', 'usti_bb', 'valor'];
-  
   dataSource = new MatTableDataSource<any>();
 
   constructor(private rs: RelatorioService) { }
 
   ngOnInit() {
-
     this.getOrdensForn();
-
   }
 
-  getOrdensForn(){
+  getOrdensForn() {
     this.rs.getOrdensFornecimentoConcluidas().subscribe(
       data => {
         this.listaOrdensForn = data;

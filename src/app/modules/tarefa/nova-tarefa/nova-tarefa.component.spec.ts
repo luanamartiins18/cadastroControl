@@ -8,9 +8,9 @@ describe('NovaTarefaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NovaTarefaComponent ]
+      declarations: [NovaTarefaComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -69,7 +69,6 @@
               </tr>
             </tbody>
           </table>
-
           <div class='d-flex justify-content-end px-3 py-3'>
             <button (click)='this.getRelatorioSiglaReferenciaXlsx(filtro);' class="btn btn-success">
               <i class="label-btn-cinza fa fa-table mr-2" aria-hidden="true"></i>
@@ -80,9 +79,7 @@
       </mat-card-content>
     </mat-card>
   </div>
-
 </div>
-
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">
@@ -91,7 +88,6 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-
   <div class="modal-body">
     <mat-accordion>
       <mat-expansion-panel *ngFor="let item of relatorioExpandido" (opened)="expandir(item)">
@@ -99,23 +95,22 @@
           <mat-panel-title>
             <table>
               <thead class="thead-light">
-              <tr>
-                <th>OF</th>
-                <th>Ustibb</th>
-                <th>Valor</th>
-                <th>Status</th>
-              </tr>
+                <tr>
+                  <th>OF</th>
+                  <th>Ustibb</th>
+                  <th>Valor</th>
+                  <th>Status</th>
+                </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td class = 'border-right'>{{item.numero_of}}</td>
-                  <td class = 'border-right'>{{item.valor_ustibb}}</td>
-                  <td class = 'border-right'> R$ {{item.valor}}</td>
-                  <td class = 'border-right'>{{item.status_of}}</td>
+                  <td class='border-right'>{{item.numero_of}}</td>
+                  <td class='border-right'>{{item.valor_ustibb}}</td>
+                  <td class='border-right'> R$ {{item.valor}}</td>
+                  <td class='border-right'>{{item.status_of}}</td>
                 </tr>
               </tbody>
             </table>
-
           </mat-panel-title>
           <mat-panel-description>
             Envolvidos {{item.sigla}}
@@ -139,7 +134,6 @@
           </tbody>
         </table>
       </mat-expansion-panel>
-
       <table class="table mt-2 mb-2 mat-elevation-z4 fonte-item-guia mb-3">
         <thead>
           <tr>
@@ -156,10 +150,8 @@
           </tr>
         </tbody>
       </table>
-
     </mat-accordion>
   </div>
-
   <div class="modal-footer">
     <button (click)='this.getRelatorioSiglaReferenciaXlsx(filtroDetalhado);' class="btn btn-success">
       <i class="label-btn-cinza fa fa-table mr-2" aria-hidden="true"></i>
@@ -167,9 +159,6 @@
     </button>
   </div>
 </ng-template>
-
-
-
 <ng-template #carregando>
   <div class='wrapper d-flex justify-content-center align-items-center'>
     <i class="fa fa-refresh fa-spin fa-5x" aria-hidden="true"></i>

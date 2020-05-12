@@ -52,7 +52,7 @@ export class RelatorioService {
   }
 
   getRelatorioSiglaReferenciaXlsx(filtro: RelatorioFiltro) {
-    return this.http.get(environment.api + "relatorio-sigla-referencia/xlsx", { responseType: 'blob',params: this.paramsFilter(filtro) });
+    return this.http.get(environment.api + "relatorio-sigla-referencia/xlsx", { responseType: 'blob', params: this.paramsFilter(filtro) });
   }
   getRelatorioSiglaReferencias() {
 

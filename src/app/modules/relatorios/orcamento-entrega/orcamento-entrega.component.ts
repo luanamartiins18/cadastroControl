@@ -15,13 +15,12 @@ export class OrcamentoEntregaComponent implements OnInit {
   relatorioOrcamento;
   relatorioEntrega;
   numeroOf;
-
   urlRelOrcamentoXlsx;
   urlRelEntregaXlsx;
 
   constructor(private route: ActivatedRoute,
-              private rs: RelatorioService,
-              private ts: TarefaService) { }
+    private rs: RelatorioService,
+    private ts: TarefaService) { }
 
   ngOnInit() {
     this.buscaRelatorioOrcamento();
@@ -29,11 +28,11 @@ export class OrcamentoEntregaComponent implements OnInit {
     this.buscaNumeroOf();
   }
 
-  setaBotao(op){
+  setaBotao(op) {
     this.btnSelecionado = op;
   }
 
-  buscaNumeroOf(){
+  buscaNumeroOf() {
     this.ts.getNumOf(this.idOf).subscribe(
       data => {
         this.numeroOf = data;
@@ -41,7 +40,7 @@ export class OrcamentoEntregaComponent implements OnInit {
     );
   }
 
-  buscaRelatorioEntrega(){
+  buscaRelatorioEntrega() {
     this.rs.getRelatorioEntrega(this.idOf).subscribe(
       data => {
         this.relatorioEntrega = data;
@@ -49,8 +48,8 @@ export class OrcamentoEntregaComponent implements OnInit {
       }
     );
   }
- 
-  buscaRelatorioOrcamento(){
+
+  buscaRelatorioOrcamento() {
     this.rs.getRelatorioOrcamento(this.idOf).subscribe(
       data => {
         this.relatorioOrcamento = data;
@@ -59,13 +58,13 @@ export class OrcamentoEntregaComponent implements OnInit {
     );
   }
 
-  calculaSomaUstiBB(listaUsuOf){
+  calculaSomaUstiBB(listaUsuOf) {
     let soma = 0;
     let somaGeral = 0
-    for(let i of listaUsuOf.listaUsuOf){
+    for (let i of listaUsuOf.listaUsuOf) {
       soma = 0;
-      for(let j of i.listaTarefas){
-        for(let k of j.listaItens){
+      for (let j of i.listaTarefas) {
+        for (let k of j.listaItens) {
           soma += k.vlrUstiBB;
           somaGeral += k.vlrUstiBB;
         }
@@ -75,13 +74,12 @@ export class OrcamentoEntregaComponent implements OnInit {
     listaUsuOf.listaUsuOf.somaGeral = somaGeral;
   }
 
-  getRelatorioOrcamentoXlsx(){
+  getRelatorioOrcamentoXlsx() {
     this.rs.getRelatorioOrcamentoXlsx(this.idOf).subscribe(
       data => {
-        console.log(data);        
+        console.log(data);
         this.urlRelOrcamentoXlsx = window.URL.createObjectURL(data);
         console.log(this.urlRelOrcamentoXlsx);
-
         const url = window.URL.createObjectURL(data);
         const link = document.createElement('a');
         link.href = url;
@@ -91,14 +89,12 @@ export class OrcamentoEntregaComponent implements OnInit {
     );
   }
 
-  
-  getRelatorioEntregaXlsx(){
+  getRelatorioEntregaXlsx() {
     this.rs.getRelatorioEntregaXlsx(this.idOf).subscribe(
       data => {
-        console.log(data);        
+        console.log(data);
         this.urlRelEntregaXlsx = window.URL.createObjectURL(data);
         console.log(this.urlRelEntregaXlsx);
-
         const url = window.URL.createObjectURL(data);
         const link = document.createElement('a');
         link.href = url;
@@ -108,7 +104,7 @@ export class OrcamentoEntregaComponent implements OnInit {
     );
   }
 
-  getRelatorioOrcamentoTxt(){
+  getRelatorioOrcamentoTxt() {
     this.rs.getRelatorioOrcamentoTxt(this.idOf).subscribe(
       data => {
         const url = window.URL.createObjectURL(data);
@@ -119,7 +115,8 @@ export class OrcamentoEntregaComponent implements OnInit {
       }
     );
   }
-  getRelatorioEntregaTxt(){
+
+  getRelatorioEntregaTxt() {
     this.rs.getRelatorioEntregaTxt(this.idOf).subscribe(
       data => {
         const url = window.URL.createObjectURL(data);
@@ -130,9 +127,4 @@ export class OrcamentoEntregaComponent implements OnInit {
       }
     );
   }
-
-  
-
-
-
 }

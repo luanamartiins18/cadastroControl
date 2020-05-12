@@ -8,9 +8,9 @@ describe('RelatorioSiglaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RelatorioSiglaComponent ]
+      declarations: [RelatorioSiglaComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

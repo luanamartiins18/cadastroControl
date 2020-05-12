@@ -15,30 +15,25 @@ export class MensagensColaboradorComponent implements OnInit {
   pageSize = 1;
 
   constructor(private ms: MensagemService,
-              private nt: NotifierService,
-              private modal: NgbActiveModal) { }
+    private nt: NotifierService,
+    private modal: NgbActiveModal) { }
 
   ngOnInit() {
   }
 
-  marcaLida(row){
+  marcaLida(row) {
+    let req = { idMsgUsu: row.idUsuMsg };
+    this.listaMsgUsu.splice(this.page - 1, 1);
 
-   
-    let req = {idMsgUsu: row.idUsuMsg};    
-    this.listaMsgUsu.splice(this.page-1, 1);
-
-    
-       
     this.ms.marcaMsgLida(req).subscribe(
-      (data)=>{
-        if(data.status != 200){
+      (data) => {
+        if (data.status != 200) {
           this.nt.notify("error", "Houve um erro ao gravar as informações, favor contatar o administrador do sistema");
         }
-        if(this.listaMsgUsu.length == 0){
+        if (this.listaMsgUsu.length == 0) {
           this.modal.close();
         }
       }
     );
   }
-
 }

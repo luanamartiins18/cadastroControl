@@ -23,7 +23,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     CommonModule,
     FormsModule,
     RouterModule,
-    ReactiveFormsModule,    
+    ReactiveFormsModule,
     MatTableModule,
     MatDatepickerModule,
     MatFormFieldModule,

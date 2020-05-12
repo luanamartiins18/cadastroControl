@@ -1,45 +1,32 @@
-<div class = 'container-fluid'>
-
-    <div class = 'container border-bottom pt-4 pb-2'>            
-        <h3 class = 'text-muted'>
-            Mensagens Recebidas
-        </h3>        
+<div class='container-fluid'>
+  <div class='container border-bottom pt-4 pb-2'>
+    <h3 class='text-muted'>
+      Mensagens Recebidas
+    </h3>
+  </div>
+  <div class='container'>
+    <div class='mt-4 row mb-4'
+      *ngFor="let i of this.listaMsgUsu | slice: (this.page-1) * this.pageSize : (this.page-1) * this.pageSize + this.pageSize">
+      <div class='col-sm-12'>
+        <h5>
+          {{i.titulo}}
+        </h5>
+      </div>
+      <div class='col-sm-8'>
+        <textarea disabled class='form-control'>{{i.corpo}}</textarea>
+      </div>
+      <div class='col-sm-4'>
+      </div>
+      <div class='col-sm-12 mt-2'>
+        Enviado por: {{i.responsavel | titlecase}}
+      </div>
+      <div class='col-sm-4 mt-2'>
+        <button (click)='this.marcaLida(i);' class='bg-success text-white form-control'>
+          Marcar como lida
+        </button>
+      </div>
     </div>
-
-    <div class = 'container'>
-
-        <div class = 'mt-4 row mb-4' *ngFor="let i of this.listaMsgUsu | slice: (this.page-1) * this.pageSize : (this.page-1) * this.pageSize + this.pageSize">
-       
-            <div class = 'col-sm-12'>
-                <h5>
-                    {{i.titulo}}
-                </h5>                
-            </div>
-
-            <div class = 'col-sm-8'>
-                <textarea disabled class = 'form-control'>{{i.corpo}}</textarea>                                
-            </div>
-
-            <div class = 'col-sm-4'>    
-            </div>  
-            
-            <div class = 'col-sm-12 mt-2'>    
-                Enviado por: {{i.responsavel | titlecase}}
-            </div> 
-
-            <div class = 'col-sm-4 mt-2'>    
-                <button (click) = 'this.marcaLida(i);' class = 'bg-success text-white form-control'>
-                    Marcar como lida
-                </button>
-            </div> 
-
-            
-
-    
-        </div>
-        <ngb-pagination [(page)]="this.page" [pageSize]="this.pageSize" [collectionSize]="this.listaMsgUsu.length"></ngb-pagination>
-
-    </div>
-
-
+    <ngb-pagination [(page)]="this.page" [pageSize]="this.pageSize" [collectionSize]="this.listaMsgUsu.length">
+    </ngb-pagination>
+  </div>
 </div>

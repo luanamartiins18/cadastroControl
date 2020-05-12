@@ -8,9 +8,9 @@ describe('OrdemFornecimentoRelatorioComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OrdemFornecimentoRelatorioComponent ]
+      declarations: [OrdemFornecimentoRelatorioComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

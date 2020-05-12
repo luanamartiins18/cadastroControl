@@ -10,58 +10,48 @@ import { NotifierService } from 'angular-notifier';
 })
 export class DetalhaMensagemComponent implements OnInit {
 
-  
   idMsg: String;
   listaUsuMsg;
-
   colunas = ['nomeUsu', 'visualizado'];
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              private ms: MensagemService,
-              private nt: NotifierService) { }
+    private router: Router,
+    private ms: MensagemService,
+    private nt: NotifierService) { }
 
   ngOnInit() {
     this.carregaMensagens();
   }
 
-  carregaMensagens(){
+  carregaMensagens() {
     this.idMsg = this.route.snapshot.paramMap.get('id');
-    
     this.ms.detalhaMensagem(this.idMsg).subscribe(
-      (listaUsuMsg)=>{
+      (listaUsuMsg) => {
         this.listaUsuMsg = listaUsuMsg;
       }
     );
   }
 
-  visualizado(linha){
-    return typeof(linha) == 'string';
+  visualizado(linha) {
+    return typeof (linha) == 'string';
   }
 
-  alteraStatusMsg(acao){
-   
+  alteraStatusMsg(acao) {
     let param = {
       idMsg: this.listaUsuMsg[0].idMsg,
       acao: acao
     };
 
-
     this.ms.alteraStatusMsg(param).subscribe(
-      (data)=>{
-        if(data.status == 200){
+      (data) => {
+        if (data.status == 200) {
           this.nt.notify("success", "Situação da mensagem alterada com sucesso");
           this.carregaMensagens();
           this.router.navigate([this.router.url]);
-        }else{
+        } else {
           this.nt.notify("error", "Houve um erro ao gravar as informações, favor contatar o administrador do sistema");
         }
       }
     );
-
-
-
   }
-
-
 }

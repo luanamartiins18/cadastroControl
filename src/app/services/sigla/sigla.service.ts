@@ -10,8 +10,7 @@ export class SiglaService {
 
   constructor(private http: HttpClient) { }
 
-  getSiglas(){
+  getSiglas() {
     return this.http.get<Array<Sigla>>(environment.api + "siglas");
   }
-
 }

@@ -1,78 +1,56 @@
-<div *ngIf = 'this.mensagens; else carregando' class = 'pb-2'> 
-    <div class = 'container-fluid mt-3'>
-
-        <ul class="nav nav-tabs">
-    
-            <li class="nav-item">
-                <a [routerLink]="['/../mensagens']" class="nav-link active">
-                    Mensagens Enviadas
-                </a>
-            </li> 
-    
-            <li class="nav-item">
-              <a [routerLink]="['/../nova-mensagem']" class="nav-link">
-                Nova Mensagem
-                </a>
-            </li>   
-        </ul>
-        
-
-        <div *ngIf = 'this.mensagens.length > 0; else semMensagens' class = 'custom-size mat-elevation-z8 '>
-        
-            <table mat-table [dataSource]="this.mensagens">
-                
-                <ng-container matColumnDef="dtExp">
-                    <th mat-header-cell *matHeaderCellDef> Data de Expiração </th>
-                    <td mat-cell *matCellDef="let element"> {{element.dtExpiracao | date: 'dd/MM/yyyy' : '+180'}} </td>
-                </ng-container>
-    
-                <ng-container matColumnDef="tpMsg">
-                    <th mat-header-cell *matHeaderCellDef> Tipo da Mensagem </th>
-                    <td mat-cell *matCellDef="let element"> {{this.trataTipoMsg(element.tpMsg, element.sigla)}} </td>
-                </ng-container>
-
-                <ng-container matColumnDef="titMsg">
-                    <th mat-header-cell *matHeaderCellDef> Título </th>
-                    <td mat-cell *matCellDef="let element"> {{element.titulo}} </td>
-                </ng-container>
-    
-                <ng-container matColumnDef="dtCriacao">
-                    <th mat-header-cell *matHeaderCellDef> Data de Criação </th>
-                    <td mat-cell *matCellDef="let element"> {{element.dtCriacao | date: 'dd/MM/yyyy' : '+180'}} </td>
-                </ng-container>
-                
-                <ng-container matColumnDef="resp">
-                    <th mat-header-cell *matHeaderCellDef> Responsável </th>
-                    <td mat-cell *matCellDef="let element"> {{element.responsavel | titlecase}} </td>
-                </ng-container>
-    
-                <ng-container matColumnDef="status">
-                    <th mat-header-cell *matHeaderCellDef> Status </th>
-                    <td mat-cell *matCellDef="let element"> {{this.converteStatus(element.status)}} </td>
-                </ng-container>
-    
-                <tr mat-header-row *matHeaderRowDef="colunas; sticky: true"></tr> 
-                <tr (click) = 'detalhaMsg(row);' class = 'custom-row' mat-row *matRowDef="let row; columns: colunas;" ></tr>
-                
-                
-                
-    
-            </table>
-        </div>  
-        
-        <ng-template #semMensagens>
-            <div class = 'text-secondary mt-3 ml-4'>
-                Não há mensagens enviadas
-            </div>
-        </ng-template>
-        
+<div *ngIf='this.mensagens; else carregando' class='pb-2'>
+  <div class='container-fluid mt-3'>
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a [routerLink]="['/../mensagens']" class="nav-link active">
+          Mensagens Enviadas
+        </a>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="['/../nova-mensagem']" class="nav-link">
+          Nova Mensagem
+        </a>
+      </li>
+    </ul>
+    <div *ngIf='this.mensagens.length > 0; else semMensagens' class='custom-size mat-elevation-z8 '>
+      <table mat-table [dataSource]="this.mensagens">
+        <ng-container matColumnDef="dtExp">
+          <th mat-header-cell *matHeaderCellDef> Data de Expiração </th>
+          <td mat-cell *matCellDef="let element"> {{element.dtExpiracao | date: 'dd/MM/yyyy' : '+180'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="tpMsg">
+          <th mat-header-cell *matHeaderCellDef> Tipo da Mensagem </th>
+          <td mat-cell *matCellDef="let element"> {{this.trataTipoMsg(element.tpMsg, element.sigla)}} </td>
+        </ng-container>
+        <ng-container matColumnDef="titMsg">
+          <th mat-header-cell *matHeaderCellDef> Título </th>
+          <td mat-cell *matCellDef="let element"> {{element.titulo}} </td>
+        </ng-container>
+        <ng-container matColumnDef="dtCriacao">
+          <th mat-header-cell *matHeaderCellDef> Data de Criação </th>
+          <td mat-cell *matCellDef="let element"> {{element.dtCriacao | date: 'dd/MM/yyyy' : '+180'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="resp">
+          <th mat-header-cell *matHeaderCellDef> Responsável </th>
+          <td mat-cell *matCellDef="let element"> {{element.responsavel | titlecase}} </td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell *matCellDef="let element"> {{this.converteStatus(element.status)}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="colunas; sticky: true"></tr>
+        <tr (click)='detalhaMsg(row);' class='custom-row' mat-row *matRowDef="let row; columns: colunas;"></tr>
+      </table>
     </div>
+    <ng-template #semMensagens>
+      <div class='text-secondary mt-3 ml-4'>
+        Não há mensagens enviadas
+      </div>
+    </ng-template>
+  </div>
 </div>
-
 <ng-template #carregando>
-
-    <div class = 'container-fluid d-flex justify-content-center align-items-center mt-5'>
-      <i class="fa fa-refresh fa-spin fa-4x" aria-hidden="true"></i>
-    </div>
-    
+  <div class='container-fluid d-flex justify-content-center align-items-center mt-5'>
+    <i class="fa fa-refresh fa-spin fa-4x" aria-hidden="true"></i>
+  </div>
 </ng-template>

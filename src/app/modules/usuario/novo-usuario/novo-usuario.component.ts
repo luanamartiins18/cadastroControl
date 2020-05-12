@@ -63,16 +63,16 @@ export class NovoUsuarioComponent implements OnInit {
 
   private montaFormBuilder() {
     this.form = this.formBuilder.group({
-      nome: [this.usuario.nome,[Validators.required]],
-      cpf: [this.usuario.cpf,[Validators.required]],
-      email: [this.usuario.email,[Validators.required]],
-      celular: [this.usuario.celular,[Validators.required]],
-      nascimento: [this.usuario.nascimento,[Validators.required]],
-      listaPerfil: [this.usuario.listaPerfil,[Validators.required]],
-      cargo: [this.usuario.cargo,[Validators.required]],
-      listaSiglas: [this.usuario.listaSiglas,[Validators.required]],
-      codigoRe: [this.usuario.codigoRe,[Validators.required]],
-      codigoBB: [this.usuario.codigoBB,[Validators.required]],
+      nome: [this.usuario.nome, [Validators.required]],
+      cpf: [this.usuario.cpf, [Validators.required]],
+      email: [this.usuario.email, [Validators.required]],
+      celular: [this.usuario.celular, [Validators.required]],
+      nascimento: [this.usuario.nascimento, [Validators.required]],
+      listaPerfil: [this.usuario.listaPerfil, [Validators.required]],
+      cargo: [this.usuario.cargo, [Validators.required]],
+      listaSiglas: [this.usuario.listaSiglas, [Validators.required]],
+      codigoRe: [this.usuario.codigoRe, [Validators.required]],
+      codigoBB: [this.usuario.codigoBB, [Validators.required]],
       demanda: [this.usuario.demanda],
     });
   }
@@ -110,14 +110,13 @@ export class NovoUsuarioComponent implements OnInit {
     if (this.form.invalid) {
       this.notifier.notify("error", "Todos os campos devem ser preenchidos!");
     } else {
-            
+
       if (this.id) {
-        this.atualizaUsuario();      
+        this.atualizaUsuario();
       } else {
         this.insereUsuario();
       }
     }
-
   }
 
   private insereUsuario() {
@@ -135,7 +134,7 @@ export class NovoUsuarioComponent implements OnInit {
           this.notifier.notify("error", element.defaultMessage);
         });
       }
-      else if(err.error.message){
+      else if (err.error.message) {
         this.notifier.notify("error", err.error.message);
       }
       else {
@@ -159,7 +158,7 @@ export class NovoUsuarioComponent implements OnInit {
           this.notifier.notify("error", element.defaultMessage);
         });
       }
-      else if(err.error.message){
+      else if (err.error.message) {
         this.notifier.notify("error", err.error.message);
       }
       else {

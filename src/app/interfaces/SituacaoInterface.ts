@@ -1,4 +1,4 @@
 export interface SituacaoInterface {
-    id: number;
-    descricao: string;
+  id: number;
+  descricao: string;
 }

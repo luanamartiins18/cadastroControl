@@ -10,7 +10,7 @@ export class CargoService {
 
   constructor(private http: HttpClient) { }
 
-  getCargo(){
+  getCargo() {
     return this.http.get<Array<Cargo>>(environment.api + "cargo");
   }
 }

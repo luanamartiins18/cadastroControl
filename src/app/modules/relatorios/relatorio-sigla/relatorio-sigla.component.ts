@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
 })
 export class RelatorioSiglaComponent implements OnInit {
   panelOpenState = false;
-
   @ViewChild("content", { static: true }) modalContent: TemplateRef<any>;
   relatorioAux = new Array;
   relatorioReduzido = new Array;
@@ -20,7 +19,7 @@ export class RelatorioSiglaComponent implements OnInit {
   relatorioEnvolvidos = new Array;
   relatorioSigla = new Array;
   colunasReduzido = ['sigla', 'qtd', 'valor_ustibb', 'valor', 'referencia'];
-  colunasExpandido = ['numero_of', 'valor_ustibb', 'valor','status_of'];
+  colunasExpandido = ['numero_of', 'valor_ustibb', 'valor', 'status_of'];
   colunasEnvolvidos = ['colaborador', 'valor_ustibb', 'valor'];
   urlTotalXlsx;
   filtro: RelatorioFiltro = new RelatorioFiltro();
@@ -37,7 +36,6 @@ export class RelatorioSiglaComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router,
     private fb: FormBuilder) { }
-
 
   ngOnInit() {
     this.buscaRelatorio();
@@ -93,7 +91,7 @@ export class RelatorioSiglaComponent implements OnInit {
     this.valor_ustibbDetalhada = 0;
     this.valorDetalhada = 0;
     this.relatorioExpandido.forEach((obj) => {
-      this.qtdDetalhada ++;
+      this.qtdDetalhada++;
       this.valor_ustibbDetalhada += obj.valor_ustibb
       this.valorDetalhada += obj.valor;
     })
@@ -115,7 +113,7 @@ export class RelatorioSiglaComponent implements OnInit {
     this.filtro.referencia = null;
   }
 
-  getRelatorioSiglaReferenciaXlsx(filtro:RelatorioFiltro) {
+  getRelatorioSiglaReferenciaXlsx(filtro: RelatorioFiltro) {
     this.rs.getRelatorioSiglaReferenciaXlsx(filtro).subscribe(
       data => {
         console.log(data);
@@ -131,5 +129,4 @@ export class RelatorioSiglaComponent implements OnInit {
       }
     );
   }
-
 }

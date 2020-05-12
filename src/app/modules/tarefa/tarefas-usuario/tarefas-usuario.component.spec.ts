@@ -8,9 +8,9 @@ describe('TarefasUsuarioComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TarefasUsuarioComponent ]
+      declarations: [TarefasUsuarioComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

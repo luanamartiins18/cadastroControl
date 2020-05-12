@@ -9,56 +9,42 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ColaboradorOfComponent implements OnInit {
 
-  colunas = ['numOf', 'sigla', 'situacaoAlm', 'tema', 'responsavelT', 'gerenteT', 'dtAbertura', 'dtPrevisao','dtEncaminhamento', 'execucao'];
+  colunas = ['numOf', 'sigla', 'situacaoAlm', 'tema', 'responsavelT', 'gerenteT', 'dtAbertura', 'dtPrevisao', 'dtEncaminhamento', 'execucao'];
   listaOf: Array<any>;
   idUsu;
 
   constructor(private ofs: OrdemFornecimentoService,
-              private route: ActivatedRoute) { }
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
-
     this.idUsu = this.route.snapshot.paramMap.get('id');
-
     this.ofs.getOrdemFornUsu(this.idUsu).subscribe(
-      (data)=>{  
+      (data) => {
         this.listaOf = data;
-
-        for(let i of this.listaOf){
+        for (let i of this.listaOf) {
           this.ofs.getValorTarefasOf(this.idUsu, i.idOf).subscribe(
-            (vlr)=>{
-             
+            (vlr) => {
               i.valorExecutado = vlr['valorExecutado'];
-              i.valorPrevisto  = vlr['valorPlanejado'];
-              i.perExecutado   = (vlr['valorExecutado'] * 100) / vlr['valorPlanejado'];
-
+              i.valorPrevisto = vlr['valorPlanejado'];
+              i.perExecutado = (vlr['valorExecutado'] * 100) / vlr['valorPlanejado'];
               i.valorExecutadoTotal = vlr['valorExecutadoTotal'];
-              i.valorPrevistoTotal  = vlr['valorPlanejadoTotal'];
-              i.perExecutadoTotal   = (vlr['valorExecutadoTotal'] * 100) / vlr['valorPlanejadoTotal'];
+              i.valorPrevistoTotal = vlr['valorPlanejadoTotal'];
+              i.perExecutadoTotal = (vlr['valorExecutadoTotal'] * 100) / vlr['valorPlanejadoTotal'];
             },
-            (error)=>{}
+            (error) => { }
           );
         }
-
       }
-
     );
-
-
-
   }
 
-  primeiroNome(nome: string){
+  primeiroNome(nome: string) {
     let aux = nome.split(" ");
-    let res = aux[0] + " " +  aux[2];    
+    let res = aux[0] + " " + aux[2];
     return res;
   }
 
-  getValor(idOf){
+  getValor(idOf) {
     console.log(idOf);
   }
-  
-
-
-
 }

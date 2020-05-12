@@ -10,7 +10,7 @@ export class PerfilService {
 
   constructor(private http: HttpClient) { }
 
-  getPerfil(){
+  getPerfil() {
     return this.http.get<Array<Perfil>>(environment.api + "perfil");
   }
 }

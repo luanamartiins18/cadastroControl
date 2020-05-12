@@ -14,8 +14,7 @@ export class ContainerRelatoriosComponent implements OnInit {
   ngOnInit() {
   }
 
-  selecionaOp(value){
+  selecionaOp(value) {
     this.selectedOp = value;
   }
-
 }
