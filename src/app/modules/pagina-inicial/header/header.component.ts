@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
 import { LoginService } from '../../usuario/login.service';
 import { Router } from '@angular/router';
-import { Usuario } from 'src/app/models/usuario/usuario.model';
+import { Usuario } from '../../../models/usuario/usuario.model';
 
 @Component({
   selector: 'header',
