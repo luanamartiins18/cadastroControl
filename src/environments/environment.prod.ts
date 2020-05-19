@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api: 'https://ger-demanda.herokuapp.com/'
+  api: 'http://127.0.0.1:8081/'
 };
