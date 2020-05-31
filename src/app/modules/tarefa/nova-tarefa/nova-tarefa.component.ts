@@ -73,15 +73,15 @@ export class NovaTarefaComponent implements OnInit {
       disciplina: new FormControl('', Validators.required),
       atividade: new FormControl('', Validators.required),
       plataforma: new FormControl(''),
-      descTarefa: new FormControl('', Validators.required),
+      descricao_tarefa: new FormControl('', Validators.required),
       itens: new FormArray([], Validators.required)
     });
     this.formItens = new FormGroup({
-      complexidade: new FormControl('', Validators.required),
+      id_complex: new FormControl('', Validators.required),
       componente: new FormControl(''),
       valor: new FormControl('', Validators.required),
       uni_medida: new FormControl('', Validators.required),
-      desc_complex: new FormControl('', Validators.required),
+      descricao_complex: new FormControl('', Validators.required),
       quantidade: new FormControl('')
     });
   }
@@ -92,7 +92,7 @@ export class NovaTarefaComponent implements OnInit {
       return false;
     }
     for (let i of this.form.value.itens) {
-      if (i.complexidade == this.formItens.value.complexidade) {
+      if (i.id_complex == this.formItens.value.id_complex) {
         this.nt.notify("error", "Já existe um item com essa complexidade cadastrado");
         return false;
       }
@@ -106,11 +106,11 @@ export class NovaTarefaComponent implements OnInit {
       return false;
     }
     let formItensAux = new FormGroup({
-      complexidade: new FormControl(),
+      id_complex: new FormControl(),
       componente: new FormControl(),
       valor: new FormControl(),
       uni_medida: new FormControl(),
-      desc_complex: new FormControl(),
+      descricao_complex: new FormControl(),
       quantidade: new FormControl()
     });
     formItensAux.patchValue(this.formItens.value);
@@ -121,11 +121,11 @@ export class NovaTarefaComponent implements OnInit {
       formItensAux.controls.quantidade.setValue(-1);
     }
     this.formItens = new FormGroup({
-      complexidade: new FormControl('', Validators.required),
+      id_complex: new FormControl('', Validators.required),
       componente: new FormControl(''),
       valor: new FormControl('', Validators.required),
       uni_medida: new FormControl('', Validators.required),
-      desc_complex: new FormControl('', Validators.required),
+      descricao_complex: new FormControl('', Validators.required),
       quantidade: new FormControl('')
     });
     (this.form.controls.itens as FormArray).push(formItensAux);

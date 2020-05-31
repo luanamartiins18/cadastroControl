@@ -69,7 +69,7 @@
                         </span>
                       </div>
                       <div class='col-sm-10'>
-                        <textarea formControlName='descTarefa' class='form-control form-control-sm'></textarea>
+                        <textarea formControlName='descricao_tarefa' class='form-control form-control-sm'></textarea>
                       </div>
                     </div>
                   </div>
@@ -110,7 +110,7 @@
                         </span>
                       </div>
                       <div class='col-sm-9'>
-                        <select formControlName='complexidade' class='form-control form-control-sm'>
+                        <select formControlName='id_complex' class='form-control form-control-sm'>
                           <option *ngFor='let i of this.complexidades' [value]="i.id">
                             {{i.descricao}}
                           </option>
@@ -140,7 +140,7 @@
                         </span>
                       </div>
                       <div class='col-sm-9'>
-                        <textarea formControlName='desc_complex' class='form-control form-control-sm'></textarea>
+                        <textarea formControlName='descricao_complex' class='form-control form-control-sm'></textarea>
                       </div>
                     </div>
                   </div>
@@ -222,7 +222,7 @@
                     <tbody>
                       <tr *ngFor='let i of this.form.value.itens; let ind = index;'>
                         <td>
-                          {{this.converteIdLabel(this.complexidades, i.complexidade)}}
+                          {{this.converteIdLabel(this.complexidades, i.id_complex)}}
                         </td>
                         <td>
                           {{i.componente == "" ? ' N/A ' : i.componente}}
@@ -234,7 +234,7 @@
                           {{this.converteIdLabel(this.uniMedidas, i.uni_medida)}}
                         </td>
                         <td>
-                          {{i.desc_complex}}
+                          {{i.descricao_complex}}
                         </td>
                         <td>
                           {{i.quantidade == -1 ? ' N/A ' : i.quantidade}}

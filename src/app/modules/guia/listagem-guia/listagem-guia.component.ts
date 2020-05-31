@@ -218,7 +218,7 @@ export class ListagemGuiaComponent implements OnInit {
   excluiItem() {
     this.guia.deletaItemGuia(this.itemSelecionadoApagar).subscribe(
       data => {
-        if (data.status == 200) {
+        if (data.status == 204 ) {
           this.nt.notify("success", "Item excluído com sucesso");
           this.inicializaPagina();
         } else {
