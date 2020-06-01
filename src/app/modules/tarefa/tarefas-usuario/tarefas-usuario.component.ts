@@ -24,6 +24,10 @@ export class TarefasUsuarioComponent implements OnInit {
   listaItensGuiaAux: Array<any>;
   listaTarefas: Array<any>;
   perfil: string;
+  perfilAux;
+  perfilAlta = 1;
+  perfilBaixa = 2;
+  perfilBaixaAlta = 3;
   form: FormGroup;
   valorPlanejado: number;
   valorExecutado: number;
@@ -59,7 +63,7 @@ export class TarefasUsuarioComponent implements OnInit {
       sprint: new FormControl(),
       observacao: new FormControl(),
       artefato: new FormControl(),
-      perfil: new FormControl(),
+      perfil: new FormControl(this.perfilAux),
       disciplina: new FormControl(),
       item: new FormControl(),
       quantidade: new FormControl(),
@@ -110,7 +114,7 @@ export class TarefasUsuarioComponent implements OnInit {
   resetForm() {
     this.form.reset();
     this.opFormTrf = "Salvar"
-    this.form.controls.perfil.setValue(0);
+    this.form.controls.perfil.setValue(this.perfilAux);
   }
 
   editaTarefa(tarefa) {
@@ -123,9 +127,14 @@ export class TarefasUsuarioComponent implements OnInit {
     this.form.controls.numTarefa.setValue(tarefa.numTarefa);
     this.form.controls.quantidade.setValue(tarefa.quantidade);
     if (tarefa.perfil == "Alta") {
-      this.form.controls.perfil.setValue(2);
-    } else {
-      this.form.controls.perfil.setValue(1);
+      this.perfilAux = this.perfilAlta;
+      this.form.controls.perfil.setValue(this.perfilAlta);
+    } else if (tarefa.perfil == "Baixa"){
+      this.perfilAux = this.perfilBaixa;
+      this.form.controls.perfil.setValue(this.perfilBaixa);
+    } else if (tarefa.perfil == "Baixa/Alta"){
+    this.perfilAux = this.perfilBaixaAlta;
+    this.form.controls.perfil.setValue(this.perfilBaixaAlta);
     }
     this.filtraDisciplinas();
     this.form.controls.disciplina.setValue(tarefa.disciplina);
@@ -221,12 +230,19 @@ export class TarefasUsuarioComponent implements OnInit {
         this.us.getPerfilUsuario(this.idUsu).subscribe(
           (data) => {
             if (data['descricao'] == 'Alta') {
-              this.form.controls.perfil.setValue(2);
+              this.form.controls.perfil.setValue(this.perfilAlta);
               this.form.controls.perfil.disable();
+              this.perfilAux = this.perfilAlta;
 
             } else if (data['descricao'] == 'Baixa') {
-              this.form.controls.perfil.setValue(1);
+              this.form.controls.perfil.setValue(this.perfilBaixa);
               this.form.controls.perfil.disable();
+              this.perfilAux = this.perfilBaixa;
+            }
+            else if (data['descricao'] == 'Baixa/Alta') {
+              this.form.controls.perfil.setValue(this.perfilBaixaAlta);
+              this.form.controls.perfil.disable();
+              this.perfilAux = this.perfilBaixaAlta;
             }
           }
         );
@@ -272,18 +288,23 @@ export class TarefasUsuarioComponent implements OnInit {
       descricao: "Selecione uma Disciplina"
     });
     for (let i of this.listaDisciplinasAux) {
-      if (this.form.controls.perfil.value == 1) {
+      if (this.form.controls.perfil.value == this.perfilBaixa) {
         if (i.perfil == 'Baixa') {
+          this.perfilAux = this.perfilBaixa;
           this.listaDisciplinas.push(i);
         }
       }
-      if (this.form.controls.perfil.value == 2) {
+      if (this.form.controls.perfil.value == this.perfilAlta) {
         if (i.perfil == 'Alta') {
+          this.perfilAux = this.perfilAlta;
           this.listaDisciplinas.push(i);
         }
       }
-      if (i.perfil == 'Baixa/Alta') {
-        this.listaDisciplinas.push(i);
+      if (this.form.controls.perfil.value == this.perfilBaixaAlta) {
+        if (i.perfil == 'Baixa/Alta') {
+          this.perfilAux = this.perfilBaixaAlta;
+          this.listaDisciplinas.push(i);
+        }
       }
     }
   }
