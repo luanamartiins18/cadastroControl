@@ -7,6 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import * as CryptoJS from 'crypto-js';
+import { EmailService } from 'src/app/services/email/email.service';
 
 @Component({
   selector: 'app-login',
@@ -16,15 +17,18 @@ import * as CryptoJS from 'crypto-js';
 export class LoginComponent implements OnInit {
 
   @ViewChild("content", { static: true }) modalContent: TemplateRef<any>;
+  @ViewChild("recuperacao", { static: true }) modalRecuperacao: TemplateRef<any>;
   logoQintess: string = './assets/Logo-qintess-branco.jpg';
   senhaErrada: boolean = false;
   loginForm: FormGroup;
+  recuperacaoForm: FormGroup;
   senhaForm: FormGroup;
   usuario: Usuario = new Usuario();
   form: FormGroup;
 
   constructor(private loginService: LoginService,
     private usuarioService: UsuarioService,
+    private emailService: EmailService,
     private formBuilder: FormBuilder,
     private router: Router,
     private modalService: NgbModal,
@@ -39,6 +43,9 @@ export class LoginComponent implements OnInit {
     this.senhaForm = this.formBuilder.group({
       senha: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(80)]],
       confSenha: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(80)]],
+    });
+    this.recuperacaoForm = this.formBuilder.group({
+      email: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(80)]]
     });
   }
 
@@ -103,4 +110,34 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['home']);
     this.senhaErrada = false;
   }
+
+  private openModalRecuperacao(){
+    this.modalService.open(this.modalRecuperacao);
+  }
+
+  private recuperarSenha() {
+    if (this.recuperacaoForm.invalid) {
+      this.recuperacaoForm.reset();
+      return this.nt.notify("error", "Insira um email  válido");
+    }
+    this.emailService.sendMail(this.usuario.email).subscribe((data) => {
+      if (data.status == 200) {
+        this.nt.notify("success", "Solicitação enviada com sucesso!");
+        this.loginSucess();
+      }
+      else {
+        this.nt.notify("error", "Houve um erro na solicitação, favor contatar o administrador do sistema.");
+      }
+    }, err => {
+      if (err.error.errors) {
+        err.error.errors.forEach(element => {
+          this.nt.notify("error", element.defaultMessage);
+        });
+      }
+      else {
+        this.nt.notify("error", "Ocorreu um erro inesperado, por favor tente novamente.");
+      }
+    });
+  }
+
 }

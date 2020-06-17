@@ -19,13 +19,16 @@
         <div class='d-flex justify-content-center mt-4'>
           <input class='enviar text-white px-2 btn btn-block' type='submit' value='Entrar' (click)='checaLogin()' />
         </div>
+        <div class='d-flex justify-content-center mt-4'>
+        <input class='enviar text-white px-2 btn btn-block' type='submit' value='Esqueci a senha' (click)='openModalRecuperacao()' />
+        </div>
       </form>
     </div>
   </div>
   <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title">
-        <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Primeiro Acesso</h4>
+        <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Criação de senha </h4>
       <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -57,4 +60,37 @@
       <button type="button" class="btn btn-outline-danger" (click)="c('Save click'); alteraSenha();">Confirmar</button>
     </div>
   </ng-template>
+
+
+  <ng-template #recuperacao let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">
+        <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Recuperação de senha</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <h4 class="d-flex justify-content-center">Enviaremos uma nova senha</h4>
+    </div>
+    <form [formGroup]='recuperacaoForm'>
+      <div class='container '>
+        <div class='form-group row pl-4'>
+          <div class='col-sm-6'>
+            <mat-form-field>
+              <mat-label>Informe seu e-mail</mat-label>
+              <input matInput placeholder='Digite aqui' type='text' formControlName="email"
+                class='form-control' [(ngModel)]='usuario.email'>
+            </mat-form-field>
+          </div>
+          <div class='col-sm-6'>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-danger" (click)="c('Save click'); recuperarSenha();">Confirmar</button>
+    </div>
+  </ng-template>
+
 </div>
