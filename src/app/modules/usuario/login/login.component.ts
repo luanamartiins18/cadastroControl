@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
       confSenha: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(80)]],
     });
     this.recuperacaoForm = this.formBuilder.group({
-      email: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(80)]]
+      cpf: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(80)]]
     });
   }
 
@@ -118,15 +118,16 @@ export class LoginComponent implements OnInit {
   private recuperarSenha() {
     if (this.recuperacaoForm.invalid) {
       this.recuperacaoForm.reset();
-      return this.nt.notify("error", "Insira um email  válido");
+      return this.nt.notify("error", "Insira um cpf  válido");
     }
-    this.emailService.sendMail(this.usuario.email).subscribe((data) => {
+    this.emailService.sendMail(this.usuario.cpf).subscribe((data) => {
+      this.nt.notify("error", this.usuario.email);
       if (data.status == 200) {
-        this.nt.notify("success", "Solicitação enviada com sucesso!");
+        this.nt.notify("success", "");
         this.loginSucess();
       }
       else {
-        this.nt.notify("error", "Houve um erro na solicitação, favor contatar o administrador do sistema.");
+        this.nt.notify("error", "");
       }
     }, err => {
       if (err.error.errors) {
@@ -135,7 +136,7 @@ export class LoginComponent implements OnInit {
         });
       }
       else {
-        this.nt.notify("error", "Ocorreu um erro inesperado, por favor tente novamente.");
+        this.nt.notify("error", "");
       }
     });
   }

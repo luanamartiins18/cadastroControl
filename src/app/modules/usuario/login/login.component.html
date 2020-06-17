@@ -71,17 +71,17 @@
       </button>
     </div>
     <div class="modal-body">
-      <h4 class="d-flex justify-content-center">Enviaremos uma nova senha</h4>
+      <h5 class="d-flex justify-content-center">Para redefinir a sua senha, informe seu CPF abaixo </h5>
     </div>
     <form [formGroup]='recuperacaoForm'>
       <div class='container '>
         <div class='form-group row pl-4'>
           <div class='col-sm-6'>
-            <mat-form-field>
-              <mat-label>Informe seu e-mail</mat-label>
-              <input matInput placeholder='Digite aqui' type='text' formControlName="email"
-                class='form-control' [(ngModel)]='usuario.email'>
-            </mat-form-field>
+            
+              <mat-label>CPf</mat-label>
+              <input  mask="000.000.000-00" [showMaskTyped]="true" matInput type='text' formControlName="cpf"
+                class='form-control' [(ngModel)]='usuario.cpf'>
+            
           </div>
           <div class='col-sm-6'>
           </div>
@@ -89,7 +89,7 @@
       </div>
     </form>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-danger" (click)="c('Save click'); recuperarSenha();">Confirmar</button>
+      <button type="button" class="btn btn-danger" (click)="c('Save click'); recuperarSenha();">Confirmar</button>
     </div>
   </ng-template>
 
