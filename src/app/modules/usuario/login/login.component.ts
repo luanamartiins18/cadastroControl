@@ -1,6 +1,6 @@
 import { Component, ViewChild, TemplateRef, OnInit } from '@angular/core';
 import { LoginService } from '../login.service';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup,Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -53,8 +53,8 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return this.nt.notify("error", "Preencha todos os campos");
     }
-    this.loginService.autenticaUsuario(this.loginForm.get('codigoRe'), this.loginForm.get('senha'), this).subscribe(
-      data => {
+    this.loginService.autenticaUsuario(this.loginForm.get('codigoRe'), this.loginForm.get('senha')).subscribe(
+      (data: { status: number; body: Usuario; }) => {
         if (data.status == 200) {
           this.usuario = data.body;
           if (this.usuario.primeiroAcesso) {

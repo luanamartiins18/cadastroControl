@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import * as CryptoJS from 'crypto-js';
 import { environment } from 'src/environments/environment';
-import { Router } from '@angular/router';
-import { NotifierService } from 'angular-notifier';
+import { AbstractControl } from '@angular/forms';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,8 +15,7 @@ const httpOptions = {
 })
 export class LoginService {
   constructor(private http: HttpClient) { }
-  autenticaUsuario(codigoRe, senha, component): any {
-    let objComponent = component;
+  autenticaUsuario(codigoRe: AbstractControl, senha: AbstractControl): any {
     codigoRe = codigoRe.value;
     senha = CryptoJS.SHA256(senha.value).toString();
     let parametros = { codigoRe: codigoRe, senha: senha };

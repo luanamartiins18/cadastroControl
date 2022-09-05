@@ -13,7 +13,7 @@ export class DetalhaUsuarioComponent implements OnInit {
 
   id: String;
   usuario: Usuario = new Usuario();
-  colunas = ['nome', 'email', 'cpf', 'celular', 'cargo', 'nascimento', 'codigoRe', 'codigoBB', 'empresa', 'demanda', 'contrato', 'status', 'listaPerfil', 'listaSiglas'];
+  colunas = ['nome','endereco', 'cep','cpf', 'email', 'uf', 'cidade', 'codigoRe', 'status', 'numero','cargo', 'tipo', 'bu'];
 
   constructor(
     private route: ActivatedRoute,
@@ -39,6 +39,31 @@ export class DetalhaUsuarioComponent implements OnInit {
     this.router.navigate(['novo-usuario/' + this.id]);
   }
 
+
+  deleteUsuario() {
+    this.us.deleteUsuario(this.usuario).subscribe((data) => {
+      if (data.status == 200) {
+        this.nt.notify("success", "Usuário deletado com sucesso!");
+        this.router.navigate(['usuarios']);
+      }
+      else {
+        this.nt.notify("error", "Houve um erro ao deletar o usuario, favor contatar o administrador do sistema.");
+      }
+    }, err => {
+      if (err.error.errors) {
+        err.error.errors.forEach(element => {
+          this.nt.notify("error", element.defaultMessage);
+        });
+      }
+      else if (err.error.message) {
+        this.nt.notify("error", err.error.message);
+      }
+      else {
+        this.nt.notify("error", "Ocorreu um erro inesperado, por favor tente novamente.");
+      }
+    });
+  }
+
   alteraStatus(acao) {
     let param = {
       id: this.usuario.id,
@@ -47,7 +72,7 @@ export class DetalhaUsuarioComponent implements OnInit {
     this.us.alteraStatus(param).subscribe(
       (data) => {
         if (data.status == 200) {
-          this.nt.notify("success", "Situação do usuario alterada com sucesso");
+          this.nt.notify("success", "Status do usuário alterado com sucesso");
           this.carregaUsuarios();
           this.router.navigate([this.router.url]);
         } else {

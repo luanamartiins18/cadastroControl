@@ -5,7 +5,6 @@ import { HomeParentComponent } from './home-parent/home-parent.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DefaultComponent } from './default/default.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MensagemModule } from '../mensagem/mensagem.module';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -14,7 +13,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MensagemModule, 
     RouterModule,
     NgbModule
   ],

@@ -1,15 +1,16 @@
-.custom-pointer label{
-  cursor: pointer;
-}
-
-a{
-  cursor: pointer;
-}
-
 .custom-size{
   height: 26rem;
   overflow: auto;
   margin-top: 2rem;
+  border: 1px solid black;
+}
+
+.form-control{
+  border: 1px solid black;
+}
+
+.input-group-append{
+  border: 1px solid black;
 }
 
 table{
@@ -21,7 +22,7 @@ table{
 }
 
 tr.mat-header-row{
-  background-color: rgb(99, 99, 99);
+  background-color: rgb(16, 15, 15);
 }
 
 th.mat-header-cell{
@@ -29,6 +30,3 @@ th.mat-header-cell{
   font-size: 0.8rem;
 }
 
-tr.mat-row:hover{
-  background-color: rgba(0, 0, 0, 0.1);
-}

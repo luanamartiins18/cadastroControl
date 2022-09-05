@@ -40,10 +40,6 @@ export class MensagemService {
     return this.http.post(environment.api + 'mensagem-geral', param, { headers: httpOptions.headers, observe: 'response' });
   }
 
-  enviaMensagemSigla(param) {
-    return this.http.post(environment.api + "mensagem-sigla", param, { headers: httpOptions.headers, observe: 'response' });
-  }
-
   getHistoricoMsgColaborador(id) {
     return this.http.get<Array<any>>(environment.api + 'historico-mensagens/usuario/' + id);
   }

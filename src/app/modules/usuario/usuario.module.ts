@@ -14,21 +14,35 @@ import { LoginComponent } from './login/login.component';
 import { NovoUsuarioComponent } from './novo-usuario/novo-usuario.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { DetalhaUsuarioComponent } from './detalha-usuario/detalha-usuario.component';
+import {MatSortModule} from '@angular/material/sort';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
+import { CpfPipe } from '../pipe/cpf.pipe';
+import { CepPipe } from '../pipe/cep.pipe';
+import { MatGridListModule } from '@angular/material';
+import { CargoComponent } from './cargo/cargo.component';
+import { HistoricoUsuarioComponent } from './historico-usuario/historico-usuario.component';
 
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 @NgModule({
-  declarations: [LoginComponent, NovoUsuarioComponent, UsuariosComponent, DetalhaUsuarioComponent],
+  declarations: [LoginComponent, NovoUsuarioComponent, UsuariosComponent, DetalhaUsuarioComponent, CpfPipe, CepPipe, CargoComponent, HistoricoUsuarioComponent],
   imports: [
     CommonModule,
     FormsModule,
     RouterModule,
     ReactiveFormsModule,
     MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatGridListModule,
     MatDatepickerModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatNativeDateModule,
     MatInputModule,
+    MatButtonModule,
     NgbModule,
     NgxMaskModule.forRoot(options),
     NgMultiSelectDropDownModule.forRoot()

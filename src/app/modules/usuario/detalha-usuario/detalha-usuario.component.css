@@ -1,37 +1,50 @@
-i{
-  cursor: pointer;   
+*{
+    margin: 8;
+
 }
 
-.custom-size{
-  height: 36rem;   
-  overflow: auto;
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    width: 800px;
+    min-width: 800px;
+    padding: 0;
 }
 
-@media(max-height: 720px){
+.container-full {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 990px;
+    padding: 10px;
+    margin: auto;
+}
+
+.container div {
+    padding: 10px;
+    
+}
+
+.form-control {
+    width: 230px;
+    border: 1px solid black;
+} 
+
+.button2{
+    background-color: red;
+}
+.button1{
+    background-color: green;
+}
+
+
+button {
   
-  .custom-size{
-      height: 24rem;     
-  }
-}
-
-.visualizado i{     
-  color: green !important;
-}
-
-.custom-icon span{
-  margin-left: 1.5rem;
-}
-
-.custom-icon i{
-  color: grey;
-  margin-right: -8px;
-  cursor: auto;
-}
-
-table{
-  width: 100%;
-}
-
-.custom-button{
-  max-width: 12rem;
+    height: 50px;
+    color: #fff;
+    display: block;
+    background-color: rgb(19, 99, 219);
+    
+   
 }

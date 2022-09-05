@@ -1,9 +1,8 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
-import { HomeParentComponent } from '../home-parent/home-parent.component';
 import { LoginService } from '../../usuario/login.service';
 import { Router } from '@angular/router';
-import { ListagemGuiaComponent } from '../../guia/listagem-guia/listagem-guia.component';
+
 
 
 @Component({
@@ -22,18 +21,8 @@ export class NavbarComponent implements OnInit {
   constructor(private loginService: LoginService,
     private router: Router) { }
 
-  ngOnChanges(changes: SimpleChanges) {
-    let usuAtual: Usuario = changes.usuario.currentValue;
-    if (usuAtual != null) {
-      for (let perfil of usuAtual.listaPerfil) {
-        if (perfil.status == 1) {
-
-          this.lisPerfil = perfil.perfil.descricao;
-        }
-      }
-    }
+  ngOnChanges() {
   }
-
   deslogaUsuario() {
     this.loginService.deslogaUsuario();
     this.router.navigate(['login']);
@@ -41,15 +30,15 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() { }
 
-  admGestor(id) {
+  admGestor(id: number) {
     return (id == 2 || id == 1);
   }
 
-  gestor(id) {
+  gestor(id: number) {
     return (id == 1);
   }
 
-  colaborador(id) {
+  colaborador(id: number) {
     return (id == 3);
   }
 }

@@ -1,0 +1,58 @@
+<div *ngIf='this.usuarios; else carregando' class='pb-2'>
+  <div class='container-fluid mt-3'>
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a [routerLink]="['/../usuarios']" class="nav-link active">
+          <i class="fa fa-users" aria-hidden="true"></i>
+          Lista de Usuários
+        </a>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="['/../novo-usuario']" class="nav-link">
+          <i class="fa fa-user-plus" aria-hidden="true"></i>
+          Cadastro
+        </a>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="['/../cargo']" class="nav-link active">
+          <i class="fa fa-user" aria-hidden="true"></i>
+          Historico
+        </a>
+    </li>
+    </ul>
+    <div class="input-group mt-3 p">
+      <input (keyup)="searchAllField($event)" class="form-control" placeholder="Pesquisar entre os campos">
+      <div class="input-group-append">
+        <span class="input-group-text"><i class="fa fa-search fa-fw"></i></span>
+      </div>
+    </div>
+    <div *ngIf='this.usuariosSearch.length > 0; else semUsuarios' class='custom-size mat-elevation-z8 '>
+      <table mat-table [dataSource]="usuarios" matSort>
+        <ng-container matColumnDef="nome">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by nome">NOME</th>
+          <td mat-cell *matCellDef="let element"> {{element.nome.toUpperCase()}} </td>
+        </ng-container>
+        <ng-container matColumnDef="cargo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>CARGO</th>
+          <td mat-cell *matCellDef="let element"> {{element.cargo.descricao}} </td>
+        </ng-container>
+        <ng-container matColumnDef="codigoRe">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>MATRICULA</th>
+          <td mat-cell *matCellDef="let element"> {{element.codigoRe}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="colunas; sticky: true"></tr> 
+        <tr  (click)='historicoUsuario()' class='custom-row' mat-row *matRowDef="let row; columns: colunas;"></tr> 
+      </table>
+    </div>
+    <ng-template #semUsuarios>
+      <div class='text-secondary mt-3 ml-4'>
+        Não há usuários cadastrados
+      </div>
+    </ng-template>
+  </div>
+</div>
+<ng-template #carregando>
+  <div class='container-fluid d-flex justify-content-center align-items-center mt-5'>
+    <i class="fa fa-refresh fa-spin fa-4x" aria-hidden="true"></i>
+  </div>
+</ng-template>

@@ -1,25 +1,31 @@
 import { UsuarioInterface } from 'src/app/interfaces/UsuarioInterface';
-import { Contrato } from 'src/app/models/contrato/contrato.model';
-import { Cargo } from 'src/app/models/cargo/cargo.model';
-import { ListaSigla } from '../ListaSigla/lista-sigla.model';
-import { ListaPerfil } from '../ListaPerfil/lista-perfil.model';
+import { Funcao } from '../cargo/funcao.model';
+import { Cidade } from '../cidade/cidade.model';
+import { Uf } from '../uf/uf.model';
+import { Tipo } from '../tipo/tipo.model';
+import { Bu } from '../bu/bu.model';
 
 export class Usuario implements UsuarioInterface {
 
   id?: number;
   nome?: string;
+  cep?: string;
+  endereco?: string;
+  rg?: string;
+  org_emissor?: string;
+  numero?: string;
+  complemento?: string;
+  data_nascimento?: Date;
+  data_emissao?: Date;
   email?: string;
   cpf?: string;
   codigoRe?: string;
-  codigoBB?: string;
-  empresa?: string;
-  demanda?: number;
-  nascimento?: Date;
   status?: string;
-  contrato?: Contrato;
-  cargo?: Cargo;
-  listaSiglas: ListaSigla[];
-  listaPerfil: ListaPerfil[];
+  cargo?: Funcao;
+  cidade?: Cidade;
+  uf?: Uf;
+  tipo?: Tipo;
+  bu?: Bu;
   celular?: string;
   primeiroAcesso: boolean;
   senha?: string;
@@ -27,18 +33,23 @@ export class Usuario implements UsuarioInterface {
   constructor(
     id?: number,
     nome?: string,
+    cep?: string,
+    rg?: string,
+    org_emissor?: string,
+    numero?: string,
+    complemento?: string,
+    data_nascimento?: Date,
+    data_emissao?: Date,
+    endereco?: string,
     email?: string,
     cpf: string = "",
     codigoRe?: string,
-    codigoBB?: string,
-    empresa?: string,
-    demanda?: number,
-    nascimento?: Date,
     status?: string,
-    contrato?: Contrato,
-    cargo?: Cargo,
-    listaSiglas: ListaSigla[] = [],
-    listaPerfil: ListaPerfil[] = [],
+    cargo?: Funcao,
+    cidade?: Cidade,
+    bu?: Bu,
+    tipo?: Tipo,
+    uf?: Uf,
     celular: string = "",
     primeiroAcesso?: boolean,
     senha?: string,

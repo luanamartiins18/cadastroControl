@@ -1,7 +1,49 @@
-.custom-label{
-  cursor: pointer;
+*{
+    margin: 8;
+
 }
 
-.custom-error{
-  border: 1px solid red;
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    width: 848px;
+    min-width: 848px;
+    padding: 0;
 }
+
+.container-full {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 848px;
+    padding: 10px;
+    margin: auto;
+}
+
+.container div {
+    padding: 10px;    
+}
+
+.form-control {
+    width: 250px;
+    border: 1px solid black;
+} 
+.button{
+    width: 10em;
+    height: 50px;
+    color: rgb(254, 252, 252);
+    background-color: rgb(10, 104, 38);
+
+}
+.button2{
+    width:7em;
+    height: 50px;
+    color: rgb(254, 252, 252);
+    background-color: red;
+
+}
+
+
+

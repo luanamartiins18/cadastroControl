@@ -12,93 +12,224 @@
         Cadastro
       </a>
     </li>
+      <li class="nav-item">
+        <a [routerLink]="['/../cargo']" class="nav-link active">
+          <i class="fa fa-user-plus" aria-hidden="true"></i>
+          Historico
+        </a>
+    </li>
   </ul>
   <div *ngIf='usuario; else carregando'>
-    <div class='container-fluid'>
       <form>
         <div class='container '>
-          <div class='form-group row pl-4'>
-            <div class='col-sm-6'>
-              <Label class="font-weight-bold">Nome</Label>
-              <input disabled class='form-control' value={{usuario?.nome?.toUpperCase()}} type='text'
-                class='form-control' />
+           <!-- input matricula -->
+            <div id="matricula" >
+              <Label class="font-weight-bold">Matricula</Label>
+              <input 
+                disabled class='form-control' 
+                value={{usuario?.codigoRe}} 
+                type='text' 
+                class='form-control'
+              />
             </div>
-            <div class='col-sm-6'>
+            <!-- input cpf -->
+            <div  id="cpf">
               <Label class="font-weight-bold">CPF</Label>
-              <input disabled class='form-control' value={{usuario?.cpf}} type='text' class='form-control' />
+              <input 
+                disabled class='form-control' 
+                value={{usuario?.cpf|cpf}} 
+                type='text' 
+                class='form-control'
+               />
             </div>
-            <div class='col-sm-6'>
-              <Label class="font-weight-bold">E-mail</Label>
-              <input disabled class='form-control' value={{usuario?.email}} type='text' class='form-control' />
-            </div>
-            <div class='col-sm-6'>
-              <Label class="font-weight-bold">Celular</Label>
-              <input disabled class='form-control' value={{usuario?.celular}} type='text' class='form-control' />
-            </div>
-            <div class='col-sm-6'>
+            <!-- input data_nascimento -->
+            <div  id="data_nascimento" >
               <Label class="font-weight-bold">Data de Nascimento</Label>
-              <input disabled class='form-control' [value]="usuario?.nascimento | date: 'dd/MM/yyyy'" type='text'
-                class='form-control' />
+              <input 
+                disabled class='form-control'
+                [value]="usuario?.data_nascimento | date: 'dd/MM/yyyy'" 
+                type='text'
+                class='form-control' 
+              />
             </div>
-            <div class='col-sm-6'>
-              <Label class="font-weight-bold">Perfil</Label>
-              <input disabled class='form-control' value={{listToString(usuario?.listaPerfil)}} type='text'
-                class='form-control' />
+            <!-- input rg -->
+            <div  id="rg">
+              <Label class="font-weight-bold">RG</Label>
+              <input 
+                disabled class='form-control' 
+                value={{usuario?.rg}} 
+                type='text' 
+                class='form-control'
+              />
             </div>
-            <div class='col-sm-6'>
-              <Label class="font-weight-bold">Cargo</Label>
-              <input disabled class='form-control' value={{usuario?.cargo?.descricao}} type='text'
-                class='form-control' />
+            <!-- input data_emissao -->
+            <div  id="data_emissao">
+              <Label class="font-weight-bold">Data Emissão</Label>
+              <input 
+                disabled class='form-control'
+                [value]="usuario?.data_emissao | date: 'dd/MM/yyyy'" 
+                type='text'
+                class='form-control' 
+              />
             </div>
-            <div class='col-sm-6'>
-              <Label class="font-weight-bold">Sigla</Label>
-              <input disabled class='form-control' value={{listToString(usuario?.listaSiglas)}} type='text'
-                class='form-control' />
+            <!-- input orgão emissor -->
+            <div  id="org_emissor">
+              <Label class="font-weight-bold">Órg.Emissor</Label>
+              <input 
+                disabled class='form-control' 
+                value={{usuario?.org_emissor}} 
+                type='text' 
+                class='form-control'
+              />
             </div>
-            <div class='col-sm-6'>
-              <Label class="font-weight-bold">Código RE</Label>
-              <input disabled class='form-control' value={{usuario?.codigoRe}} type='text' class='form-control' />
-            </div>
-            <div class='col-sm-6'>
-              <Label class="font-weight-bold">Código BB</Label>
-              <input disabled class='form-control' value={{usuario?.codigoBB}} type='text' class='form-control' />
-            </div>
-            <div class='col-sm-6'>
-              <Label class="font-weight-bold">Empresa</Label>
-              <input disabled class='form-control' value={{usuario?.empresa}} type='text' class='form-control' />
-            </div>
-            <div class='col-sm-6'>
-              <Label class="font-weight-bold">Demanda</Label>
-              <input disabled class='form-control' value={{usuario?.demanda}} type='text' class='form-control' />
-            </div>
-            <div class='col-sm-6'>
-              <Label class="font-weight-bold">Contrato</Label>
-              <input disabled class='form-control' value={{usuario?.contrato?.descricao}} type='text'
-                class='form-control' />
-            </div>
-            <div class='col-sm-6'>
-              <Label class="font-weight-bold">Status {{usuario?.status}}</Label>
-              <div *ngIf='usuario.status == "Ativo"; else inativo'>
-                <button (click)='alteraStatus("desativar");' class='form-control bg-danger text-light'>
-                  <i class="fa fa-minus-circle"></i> Inativar Usuário </button>
+            <div class="container-full">
+              <!-- input nome -->
+              <div id="nome">
+                <Label class="font-weight-bold">Nome</Label>
+                <input 
+                  disabled class='form-control' 
+                  value={{usuario?.nome?.toUpperCase()}} 
+                  type='text'
+                  style="width: 720px" 
+                  class='form-control' />
               </div>
-              <ng-template #inativo>
-                <div>
-                  <button (click)='alteraStatus("ativar");' class='form-control bg-primary text-light'>
-                    <i class="fa fa-plus-circle"></i> Reativar Usuário </button>
-                </div>
+              <!-- input email -->
+              <div  id="email">
+                <Label class="font-weight-bold">E-mail</Label>
+                <input 
+                  disabled class='form-control' 
+                  value={{usuario?.email}} 
+                  type='text' 
+                  style="width: 720px" 
+                  class='form-control' 
+                />
+              </div>
+            </div>
+           <!-- input celular -->
+                <div >
+                  <Label class="font-weight-bold">Celular</Label>
+                  <input 
+                    disabled class='form-control' 
+                    value={{usuario?.celular}} 
+                    type='text'
+                    class='form-control' />
+                </div> 
+            <!-- input cep  -->
+            <div >
+              <Label class="font-weight-bold">Cep</Label>
+              <input 
+                disabled class='form-control' 
+                value={{usuario?.cep|cep}} 
+                type='text' 
+                class='form-control' />
+            </div> 
+            <!-- input cidade -->
+            <div >
+              <Label class="font-weight-bold">Cidade</Label>
+              <input 
+                disabled class='form-control' 
+                value={{usuario?.cidade?.descricao}} 
+                type='text'
+                class='form-control' />
+            </div> 
+            <!-- input uf -->
+            <div >
+              <Label class="font-weight-bold">UF</Label>
+              <input 
+                disabled class='form-control' 
+                value={{usuario?.uf?.descricao}} 
+                type='text'
+                class='form-control' />
+            </div> 
+            <!-- input endereco -->
+             <div >
+              <Label class="font-weight-bold">Endereço</Label>
+              <input 
+                disabled class='form-control' 
+                value={{usuario?.endereco}} 
+                type='text'
+                class='form-control' />
+            </div> 
+            <!-- input numero_casa -->
+             <div >
+              <Label class="font-weight-bold">Nº</Label>
+              <input 
+                disabled class='form-control' 
+                value={{usuario?.numero}} 
+                type='text'
+                class='form-control' />
+            </div> 
+            <!-- input complemento -->
+            <div >
+              <Label class="font-weight-bold">Complemento</Label>
+              <input 
+                disabled class='form-control' 
+                value={{usuario?.complemento}} 
+                type='text'
+                class='form-control' />
+            </div> 
+          <!-- input cargo -->
+          <div >
+            <Label 
+            class="font-weight-bold">Cargo</Label>
+            <input 
+            disabled class='form-control' 
+            value={{usuario?.cargo?.descricao}} 
+            type='text'
+            class='form-control' />
+          </div> 
+          <!-- input TIPO -->
+          <div >
+            <Label 
+            class="font-weight-bold">Tipo</Label>
+            <input 
+            disabled class='form-control' 
+            value={{usuario?.tipo?.descricao}} 
+            type='text'
+            class='form-control' />
+          </div> 
+          <!-- input  -->
+           <div > 
+            <Label 
+            class="font-weight-bold">Área Négocio</Label>
+            <input 
+            disabled class='form-control' 
+            value={{usuario?.bu?.descricao}} 
+            type='text'
+            class='form-control' />
+          </div> 
+            <div>
+              <Label class="font-weight-bold">Status {{usuario?.status}}</Label>
+              <section *ngIf='usuario.status == "Ativo"; else inativo'>
+
+                  <button mat-raised-button 
+                    class="button1"
+                    (click)='alteraStatus("desativar");' 
+                    color="blue">Inativar Usuário
+                  </button>
+                </section>
+                  <ng-template #inativo>  
+                    <button mat-raised-button 
+                    class="button2"
+                    (click)='alteraStatus("ativar");'
+                    color="blue">Reativar Usuário
+              </button>
               </ng-template>
-            </div>
-            <div class='col-sm-6 mt-3 p'>
-              <button (click)='editaUsuario()' class='form-control bg-success text-light'>
-                <i class="fa fa-pencil"></i> Editar usuário </button>
-            </div>
+            </div> 
+            <div >
+            <div class='butao-editar '>
+              <button mat-raised-button 
+              (click)='editaUsuario()' 
+              color="blue">Editar usuário
+            </button>
+            </div>  
+            </div> 
           </div>
-        </div>
-      </form>
-    </div>
+        </form>
+      </div>
     <ng-template #carregando>
-      <div class='container-fluid d-flex justify-content-center align-items-center mt-5'>
+      <div class='container-fluid'>
         <i class="fa fa-refresh fa-spin fa-4x" aria-hidden="true"></i>
       </div>
     </ng-template>
+</div>

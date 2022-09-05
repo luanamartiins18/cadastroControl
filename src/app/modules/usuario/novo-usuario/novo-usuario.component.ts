@@ -1,15 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { Cargo } from 'src/app/models/cargo/cargo.model';
-import { Perfil } from 'src/app/models/perfil/perfil.model';
-import { Sigla } from 'src/app/models/sigla/sigla.model';
-import { CargoService } from 'src/app/services/cargo/cargo.service';
-import { PerfilService } from 'src/app/services/perfil/perfil.service';
-import { SiglaService } from 'src/app/services/sigla/sigla.service';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { UsuarioService } from '../../../services/usuario/usuario.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
+import { Cidade } from 'src/app/models/cidade/cidade.model';
+import { Uf } from 'src/app/models/uf/uf.model';
+import { CidadeService } from 'src/app/services/cidade/cidade.service';
+import { UfService } from 'src/app/services/uf/uf.service';
+import { MatDialog } from '@angular/material/dialog';
+import {FuncaoService} from 'src/app/services/funcao/funcao.service'
+import { Funcao } from 'src/app/models/cargo/funcao.model';
+import { Bu } from 'src/app/models/bu/bu.model';
+import { Tipo } from 'src/app/models/tipo/tipo.model';
+import { BuService } from 'src/app/services/bu/bu.service';
+import { TipoService } from 'src/app/services/tipo/tipo.service';
+import { HttpClient } from "@angular/common/http";
+
 
 @Component({
   selector: 'app-novo-usuario',
@@ -18,9 +25,11 @@ import { Usuario } from 'src/app/models/usuario/usuario.model';
 })
 export class NovoUsuarioComponent implements OnInit {
 
-  listaSiglas: Array<Sigla>;
-  listaPerfil: Array<Perfil>;
-  listaCargo: Array<Cargo>;
+  listaCargo: Array<Funcao>;
+  listaBu: Array<Bu>;
+  listaTipo: Array<Tipo>;
+  listaCidade: Array<Cidade>;
+  listaUf: Array<Uf>;
   form: FormGroup;
   formValido: boolean = true;
   dropdownSettings = {};
@@ -30,23 +39,30 @@ export class NovoUsuarioComponent implements OnInit {
   id: any;
 
   constructor(
-    private siglaService: SiglaService,
-    private perfilService: PerfilService,
-    private cargoService: CargoService,
+    private cidadeService: CidadeService,
+    private ufService: UfService,
+    private funcaoService: FuncaoService,
+    private buService: BuService,
+    private tipoService: TipoService,
     private usuarioService: UsuarioService,
     private notifier: NotifierService,
     private route: ActivatedRoute,
     private router: Router,
     public formBuilder: FormBuilder,
+    private http: HttpClient,
+  
   ) { }
 
   ngOnInit() {
     this.configDropdown();
     this.montaFormBuilder();
-    this.getSiglas();
-    this.getPerfis();
-    this.getCargos();
     this.carregaUsuarios();
+    this.getCidade();
+    this.getCargos();
+    this.getBu();
+    this.getTipo();
+    this.getUf();
+    this.getCEP(this.usuario.cep);
   }
 
   private configDropdown() {
@@ -64,36 +80,76 @@ export class NovoUsuarioComponent implements OnInit {
   private montaFormBuilder() {
     this.form = this.formBuilder.group({
       nome: [this.usuario.nome, [Validators.required]],
-      cpf: [this.usuario.cpf, [Validators.required]],
-      email: [this.usuario.email, [Validators.required]],
       celular: [this.usuario.celular, [Validators.required]],
-      nascimento: [this.usuario.nascimento, [Validators.required]],
-      listaPerfil: [this.usuario.listaPerfil, [Validators.required]],
-      cargo: [this.usuario.cargo, [Validators.required]],
-      listaSiglas: [this.usuario.listaSiglas, [Validators.required]],
+      cpf: [this.usuario.cpf, [Validators.required]],
+      data_nascimento:[this.usuario.data_nascimento, [Validators.required]],
+      rg: [this.usuario.rg, [Validators.required]],
+      data_emissao: [this.usuario.data_emissao, [Validators.required]],
+      org_emissor:[this.usuario.org_emissor, [Validators.required]],
+      cep: [this.usuario.cep, [Validators.required]],
+      endereco: [this.usuario.endereco, [Validators.required]],
+      cidade: [this.usuario.cidade, [Validators.required]],
+      uf: [this.usuario.uf, [Validators.required]],
+      email: [this.usuario.email, [Validators.required]],
       codigoRe: [this.usuario.codigoRe, [Validators.required]],
-      codigoBB: [this.usuario.codigoBB, [Validators.required]],
-      demanda: [this.usuario.demanda],
-    });
-  }
-
-  private getSiglas() {
-    this.siglaService.getSiglas().subscribe((lista) => {
-      this.listaSiglas = lista;
-    });
-  }
-
-  private getPerfis() {
-    this.perfilService.getPerfil().subscribe((lista) => {
-      this.listaPerfil = lista;
+      numero: [this.usuario.numero, [Validators.required]],
+      complemento: [this.usuario.complemento, [Validators.required]],
+      cargo:[this.usuario.cargo,[Validators.required]],
+      bu: [this.usuario.bu,[Validators.required]],
+      tipo:[this.usuario.tipo,[Validators.required]]
     });
   }
 
   private getCargos() {
-    this.cargoService.getCargo().subscribe((lista) => {
+    this.funcaoService.getCargo().subscribe((lista) => {
       this.listaCargo = lista;
     });
   }
+  private getBu() {
+    this.buService.getBu().subscribe((lista) => {
+      this.listaBu = lista;
+    });
+  }
+
+  private getTipo() {
+    this.tipoService.getTipo().subscribe((lista) => {
+      this.listaTipo = lista;
+    });
+  }
+
+
+ 
+  private getCidade() {
+    this.cidadeService.getCidade().subscribe((lista) => {
+      this.listaCidade = lista;
+    });
+  }
+  private getUf() {
+    this.ufService.getUf().subscribe((lista) => {
+      this.listaUf = lista;
+    });
+  }
+
+  getCEP(event: any) {
+    var a = [];
+    if(event){
+      var value = event.target.value;
+      var numberPattern = /\d+/g;
+      value = value.match( numberPattern ).join([]);
+      var url = this.usuarioService.buscaCep(value);
+      url.subscribe(data => {
+        console.log((<HTMLInputElement>document.getElementById("endereco")));
+        (<HTMLInputElement>document.getElementById("endereco")).value = data['logradouro'];
+        (<HTMLInputElement>document.getElementById("complemento")).value = data['bairro'];
+        (<HTMLInputElement>document.getElementById("cidade")).value = data['localidade'];
+        (<HTMLInputElement>document.getElementById("uf")).value = data['uf'];
+      });
+      
+      return url
+    }
+  }
+
+  
 
   private carregaUsuarios() {
     this.id = this.route.snapshot.paramMap.get('id');

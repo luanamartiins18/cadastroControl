@@ -21,16 +21,7 @@ export class HeaderComponent implements OnInit, OnChanges {
 
   ngOnInit() { }
 
-  ngOnChanges(changes: SimpleChanges) {
-    let usuAtual: Usuario = changes.usuario.currentValue;
-    if (usuAtual != null) {
-      for (let perfil of usuAtual.listaPerfil) {
-        if (perfil.status == 1) {
-
-          this.lisPerfil = perfil.perfil.descricao;
-        }
-      }
-    }
+  ngOnChanges() {
   }
 
   deslogaUsuario() {
