@@ -51,7 +51,7 @@ export class DetalhaUsuarioComponent implements OnInit {
       }
     }, err => {
       if (err.error.errors) {
-        err.error.errors.forEach(element => {
+        err.error.errors.forEach((element: { defaultMessage: string; }) => {
           this.nt.notify("error", element.defaultMessage);
         });
       }
@@ -64,7 +64,7 @@ export class DetalhaUsuarioComponent implements OnInit {
     });
   }
 
-  alteraStatus(acao) {
+  alteraStatus(acao: any) {
     let param = {
       id: this.usuario.id,
       acao: acao
@@ -82,7 +82,4 @@ export class DetalhaUsuarioComponent implements OnInit {
     );
   }
 
-  listToString(lista: any[]) {
-    return lista ? lista.map(obj => obj.descricao).toString() : "";
-  }
 }

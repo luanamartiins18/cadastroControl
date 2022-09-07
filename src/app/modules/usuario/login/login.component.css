@@ -28,6 +28,7 @@ i{
 .login input[type = 'text']{
     border: none;
     padding-bottom: 0.25rem;;
+    text-transform: uppercase;
 } 
 
 .senha input[type = 'password']{

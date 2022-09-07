@@ -41,7 +41,7 @@
           <td mat-cell *matCellDef="let element"> {{element.codigoRe}} </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="colunas; sticky: true"></tr> 
-        <tr  (click)='historicoUsuario()' class='custom-row' mat-row *matRowDef="let row; columns: colunas;"></tr> 
+        <tr  (click)='historicoUsuario(row)' class='custom-row' mat-row *matRowDef="let row; columns: colunas;"></tr> 
       </table>
     </div>
     <ng-template #semUsuarios>

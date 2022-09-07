@@ -19,10 +19,10 @@ const routes: Routes = [
       {path: 'home', component: DefaultComponent, canActivate:[AuthGuardService]},
       {path: 'usuarios', component: UsuariosComponent, canActivate:[AuthGuardService]},
       {path: 'usuarios/:id', component: DetalhaUsuarioComponent, canActivate:[AuthGuardService]},
+      {path: 'novo-usuario/:id', component: NovoUsuarioComponent, canActivate: [AuthGuardService]},
       {path: 'novo-usuario', component: NovoUsuarioComponent, canActivate: [AuthGuardService]},
       {path: 'cargo', component:CargoComponent, canActivate:[AuthGuardService]},
-      {path: 'historico', component:HistoricoUsuarioComponent, canActivate:[AuthGuardService]}
-
+      {path: 'historico/:id', component:HistoricoUsuarioComponent, canActivate:[AuthGuardService]}
     ]
   }
 ];

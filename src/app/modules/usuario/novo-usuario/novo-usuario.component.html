@@ -102,6 +102,7 @@
             style="width: 790px" />
         </div> 
     </div>
+    
     <div class='container '>  
       <!-- input celular -->
          <div id="celular">
@@ -130,26 +131,29 @@
           (blur)="getCEP($event)"
           type='text' 
           class='form-control' />
+
         </div> 
 
         <!-- input cidade -->
         <div>
-          <label class="font-weight-bold">Cidade</label>
+          <Label class="font-weight-bold">Cidade</Label>
           <input 
             type="text"
             id="cidade"
-            name="cidade"
             class='form-control'
+            formControlName='cidade' 
+            [(ngModel)]='usuario.cidade'
           />
         </div> 
         <!-- input uf -->
         <div>
-          <label class="font-weight-bold">UF</label>
+          <Label class="font-weight-bold">UF</Label>
           <input 
-          type="text"
-          name="uf"
-          id="uf"
-          class='form-control'
+            id="uf"
+            formControlName='uf' 
+            type="text"
+            class='form-control'
+            [(ngModel)]='usuario.uf'
         />
       </div> 
         <!-- input endereco -->
@@ -178,17 +182,13 @@
            <div>
             <Label class="font-weight-bold">Complemento</Label>
             <input 
-              formControlName='complemento' 
               id="complemento"
+              formControlName='complemento' 
               type='text' 
               class='form-control' 
               [(ngModel)]='usuario.complemento'
               />
           </div> 
-
-
-
-
 
           <!-- input cargo -->
           <div id='cargo'>
@@ -198,9 +198,9 @@
             class='form-control' 
             [(ngModel)]="usuario.cargo">
             <option [ngValue]="item"
-             class='form-control' 
+              type='text' 
              [selected]=" usuario.cargo && usuario.cargo.id==item.id"
-                *ngFor='let item of this.listaCargo'>{{item.descricao}}</option>
+                *ngFor='let item of this.listaCargo'>{{item.descricao}} </option>
             </select>
           </div>
            <!-- input tipo -->
@@ -222,6 +222,7 @@
             <select 
             formControlName='bu' 
             class='form-control' 
+            style="width: 520px" 
             [(ngModel)]="usuario.bu">
             <option [ngValue]="item"
              class='form-control' 
@@ -229,16 +230,21 @@
                 *ngFor='let item of this.listaBu'>{{item.descricao}}</option>
             </select>
           </div>
-         <!-- input botão -->
-         <div class='col-sm-2 mt-4 p'>
-          <input (click)='submit()'
-           type="submit" 
-           value="Cadastrar" 
-           class='button' />
-        </div>
-        <div  class='col-sm-2 mt-4 p'>
-          <input type="reset" value="Cancelar" class="button2">
-        </div>
+            <!-- input botão -->
+          <div class="container">
+          <div class='col-sm-4'>
+            <input (click)='submit()'
+            type="submit" 
+            value="Cadastrar" 
+            class='button' />
+          </div>
+          <div class='col-sm-6'>
+            <input 
+              type="reset" 
+              value="Cancelar" 
+              class="button2">
+          </div>
+      </div>
     </div>
   </form>
 </div>

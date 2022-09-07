@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
-import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'usuarios',
@@ -14,7 +13,6 @@ export class UsuariosComponent implements OnInit {
   usuarios: Usuario[] = [];
   usuariosSearch: Usuario[] = [];
   
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
   colunas = [
   'nome', 'cpf', 'cargo', 'codigoRe', 'endereco',  'status'
   ];

@@ -82,7 +82,6 @@
                 class='form-control'
               />
             </div>
-            <div class="container-full">
               <!-- input nome -->
               <div id="nome">
                 <Label class="font-weight-bold">Nome</Label>
@@ -90,7 +89,7 @@
                   disabled class='form-control' 
                   value={{usuario?.nome?.toUpperCase()}} 
                   type='text'
-                  style="width: 720px" 
+                  style="width: 730px" 
                   class='form-control' />
               </div>
               <!-- input email -->
@@ -100,13 +99,12 @@
                   disabled class='form-control' 
                   value={{usuario?.email}} 
                   type='text' 
-                  style="width: 720px" 
+                  style="width: 730px" 
                   class='form-control' 
                 />
               </div>
-            </div>
            <!-- input celular -->
-                <div >
+                <div  >
                   <Label class="font-weight-bold">Celular</Label>
                   <input 
                     disabled class='form-control' 
@@ -128,7 +126,7 @@
               <Label class="font-weight-bold">Cidade</Label>
               <input 
                 disabled class='form-control' 
-                value={{usuario?.cidade?.descricao}} 
+                value={{usuario?.cidade}} 
                 type='text'
                 class='form-control' />
             </div> 
@@ -137,7 +135,7 @@
               <Label class="font-weight-bold">UF</Label>
               <input 
                 disabled class='form-control' 
-                value={{usuario?.uf?.descricao}} 
+                value={{usuario?.uf}} 
                 type='text'
                 class='form-control' />
             </div> 
@@ -193,36 +191,36 @@
             <Label 
             class="font-weight-bold">Área Négocio</Label>
             <input 
-            disabled class='form-control' 
-            value={{usuario?.bu?.descricao}} 
-            type='text'
-            class='form-control' />
+              style="width: 490px" 
+              disabled class='form-control' 
+              value={{usuario?.bu?.descricao}} 
+              type='text'
+              class='form-control' />
           </div> 
-            <div>
-              <Label class="font-weight-bold">Status {{usuario?.status}}</Label>
-              <section *ngIf='usuario.status == "Ativo"; else inativo'>
-
-                  <button mat-raised-button 
-                    class="button1"
-                    (click)='alteraStatus("desativar");' 
-                    color="blue">Inativar Usuário
-                  </button>
-                </section>
-                  <ng-template #inativo>  
+            <div class="container">
+              <div class="col-sm-3" >
+                <Label class="font-weight-bold">Status {{usuario?.status}}</Label>
+                <section *ngIf='usuario.status == "Ativo"; else inativo'>
                     <button mat-raised-button 
-                    class="button2"
-                    (click)='alteraStatus("ativar");'
-                    color="blue">Reativar Usuário
-              </button>
-              </ng-template>
-            </div> 
-            <div >
-            <div class='butao-editar '>
-              <button mat-raised-button 
-              (click)='editaUsuario()' 
-              color="blue">Editar usuário
-            </button>
-            </div>  
+                      class="button1"
+                      (click)='alteraStatus("desativar");' 
+                      color="blue">Inativar Usuário
+                    </button>
+                  </section>
+                    <ng-template #inativo>  
+                      <button mat-raised-button 
+                      class="button2"
+                      (click)='alteraStatus("ativar");'
+                      color="blue">Reativar Usuário
+                </button>
+                </ng-template>
+              </div> 
+              <div class="col-4 mt-4 ">
+                <button mat-raised-button 
+                  (click)='editaUsuario()' 
+                  color="blue">Editar usuário
+                </button>
+             </div>
             </div> 
           </div>
         </form>

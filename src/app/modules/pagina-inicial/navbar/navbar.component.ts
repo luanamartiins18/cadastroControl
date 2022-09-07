@@ -31,11 +31,11 @@ export class NavbarComponent implements OnInit {
   ngOnInit() { }
 
   admGestor(id: number) {
-    return (id == 2 || id == 1);
+    return ( id == 13 || id == 9 || id == 20 || id == 21);
   }
 
   gestor(id: number) {
-    return (id == 1);
+    return ( id == 9 || id == 20 || id == 21);
   }
 
   colaborador(id: number) {

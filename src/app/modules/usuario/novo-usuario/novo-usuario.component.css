@@ -29,6 +29,7 @@
 .form-control {
     width: 250px;
     border: 1px solid black;
+    text-transform: uppercase;
 } 
 .button{
     width: 10em;
@@ -38,12 +39,13 @@
 
 }
 .button2{
-    width:7em;
+    width:10em;
     height: 50px;
     color: rgb(254, 252, 252);
     background-color: red;
 
 }
+
 
 
 

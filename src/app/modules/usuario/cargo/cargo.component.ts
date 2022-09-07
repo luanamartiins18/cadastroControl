@@ -29,10 +29,11 @@ export class CargoComponent implements OnInit {
     });
   }
 
-  historicoUsuario() {
-    
-    this.router.navigate(['historico'])
+  historicoUsuario(row: {id:string; }) {
+    this.router.navigate(['/../historico/' + row.id]);
   } 
+
+
   searchAllField(event: any) {
     this.usuariosSearch = this.usuarios.filter(obj => {
       return Object.keys(obj).find((key) => {

@@ -58,6 +58,10 @@ export class UsuarioService {
     return this.http.get<Usuario>(environment.api + 'usuarios/' + id);
   }
 
+  getHistoricoId(id){
+    return this.http.get<Usuario>(environment.api + 'historico/' + id);
+  }
+
   deleteUsuario(id: string | Usuario) {
     return this.http.delete(environment.api + "usuarios/" + id, { observe: 'response' });
   }

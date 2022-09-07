@@ -1,7 +1,5 @@
 import { UsuarioInterface } from 'src/app/interfaces/UsuarioInterface';
 import { Funcao } from '../cargo/funcao.model';
-import { Cidade } from '../cidade/cidade.model';
-import { Uf } from '../uf/uf.model';
 import { Tipo } from '../tipo/tipo.model';
 import { Bu } from '../bu/bu.model';
 
@@ -22,8 +20,8 @@ export class Usuario implements UsuarioInterface {
   codigoRe?: string;
   status?: string;
   cargo?: Funcao;
-  cidade?: Cidade;
-  uf?: Uf;
+  cidade?: string;
+  uf?: string;
   tipo?: Tipo;
   bu?: Bu;
   celular?: string;
@@ -46,10 +44,10 @@ export class Usuario implements UsuarioInterface {
     codigoRe?: string,
     status?: string,
     cargo?: Funcao,
-    cidade?: Cidade,
+    cidade?: string,
     bu?: Bu,
     tipo?: Tipo,
-    uf?: Uf,
+    uf?: string,
     celular: string = "",
     primeiroAcesso?: boolean,
     senha?: string,

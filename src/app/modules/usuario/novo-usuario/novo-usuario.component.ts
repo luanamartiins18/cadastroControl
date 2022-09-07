@@ -4,18 +4,12 @@ import { UsuarioService } from '../../../services/usuario/usuario.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
-import { Cidade } from 'src/app/models/cidade/cidade.model';
-import { Uf } from 'src/app/models/uf/uf.model';
-import { CidadeService } from 'src/app/services/cidade/cidade.service';
-import { UfService } from 'src/app/services/uf/uf.service';
-import { MatDialog } from '@angular/material/dialog';
 import {FuncaoService} from 'src/app/services/funcao/funcao.service'
 import { Funcao } from 'src/app/models/cargo/funcao.model';
 import { Bu } from 'src/app/models/bu/bu.model';
 import { Tipo } from 'src/app/models/tipo/tipo.model';
 import { BuService } from 'src/app/services/bu/bu.service';
 import { TipoService } from 'src/app/services/tipo/tipo.service';
-import { HttpClient } from "@angular/common/http";
 
 
 @Component({
@@ -28,19 +22,11 @@ export class NovoUsuarioComponent implements OnInit {
   listaCargo: Array<Funcao>;
   listaBu: Array<Bu>;
   listaTipo: Array<Tipo>;
-  listaCidade: Array<Cidade>;
-  listaUf: Array<Uf>;
   form: FormGroup;
-  formValido: boolean = true;
-  dropdownSettings = {};
-  perfisItems = [];
-  siglasItems = [];
   usuario: Usuario = new Usuario();
   id: any;
 
   constructor(
-    private cidadeService: CidadeService,
-    private ufService: UfService,
     private funcaoService: FuncaoService,
     private buService: BuService,
     private tipoService: TipoService,
@@ -49,33 +35,19 @@ export class NovoUsuarioComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public formBuilder: FormBuilder,
-    private http: HttpClient,
+    
   
   ) { }
 
   ngOnInit() {
-    this.configDropdown();
     this.montaFormBuilder();
     this.carregaUsuarios();
-    this.getCidade();
     this.getCargos();
     this.getBu();
     this.getTipo();
-    this.getUf();
     this.getCEP(this.usuario.cep);
   }
 
-  private configDropdown() {
-    this.dropdownSettings = {
-      singleSelection: false,
-      idField: 'id',
-      textField: 'descricao',
-      selectAllText: 'Selecione Todos',
-      unSelectAllText: 'Desmarcar Todos',
-      itemsShowLimit: 3,
-      allowSearchFilter: true
-    };
-  }
 
   private montaFormBuilder() {
     this.form = this.formBuilder.group({
@@ -86,7 +58,7 @@ export class NovoUsuarioComponent implements OnInit {
       rg: [this.usuario.rg, [Validators.required]],
       data_emissao: [this.usuario.data_emissao, [Validators.required]],
       org_emissor:[this.usuario.org_emissor, [Validators.required]],
-      cep: [this.usuario.cep, [Validators.required]],
+      cep: [this.usuario.cep, [Validators.required, ]],
       endereco: [this.usuario.endereco, [Validators.required]],
       cidade: [this.usuario.cidade, [Validators.required]],
       uf: [this.usuario.uf, [Validators.required]],
@@ -118,39 +90,23 @@ export class NovoUsuarioComponent implements OnInit {
   }
 
 
- 
-  private getCidade() {
-    this.cidadeService.getCidade().subscribe((lista) => {
-      this.listaCidade = lista;
-    });
-  }
-  private getUf() {
-    this.ufService.getUf().subscribe((lista) => {
-      this.listaUf = lista;
-    });
-  }
-
   getCEP(event: any) {
-    var a = [];
-    if(event){
-      var value = event.target.value;
-      var numberPattern = /\d+/g;
-      value = value.match( numberPattern ).join([]);
-      var url = this.usuarioService.buscaCep(value);
-      url.subscribe(data => {
-        console.log((<HTMLInputElement>document.getElementById("endereco")));
-        (<HTMLInputElement>document.getElementById("endereco")).value = data['logradouro'];
-        (<HTMLInputElement>document.getElementById("complemento")).value = data['bairro'];
-        (<HTMLInputElement>document.getElementById("cidade")).value = data['localidade'];
-        (<HTMLInputElement>document.getElementById("uf")).value = data['uf'];
-      });
-      
-      return url
+      if(event){
+        var value = event.target.value;
+        var numberPattern = /\d+/g;
+        value = value.match( numberPattern ).join([]);
+        var url = this.usuarioService.buscaCep(value);
+        url.subscribe(data => {
+          (<HTMLInputElement>document.getElementById("endereco")).value = data['logradouro'];
+          (<HTMLInputElement>document.getElementById("complemento")).value = data['bairro'];
+          (<HTMLInputElement>document.getElementById("cidade")).value = data['localidade'];
+          (<HTMLInputElement>document.getElementById("uf")).value = data['uf'];
+        });
+        return url
+      } 
     }
-  }
 
   
-
   private carregaUsuarios() {
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {
@@ -186,7 +142,7 @@ export class NovoUsuarioComponent implements OnInit {
       }
     }, err => {
       if (err.error.errors) {
-        err.error.errors.forEach(element => {
+        err.error.errors.forEach((element: { defaultMessage: string; }) => {
           this.notifier.notify("error", element.defaultMessage);
         });
       }
@@ -210,7 +166,7 @@ export class NovoUsuarioComponent implements OnInit {
       }
     }, err => {
       if (err.error.errors) {
-        err.error.errors.forEach(element => {
+        err.error.errors.forEach((element: { defaultMessage: string; }) => {
           this.notifier.notify("error", element.defaultMessage);
         });
       }

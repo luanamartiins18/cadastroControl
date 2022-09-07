@@ -5,9 +5,7 @@ import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
-import { UsuarioService } from 'src/app/services/usuario/usuario.service';
-import * as CryptoJS from 'crypto-js';
-import { EmailService } from 'src/app/services/email/email.service';
+
 
 @Component({
   selector: 'app-login',
@@ -27,8 +25,6 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
 
   constructor(private loginService: LoginService,
-    private usuarioService: UsuarioService,
-    private emailService: EmailService,
     private formBuilder: FormBuilder,
     private router: Router,
     private modalService: NgbModal,
@@ -37,21 +33,21 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      codigoRe: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(80)]],
-      senha: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(80)]],
+      codigoRe: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
+      senha: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
     });
     this.senhaForm = this.formBuilder.group({
-      senha: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(80)]],
-      confSenha: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(80)]],
+      senha: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
+      confSenha: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
     });
     this.recuperacaoForm = this.formBuilder.group({
-      cpf: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(80)]]
+      cpf: ["", [Validators.required, Validators.minLength(11), Validators.maxLength(15)]]
     });
   }
 
   checaLogin() {
     if (this.loginForm.invalid) {
-      return this.nt.notify("error", "Preencha todos os campos");
+      return this.nt.notify("error", "Campos invalidos");
     }
     this.loginService.autenticaUsuario(this.loginForm.get('codigoRe'), this.loginForm.get('senha')).subscribe(
       (data: { status: number; body: Usuario; }) => {
@@ -75,70 +71,111 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  private alteraSenha() {
-    if (this.senhaForm.invalid) {
-      this.senhaForm.reset();
-      return this.nt.notify("error", "Crie  uma senha com pelo menos 6 caracteres.");
-    }
-    if (this.senhaForm.value.senha != this.senhaForm.value.confSenha) {
-      this.senhaForm.reset();
-      return this.nt.notify("error", "As senhas não estão iguais.");
-    }
-    this.usuario.senha = CryptoJS.SHA256(this.usuario.senha).toString();
-    this.usuarioService.alteraSenha(this.usuario).subscribe((data) => {
-      if (data.status == 200) {
-        this.nt.notify("success", "Senha criada com sucesso!");
-        this.loginSucess();
-      }
-      else {
-        this.nt.notify("error", "Houve um erro no cadastro da senha, favor contatar o administrador do sistema.");
-      }
-    }, err => {
-      if (err.error.errors) {
-        err.error.errors.forEach(element => {
-          this.nt.notify("error", element.defaultMessage);
-        });
-      }
-      else {
-        this.nt.notify("error", "Ocorreu um erro inesperado, por favor tente novamente.");
-      }
-    });
-  }
-
   private loginSucess() {
     sessionStorage.setItem('colaborador', this.loginForm.get('codigoRe').value);
     this.router.navigate(['home']);
     this.senhaErrada = false;
   }
 
-  private openModalRecuperacao(){
-    this.modalService.open(this.modalRecuperacao);
-  }
-
-  private recuperarSenha() {
-    if (this.recuperacaoForm.invalid) {
-      this.recuperacaoForm.reset();
-      return this.nt.notify("error", "Insira um cpf  válido");
-    }
-    this.emailService.sendMail(this.usuario.cpf).subscribe((data) => {
-      this.nt.notify("error", this.usuario.email);
-      if (data.status == 200) {
-        this.nt.notify("success", "");
-        this.loginSucess();
-      }
-      else {
-        this.nt.notify("error", "");
-      }
-    }, err => {
-      if (err.error.errors) {
-        err.error.errors.forEach(element => {
-          this.nt.notify("error", element.defaultMessage);
-        });
-      }
-      else {
-        this.nt.notify("error", "");
-      }
-    });
-  }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // private alteraSenha() {
+  //   if (this.senhaForm.invalid) {
+  //     this.senhaForm.reset();
+  //     return this.nt.notify("error", "Crie  uma senha com pelo menos 6 caracteres.");
+  //   }
+  //   if (this.senhaForm.value.senha != this.senhaForm.value.confSenha) {
+  //     this.senhaForm.reset();
+  //     return this.nt.notify("error", "As senhas não estão iguais.");
+  //   }
+  //   this.usuario.senha = CryptoJS.SHA256(this.usuario.senha).toString();
+  //   this.usuarioService.alteraSenha(this.usuario).subscribe((data) => {
+  //     if (data.status == 200) {
+  //       this.nt.notify("success", "Senha criada com sucesso!");
+  //       this.loginSucess();
+  //     }
+  //     else {
+  //       this.nt.notify("error", "Houve um erro no cadastro da senha, favor contatar o administrador do sistema.");
+  //     }
+  //   }, err => {
+  //     if (err.error.errors) {
+  //       err.error.errors.forEach(element => {
+  //         this.nt.notify("error", element.defaultMessage);
+  //       });
+  //     }
+  //     else {
+  //       this.nt.notify("error", "Ocorreu um erro inesperado, por favor tente novamente.");
+  //     }
+  //   });
+  // }
+
+
+  // private openModalRecuperacao(){
+  //   this.modalService.open(this.modalRecuperacao);
+  // }
+
+  // private recuperarSenha() {
+  //   if (this.recuperacaoForm.invalid) {
+  //     this.recuperacaoForm.reset();
+  //     return this.nt.notify("error", "Insira um cpf  válido");
+  //   }
+  //   this.emailService.sendMail(this.usuario.cpf).subscribe((data) => {
+  //     this.nt.notify("error", this.usuario.email);
+  //     if (data.status == 200) {
+  //       this.nt.notify("success", "");
+  //       this.loginSucess();
+  //     }
+  //     else {
+  //       this.nt.notify("error", "");
+  //     }
+  //   }, err => {
+  //     if (err.error.errors) {
+  //       err.error.errors.forEach(element => {
+  //         this.nt.notify("error", element.defaultMessage);
+  //       });
+  //     }
+  //     else {
+  //       this.nt.notify("error", "");
+  //     }
+  //   });
+  // }

@@ -1,9 +1,8 @@
 
 import { BuInterface } from './BuInterface';
 import { CargoInterface } from './CargoInterface';
-import { CidadeInterface } from './cidadeInterface';
 import { TipoInterface } from './TipoInterface';
-import { UfInterface } from './UfInterface';
+
 
 export interface UsuarioInterface {
   id?: number;
@@ -21,8 +20,8 @@ export interface UsuarioInterface {
   codigoRe?: string;
   status?: string;
   cargo?: CargoInterface;
-  cidade?: CidadeInterface;
-  uf?: UfInterface;
+  cidade?: string;
+  uf?: string;
   tipo?: TipoInterface;
   bu?: BuInterface;
   celular?: string;
