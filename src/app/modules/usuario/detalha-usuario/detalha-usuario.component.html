@@ -164,39 +164,9 @@
                 disabled class='form-control' 
                 value={{usuario?.complemento}} 
                 type='text'
+                style="width: 480px" 
                 class='form-control' />
             </div> 
-          <!-- input cargo -->
-          <div >
-            <Label 
-            class="font-weight-bold">Cargo</Label>
-            <input 
-            disabled class='form-control' 
-            value={{usuario?.cargo?.descricao}} 
-            type='text'
-            class='form-control' />
-          </div> 
-          <!-- input TIPO -->
-          <div >
-            <Label 
-            class="font-weight-bold">Tipo</Label>
-            <input 
-            disabled class='form-control' 
-            value={{usuario?.tipo?.descricao}} 
-            type='text'
-            class='form-control' />
-          </div> 
-          <!-- input  -->
-           <div > 
-            <Label 
-            class="font-weight-bold">Área Négocio</Label>
-            <input 
-              style="width: 490px" 
-              disabled class='form-control' 
-              value={{usuario?.bu?.descricao}} 
-              type='text'
-              class='form-control' />
-          </div> 
             <div class="container">
               <div class="col-sm-3" >
                 <Label class="font-weight-bold">Status {{usuario?.status}}</Label>
@@ -215,12 +185,12 @@
                 </button>
                 </ng-template>
               </div> 
-              <div class="col-4 mt-4 ">
+            <section class="editbutton">
                 <button mat-raised-button 
                   (click)='editaUsuario()' 
                   color="blue">Editar usuário
                 </button>
-             </div>
+              </section>
             </div> 
           </div>
         </form>

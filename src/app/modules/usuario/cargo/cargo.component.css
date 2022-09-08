@@ -1,30 +1,56 @@
-.custom-size{
-    height: 26rem;
-    overflow: auto;
-    margin-top: 2rem;
-    border: 1px solid black;
-  }
+
+  *{
+    margin: 8;
+
+}
+
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    width: 848px;
+    min-width: 848px;
+    padding: 0;
+}
+.container div {
+  padding: 10px;    
+}
+
+
+.form-control {
+  width: 250px;
+  border: 1px solid black;
+  text-transform: uppercase;
+} 
+
+
+
+table{
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
   
-  .form-control{
-    border: 1px solid black;
-    text-transform: uppercase;
-  }
-    
-  table{
-    width: 100%;
-  }
   
-  .custom-row{
-    cursor: pointer;
-  }
-  
-  tr.mat-header-row{
-    background-color: black;
-  }
-  
-  th.mat-header-cell{
-    color: white;
-    font-size: 0.8rem;
-  }
-  
-  
+}
+
+.custom-row{
+  cursor: pointer;
+}
+
+tr.mat-header-row{
+  background-color: rgb(16, 15, 15);
+}
+
+th.mat-header-cell{
+  color: white;
+  font-size: 0.8rem;
+}
+
+.button{
+  width:10em;
+  height: 50px;
+  color: rgb(254, 252, 252);
+  background-color: red;
+
+}

@@ -26,24 +26,12 @@ export class UsuarioService {
     return this.http.get(`https://viacep.com.br/ws/${cep}/json/`);
   }
 
-  getCargoUsuario(re: String) {
-    return this.http.get(environment.api + 'usuario/' + re + '/cargo');
-  }
-
   getCidadeUsuario(re: String) {
     return this.http.get(environment.api + 'usuario/' + re + '/cidade');
   }
 
   getUfUsuario(re: String) {
     return this.http.get(environment.api + 'usuario/' + re + '/uf');
-  }
-
-  getTipoUsuario(re: String) {
-    return this.http.get(environment.api + 'usuario/' + re + '/tipo');
-  }
-
-  getBuUsuario(re: String) {
-    return this.http.get(environment.api + 'usuario/' + re + '/bu');
   }
 
   insereUsuario(param: Usuario) {
@@ -58,9 +46,6 @@ export class UsuarioService {
     return this.http.get<Usuario>(environment.api + 'usuarios/' + id);
   }
 
-  getHistoricoId(id){
-    return this.http.get<Usuario>(environment.api + 'historico/' + id);
-  }
 
   deleteUsuario(id: string | Usuario) {
     return this.http.delete(environment.api + "usuarios/" + id, { observe: 'response' });
@@ -70,12 +55,14 @@ export class UsuarioService {
     return this.http.put(environment.api + "usuarios/" + param.id, param, { headers: httpOptions.headers, observe: 'response' });
   }
 
+  insereFuncao(param: Usuario){
+    return this.http.post(environment.api + "funcao", param, { headers: httpOptions.headers, observe: 'response' });
+  }
+
+
   alteraStatus(param) {
     return this.http.post(environment.api + 'usuario-status', param, { headers: httpOptions.headers, observe: 'response' });
   }
 
-  alteraSenha(param: Usuario) {
-    return this.http.put(environment.api + "altera-senha/" + param.id, param, { headers: httpOptions.headers, observe: 'response' });
-  }
 
 }

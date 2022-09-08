@@ -14,7 +14,7 @@
       <li class="nav-item">
         <a [routerLink]="['/../cargo']" class="nav-link active">
           <i class="fa fa-user-plus" aria-hidden="true"></i>
-          Historico
+          Função
         </a>
     </li>
   </ul>
@@ -186,49 +186,9 @@
               formControlName='complemento' 
               type='text' 
               class='form-control' 
+              style="width: 520px" 
               [(ngModel)]='usuario.complemento'
               />
-          </div> 
-
-          <!-- input cargo -->
-          <div id='cargo'>
-            <label class="font-weight-bold">Cargo</label>
-            <select 
-            formControlName='cargo' 
-            class='form-control' 
-            [(ngModel)]="usuario.cargo">
-            <option [ngValue]="item"
-              type='text' 
-             [selected]=" usuario.cargo && usuario.cargo.id==item.id"
-                *ngFor='let item of this.listaCargo'>{{item.descricao}} </option>
-            </select>
-          </div>
-           <!-- input tipo -->
-           <div id='tipo'>
-            <label class="font-weight-bold">Tipo</label>
-            <select 
-            formControlName='tipo' 
-            class='form-control' 
-            [(ngModel)]="usuario.tipo">
-            <option [ngValue]="item"
-             class='form-control' 
-             [selected]=" usuario.tipo && usuario.tipo.id==item.id"
-                *ngFor='let item of this.listaTipo'>{{item.descricao}}</option>
-            </select>
-          </div>
-          <!-- input bu -->
-          <div id='bu'>
-            <label class="font-weight-bold">Área Negócio</label>
-            <select 
-            formControlName='bu' 
-            class='form-control' 
-            style="width: 520px" 
-            [(ngModel)]="usuario.bu">
-            <option [ngValue]="item"
-             class='form-control' 
-             [selected]=" usuario.bu && usuario.bu.id==item.id"
-                *ngFor='let item of this.listaBu'>{{item.descricao}}</option>
-            </select>
           </div>
             <!-- input botão -->
           <div class="container">

@@ -10,7 +10,6 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
-import { LoginComponent } from './login/login.component';
 import { NovoUsuarioComponent } from './novo-usuario/novo-usuario.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { DetalhaUsuarioComponent } from './detalha-usuario/detalha-usuario.component';
@@ -22,12 +21,12 @@ import { CpfPipe } from '../pipe/cpf.pipe';
 import { CepPipe } from '../pipe/cep.pipe';
 import { MatGridListModule } from '@angular/material';
 import { CargoComponent } from './cargo/cargo.component';
-import { HistoricoUsuarioComponent } from './historico-usuario/historico-usuario.component';
+
 
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 @NgModule({
-  declarations: [LoginComponent, NovoUsuarioComponent, UsuariosComponent, DetalhaUsuarioComponent, CpfPipe, CepPipe, CargoComponent, HistoricoUsuarioComponent],
+  declarations: [NovoUsuarioComponent, UsuariosComponent, DetalhaUsuarioComponent, CpfPipe, CepPipe, CargoComponent],
   imports: [
     CommonModule,
     FormsModule,

@@ -13,7 +13,7 @@ export class DetalhaUsuarioComponent implements OnInit {
 
   id: String;
   usuario: Usuario = new Usuario();
-  colunas = ['nome','endereco', 'cep','cpf', 'email', 'uf', 'cidade', 'codigoRe', 'status', 'numero','cargo', 'tipo', 'bu'];
+  colunas = ['nome','endereco', 'cep','cpf', 'email', 'uf', 'cidade', 'codigoRe', 'status', 'numero'];
 
   constructor(
     private route: ActivatedRoute,

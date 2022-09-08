@@ -4,12 +4,7 @@ import { UsuarioService } from '../../../services/usuario/usuario.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
-import {FuncaoService} from 'src/app/services/funcao/funcao.service'
-import { Funcao } from 'src/app/models/cargo/funcao.model';
-import { Bu } from 'src/app/models/bu/bu.model';
-import { Tipo } from 'src/app/models/tipo/tipo.model';
-import { BuService } from 'src/app/services/bu/bu.service';
-import { TipoService } from 'src/app/services/tipo/tipo.service';
+
 
 
 @Component({
@@ -19,17 +14,12 @@ import { TipoService } from 'src/app/services/tipo/tipo.service';
 })
 export class NovoUsuarioComponent implements OnInit {
 
-  listaCargo: Array<Funcao>;
-  listaBu: Array<Bu>;
-  listaTipo: Array<Tipo>;
+
   form: FormGroup;
   usuario: Usuario = new Usuario();
   id: any;
 
   constructor(
-    private funcaoService: FuncaoService,
-    private buService: BuService,
-    private tipoService: TipoService,
     private usuarioService: UsuarioService,
     private notifier: NotifierService,
     private route: ActivatedRoute,
@@ -42,9 +32,6 @@ export class NovoUsuarioComponent implements OnInit {
   ngOnInit() {
     this.montaFormBuilder();
     this.carregaUsuarios();
-    this.getCargos();
-    this.getBu();
-    this.getTipo();
     this.getCEP(this.usuario.cep);
   }
 
@@ -66,45 +53,36 @@ export class NovoUsuarioComponent implements OnInit {
       codigoRe: [this.usuario.codigoRe, [Validators.required]],
       numero: [this.usuario.numero, [Validators.required]],
       complemento: [this.usuario.complemento, [Validators.required]],
-      cargo:[this.usuario.cargo,[Validators.required]],
-      bu: [this.usuario.bu,[Validators.required]],
-      tipo:[this.usuario.tipo,[Validators.required]]
     });
   }
-
-  private getCargos() {
-    this.funcaoService.getCargo().subscribe((lista) => {
-      this.listaCargo = lista;
-    });
-  }
-  private getBu() {
-    this.buService.getBu().subscribe((lista) => {
-      this.listaBu = lista;
-    });
-  }
-
-  private getTipo() {
-    this.tipoService.getTipo().subscribe((lista) => {
-      this.listaTipo = lista;
-    });
-  }
+    
 
 
   getCEP(event: any) {
       if(event){
         var value = event.target.value;
         var numberPattern = /\d+/g;
-        value = value.match( numberPattern ).join([]);
+        var validacep = /^[0-9]{8}$/;
+        value = value.match( numberPattern, validacep).join([]);
         var url = this.usuarioService.buscaCep(value);
         url.subscribe(data => {
-          (<HTMLInputElement>document.getElementById("endereco")).value = data['logradouro'];
-          (<HTMLInputElement>document.getElementById("complemento")).value = data['bairro'];
-          (<HTMLInputElement>document.getElementById("cidade")).value = data['localidade'];
-          (<HTMLInputElement>document.getElementById("uf")).value = data['uf'];
+          console.log(data['erro']);
+          if(data['erro']) {
+            alert("Formato de CEP inválido.");
+          } else{
+            (<HTMLInputElement>document.getElementById("endereco")).value = data['logradouro'];
+             this.usuario.endereco = data['logradouro'];
+            (<HTMLInputElement>document.getElementById("complemento")).value = data['bairro'];
+            this.usuario.complemento = data['bairro'];
+            (<HTMLInputElement>document.getElementById("cidade")).value = data['localidade'];
+            this.usuario.cidade = data['localidade'];
+            (<HTMLInputElement>document.getElementById("uf")).value = data['uf'];
+            this.usuario.uf = data['uf'];
+          }
         });
         return url
       } 
-    }
+  }
 
   
   private carregaUsuarios() {
@@ -120,14 +98,11 @@ export class NovoUsuarioComponent implements OnInit {
 
   submit() {
     if (this.form.invalid) {
-      this.notifier.notify("error", "Todos os campos devem ser preenchidos!");
-    } else {
-
-      if (this.id) {
+      this.notifier.notify("error", "Campos devem ser preenchidos corretamente!");
+    }  else if(this.id){
         this.atualizaUsuario();
       } else {
         this.insereUsuario();
-      }
     }
   }
 

@@ -1,9 +1,6 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
-import { LoginService } from '../../usuario/login.service';
 import { Router } from '@angular/router';
-
-
 
 @Component({
   selector: 'navbar',
@@ -18,27 +15,12 @@ export class NavbarComponent implements OnInit {
   logoQintessRed: string = './assets/qintes-logo-reduzido.jpg';
   logoBB: string = './assets/bb-logo.jpg'
 
-  constructor(private loginService: LoginService,
+  constructor(
     private router: Router) { }
 
   ngOnChanges() {
   }
-  deslogaUsuario() {
-    this.loginService.deslogaUsuario();
-    this.router.navigate(['login']);
-  }
-
+ 
   ngOnInit() { }
 
-  admGestor(id: number) {
-    return ( id == 13 || id == 9 || id == 20 || id == 21);
-  }
-
-  gestor(id: number) {
-    return ( id == 9 || id == 20 || id == 21);
-  }
-
-  colaborador(id: number) {
-    return (id == 3);
-  }
 }

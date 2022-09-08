@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
-import { LoginService } from '../../usuario/login.service';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from '../../../models/usuario/usuario.model';
 
@@ -8,7 +7,7 @@ import { Usuario } from '../../../models/usuario/usuario.model';
   templateUrl: './Header.component.html',
   styleUrls: ['./Header.component.css']
 })
-export class HeaderComponent implements OnInit, OnChanges {
+export class HeaderComponent implements OnInit {
 
   logoQintess: string = './assets/Qintess-logo-alt.jpg';
   logoQintessRed: string = './assets/qintes-logo-reduzido.jpg';
@@ -16,16 +15,9 @@ export class HeaderComponent implements OnInit, OnChanges {
   @Input() usuario: Usuario;
   lisPerfil: String;
 
-  constructor(private loginService: LoginService,
-    private router: Router) { }
+  constructor() { }
 
   ngOnInit() { }
 
-  ngOnChanges() {
-  }
 
-  deslogaUsuario() {
-    this.loginService.deslogaUsuario();
-    this.router.navigate(['login']);
-  }
 }

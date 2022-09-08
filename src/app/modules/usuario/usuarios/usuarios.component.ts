@@ -14,7 +14,7 @@ export class UsuariosComponent implements OnInit {
   usuariosSearch: Usuario[] = [];
   
   colunas = [
-  'nome', 'cpf', 'cargo', 'codigoRe', 'endereco',  'status'
+  'nome', 'cpf',  'codigoRe', 'endereco',  'status'
   ];
   
 

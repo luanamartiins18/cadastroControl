@@ -2,32 +2,8 @@
   <div class='row'>
     <div class='col-md-12'>
       <div class="row">
-        <div class="col-md-12 teste d-flex justify-content-end align-items-center">
-          <i class="fa fa-power-off"></i>
-          <button class='btn-desloga' (click)='deslogaUsuario()'>Sair</button>
-        </div>
         <div class='col-md-8'>
           <img [src]="logoQintess" class="logo-qintess mr-3" />
-        </div>
-        <div class='col-md-4 d-flex align-items-end pl-5'>
-          <div class="dados-pessoais">
-            <div class='icone'>
-              <i class="fa fa-user"></i>
-              <span>{{this.usuario?.nome | titlecase}}</span>
-            </div>
-            <div class='icone'>
-              <i class="fa fa-briefcase"></i>
-              <span>{{this.usuario?.cargo.descricao}}</span>
-            </div>
-            <div class='icone pb-1'>
-              <i class="fa fa-address-card"></i>
-              <span>{{this.usuario?.codigoRe}}</span>
-            </div>
-            <div class='icone pb-1'>
-              <i class="fa fa-users"></i>
-              <span>{{this.lisPerfil}}</span>
-            </div>
-          </div>
         </div>
       </div>
     </div>
