@@ -16,7 +16,7 @@ const routes: Routes = [
       {path: 'usuarios/:id', component: DetalhaUsuarioComponent},
       {path: 'novo-usuario/:id', component: NovoUsuarioComponent},
       {path: 'novo-usuario', component: NovoUsuarioComponent},
-      {path: 'cargo', component:CargoComponent},
+      {path: 'funcao', component:CargoComponent},
     ]
   }
 ];

@@ -11,10 +11,8 @@ import { Usuario } from 'src/app/models/usuario/usuario.model';
 export class UsuariosComponent implements OnInit {
 
   usuarios: Usuario[] = [];
-  usuariosSearch: Usuario[] = [];
-  
   colunas = [
-  'nome', 'cpf',  'codigoRe', 'endereco',  'status'
+    'nome', 'cpf',  'codigoRe', 'cargo',  'status'
   ];
   
 
@@ -28,16 +26,16 @@ export class UsuariosComponent implements OnInit {
     this.us.getListaUsuarios().subscribe(
       data => {
       this.usuarios = data;
-      this.usuariosSearch = data;
     });
   }
+  
   detalhaUsuarios(row: { id: string; }) {
     this.router.navigate(['/../usuarios/' + row.id]);
   }
 
 
   searchAllField(event: any) {
-    this.usuariosSearch = this.usuarios.filter(obj => {
+    this.usuarios = this.usuarios.filter(obj => {
       return Object.keys(obj).find((key) => {
         return obj[key] ? ((obj[key].descricao ? obj[key].descricao : obj[key]).toString().toUpperCase()).includes(event.target.value.toUpperCase()) : false;
       });

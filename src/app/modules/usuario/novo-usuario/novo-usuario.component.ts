@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { UsuarioService } from '../../../services/usuario/usuario.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
+import { MatDialog } from '@angular/material';
+import { DialogComponent } from '../dialog/dialog.component';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 
 
@@ -25,8 +28,8 @@ export class NovoUsuarioComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public formBuilder: FormBuilder,
-    
-  
+
+
   ) { }
 
   ngOnInit() {
@@ -55,9 +58,15 @@ export class NovoUsuarioComponent implements OnInit {
       complemento: [this.usuario.complemento, [Validators.required]],
     });
   }
-    
 
-
+  limpa_formulário_cep() {
+    //Limpa valores do formulário de cep.
+    (<HTMLInputElement>document.getElementById('endereco')).value=("");
+    (<HTMLInputElement>document.getElementById('complemento')).value=("");
+    (<HTMLInputElement>document.getElementById('cidade')).value=("");
+    (<HTMLInputElement>document.getElementById('uf')).value=("");
+}
+  
   getCEP(event: any) {
       if(event){
         var value = event.target.value;
@@ -66,8 +75,8 @@ export class NovoUsuarioComponent implements OnInit {
         value = value.match( numberPattern, validacep).join([]);
         var url = this.usuarioService.buscaCep(value);
         url.subscribe(data => {
-          console.log(data['erro']);
           if(data['erro']) {
+            this.limpa_formulário_cep()
             alert("Formato de CEP inválido.");
           } else{
             (<HTMLInputElement>document.getElementById("endereco")).value = data['logradouro'];
@@ -82,6 +91,7 @@ export class NovoUsuarioComponent implements OnInit {
         });
         return url
       } 
+      
   }
 
   
@@ -95,10 +105,10 @@ export class NovoUsuarioComponent implements OnInit {
       );
     }
   }
-
+ 
   submit() {
     if (this.form.invalid) {
-      this.notifier.notify("error", "Campos devem ser preenchidos corretamente!");
+      this.notifier.notify("error", " Todos os ampos devem ser preenchidos corretamente!");
     }  else if(this.id){
         this.atualizaUsuario();
       } else {
@@ -113,21 +123,10 @@ export class NovoUsuarioComponent implements OnInit {
         this.router.navigate(['usuarios']);
       }
       else {
-        this.notifier.notify("error", "Houve um erro no cadastro do usuario, favor contatar o administrador do sistema.");
+        this.notifier.notify("error", "Ocorreu um erro ao cadastrar, por favor tente novamente.");
       }
-    }, err => {
-      if (err.error.errors) {
-        err.error.errors.forEach((element: { defaultMessage: string; }) => {
-          this.notifier.notify("error", element.defaultMessage);
-        });
-      }
-      else if (err.error.message) {
-        this.notifier.notify("error", err.error.message);
-      }
-      else {
-        this.notifier.notify("error", "Ocorreu um erro inesperado, por favor tente novamente.");
-      }
-    });
+    }, 
+    );
   }
 
   private atualizaUsuario() {
@@ -137,20 +136,9 @@ export class NovoUsuarioComponent implements OnInit {
         this.router.navigate(['usuarios']);
       }
       else {
-        this.notifier.notify("error", "Houve um erro na atualização do usuario, favor contatar o administrador do sistema.");
+        this.notifier.notify("error", "Ocorreu um erro na atualização, por favor tente novamente.");
       }
-    }, err => {
-      if (err.error.errors) {
-        err.error.errors.forEach((element: { defaultMessage: string; }) => {
-          this.notifier.notify("error", element.defaultMessage);
-        });
-      }
-      else if (err.error.message) {
-        this.notifier.notify("error", err.error.message);
-      }
-      else {
-        this.notifier.notify("error", "Ocorreu um erro inesperado, por favor tente novamente.");
-      }
-    });
+    }, 
+   );
   }
 }

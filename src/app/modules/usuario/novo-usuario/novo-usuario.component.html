@@ -12,7 +12,7 @@
         Cadastro
       </a>
       <li class="nav-item">
-        <a [routerLink]="['/../cargo']" class="nav-link active">
+        <a [routerLink]="['/../funcao']" class="nav-link active">
           <i class="fa fa-user-plus" aria-hidden="true"></i>
           Função
         </a>
@@ -47,7 +47,7 @@
           <input 
           formControlName='data_nascimento' 
           [(ngModel)]='usuario.data_nascimento' 
-          type='date' 
+          type='date'
           class='form-control' />
         </div>
       <!-- input RG -->
@@ -82,14 +82,14 @@
         </div>
     </div>
     <div class="container-full">
-      <div  id="nome" >
-        <Label class="font-weight-bold">Nome</Label>  
+      <div id="rg" >
+        <Label class="font-weight-bold">Nome</Label>
         <input 
-          formControlName='nome' 
-          class="form-control"
-          style="width: 790px" 
-          [(ngModel)]="usuario.nome "
-          type="text">
+        formControlName='nome' 
+        [(ngModel)]='usuario.nome'
+        type='text' 
+        style="width: 790px" 
+        class='form-control' />
       </div>
            <!-- input email -->
          <div id="email">
@@ -108,7 +108,6 @@
          <div id="celular">
           <Label class="font-weight-bold">Celular</Label>
           <input 
-            id="celular"
             mask="(00) 00000-0000" 
             [showMaskTyped]="true" 
             [dropSpecialCharacters]="false" 
@@ -123,7 +122,6 @@
          <div>
           <Label class="font-weight-bold">CEP</Label>
           <input 
-          id="cep"
           mask="00.000-000" 
           [showMaskTyped]="true"
           formControlName='cep' 
@@ -135,21 +133,19 @@
         </div> 
 
         <!-- input cidade -->
-        <div>
+        <div  id="cidade">
           <Label class="font-weight-bold">Cidade</Label>
           <input 
             type="text"
-            id="cidade"
             class='form-control'
             formControlName='cidade' 
             [(ngModel)]='usuario.cidade'
           />
         </div> 
         <!-- input uf -->
-        <div>
+        <div id="uf">
           <Label class="font-weight-bold">UF</Label>
           <input 
-            id="uf"
             formControlName='uf' 
             type="text"
             class='form-control'
@@ -157,10 +153,9 @@
         />
       </div> 
         <!-- input endereco -->
-          <div>
+          <div id="endereco">
             <Label class="font-weight-bold">Endereço</Label>
             <input 
-              id="endereco"
               formControlName='endereco' 
               type='text' 
               class='form-control' 
@@ -171,7 +166,6 @@
             <div >
               <Label class="font-weight-bold">Nº</Label>
                 <input 
-                  id="numero"
                   formControlName='numero' 
                   type='text' 
                   class='form-control' 
@@ -179,10 +173,9 @@
                 />
             </div> 
           <!-- input complemento -->
-           <div>
+           <div id="complemento">
             <Label class="font-weight-bold">Complemento</Label>
             <input 
-              id="complemento"
               formControlName='complemento' 
               type='text' 
               class='form-control' 
@@ -193,7 +186,7 @@
             <!-- input botão -->
           <div class="container">
           <div class='col-sm-4'>
-            <input (click)='submit()'
+            <input (click)="submit()"
             type="submit" 
             value="Cadastrar" 
             class='button' />

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
+import { Historico } from 'src/app/models/historico/historico.model';
 
 
 const httpOptions = {
@@ -34,12 +35,13 @@ export class UsuarioService {
     return this.http.get(environment.api + 'usuario/' + re + '/uf');
   }
 
-  insereUsuario(param: Usuario) {
-    return this.http.post(environment.api + "usuarios", param, { headers: httpOptions.headers, observe: 'response' });
-  }
 
   getListaUsuarios() {
     return this.http.get<Usuario[]>(environment.api + 'usuarios');
+  }
+
+  getListaHistorico() {
+    return this.http.get<Historico[]>(environment.api + 'historico');
   }
 
   getUsuarioId(id) {
@@ -47,12 +49,16 @@ export class UsuarioService {
   }
 
 
-  deleteUsuario(id: string | Usuario) {
+  deleteUsuario(id) {
     return this.http.delete(environment.api + "usuarios/" + id, { observe: 'response' });
   }
 
   atualizaUsuario(param: Usuario) {
     return this.http.put(environment.api + "usuarios/" + param.id, param, { headers: httpOptions.headers, observe: 'response' });
+  }
+
+  insereUsuario(param: Usuario) {
+    return this.http.post(environment.api + "usuarios", param, { headers: httpOptions.headers, observe: 'response' });
   }
 
   insereFuncao(param: Usuario){
@@ -63,6 +69,5 @@ export class UsuarioService {
   alteraStatus(param) {
     return this.http.post(environment.api + 'usuario-status', param, { headers: httpOptions.headers, observe: 'response' });
   }
-
 
 }

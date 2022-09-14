@@ -15,12 +15,7 @@ export class NavbarComponent implements OnInit {
   logoQintessRed: string = './assets/qintes-logo-reduzido.jpg';
   logoBB: string = './assets/bb-logo.jpg'
 
-  constructor(
-    private router: Router) { }
-
-  ngOnChanges() {
-  }
- 
+  constructor() { }
   ngOnInit() { }
 
 }

@@ -13,9 +13,9 @@
       </a>
     </li>
       <li class="nav-item">
-        <a [routerLink]="['/../cargo']" class="nav-link active">
+        <a [routerLink]="['/../funcao']" class="nav-link active">
           <i class="fa fa-user-plus" aria-hidden="true"></i>
-          Historico
+          Função
         </a>
     </li>
   </ul>
@@ -168,7 +168,7 @@
                 class='form-control' />
             </div> 
             <div class="container">
-              <div class="col-sm-3" >
+              <div class="col-sm-4" >
                 <Label class="font-weight-bold">Status {{usuario?.status}}</Label>
                 <section *ngIf='usuario.status == "Ativo"; else inativo'>
                     <button mat-raised-button 
@@ -185,12 +185,18 @@
                 </button>
                 </ng-template>
               </div> 
-            <section class="editbutton">
+            <section class="editbutton  col-sm-4">
                 <button mat-raised-button 
                   (click)='editaUsuario()' 
                   color="blue">Editar usuário
                 </button>
               </section>
+              <!-- <section class="editbutton  col-sm-4">
+                <button mat-raised-button 
+                  (click)='deleteUsuario()' 
+                  color="blue">Deletar
+                </button>
+              </section> -->
             </div> 
           </div>
         </form>

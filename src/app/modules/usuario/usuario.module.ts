@@ -16,17 +16,24 @@ import { DetalhaUsuarioComponent } from './detalha-usuario/detalha-usuario.compo
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatButtonModule} from '@angular/material/button';
-import {MatDialogModule} from '@angular/material/dialog';
 import { CpfPipe } from '../pipe/cpf.pipe';
 import { CepPipe } from '../pipe/cep.pipe';
 import { MatGridListModule } from '@angular/material';
 import { CargoComponent } from './cargo/cargo.component';
-
-
+import { DialogComponent } from './dialog/dialog.component';
+import {MatDialogModule} from '@angular/material/dialog'; 
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 @NgModule({
-  declarations: [NovoUsuarioComponent, UsuariosComponent, DetalhaUsuarioComponent, CpfPipe, CepPipe, CargoComponent],
+  declarations: [
+    NovoUsuarioComponent, 
+    UsuariosComponent, 
+    DetalhaUsuarioComponent, 
+    CpfPipe, 
+    CepPipe, 
+    CargoComponent, 
+    DialogComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -37,12 +44,12 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     MatSortModule,
     MatGridListModule,
     MatDatepickerModule,
-    MatDialogModule,
     MatFormFieldModule,
     MatNativeDateModule,
     MatInputModule,
     MatButtonModule,
     NgbModule,
+    MatDialogModule,
     NgxMaskModule.forRoot(options),
     NgMultiSelectDropDownModule.forRoot()
   ]

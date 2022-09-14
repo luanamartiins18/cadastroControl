@@ -24,14 +24,17 @@
   text-transform: uppercase;
 } 
 
-
+.tabelaHistorico {
+  margin-left: 200px;
+}
 
 table{
-  width: 30%;
-  margin-left: auto;
+  width: 35%;
+  margin-left:auto;
   margin-right: auto;
-  
-  
+  overflow: scroll;
+  border: 1px solid black;
+
 }
 
 .custom-row{
@@ -51,6 +54,6 @@ th.mat-header-cell{
   width:10em;
   height: 50px;
   color: rgb(254, 252, 252);
-  background-color: red;
+  background-color: rgb(3, 90, 32);
 
 }

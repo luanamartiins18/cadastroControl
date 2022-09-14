@@ -13,7 +13,7 @@
         Cadastro
       </a>
       <li class="nav-item">
-        <a [routerLink]="['/../cargo']" class="nav-link active">
+        <a [routerLink]="['/../funcao']" class="nav-link active">
           <i class="fa fa-user-plus" aria-hidden="true"></i>
           Função
         </a>
@@ -27,31 +27,32 @@
           formControlName='codigoRe' 
           [(ngModel)]="usuario.codigoRe" 
           type='text' 
+          (blur)="getNome($event)"
           placeholder="RExxxxxx"
           maxlength="8"
           class='form-control' />
         </div>
-        <div  id="nome" >
-          <Label class="font-weight-bold">Nome</Label>  
+        <div id="nome">
+          <Label class="font-weight-bold">Nome</Label>
           <input 
-            formControlName='nome' 
-            class="form-control"
-            [(ngModel)]="usuario.nome "
-            type="text">
+            disabled class='form-control' 
+            value={{usuario?.nome?.toUpperCase()}} 
+            type='text'
+            class='form-control' />
         </div>
-              <!-- input cargo -->
-              <div id='cargo'>
-                <label class="font-weight-bold">Cargo</label>
-                <select 
-                formControlName='cargo' 
-                class='form-control' 
-                [(ngModel)]="usuario.cargo">
-                <option [ngValue]="item"
-                  type='text' 
-                 [selected]=" usuario.cargo && usuario.cargo.id==item.id"
-                    *ngFor='let item of this.listaCargo'>{{item.descricao}} </option>
-                </select>
-              </div>
+        <!-- input cargo -->
+          <div id='cargo'>
+            <label class="font-weight-bold">Cargo</label>
+              <select 
+              formControlName='cargo' 
+              class='form-control' 
+              [(ngModel)]="usuario.cargo">
+              <option [ngValue]="item"
+                type='text'
+                [selected]=" usuario.cargo && usuario.cargo.id==item.id"
+                  *ngFor='let item of this.listaCargo'>{{item.descricao}} </option>
+              </select>
+          </div>
                <!-- input tipo -->
                <div id='tipo'>
                 <label class="font-weight-bold">Tipo</label>
@@ -89,4 +90,23 @@
             </div>
       </div>
   </form>
+  <div class="tabelaHistorico"  >
+    <table mat-table [dataSource]=" historico" matSort>
+      <ng-container matColumnDef="cargo">
+        <th mat-header-cell *matHeaderCellDef> CARGO</th>
+        <td mat-cell *matCellDef="let element"> {{element.cargo.descricao}} </td>
+      </ng-container>
+      <ng-container matColumnDef="data_inicio">
+        <th mat-header-cell *matHeaderCellDef>DATA_INICIO</th>
+        <td mat-cell *matCellDef="let element"> {{element.data_inicio | date : 'dd/MM/yyyy'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="data_final">
+        <th mat-header-cell *matHeaderCellDef>DATA_FINAL</th>
+        <td mat-cell *matCellDef="let element"> {{element.data_final | date : 'dd/MM/yyyy'}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="colunas; sticky: true"></tr>
+      <tr class='custom-row' mat-row *matRowDef="let row; columns: colunas;"></tr>
+    </table>
+  </div>
 </div>
+

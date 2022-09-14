@@ -1,9 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { UsuarioModule } from './modules/usuario/usuario.module';
 import { PaginaInicialModule } from './modules/pagina-inicial/pagina-inicial.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -12,6 +10,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { MatDialogModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -24,6 +23,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     PaginaInicialModule,
     HttpClientModule,   
     NgSelectModule,
+    MatDialogModule,
     FormsModule,
     NgbModule,
     NotifierModule.withConfig({

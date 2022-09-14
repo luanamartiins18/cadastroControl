@@ -41,28 +41,22 @@ export class DetalhaUsuarioComponent implements OnInit {
 
 
   deleteUsuario() {
-    this.us.deleteUsuario(this.usuario).subscribe((data) => {
-      if (data.status == 200) {
-        this.nt.notify("success", "Usuário deletado com sucesso!");
-        this.router.navigate(['usuarios']);
+    let param = {
+      id: this.usuario.id,
+    };
+    this.us.deleteUsuario(param).subscribe(
+      (data) => {
+        if (data.status == 200) {
+          this.nt.notify("success", "Usuario deletado");
+          this.carregaUsuarios();
+          this.router.navigate([this.router.url]);
+        } else {
+          this.nt.notify("error", "Houve um erro ao gravar as informações, favor contatar o administrador do sistema");
+        }
       }
-      else {
-        this.nt.notify("error", "Houve um erro ao deletar o usuario, favor contatar o administrador do sistema.");
-      }
-    }, err => {
-      if (err.error.errors) {
-        err.error.errors.forEach((element: { defaultMessage: string; }) => {
-          this.nt.notify("error", element.defaultMessage);
-        });
-      }
-      else if (err.error.message) {
-        this.nt.notify("error", err.error.message);
-      }
-      else {
-        this.nt.notify("error", "Ocorreu um erro inesperado, por favor tente novamente.");
-      }
-    });
+    );
   }
+
 
   alteraStatus(acao: any) {
     let param = {
