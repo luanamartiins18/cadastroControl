@@ -12,7 +12,7 @@ export class UsuariosComponent implements OnInit {
 
   usuarios: Usuario[] = [];
   colunas = [
-    'nome', 'cpf',  'codigoRe', 'cargo',  'status'
+    'nome', 'cpf',  'codigoRe',  'status', 'cargo'
   ];
   
 

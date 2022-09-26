@@ -25,16 +25,23 @@
 } 
 
 .tabelaHistorico {
-  margin-left: 200px;
+  margin-left: 40px;
+  max-height: 450px;
+  overflow: auto;
+  margin-bottom: 30px;
 }
 
 table{
-  width: 35%;
+  width: 58%;
   margin-left:auto;
-  margin-right: auto;
+  margin-right: 300px;
   overflow: scroll;
   border: 1px solid black;
 
+}
+
+.tableok {
+    overflow: auto !important;
 }
 
 .custom-row{
@@ -49,11 +56,18 @@ th.mat-header-cell{
   color: white;
   font-size: 0.8rem;
 }
+  
+.button1 {
+  font-size: 12px;
+  background-color: rgb(204, 24, 240);
+  width: 120px;
+  padding: 1px 15px 3px 2px;
+  border-radius: 50px;
+  margin-left: 320px;
+  color: #ffff;
+}
 
-.button{
-  width:10em;
-  height: 50px;
-  color: rgb(254, 252, 252);
-  background-color: rgb(3, 90, 32);
-
+.mat-icon  {
+  margin-left: -20px;
+  
 }

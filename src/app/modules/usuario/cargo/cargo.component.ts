@@ -1,3 +1,4 @@
+import { not } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router} from '@angular/router';
@@ -28,18 +29,20 @@ export class CargoComponent implements OnInit {
   listaCargo: Array<Funcao>;
   listaBu: Array<Bu>;
   listaTipo: Array<Tipo>;
+  listaCargoHistorico: Array<{id: number, descricao: string}>;
   historico: Historico[] = [];
   id: any;
   colunas = [
-    'cargo', 'data_inicio', 'data_final', 
+    'cargo', 'data_inicio', 'data_final', 'vigente'
     ];
+  mostrarTabela: boolean;
+
   constructor(
     public formBuilder: FormBuilder,
     private funcaoService: FuncaoService,
     private buService: BuService,
     private usuarioService: UsuarioService,
     private tipoService: TipoService,
-    private router: Router,
     private notifier: NotifierService,
   ) { }
 
@@ -48,33 +51,54 @@ export class CargoComponent implements OnInit {
     this.getCargos();
     this.getBu();
     this.getTipo();
+    this.mostrarhistorico();
+    this.mostrarTabela = false;
   }
 
+
+  atualizarListaCargos() {
+    let listaCargoHistorico = [];
+    let arrIdsHistorico = [];
+  
+    this.historico.forEach((historico) =>{
+      arrIdsHistorico.push(historico.cargo.id);
+    })
+     this.listaCargo.forEach((cargo) => {
+      if(!arrIdsHistorico.includes(cargo.id)){
+        listaCargoHistorico.push(cargo);
+      }
+    })
+    this.listaCargo = listaCargoHistorico;
+  }
+ 
+
+
   mostrarhistorico() {
-    if(this.usuario.codigoRe != "") {
-      this.historico = []
-    }else {
-      this.usuarioService.getListaHistorico().subscribe(
+    this.mostrarTabela = true;
+    if(this.usuario.codigoRe == undefined) {
+      this.historico = [];
+    }else{
+      this.usuarioService.getListaHistoricoRe(this.usuario.codigoRe).subscribe(
         data => {
         this.historico = data;
+        this.atualizarListaCargos();
       });
-    
     }
   } 
-    
+
   getNome(event: any) {
     if(event){
       var value = event.target.value;
       var url = this.usuarioService.getUsuario(value);
       url.subscribe(data => {
-        if(data['erro']) {
-          alert("Ocorreu um erro.");
-        } else{
+        if(data) {
           (<HTMLInputElement>document.getElementById("nome")).value = data['nome'];
-            this.usuario.nome = data['nome'];
+          this.usuario.nome = data['nome'];
+        } else{
+          (<HTMLInputElement>document.getElementById('nome')).value=("");
         }
       });
-      return url
+      return url;
     } 
   }
 
@@ -93,6 +117,7 @@ export class CargoComponent implements OnInit {
       this.listaCargo = lista;
     });
   }
+
   private getBu() {
     this.buService.getBu().subscribe((lista) => {
       this.listaBu = lista;
@@ -118,7 +143,6 @@ export class CargoComponent implements OnInit {
     this.usuarioService.insereFuncao(this.usuario).subscribe((data) => {
       if (data.status == 200) {
         this.notifier.notify("success", "Função criado com sucesso!");
-        this.router.navigate(['usuarios']);
       }
       else {
         this.notifier.notify("error", "Houve um erro no cadastro a Função");

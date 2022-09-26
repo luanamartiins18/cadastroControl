@@ -4,9 +4,7 @@ import { UsuarioService } from '../../../services/usuario/usuario.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
-import { MatDialog } from '@angular/material';
-import { DialogComponent } from '../dialog/dialog.component';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
+
 
 
 

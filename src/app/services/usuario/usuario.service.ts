@@ -44,6 +44,16 @@ export class UsuarioService {
     return this.http.get<Historico[]>(environment.api + 'historico');
   }
 
+  getListaHistoricoRe(re: String) {
+    return this.http.get<Historico[]>(environment.api + 'historico/' + re);
+  }
+
+  deleteHistoricoID(id: number) {
+    return this.http.delete(environment.api + "historico/" + id);
+  }
+
+
+
   getUsuarioId(id) {
     return this.http.get<Usuario>(environment.api + 'usuarios/' + id);
   }

@@ -20,8 +20,9 @@ import { CpfPipe } from '../pipe/cpf.pipe';
 import { CepPipe } from '../pipe/cep.pipe';
 import { MatGridListModule } from '@angular/material';
 import { CargoComponent } from './cargo/cargo.component';
-import { DialogComponent } from './dialog/dialog.component';
 import {MatDialogModule} from '@angular/material/dialog'; 
+import { MatIconModule } from '@angular/material/icon'
+
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 @NgModule({
@@ -32,7 +33,6 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     CpfPipe, 
     CepPipe, 
     CargoComponent, 
-    DialogComponent
   ],
   imports: [
     CommonModule,
@@ -48,6 +48,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     MatNativeDateModule,
     MatInputModule,
     MatButtonModule,
+    MatIconModule,
     NgbModule,
     MatDialogModule,
     NgxMaskModule.forRoot(options),

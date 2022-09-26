@@ -45,35 +45,4 @@ li{
     min-height: 10vh;
 }
 
-a::after{
-    display: block;
-    content: " ";
-    border-bottom: solid 1px white;
-    transform: scaleX(0);
-    transition: transform 250ms ease-in-out;
-}
 
-a:hover::after{
-    transform: scaleX(0.75);    
-}
-
-a:hover{
-    color: white !important;
-}
-
-.icone-usu{
-    color: white;
-}
-
-.dados-usu hr{
-    margin: 0;
-}
-
-.dados-usu div{
-    padding: 0.5rem;
-}
-
-.dados-usu{
-    background-color: rgb(46, 46, 46);
-    color: white;
-}

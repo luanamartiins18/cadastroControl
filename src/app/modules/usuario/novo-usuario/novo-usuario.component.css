@@ -31,21 +31,42 @@
     border: 1px solid black;
     text-transform: uppercase;
 } 
-.button{
-    width: 10em;
-    height: 50px;
-    color: rgb(254, 252, 252);
-    background-color: rgb(10, 104, 38);
 
+section {
+    display: table;
 }
-.button2{
-    width:10em;
-    height: 50px;
-    color: rgb(254, 252, 252);
-    background-color: red;
-
+  
+.example-button-row {
+    width: 490px;
+    margin-left: 250px;
+}
+  
+.example-button-row .mat-button-base {
+    margin: 5px 20px 0;
+}
+  
+.button1 {
+    font-size: 12px;
+    background-color: rgb(204, 24, 240);
+    width: 130px;
+    padding: 1px 15px 3px 2px;
+    border-radius: 50px;
+    margin-left: 320px;
+    color: #ffff;
+}
+  
+.button2 {
+    font-size: 12px;
+    background-color: rgb(204, 24, 240);
+    width: 130px;
+    padding: 1px 15px 3px 2px;
+    border-radius: 50px;
+    margin-left: 320px;
+    color: #ffff;
 }
 
+
+  
 
 
 
