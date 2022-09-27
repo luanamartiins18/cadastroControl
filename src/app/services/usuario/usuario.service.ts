@@ -74,8 +74,7 @@ export class UsuarioService {
   insereFuncao(param: Usuario){
     return this.http.post(environment.api + "funcao", param, { headers: httpOptions.headers, observe: 'response' });
   }
-
-
+  
   alteraStatus(param) {
     return this.http.post(environment.api + 'usuario-status', param, { headers: httpOptions.headers, observe: 'response' });
   }
