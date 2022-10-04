@@ -1,8 +1,7 @@
-    <div class='container-fluid mt-3'>
       <ul class="nav nav-tabs">
         <li class="nav-item">
           <a [routerLink]="['/../usuarios']" class="nav-link active">
-            <i class="fa fa-user" aria-hidden="true"></i>
+            <i class="fa fa-users" aria-hidden="true"></i>
             Lista de Usuários
           </a>
         </li>
@@ -11,14 +10,26 @@
             <i class="fa fa-user-plus" aria-hidden="true"></i>
             Cadastro
           </a>
+          <li class="nav-item">
+            <a [routerLink]="['/../funcao']" class="nav-link active">
+              <i class="fa fa-user-plus" aria-hidden="true"></i>
+              Função
+            </a>
         </li>
         <li class="nav-item">
-          <a [routerLink]="['/../funcao']" class="nav-link active">
-            <i class="fa fa-user" aria-hidden="true"></i>
-            Função
+          <a [routerLink]="['/../contrato']" class="nav-link active">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+            Contrato
           </a>
       </li>
+      <li class="nav-item">
+        <a [routerLink]="['/../relatorio']" class="nav-link active">
+          <i class="fa fa-user-plus" aria-hidden="true"></i>
+          Relatório
+        </a>
+    </li>
       </ul>
+    <div class='container-fluid'>
       <div class="input-group mt-3 p">
         <input (keyup)="searchAllField($event)" class="form-control" placeholder="Pesquisar entre os campos">
         <div class="input-group-append">
@@ -64,4 +75,4 @@
           Não há usuários cadastrados
         </div>
       </ng-template>
-</div>
+    </div>

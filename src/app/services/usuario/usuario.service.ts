@@ -3,6 +3,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
 import { Historico } from 'src/app/models/historico/historico.model';
+import { Operacao } from 'src/app/models/operacao/operacao.model';
 
 
 const httpOptions = {
@@ -40,6 +41,10 @@ export class UsuarioService {
     return this.http.get<Usuario[]>(environment.api + 'usuarios');
   }
 
+  getListaUsuariosPorOperacao(idOperacao: number) {
+    return this.http.get<Usuario[]>(environment.api + 'usuariosoperacao/' + idOperacao);
+  }
+
   getListaHistorico() {
     return this.http.get<Historico[]>(environment.api + 'historico');
   }
@@ -48,11 +53,13 @@ export class UsuarioService {
     return this.http.get<Historico[]>(environment.api + 'historico/' + re);
   }
 
+  getListaHistoricoOperacaoRe(re: String) {
+    return this.http.get<Operacao[]>(environment.api + 'historicooperacao/' + re);
+  }
+
   deleteHistoricoID(id: number) {
     return this.http.delete(environment.api + "historico/" + id);
   }
-
-
 
   getUsuarioId(id) {
     return this.http.get<Usuario>(environment.api + 'usuarios/' + id);
@@ -73,6 +80,10 @@ export class UsuarioService {
 
   insereFuncao(param: Usuario){
     return this.http.post(environment.api + "funcao", param, { headers: httpOptions.headers, observe: 'response' });
+  }
+
+  insereContrato(param: Usuario){
+    return this.http.post(environment.api + "contrato", param, { headers: httpOptions.headers, observe: 'response' });
   }
   
   alteraStatus(param) {

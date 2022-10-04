@@ -2,6 +2,10 @@ import { UsuarioInterface } from 'src/app/interfaces/UsuarioInterface';
 import { Funcao } from '../cargo/funcao.model';
 import { Tipo } from '../tipo/tipo.model';
 import { Bu } from '../bu/bu.model';
+import { Demanda } from '../demanda/demanda.model';
+import { CentroCusto } from '../centroCusto/centroCusto.model';
+import { Cliente } from '../cliente/cliente.model';
+import { Operacao } from '../operacao/operacao.model';
 
 export class Usuario implements UsuarioInterface {
 
@@ -27,6 +31,10 @@ export class Usuario implements UsuarioInterface {
   celular?: string;
   primeiroAcesso: boolean;
   senha?: string;
+  demanda?: Demanda;
+  centro?: CentroCusto;
+  cliente?: Cliente;
+  operacao?: Operacao;
 
   constructor(
     id?: number,
@@ -51,5 +59,9 @@ export class Usuario implements UsuarioInterface {
     celular: string = "",
     primeiroAcesso?: boolean,
     senha?: string,
+    demanda?: Demanda,
+    centro?: CentroCusto,
+    cliente?: Cliente,
+    operacao?: Operacao,
   ) { }
 }

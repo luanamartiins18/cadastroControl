@@ -21,7 +21,10 @@ import { CepPipe } from '../pipe/cep.pipe';
 import { MatGridListModule } from '@angular/material';
 import { CargoComponent } from './cargo/cargo.component';
 import {MatDialogModule} from '@angular/material/dialog'; 
-import { MatIconModule } from '@angular/material/icon'
+import { MatIconModule } from '@angular/material/icon';
+import { RelatorioComponent } from './relatorio/relatorio.component';
+import { ContratoComponent } from './contrato/contrato.component';
+
 
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
@@ -32,7 +35,9 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     DetalhaUsuarioComponent, 
     CpfPipe, 
     CepPipe, 
-    CargoComponent, 
+    CargoComponent,
+    ContratoComponent, 
+    RelatorioComponent, 
   ],
   imports: [
     CommonModule,

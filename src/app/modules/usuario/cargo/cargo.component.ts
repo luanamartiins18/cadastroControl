@@ -1,7 +1,5 @@
-import { not } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router} from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Bu } from 'src/app/models/bu/bu.model';
 import { Funcao } from 'src/app/models/cargo/funcao.model';
@@ -135,6 +133,7 @@ export class CargoComponent implements OnInit {
       this.notifier.notify("error", " Todos os campos devem ser preenchidos corretamente!");
     } else {
       this.insereFuncao();
+      location.reload()
     }
   }
 

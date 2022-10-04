@@ -1,4 +1,3 @@
-
 <div class='principal'>
   <ul class="nav nav-tabs">
     <li class="nav-item">
@@ -18,6 +17,18 @@
           Função
         </a>
     </li>
+    <li class="nav-item">
+      <a [routerLink]="['/../contrato']" class="nav-link active">
+        <i class="fa fa-user-plus" aria-hidden="true"></i>
+        Contrato
+      </a>
+  </li>
+  <li class="nav-item">
+    <a [routerLink]="['/../relatorio']" class="nav-link active">
+      <i class="fa fa-user-plus" aria-hidden="true"></i>
+      Relatório
+    </a>
+</li>
   </ul>
   <form [formGroup]='form'>
     <div class='container'>  

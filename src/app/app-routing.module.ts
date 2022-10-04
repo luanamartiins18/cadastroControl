@@ -6,6 +6,8 @@ import { DefaultComponent } from './modules/pagina-inicial/default/default.compo
 import { NovoUsuarioComponent } from './modules/usuario/novo-usuario/novo-usuario.component';
 import { DetalhaUsuarioComponent } from './modules/usuario/detalha-usuario/detalha-usuario.component';
 import { CargoComponent } from './modules/usuario/cargo/cargo.component';
+import { ContratoComponent } from './modules/usuario/contrato/contrato.component';
+import { RelatorioComponent } from './modules/usuario/relatorio/relatorio.component';
 
 
 const routes: Routes = [
@@ -17,6 +19,8 @@ const routes: Routes = [
       {path: 'novo-usuario/:id', component: NovoUsuarioComponent},
       {path: 'novo-usuario', component: NovoUsuarioComponent},
       {path: 'funcao', component:CargoComponent},
+      {path: 'contrato', component:ContratoComponent},
+      {path: 'relatorio', component:RelatorioComponent},
     ]
   }
 ];

@@ -1,6 +1,11 @@
 
+import { Demanda } from '../models/demanda/demanda.model';
 import { BuInterface } from './BuInterface';
 import { CargoInterface } from './CargoInterface';
+import { CentroInterface } from './CentroInterface';
+import { ClienteInterface } from './ClienteInterface';
+import { DemandaInterface } from './DemandaInterface';
+import { OperacaoInterface } from './OperacaoInterfaces';
 import { TipoInterface } from './TipoInterface';
 
 
@@ -27,5 +32,9 @@ export interface UsuarioInterface {
   celular?: string;
   primeiroAcesso: boolean;
   senha?: string;
+  demanda?: DemandaInterface;
+  centroCusto?: CentroInterface;
+  cliente?: ClienteInterface;
+  operacao?: OperacaoInterface;
 }
 
