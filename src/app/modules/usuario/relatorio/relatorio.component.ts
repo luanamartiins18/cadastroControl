@@ -1,11 +1,10 @@
-import { ElementRef, Component, OnInit, ViewChild } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NotifierService } from 'angular-notifier';
 import { Operacao } from 'src/app/models/operacao/operacao.model';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
 import { OperacaoService } from 'src/app/services/operacao/operacao.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
-import {jsPDF} from 'jspdf';
+import * as printJS from 'print-js';
 
 
 @Component({
@@ -15,18 +14,20 @@ import {jsPDF} from 'jspdf';
 })
 export class RelatorioComponent implements OnInit {
 
+  @ViewChild('content', {static: false}) el!: ElementRef;
+  
   listaOperacao: Array<Operacao>;
   usuario: Usuario = new Usuario();
   usuarios: Usuario[] = [];
   form: FormGroup;
-  mostrarTabela: boolean;
+  teamJSON: JSON;
   colunas = [
     'codigoRe', 'nome', 'cargo'
     ];
-  @ViewChild('content', {static:false}) el!: ElementRef;
+    mostrarGerarPDF: boolean;
+
   constructor(
     public formBuilder: FormBuilder,
-    private notifier: NotifierService,
     private operacaoService: OperacaoService,
     private us: UsuarioService
   ) {
@@ -36,23 +37,35 @@ export class RelatorioComponent implements OnInit {
   ngOnInit() {
     this.montaFormBuilder();
     this.getOperacao();
+    this.mostrarGerarPDF = false;
   }
 
-  private listaUsuariosPorOperacao(event: any){
-      this.us.getListaUsuariosPorOperacao(event.target.value).subscribe(
-        data => {
-        this.usuarios = data;
-      });
-    }
-  
+  listaUsuariosPorOperacao(event: any){
+    this.mostrarGerarPDF = true;
+    this.us.getListaUsuariosPorOperacao(event.target.value).subscribe(
+      data => {
+      this.usuarios = data;
+      })
+  }
 
   PrintSimplesPDF(){
-    let pdf = new jsPDF('p', 'pt', 'a5');
-    pdf.html(this.el.nativeElement, {
-      callback: (pdf) => {
-        pdf.save("testePDFHTML.pdf");
-      }
-      })
+    let titulo = document.getElementById('divTitulo');
+    titulo.style.display = 'block';
+    let divDemandaOperacao = document.getElementById('divDemandaOperacao');
+    divDemandaOperacao.innerHTML = "";
+    divDemandaOperacao.style.display = "block";
+    let infoDemanda = document.createElement('b');
+    let infoOperacao = document.createElement('b');
+    let totalUsuario = document.getElementById('totalUsuario');
+    totalUsuario.style.display = 'block';
+    infoDemanda.innerHTML = this.usuarios[0].demanda.descricao + "&ensp; &ensp; &ensp; &ensp; &ensp; &ensp;";
+    infoOperacao.innerHTML = this.usuarios[0].operacao.descricao;
+    divDemandaOperacao.append(infoDemanda, infoOperacao);
+    printJS({printable:'teste', type:'html', style:'.divDemandaOperacao {color: #cc18f0}'});
+    titulo.style.display = 'none';
+    divDemandaOperacao.style.display = 'none';
+    totalUsuario.style.display = 'none';
+    
   }  
 
   private montaFormBuilder() {

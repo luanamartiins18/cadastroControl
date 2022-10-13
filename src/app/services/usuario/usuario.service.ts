@@ -28,25 +28,12 @@ export class UsuarioService {
     return this.http.get(`https://viacep.com.br/ws/${cep}/json/`);
   }
 
-  getCidadeUsuario(re: String) {
-    return this.http.get(environment.api + 'usuario/' + re + '/cidade');
-  }
-
-  getUfUsuario(re: String) {
-    return this.http.get(environment.api + 'usuario/' + re + '/uf');
-  }
-
-
   getListaUsuarios() {
     return this.http.get<Usuario[]>(environment.api + 'usuarios');
   }
 
   getListaUsuariosPorOperacao(idOperacao: number) {
     return this.http.get<Usuario[]>(environment.api + 'usuariosoperacao/' + idOperacao);
-  }
-
-  getListaHistorico() {
-    return this.http.get<Historico[]>(environment.api + 'historico');
   }
 
   getListaHistoricoRe(re: String) {
@@ -57,14 +44,9 @@ export class UsuarioService {
     return this.http.get<Operacao[]>(environment.api + 'historicooperacao/' + re);
   }
 
-  deleteHistoricoID(id: number) {
-    return this.http.delete(environment.api + "historico/" + id);
-  }
-
   getUsuarioId(id) {
     return this.http.get<Usuario>(environment.api + 'usuarios/' + id);
   }
-
 
   deleteUsuario(id) {
     return this.http.delete(environment.api + "usuarios/" + id, { observe: 'response' });
@@ -91,3 +73,20 @@ export class UsuarioService {
   }
 
 }
+
+  // getListaHistorico() {
+  //   return this.http.get<Historico[]>(environment.api + 'historico');
+  // }
+
+  // getCidadeUsuario(re: String) {
+  //   return this.http.get(environment.api + 'usuario/' + re + '/cidade');
+  // }
+
+  // getUfUsuario(re: String) {
+  //   return this.http.get(environment.api + 'usuario/' + re + '/uf');
+  // }
+
+  
+  // deleteHistoricoID(id: number) {
+  //   return this.http.delete(environment.api + "historico/" + id);
+  // }

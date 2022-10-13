@@ -9,6 +9,18 @@
   border: 1px solid black;
 }
 
+.buton1 {
+  font-size: 12px;
+  background-color: rgb(204, 24, 240);
+  width: 120px;
+  padding: 1px 15px 3px 2px;
+  border-radius: 50px;
+  margin-left: 1150px;
+  color: #ffff;
+  display: block;
+  border: 1 solid rgb(204, 24, 240);
+}
+
 .form-control{
   width: 250px;
   border: 1px solid black;
@@ -30,11 +42,13 @@ table{
 }
 
 tr.mat-header-row{
-  background-color: rgb(16, 15, 16);
+  background-color: black;
+  
 }
 
 th.mat-header-cell{
   color: white;
   font-size: 0.8rem;
 }
+
 

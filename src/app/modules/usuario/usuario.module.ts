@@ -13,17 +13,19 @@ import { IConfig, NgxMaskModule } from 'ngx-mask';
 import { NovoUsuarioComponent } from './novo-usuario/novo-usuario.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { DetalhaUsuarioComponent } from './detalha-usuario/detalha-usuario.component';
-import {MatSortModule} from '@angular/material/sort';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatButtonModule} from '@angular/material/button';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatButtonModule } from '@angular/material/button';
 import { CpfPipe } from '../pipe/cpf.pipe';
 import { CepPipe } from '../pipe/cep.pipe';
 import { MatGridListModule } from '@angular/material';
 import { CargoComponent } from './cargo/cargo.component';
-import {MatDialogModule} from '@angular/material/dialog'; 
+import { MatDialogModule } from '@angular/material/dialog'; 
 import { MatIconModule } from '@angular/material/icon';
 import { RelatorioComponent } from './relatorio/relatorio.component';
 import { ContratoComponent } from './contrato/contrato.component';
+import { NgxPrintModule } from 'ngx-print';
+import { HttpClientModule } from '@angular/common/http'
 
 
 
@@ -55,7 +57,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     MatButtonModule,
     MatIconModule,
     NgbModule,
-    MatDialogModule,
+    NgxPrintModule,
+    HttpClientModule,
     NgxMaskModule.forRoot(options),
     NgMultiSelectDropDownModule.forRoot()
   ]
