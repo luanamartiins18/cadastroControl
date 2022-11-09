@@ -25,7 +25,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { RelatorioComponent } from './relatorio/relatorio.component';
 import { ContratoComponent } from './contrato/contrato.component';
 import { NgxPrintModule } from 'ngx-print';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { MaquinasComponent } from './maquinas/maquinas.component'
+import {MatCheckboxModule} from '@angular/material/checkbox'
 
 
 
@@ -39,7 +41,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     CepPipe, 
     CargoComponent,
     ContratoComponent, 
-    RelatorioComponent, 
+    RelatorioComponent, MaquinasComponent, 
   ],
   imports: [
     CommonModule,
@@ -55,6 +57,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     MatNativeDateModule,
     MatInputModule,
     MatButtonModule,
+    MatCheckboxModule,
     MatIconModule,
     NgbModule,
     NgxPrintModule,

@@ -29,6 +29,12 @@
         Relatório
       </a>
   </li>
+  <li class="nav-item">
+    <a [routerLink]="['/../maquinas']" class="nav-link active">
+      <i class="fa fa-user-plus" aria-hidden="true"></i>
+      Maquinas
+    </a>
+  </li>
   </ul>
   <form [formGroup]='form'>
     <div class='container'>  
@@ -82,7 +88,6 @@
           class='form-control'
           />
         </div>
-
       <!-- input orgao_emissor -->
         <div id="org_emissor">
           <Label class="font-weight-bold">Órg.Emissor</Label>
@@ -114,7 +119,6 @@
             style="width: 790px" />
         </div> 
     </div>
-    
     <div class='container '>  
       <!-- input celular -->
          <div id="celular">
@@ -129,8 +133,6 @@
             type='text' 
             class='form-control input-cd' />
         </div> 
-
-
         <!-- input cep -->
          <div>
           <Label class="font-weight-bold">CEP</Label>
@@ -143,9 +145,7 @@
           (blur)="getCEP($event)"
           type='text' 
           class='form-control' />
-
         </div> 
-
         <!-- input cidade -->
         <div>
           <Label class="font-weight-bold">Cidade</Label>

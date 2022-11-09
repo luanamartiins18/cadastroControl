@@ -1,10 +1,11 @@
-
-import { Demanda } from '../models/demanda/demanda.model';
 import { BuInterface } from './BuInterface';
 import { CargoInterface } from './CargoInterface';
 import { CentroInterface } from './CentroInterface';
 import { ClienteInterface } from './ClienteInterface';
 import { DemandaInterface } from './DemandaInterface';
+import { EquipamentoInterface } from './EquipamentoInterfaces';
+import { MemoriaInterface } from './MemoriaInterfaces';
+import { ModeloInterface } from './ModeloInterfaces';
 import { OperacaoInterface } from './OperacaoInterfaces';
 import { TipoInterface } from './TipoInterface';
 
@@ -25,6 +26,9 @@ export interface UsuarioInterface {
   codigoRe?: string;
   status?: string;
   cargo?: CargoInterface;
+  modelo?: ModeloInterface;
+  memoria?: MemoriaInterface;
+  equipamento?: EquipamentoInterface;
   cidade?: string;
   uf?: string;
   tipo?: TipoInterface;
@@ -36,5 +40,8 @@ export interface UsuarioInterface {
   centroCusto?: CentroInterface;
   cliente?: ClienteInterface;
   operacao?: OperacaoInterface;
+  tag?: string;
+  patrimonio?: string;
+  
 }
 

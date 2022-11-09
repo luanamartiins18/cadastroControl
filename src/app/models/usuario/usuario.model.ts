@@ -6,6 +6,9 @@ import { Demanda } from '../demanda/demanda.model';
 import { CentroCusto } from '../centroCusto/centroCusto.model';
 import { Cliente } from '../cliente/cliente.model';
 import { Operacao } from '../operacao/operacao.model';
+import { Modelo } from '../modelo/modelo.model';
+import { Memoria } from '../memoria/memoria.model';
+import { Equipamento } from '../equipamento/equipamento.model';
 
 export class Usuario implements UsuarioInterface {
 
@@ -35,6 +38,11 @@ export class Usuario implements UsuarioInterface {
   centro?: CentroCusto;
   cliente?: Cliente;
   operacao?: Operacao;
+  modelo?: Modelo;
+  memoria?: Memoria;
+  equipamento?: Equipamento;
+  tag?: string;
+  patrimonio?: string;
 
   constructor(
     id?: number,
@@ -63,5 +71,10 @@ export class Usuario implements UsuarioInterface {
     centro?: CentroCusto,
     cliente?: Cliente,
     operacao?: Operacao,
+    modelo?: Modelo,
+    memoria?: Memoria,
+    equipamento?: Equipamento,
+    tag?: string,
+    patrimonio?: string,
   ) { }
 }

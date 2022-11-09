@@ -8,6 +8,7 @@ import { DetalhaUsuarioComponent } from './modules/usuario/detalha-usuario/detal
 import { CargoComponent } from './modules/usuario/cargo/cargo.component';
 import { ContratoComponent } from './modules/usuario/contrato/contrato.component';
 import { RelatorioComponent } from './modules/usuario/relatorio/relatorio.component';
+import { MaquinasComponent } from './modules/usuario/maquinas/maquinas.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
       {path: 'funcao', component:CargoComponent},
       {path: 'contrato', component:ContratoComponent},
       {path: 'relatorio', component:RelatorioComponent},
+      {path: 'maquinas', component:MaquinasComponent},
     ]
   }
 ];

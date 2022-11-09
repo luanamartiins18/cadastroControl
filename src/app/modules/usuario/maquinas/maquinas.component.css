@@ -1,0 +1,102 @@
+*{
+    margin: 8;
+  
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    width: 848px;
+    min-width: 848px;
+    padding: 0;
+}
+
+.container div {
+    padding: 10px;    
+}
+  
+  
+.form-control {
+    width: 250px;
+    border: 1px solid black;
+    text-transform: uppercase;
+} 
+  
+.tabelaHistorico {
+    margin-left: 40px;
+    max-height: 450px;
+    overflow: auto;
+    margin-bottom: 30px;
+    
+}
+  
+table{
+    width: 58%;
+    margin-left:auto;
+    margin-right: 300px;
+    overflow: scroll;
+    border: 1px solid black;
+  
+}
+  
+.tableok {
+      overflow: auto !important;
+}
+  
+.custom-row{
+    cursor: pointer;
+}
+  
+tr.mat-header-row{
+    background-color: rgb(16, 15, 15);
+}
+  
+th.mat-header-cell{
+    color: white;
+    font-size: 0.8rem;
+}
+    
+.button1 {
+    font-size: 12px;
+    background-color: rgb(204, 24, 240);
+    width: 10rem;
+    padding: 0rem 1rem 1rem 1rem;
+    border-radius: 3rem;
+    margin-left: 10rem;
+    color: #ffff;
+}
+  
+.example-button-row {
+    margin-left: 15rem;
+}
+
+table{
+    width: 54%;
+    margin-left: 449px;
+    overflow: scroll;
+    border: 1px solid black;
+  
+  }
+  
+  .tabelaHistorico{
+    width: 68%;
+
+  }
+  
+  .tableok {
+      overflow: auto !important;
+  }
+  
+  .custom-row{
+    cursor: pointer;
+  }
+  
+  tr.mat-header-row{
+    background-color: rgb(16, 15, 15);
+  }
+  
+  th.mat-header-cell{
+    color: white;
+    font-size: 0.8rem;
+  }

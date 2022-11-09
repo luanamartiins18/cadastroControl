@@ -1,12 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { UsuarioService } from '../../../services/usuario/usuario.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
-
-
-
 
 @Component({
   selector: 'app-novo-usuario',
@@ -92,7 +89,6 @@ export class NovoUsuarioComponent implements OnInit {
       
   }
 
-  
   private carregaUsuarios() {
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
 import { Historico } from 'src/app/models/historico/historico.model';
 import { Operacao } from 'src/app/models/operacao/operacao.model';
+import { Modelo } from 'src/app/models/modelo/modelo.model';
 
 
 const httpOptions = {
@@ -44,12 +45,12 @@ export class UsuarioService {
     return this.http.get<Operacao[]>(environment.api + 'historicooperacao/' + re);
   }
 
-  getUsuarioId(id) {
-    return this.http.get<Usuario>(environment.api + 'usuarios/' + id);
+  getListaHistoricoMaquinasRe(re: String) {
+    return this.http.get<Modelo[]>(environment.api + 'historicomaquinas/' + re);
   }
 
-  deleteUsuario(id) {
-    return this.http.delete(environment.api + "usuarios/" + id, { observe: 'response' });
+  getUsuarioId(id) {
+    return this.http.get<Usuario>(environment.api + 'usuarios/' + id);
   }
 
   atualizaUsuario(param: Usuario) {
@@ -67,26 +68,13 @@ export class UsuarioService {
   insereContrato(param: Usuario){
     return this.http.post(environment.api + "contrato", param, { headers: httpOptions.headers, observe: 'response' });
   }
+
+  insereMaquinas(param: Usuario){
+    return this.http.post(environment.api + "maquinas", param, { headers: httpOptions.headers, observe: 'response' });
+  }
   
   alteraStatus(param) {
     return this.http.post(environment.api + 'usuario-status', param, { headers: httpOptions.headers, observe: 'response' });
   }
 
 }
-
-  // getListaHistorico() {
-  //   return this.http.get<Historico[]>(environment.api + 'historico');
-  // }
-
-  // getCidadeUsuario(re: String) {
-  //   return this.http.get(environment.api + 'usuario/' + re + '/cidade');
-  // }
-
-  // getUfUsuario(re: String) {
-  //   return this.http.get(environment.api + 'usuario/' + re + '/uf');
-  // }
-
-  
-  // deleteHistoricoID(id: number) {
-  //   return this.http.delete(environment.api + "historico/" + id);
-  // }

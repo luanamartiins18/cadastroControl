@@ -1,4 +1,4 @@
-<div class='container-fluid mt-3'>
+<div class='principal'>
   <ul class="nav nav-tabs">
     <li class="nav-item">
       <a [routerLink]="['/../usuarios']" class="nav-link active">
@@ -29,6 +29,12 @@
       Relatório
     </a>
 </li>
+  <li class="nav-item">
+    <a [routerLink]="['/../maquinas']" class="nav-link active">
+      <i class="fa fa-user-plus" aria-hidden="true"></i>
+      Maquinas
+    </a>
+  </li>
   </ul>
   <div *ngIf='usuario; else carregando'>
       <form>

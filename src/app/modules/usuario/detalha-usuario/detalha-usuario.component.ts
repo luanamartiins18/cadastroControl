@@ -39,25 +39,6 @@ export class DetalhaUsuarioComponent implements OnInit {
     this.router.navigate(['novo-usuario/' + this.id]);
   }
 
-
-  deleteUsuario() {
-    let param = {
-      id: this.usuario.id,
-    };
-    this.us.deleteUsuario(param).subscribe(
-      (data) => {
-        if (data.status == 200) {
-          this.nt.notify("success", "Usuario deletado");
-          this.carregaUsuarios();
-          this.router.navigate([this.router.url]);
-        } else {
-          this.nt.notify("error", "Houve um erro ao gravar as informações, favor contatar o administrador do sistema");
-        }
-      }
-    );
-  }
-
-
   alteraStatus(acao: any) {
     let param = {
       id: this.usuario.id,

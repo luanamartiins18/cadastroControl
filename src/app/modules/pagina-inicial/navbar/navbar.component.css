@@ -15,23 +15,6 @@ li{
     padding: 0.5rem;
 }
 
-.mostra-usu{
-    color: white;
-    cursor: pointer;
-    padding-right: 0.25rem;
-}
-
-.dados-pessoais{   
-    display: grid;
-    grid-template-columns: auto;
-    grid-row-gap: 0.25rem;    
-    grid-column-gap: 1rem;
-}
-
-.dropdown-menu {
-    width: 20rem !important;
-
-}
 
 .logo-qintess{
     height: 2.5rem;

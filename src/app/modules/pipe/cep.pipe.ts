@@ -6,10 +6,10 @@ export class CepPipe implements PipeTransform {
         let valorFormatado = value + '';
 
         valorFormatado = valorFormatado
-            .padStart(8, '0')                  // item 1
-            .substring(0,8)                      // item 2
-            .replace(/[^0-9]/, '')              // item 3
-            .replace(                           // item 4
+            .padStart(8, '0')                 
+            .substring(0,8)                   
+            .replace(/[^0-9]/, '')             
+            .replace(                         
                 /(\d{2})(\d{3})(\d{3})/,
                 '$1.$2-$3'
             );

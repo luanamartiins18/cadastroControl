@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'navbar',
