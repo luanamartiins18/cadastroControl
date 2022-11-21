@@ -11,6 +11,8 @@ import { Memoria } from 'src/app/models/memoria/memoria.model';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import * as printJS from 'print-js';
 
+import { HistoricoMaquinas } from 'src/app/models/historico/historicoMaquinas/historicoMaquinas.model';
+
 @Component({
   selector: 'app-maquinas',
   templateUrl: './maquinas.component.html',
@@ -25,10 +27,14 @@ export class MaquinasComponent implements OnInit {
   listaMemoria: Array<Memoria>;
   usuarios: Usuario[] = [];
   id: any;
-  historico: Modelo[] = [];
+  historico: HistoricoMaquinas[] = [];
+;
   colunas = [
-    'modelo', 'data_inicio', 'data_final'
-    ];
+  'equipamento','modelo','patrimonio','tag', 'data_inicio'
+  ];
+  colunas1 = [
+    'equipamento','modelo','patrimonio','tag', 'data_inicio', 'data_final'
+  ];
   mostrarTabela: boolean;
   mostrarGerarPDF: boolean;
   constructor(
@@ -70,6 +76,8 @@ export class MaquinasComponent implements OnInit {
         if(data) {
           (<HTMLInputElement>document.getElementById("nome")).value = data['nome'];
           this.usuario.nome = data['nome'];
+          (<HTMLInputElement>document.getElementById('dados-usuario')).value = JSON.stringify(data);
+
         } else{
           (<HTMLInputElement>document.getElementById('nome')).value=("");
         }
@@ -95,22 +103,32 @@ export class MaquinasComponent implements OnInit {
     });
   }
 
-  PrintSimplesPDF(){
+  PrintSimplesPDFs(){
+    let dadosUsuario = JSON.parse((<HTMLInputElement>document.getElementById('dados-usuario')).value);
     let titulo = document.getElementById('divTitulo');
     let divDemandaOperacao = document.getElementById('divDemandaOperacao');
     let infoDemanda = document.createElement('b');
     let infoOperacao = document.createElement('b');
-    divDemandaOperacao.innerHTML = "";
+    let imprimirPDF = document.getElementById('imprimirPDF');
+    imprimirPDF.style.display = 'block';
+    document.getElementById('nome-pdf').innerHTML = dadosUsuario.nome;
+    document.getElementById('cpf-pdf').innerHTML = dadosUsuario.cpf;
+    document.getElementById('nome-ass').innerHTML = dadosUsuario.nome;
+    document.getElementById('cpf-ass').innerHTML = dadosUsuario.cpf;;
+    document.getElementById('rg-ass').innerHTML = dadosUsuario.rg;
+    document.getElementById('nome-dev').innerHTML = dadosUsuario.nome;
+    document.getElementById('cpf-dev').innerHTML = dadosUsuario.cpf;
+
     titulo.style.display = 'block';
     divDemandaOperacao.style.display = "block";
     divDemandaOperacao.append(infoDemanda, infoOperacao);
-    printJS({printable:'teste', type:'html', style:'.divDemandaOperacao {color: #cc18f0}'});
+    printJS({printable:'imprimirPDF', type:'html',
+    gridHeaderStyle: 'color: red;  border: 2px solid #3971A5;',style:'.divDemandaOperacao {color: #cc18f0}'});
     titulo.style.display = 'none';
-    divDemandaOperacao.style.display = 'none';
+    imprimirPDF.style.display = 'none';
   }
-  
-             
 
+           
   private getEquipamento() {
     this.equipamentoService.getEquipamento().subscribe((lista) => {
       this.listaEquipamento = lista;

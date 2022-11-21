@@ -56,33 +56,24 @@ th.mat-header-cell{
     color: white;
     font-size: 0.8rem;
 }
-    
-.button1 {
-    font-size: 12px;
-    background-color: rgb(204, 24, 240);
-    width: 10rem;
-    padding: 0rem 1rem 1rem 1rem;
-    border-radius: 3rem;
-    margin-left: 10rem;
-    color: #ffff;
-}
   
 .example-button-row {
     margin-left: 15rem;
 }
-
 table{
     width: 54%;
-    margin-left: 449px;
+    margin-left: 24rem;
     overflow: scroll;
     border: 1px solid black;
   
-  }
-  
-  .tabelaHistorico{
-    width: 68%;
+}
 
-  }
+.tabelaHistorico{
+    width: 110%;
+    margin-left: -5rem;
+    overflow: scroll;
+
+}
   
   .tableok {
       overflow: auto !important;
@@ -100,3 +91,23 @@ table{
     color: white;
     font-size: 0.8rem;
   }
+
+  .button1 {
+    font-size: 14px;
+    background-color: rgb(204, 24, 240);
+    width: 8rem;
+    padding: 1px 15px 3px 2px;
+    border-radius: 5rem;
+    margin-left: 4rem;
+    color: #ffff;
+}
+  
+.button2 {
+    font-size: 14px;
+    background-color: rgb(204, 24, 240);
+    width: 8rem;
+    padding: 1px 15px 3px 2px;
+    border-radius: 5rem;
+    margin-left: 4rem;
+    color: #ffff;
+}

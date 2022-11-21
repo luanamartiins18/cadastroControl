@@ -5,6 +5,8 @@ import { Usuario } from 'src/app/models/usuario/usuario.model';
 import { Historico } from 'src/app/models/historico/historico.model';
 import { Operacao } from 'src/app/models/operacao/operacao.model';
 import { Modelo } from 'src/app/models/modelo/modelo.model';
+import { HistoricoOperacao } from 'src/app/models/historico/historicoOperacao/historicoOperacao.model';
+import { HistoricoMaquinas } from 'src/app/models/historico/historicoMaquinas/historicoMaquinas.model';
 
 
 const httpOptions = {
@@ -42,11 +44,11 @@ export class UsuarioService {
   }
 
   getListaHistoricoOperacaoRe(re: String) {
-    return this.http.get<Operacao[]>(environment.api + 'historicooperacao/' + re);
+    return this.http.get<HistoricoOperacao[]>(environment.api + 'historicooperacao/' + re);
   }
 
   getListaHistoricoMaquinasRe(re: String) {
-    return this.http.get<Modelo[]>(environment.api + 'historicomaquinas/' + re);
+    return this.http.get<HistoricoMaquinas[]>(environment.api + 'historicomaquinas/' + re);
   }
 
   getUsuarioId(id) {

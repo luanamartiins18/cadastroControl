@@ -29,7 +29,7 @@ export class ContratoComponent implements OnInit {
   usuario: Usuario = new Usuario();
   id: any;
   listaCargoHistorico: Array<{id: number, descricao: string}>;
-  historico: HistoricoOperacao [];
+  historico: HistoricoOperacao[] = [];
   
   colunas = [
     'operacao', 'data_inicio', 'data_final'

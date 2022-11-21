@@ -21,21 +21,22 @@
   text-transform: uppercase;
 } 
 
-.tabelaHistorico {
-  margin-left: 40px;
-  max-height: 450px;
-  overflow: auto;
-  margin-bottom: 30px;
+
+.tabelaHistorico{
+  width: 79%;
+  margin-left: 18rem;
+  overflow: scroll;
+
 }
 
 table{
   width: 58%;
-  margin-left:auto;
-  margin-right: 300px;
+  margin-left:5rem;
   overflow: scroll;
   border: 1px solid black;
 
 }
+
 
 .tableok {
     overflow: auto !important;
