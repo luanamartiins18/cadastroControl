@@ -30,8 +30,10 @@
     margin-bottom: 30px;
     
 }
+
+
   
-table{
+table {
     width: 58%;
     margin-left:auto;
     margin-right: 300px;
@@ -39,7 +41,11 @@ table{
     border: 1px solid black;
   
 }
-  
+
+.tableOk {
+    overflow: auto !important;
+}
+
 .tableok {
       overflow: auto !important;
 }
@@ -58,10 +64,10 @@ th.mat-header-cell{
 }
   
 .example-button-row {
-    margin-left: 15rem;
+    margin-left: 1rem
 }
 table{
-    width: 54%;
+    width: 54rem;
     margin-left: 24rem;
     overflow: scroll;
     border: 1px solid black;
@@ -69,16 +75,31 @@ table{
 }
 
 .tabelaHistorico{
-    width: 110%;
-    margin-left: -5rem;
+    width: 115rem;
+    margin-left: -10rem;
     overflow: scroll;
 
 }
   
-  .tableok {
+.tableok {
       overflow: auto !important;
-  }
-  
+}  
+
+.tableok tr td {
+    border-right-width: 5px;
+    border-left-width: 5px;
+    border-top-width: 5px;
+    border-bottom-width: 5px;
+    border-style: solid;
+    border-color: #212020;
+    
+}
+
+#tabelaDevolucao {
+     
+    width: 100% !important;
+
+}
   .custom-row{
     cursor: pointer;
   }
@@ -110,4 +131,8 @@ table{
     border-radius: 5rem;
     margin-left: 4rem;
     color: #ffff;
+}
+
+.coleta {
+  margin-left: 100px;
 }

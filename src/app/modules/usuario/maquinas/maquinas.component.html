@@ -113,29 +113,64 @@
                 type='text' 
                 class='form-control' />
               </div> 
+               <!-- input Data -->
+              <div id="data_inicio">
+                <Label class="font-weight-bold">Data de Entrega</Label>
+                <input 
+                [(ngModel)]='historicoMaquinas.data_inicio' 
+                formControlName='data_inicio' 
+                type='date'
+                class='form-control' />
+              </div>
+               <!-- data devolução -->
+              <div id="data_final" *ngIf="mostrarAtualizar">
+                <Label class="font-weight-bold">Data de Devolução</Label>
+                <input 
+                [(ngModel)]='historicoMaquinas.data_final' 
+                formControlName='data_final' 
+                type='date'
+                class='form-control' />
+              </div>
+
               <section>
                 <div class="example-button-row">
+                  <button  mat-raised-button  *ngIf="mostrarAtualizar"
+                  (click)='submitAtualizacao()' 
+                  class="button2"
+                  color="white"
+                  printTitle="devolucao">
+                  Atualizar</button>
+  
                   <button mat-raised-button
-                    (click)='submit()'
-                    class="button1"
-                    color="black">
-                <mat-icon>check_circle</mat-icon>
-                    inserir
-                  </button>
-                  <button mat-raised-button 
                     (click)='PrintSimplesPDFs()' 
                     class="button2"
                     color="white"
-                    printTitle="Relatório">
+                    printTitle="entrega">
                     <mat-icon>print</mat-icon>
-                    imprimir</button>
+                    Entrega</button>
+
+                    <button mat-raised-button
+                    (click)='submit()'
+                    (change)="atualizarTable($event)"
+                    class="button1"
+                    color="black">
+                  <mat-icon>check_circle</mat-icon>
+                    inserir</button>
+
+                    <button mat-raised-button
+                    (click)='PrintSimplesPdfDevo()' 
+                    class="button2"
+                    color="white"
+                    printTitle="entrega">
+                    <mat-icon>print</mat-icon>
+                    Devolução</button>
                 </div>
               </section>
         </div>
     </form>
-  </div>
-  <div class="tabelaHistorico"  *ngIf="mostrarTabela">
-    <table class="tableok" mat-table [dataSource]=" historico" matSort> 
+</div>
+  <div class="tabelaHistorico" *ngIf="mostrarTabela">
+    <table class="tableOK" mat-table [dataSource]=" historico" matSort> 
       <ng-container style="height: 30px !important;">
         <ng-container matColumnDef="equipamento">
           <th mat-header-cell *matHeaderCellDef>Equipamento</th>
@@ -151,7 +186,7 @@
         </ng-container>
         <ng-container matColumnDef="tag">
           <th mat-header-cell *matHeaderCellDef>Service Tag/IMEI </th>
-          <td mat-cell *matCellDef="let element"> {{element.usuario.tag }} </td>
+          <td mat-cell *matCellDef="let element"> {{element.usuario.tag}} </td>
         </ng-container>
         <ng-container matColumnDef="data_inicio">
           <th mat-header-cell *matHeaderCellDef> DATA ENTREGA</th>
@@ -161,11 +196,13 @@
           <th mat-header-cell *matHeaderCellDef> DATA FINAL</th>
           <td mat-cell *matCellDef="let element"> {{element.data_final | date : 'dd/MM/yyyy'}} </td>
         </ng-container>
-        <tr mat-header-row *matHeaderRowDef="colunas; sticky: true"></tr>
-        <tr class='custom-row' mat-row *matRowDef="let row; columns: colunas;"></tr>'
+        <tr mat-header-row *matHeaderRowDef="colunas1; sticky: true"></tr>
+        <tr class='custom-row' mat-row *matRowDef="let row; columns: colunas1;"></tr>'
       </ng-container>
     </table>
   </div>
+  
+<!-------------------------------------------------------------------------------------------------------------- -->
   <input type="hidden" id="dados-usuario" value="">
   <div class='container-fluid' id="imprimirPDF" style="display: none;">
       <div id="divTitulo" style="display: none;">
@@ -174,13 +211,13 @@
       </div>
     <div id="divDemandaOperacao" style="width: 100%;" class="divDemandaOperacao">
     </div>
-    <div class="tabelaHistorico" *ngIf="mostrarTabela">
+  <div class="tabelaHistorico" *ngIf="mostrarTabela">
       <p>Como colaborador da Qintess, eu <span id="nome-pdf"></span>, do CPF: <span id="cpf-pdf"></span>, usuário do(s) equipamento(s) abaixo, comprometo-me a:</p>
       <br>
       <h4>Dados do Equipamento:</h4>
-      <table class="tableok" mat-table [dataSource]=" historico" matSort> 
-        <ng-container style="height: 30px !important;">
-          <ng-container matColumnDef="equipamento">
+      <table class="tableok" border="1" mat-table [dataSource]=" historico"  matSort> 
+        <ng-container  style="height: 30px !important">
+          <ng-container  matColumnDef="equipamento">
             <th mat-header-cell *matHeaderCellDef>Equipamento</th>
             <td mat-cell *matCellDef="let element"> {{element.equipamento.descricao}} </td>
           </ng-container>
@@ -200,12 +237,8 @@
             <th mat-header-cell *matHeaderCellDef> DATA ENTREGA</th>
             <td mat-cell *matCellDef="let element"> {{element.data_inicio | date : 'dd/MM/yyyy'}} </td>
           </ng-container>
-          <ng-container matColumnDef="data_final">
-            <th mat-header-cell *matHeaderCellDef> DATA FINAL</th>
-            <td mat-cell *matCellDef="let element"> {{element.data_final | date : 'dd/MM/yyyy'}} </td>
-          </ng-container>
           <tr mat-header-row *matHeaderRowDef="colunas; sticky: true"></tr>
-          <tr class='custom-row' mat-row *matRowDef="let row; columns: colunas;"></tr>'
+          <tr style="border: 1px solid black;" class='custom-row' mat-row *matRowDef="let row;  columns: colunas;" [hidden]="row.vigente == 'Não'" ></tr>'
         </ng-container>
       </table>
       <h1>Responsabilidade</h1>
@@ -222,12 +255,23 @@
       <p>NOME DO COLABORADOR: <span id="nome-ass"></span>  </p>
       <P>CPF: <span id="cpf-ass"></span> </P>
       <P>RG: <span id="rg-ass"></span> </P>
-      <img src="assets/termo1.png" id="imgTitulo"> 
-      <span style="padding-left: 800px;"></span>
+  </div>
+
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------- -->
+  <input type="hidden" id="dados-usuario" value="">
+  <div class='container-fluid' id="imprimirPDFs" style="display: none;">
+      <div id="divTitulos" style="display: none;">
+        <img src="assets/termo1.png" id="imgTitulos"> 
+        <span style="padding-left: 800px;"></span>
+      </div>
+    <div id="divDemandaOperacaos" style="width: 100%;" class="divDemandaOperacaos">
+    </div>
+    <div class="tabelaHistorico" *ngIf="mostrarTabela">
       <p>A área de Infraestrutura Corporativa da Qintess confirma que os equipamentos abaixo foram recebidos e continuam com suas condições de uso adequadas.</p>
-      <br>
       <h4>Dados do Equipamento:</h4>
-      <table class="tableok" mat-table [dataSource]=" historico" matSort> 
+      <h1>Informo que recebi o(s) equipamento(s) descrito(s) abaixo:</h1>
+      <table id="tabelaDevolucao" border="1" class="tableok"  mat-table [dataSource]=" historico" matSort> 
         <ng-container style="height: 30px !important;">
           <ng-container matColumnDef="equipamento">
             <th mat-header-cell *matHeaderCellDef>Equipamento</th>
@@ -243,21 +287,20 @@
           </ng-container>
           <ng-container matColumnDef="tag">
             <th mat-header-cell *matHeaderCellDef>Service Tag/IMEI </th>
-            <td mat-cell *matCellDef="let element"> {{element.usuario.tag }} </td>
+            <td mat-cell *matCellDef="let element"> {{element.usuario.tag}} </td>
           </ng-container>
           <ng-container matColumnDef="data_inicio">
-            <th mat-header-cell *matHeaderCellDef> DATA INICIO</th>
+            <th mat-header-cell *matHeaderCellDef> DATA ENTREGA</th>
             <td mat-cell *matCellDef="let element"> {{element.data_inicio | date : 'dd/MM/yyyy'}} </td>
           </ng-container>
           <ng-container matColumnDef="data_final">
             <th mat-header-cell *matHeaderCellDef> DATA FINAL</th>
             <td mat-cell *matCellDef="let element"> {{element.data_final | date : 'dd/MM/yyyy'}} </td>
-          </ng-container> -->
+          </ng-container>
           <tr mat-header-row *matHeaderRowDef="colunas1; sticky: true"></tr>
-          <tr class='custom-row' mat-row *matRowDef="let row; columns: colunas1;"></tr>'
+          <tr style="border: 1px solid black;" class='custom-row' mat-row *matRowDef="let row; columns: colunas1;" [hidden]="row.vigente == 'Sim'" ></tr>'
         </ng-container>
       </table>
-      <h1>Informo que recebi o(s) equipamento(s) descrito(s) abaixo:</h1>
       <img src="assets/equipamento1.png" id="imgTermo"> 
       <P>SÃO PAULO</P>
       <br>
@@ -265,5 +308,8 @@
       <p>Responsável pelo recebimento:</p>                  
       <P>Nome: <span id="nome-dev"></span></P>
       <P>CPF: <span id="cpf-dev"></span></P>
+      <P>_____________________________</P>
+      <p>Responsável pela coleta:</p>                  
+      <P>Nome: <span id="nome-dev"></span></P>
+      <P>CPF: <span id="cpf-dev"></span></P>
   </div>
-</div>

@@ -71,9 +71,18 @@ export class UsuarioService {
     return this.http.post(environment.api + "contrato", param, { headers: httpOptions.headers, observe: 'response' });
   }
 
-  insereMaquinas(param: Usuario){
+  insereMaquinas(param: Usuario, historico: HistoricoMaquinas){
+    Object.assign(param, {data_inicio: historico.data_inicio, data_final: historico.data_final});
     return this.http.post(environment.api + "maquinas", param, { headers: httpOptions.headers, observe: 'response' });
+
   }
+
+  atualizarMaquinas(param: Usuario, historico: HistoricoMaquinas){
+    Object.assign(param, {data_inicio: historico.data_inicio, data_final: historico.data_final});
+    return this.http.post(environment.api + "atualizarmaquinas", param, { headers: httpOptions.headers, observe: 'response' });
+
+  }
+
   
   alteraStatus(param) {
     return this.http.post(environment.api + 'usuario-status', param, { headers: httpOptions.headers, observe: 'response' });

@@ -10,6 +10,8 @@ export class HistoricoMaquinas implements HistoricoMaquinasInterface {
     vigente?: string;
     modelo?: Modelo;
     equipamento?: Equipamento;
+    patrimonio?: string;
+    tag?: string;
     usuario?: Usuario
   
     constructor(
@@ -19,6 +21,9 @@ export class HistoricoMaquinas implements HistoricoMaquinasInterface {
       vigente?: string,
       modelo?: Modelo,
       equipamento?: Equipamento,
+      patrimonio?: string,
+      tag?: string,
       usuario?: Usuario
+     
     ) { }
   }

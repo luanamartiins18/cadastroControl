@@ -33,8 +33,9 @@ export class ContratoComponent implements OnInit {
   
   colunas = [
     'operacao', 'data_inicio', 'data_final'
-    ];
+  ];
   mostrarTabela: boolean;
+
   constructor(
     public formBuilder: FormBuilder,
     private usuarioService: UsuarioService,
@@ -82,8 +83,10 @@ export class ContratoComponent implements OnInit {
         }
       });
       return url;
-    } 
+    }
   }
+
+
 
   private montaFormBuilder() {
     this.form = this.formBuilder.group({
@@ -94,6 +97,7 @@ export class ContratoComponent implements OnInit {
       centro: [this.usuario.centro,[Validators.required]],
     });
   }
+
 
   private getCliente() {
     this.clienteService.getCliente().subscribe((lista) => {

@@ -9,6 +9,8 @@ export interface HistoricoMaquinasInterface {
     vigente?: string;
     modelo?: Modelo;
     equipamento?: Equipamento;
-    usuario?: Usuario
+    patrimonio?: string;
+    tag?: string;
+    usuario?: Usuario;
     
 }

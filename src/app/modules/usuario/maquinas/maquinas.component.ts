@@ -28,6 +28,7 @@ export class MaquinasComponent implements OnInit {
   usuarios: Usuario[] = [];
   id: any;
   historico: HistoricoMaquinas[] = [];
+  historicoMaquinas: HistoricoMaquinas = new HistoricoMaquinas();
 ;
   colunas = [
   'equipamento','modelo','patrimonio','tag', 'data_inicio'
@@ -37,6 +38,8 @@ export class MaquinasComponent implements OnInit {
   ];
   mostrarTabela: boolean;
   mostrarGerarPDF: boolean;
+  mostrarAtualizar: boolean;
+
   constructor(
     public formBuilder: FormBuilder,
     private modeloService: ModeloService,
@@ -54,6 +57,18 @@ export class MaquinasComponent implements OnInit {
     this.mostrarTabela = false;
     this.mostrarGerarPDF = false;
   }
+
+
+  atualizarTableHistorico() {
+    let listaHistorico = [];
+    let arrIdsHistorico = [];
+  
+    this.historico.forEach((historico) =>{
+      arrIdsHistorico.push(historico.id);
+    })
+    this.historico = listaHistorico;
+  }
+
 
   mostrarhistoricoMaquinas() {
     this.mostrarGerarPDF = true;
@@ -93,7 +108,10 @@ export class MaquinasComponent implements OnInit {
       equipamento: [this.usuario.equipamento,[Validators.required]],
       memoria:[this.usuario.memoria,[Validators.required]],
       tag: [this.usuario.tag,[Validators.required]],
-      patrimonio: [this.usuario.patrimonio,[Validators.required]]
+      patrimonio: [this.usuario.patrimonio,[Validators.required]],
+      data_inicio:[this.historicoMaquinas.data_inicio,[Validators.required]],
+      data_final: [this.historicoMaquinas.data_final]
+
     });
   }
 
@@ -116,19 +134,32 @@ export class MaquinasComponent implements OnInit {
     document.getElementById('nome-ass').innerHTML = dadosUsuario.nome;
     document.getElementById('cpf-ass').innerHTML = dadosUsuario.cpf;;
     document.getElementById('rg-ass').innerHTML = dadosUsuario.rg;
-    document.getElementById('nome-dev').innerHTML = dadosUsuario.nome;
-    document.getElementById('cpf-dev').innerHTML = dadosUsuario.cpf;
-
     titulo.style.display = 'block';
     divDemandaOperacao.style.display = "block";
-    divDemandaOperacao.append(infoDemanda, infoOperacao);
-    printJS({printable:'imprimirPDF', type:'html',
-    gridHeaderStyle: 'color: red;  border: 2px solid #3971A5;',style:'.divDemandaOperacao {color: #cc18f0}'});
+    divDemandaOperacao.append(infoDemanda, infoOperacao) ;
+    printJS({printable:'imprimirPDF', type:'html', targetStyle: ['border-right-width', 'border-left-width', 'border-top-width', 'border-bottom-width', 'border-style','border-color', 'display', 'width'], honorColor: true});
     titulo.style.display = 'none';
     imprimirPDF.style.display = 'none';
+  } 
+
+  PrintSimplesPdfDevo(){
+    let dadosUsuario = JSON.parse((<HTMLInputElement>document.getElementById('dados-usuario')).value);
+    let titulo = document.getElementById('divTitulos');
+    let divDemandaOperacao = document.getElementById('divDemandaOperacaos');
+    let infoDemanda = document.createElement('b');
+    let infoOperacao = document.createElement('b');
+    let imprimirPDFs = document.getElementById('imprimirPDFs');
+    imprimirPDFs.style.display = 'block';
+    document.getElementById('nome-dev').innerHTML = dadosUsuario.nome;
+    document.getElementById('cpf-dev').innerHTML = dadosUsuario.cpf;
+    titulo.style.display = 'block';
+    divDemandaOperacao.style.display = "block";
+    divDemandaOperacao.append(infoDemanda, infoOperacao) ;
+    printJS({printable:'imprimirPDFs', type:'html', targetStyle: ['border-right-width', 'border-left-width','border-top-width', 'border-bottom-width', 'border-style','border-color', 'display', 'width'], honorColor: true});
+    titulo.style.display = 'none';
+    imprimirPDFs.style.display = 'none';
   }
 
-           
   private getEquipamento() {
     this.equipamentoService.getEquipamento().subscribe((lista) => {
       this.listaEquipamento = lista;
@@ -146,15 +177,36 @@ export class MaquinasComponent implements OnInit {
       this.notifier.notify("error", " Todos os campos devem ser preenchidos corretamente!");
     } else {
       this.insereMaquinas();
+      this.mostrarAtualizar =  true;
     }
   }
 
 
+  submitAtualizacao() {
+    if (this.form.invalid) {
+      this.notifier.notify("error", " Todos os campos devem ser preenchidos corretamente!");
+    } else {
+      this.atualizaMaquinas();
+    }
+  }
+
   private insereMaquinas() {
-    this.usuarioService.insereMaquinas(this.usuario).subscribe((data) => {
+    this.usuarioService.insereMaquinas(this.usuario, this.historicoMaquinas).subscribe((data) => {
       if (data.status == 200) {
         this.notifier.notify("success", "Contrato criado com sucesso!");
-        location.reload()
+      }
+      else {
+        this.notifier.notify("error", "Houve um erro no cadastro a Maquinas");
+      }
+    }, 
+    );
+  }
+
+
+  private atualizaMaquinas(){
+    this.usuarioService.atualizarMaquinas(this.usuario, this.historicoMaquinas).subscribe((data) => {
+      if (data.status == 200) {
+        this.notifier.notify("success", "Contrato criado com sucesso!");
       }
       else {
         this.notifier.notify("error", "Houve um erro no cadastro a Maquinas");
