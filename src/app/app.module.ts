@@ -11,6 +11,15 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { MatDialogModule } from '@angular/material';
+import { RhModule } from './modules/rh/rh.module';
+import localePt from '@angular/common/locales/pt';
+import {registerLocaleData} from '@angular/common';
+import {CurrencyPipe} from '@angular/common';
+import { CpfPipe } from 'src/pipe/cpf.pipe';
+
+
+
+registerLocaleData(localePt, 'pt');
 
 @NgModule({
   declarations: [
@@ -21,7 +30,8 @@ import { MatDialogModule } from '@angular/material';
     AppRoutingModule ,
     UsuarioModule,
     PaginaInicialModule,
-    HttpClientModule,   
+    HttpClientModule,  
+    RhModule, 
     NgSelectModule,
     MatDialogModule,
     FormsModule,
@@ -41,7 +51,7 @@ import { MatDialogModule } from '@angular/material';
     }),
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [ CurrencyPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

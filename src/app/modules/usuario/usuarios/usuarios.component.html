@@ -1,4 +1,4 @@
-<ul class="nav nav-tabs">
+  <ul class="nav nav-tabs">
     <li class="nav-item">
       <a [routerLink]="['/../usuarios']" class="nav-link active">
         <i class="fa fa-users" aria-hidden="true"></i>
@@ -34,10 +34,22 @@
         Maquinas
       </a>
     </li>
+    <li class="nav-item">
+      <a [routerLink]="['/../detalhesMaquinas']" class="nav-link active">
+        <i class="fa fa-user-plus" aria-hidden="true"></i>
+        Lista de Maquinas
+      </a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="['/../perfil']" class="nav-link active">
+        <i class="fa fa-user-plus" aria-hidden="true"></i>
+        Perfil
+      </a>
+    </li>
 </ul>
 <div class='container-fluid'>
   <div class="input-group mt-3 p">
-    <input (keyup)="searchAllField($event)" class="form-control" placeholder="Pesquisar entre os campos">
+    <input (keyup)="searchAllField($event)" class="form-control" placeholder="Consultar - NOME">
       <div class="input-group-append">
         <span class="input-group-text"><i class="fa fa-search fa-fw"></i></span>
       </div>
@@ -61,7 +73,7 @@
         <td mat-cell *matCellDef="let element"> {{element.uf}} </td>
       </ng-container>
       <ng-container matColumnDef="codigoRe">
-        <th mat-header-cell *matHeaderCellDef>MATRICULA</th>
+        <th mat-header-cell *matHeaderCellDef>MATRÍCULA</th>
         <td mat-cell *matCellDef="let element"> {{element.codigoRe}} </td>
       </ng-container>
       <ng-container matColumnDef="status">

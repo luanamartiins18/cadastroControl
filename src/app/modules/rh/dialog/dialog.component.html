@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Deseja cancelar o status da vaga do candidato ?</h1>
+<div mat-dialog-actions >
+  <button mat-raised-button
+    data-id="{{rh.id}}"
+    (click)="CancelarCandidato(element)" 
+    color="primary">
+    Confirmar</button>
+  <button mat-raised-button (click)="cancelar()" color="warn">Cancelar</button>
+</div>

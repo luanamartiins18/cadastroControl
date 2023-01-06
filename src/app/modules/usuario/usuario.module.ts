@@ -16,18 +16,20 @@ import { DetalhaUsuarioComponent } from './detalha-usuario/detalha-usuario.compo
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
-import { CpfPipe } from '../pipe/cpf.pipe';
-import { CepPipe } from '../pipe/cep.pipe';
+import { CpfPipe } from '../../../pipe/cpf.pipe';
 import { MatGridListModule } from '@angular/material';
 import { CargoComponent } from './cargo/cargo.component';
-import { MatDialogModule } from '@angular/material/dialog'; 
 import { MatIconModule } from '@angular/material/icon';
 import { RelatorioComponent } from './relatorio/relatorio.component';
 import { ContratoComponent } from './contrato/contrato.component';
 import { NgxPrintModule } from 'ngx-print';
 import { HttpClientModule } from '@angular/common/http';
 import { MaquinasComponent } from './maquinas/maquinas.component'
-import {MatCheckboxModule} from '@angular/material/checkbox'
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { DetalhesMaquinasComponent } from './detalhes-maquinas/detalhes-maquinas.component';
+import { AtualizarMaquinasComponent } from './atualizar-maquinas/atualizar-maquinas.component';
+import { PerfilComponent } from './perfil/perfil.component'
+import { CepPipe } from 'src/pipe/cep.pipe';
 
 
 
@@ -37,11 +39,16 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     NovoUsuarioComponent, 
     UsuariosComponent, 
     DetalhaUsuarioComponent, 
-    CpfPipe, 
-    CepPipe, 
     CargoComponent,
     ContratoComponent, 
-    RelatorioComponent, MaquinasComponent, 
+    RelatorioComponent, 
+    MaquinasComponent,
+    DetalhesMaquinasComponent,
+    AtualizarMaquinasComponent,
+    PerfilComponent, 
+    CpfPipe,
+    CepPipe,
+
   ],
   imports: [
     CommonModule,

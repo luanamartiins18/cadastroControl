@@ -1,0 +1,256 @@
+<div class='principal'>
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a [routerLink]="['/../rh']" class="nav-link active">
+          <i class="fa fa-users" aria-hidden="true"></i>
+            Candidatos
+        </a>
+      </li>
+      <li class="nav-item">
+        <a [routerLink]="['/../cadastro-candidatos']" class="nav-link active">
+          <i class="fa fa-users" aria-hidden="true"></i>
+            Cadastro
+        </a>
+      </li>
+  </ul>
+<!-- ------------------------------------------------------------------------------------ -->
+  <form [formGroup]='form'>
+    <div class='container'>  
+        <div id="numero_zoro">
+          <Label class="font-weight-bold">Número Zoho</Label>
+          <input 
+          formControlName='numero_zoro' 
+          [(ngModel)]="rh.numero_zoro" 
+          type='text' 
+          class='form-control' />
+        </div>
+        <div id="cpf">
+          <Label class="font-weight-bold">CPF</Label>
+          <input 
+          mask="000.000.000-00" 
+          [showMaskTyped]="true" 
+          formControlName='cpf' 
+          [(ngModel)]='rh.cpf'
+          type='text' 
+          class='form-control' />
+        </div>
+        <div id="rg" >
+          <Label class="font-weight-bold">RG</Label>
+          <input 
+          formControlName='rg' 
+          [(ngModel)]='rh.rg'
+          type='text' 
+          maxlength="7"
+          class='form-control' />
+        </div>
+
+        <div id="candidato">
+          <Label class="font-weight-bold">Candidato</Label>
+          <input 
+            formControlName='candidato' 
+            [(ngModel)]="rh.candidato"  
+            type='text'
+            style="width: 791px;" 
+            class='form-control' />
+        </div>
+                   <!-- input email -->
+          <div id="email">
+            <Label class="font-weight-bold">E-mail</Label>
+            <input 
+              formControlName='email'
+              [(ngModel)]='rh.email' 
+              type='email' 
+              style="width: 791px;" 
+              class='form-control'
+               />
+          </div>
+          <div id="telefone">
+            <Label class="font-weight-bold">Telefone</Label>
+            <input 
+              id="telefone"
+              mask="(00) 00000-0000" 
+              [showMaskTyped]="true" 
+              [dropSpecialCharacters]="false" 
+              formControlName='telefone'
+              [(ngModel)]='rh.telefone' 
+              type='text' 
+              class='form-control input-cd' />
+          </div> 
+          <div id="cargo" >
+            <label class="font-weight-bold">Cargo</label>
+            <select 
+            id='select-cargo'
+            formControlName='cargo' 
+            class='form-control' 
+            [(ngModel)]="rh.cargo">
+            <option [ngValue]="item"
+            id="{{item.id}}"
+            class='form-control' 
+            [selected]=" rh.cargo && rh.cargo.id==item.id"
+                *ngFor='let item of this.listaCargo'>{{item.descricao}}</option>
+            </select>
+          </div>
+          <div id="especialidade">
+            <label class="font-weight-bold">Especialidade</label>
+            <select 
+            id='select-especialidade'
+            formControlName='especialidade' 
+            class='form-control' 
+            [(ngModel)]="rh.especialidade">
+            <option [ngValue]="item"
+            id="{{item.id}}"
+            class='form-control' 
+            [selected]=" rh.especialidade && rh.especialidade.id==item.id"
+                *ngFor='let item of this.listaEspecialidade'>{{item.descricao}}</option>
+            </select>
+          </div>
+          <div >
+            <Label class="font-weight-bold">Remuneração</Label>
+            <input id="remuneracao"
+              formControlName='remuneracao'
+              [(ngModel)]="rh.remuneracao"
+              maxlength="10"
+              type='remuneracao' 
+              class='form-control'
+               />
+          </div>
+          <div >
+            <Label class="font-weight-bold">Vale Alimentação</Label>
+            <input id="va"
+              formControlName='va'
+              [(ngModel)]='rh.vale_alimentacao' 
+              type='va' 
+              maxlength="10"
+              class='form-control'
+               />
+          </div>
+          <div>
+            <Label class="font-weight-bold">Vale Refeição</Label>
+            <input  id="vr"
+              formControlName='vr'
+              [(ngModel)]='rh.vale_refeicao' 
+              type='vr' 
+              maxlength="8"
+              class='form-control'
+               />
+          </div>
+          <div >
+            <Label class="font-weight-bold">Bônus</Label>
+            <input id="bonus"
+              formControlName='bonus'
+              [(ngModel)]='rh.bonus' 
+              type='bonus' 
+              maxlength="10"
+              class='form-control'
+               />
+          </div>
+          <div >
+            <Label class="font-weight-bold">Flash</Label>
+            <input id="flash"
+              formControlName='flash'
+              [(ngModel)]='rh.flash' 
+              type='flash'
+              maxlength="10" 
+              class='form-control'
+               />
+          </div>
+          <div>
+            <Label class="font-weight-bold">Cesta</Label>
+            <input  id="cesta"
+              formControlName='cesta'
+              [(ngModel)]='rh.cesta' 
+              type='cesta' 
+              maxlength="10"
+              class='form-control'
+               />
+          </div>
+          <div id="plano_saude">
+            <Label class="font-weight-bold">Plano de Saúde</Label>
+            <input 
+              formControlName='plano_saude'
+              [(ngModel)]='rh.plano_saude' 
+              type='plano_saude' 
+              class='form-control'
+               />
+          </div>
+          <div id='bu'>
+            <label class="font-weight-bold">Área Negócio</label>
+            <select 
+            id='select-bu'
+            formControlName='bu' 
+            class='form-control' 
+            [(ngModel)]="rh.bu">
+            <option [ngValue]="item"
+              id="{{item.id}}"
+             class='form-control' 
+             [selected]=" rh.bu && rh.bu.id==item.id"
+                *ngFor='let item of this.listaBu'>{{item.descricao}}</option>
+            </select>
+        </div>
+        <div id='operacao'>
+          <label class="font-weight-bold">Operação</label>
+          <select 
+          id='select-operacao'
+          formControlName='operacao' 
+          class='form-control' 
+          [(ngModel)]="rh.operacao">
+          <option [ngValue]="item"
+           class='form-control' 
+           id="{{item.id}}"
+           [selected]=" rh.operacao && rh.operacao.id==item.id"
+              *ngFor='let item of this.listaOperacao'>{{item.descricao}}</option>
+          </select>
+        </div>
+        <div id="etapa" *ngIf="mostrarEtapa">
+          <label class="font-weight-bold">Etapa</label>
+            <select 
+            id='select-etapa'
+            formControlName='etapa' 
+            class='form-control' 
+            [(ngModel)]="rh.etapa">
+            <option [ngValue]="item"
+              id="{{item.id}}"
+              type='text'
+              [selected]=" rh.etapa && rh.etapa.id==item.id"
+              *ngFor='let item of this.listaEtapa'>{{item.descricao}} </option>
+            </select>
+        </div> 
+        <div id="recrutador">
+          <label class="font-weight-bold">Recrutador</label>
+            <select 
+            id='select-recrutador'
+            formControlName='recrutador' 
+            class='form-control' 
+            [(ngModel)]="rh.recrutador">
+            <option [ngValue]="item"
+              id="{{item.id}}"
+              type='text'
+              [selected]=" rh.recrutador && rh.recrutador.id==item.id"
+              *ngFor='let item of this.listaRecrutador'>{{item.descricao}} </option>
+            </select>
+        </div>
+            <section>
+              <div class="example-button-row">
+
+                <button mat-icon-button  *ngIf="mostrarInserir"
+                  (click)='submit()' 
+                  id="refresh"
+                  class="button1"
+                  color="white">
+                  <mat-icon>check_circle</mat-icon>
+                  INSERIR
+                </button>
+
+                <button  mat-raised-button   *ngIf="mostrarAtualizar"
+                (click)='submit()' 
+                class="button2"
+                color="white"
+                printTitle="atualizar">
+                <mat-icon>check_circle</mat-icon>
+                Atualizar</button>
+
+              </div>
+            </section>
+      </div>
+  </form>
+</div>

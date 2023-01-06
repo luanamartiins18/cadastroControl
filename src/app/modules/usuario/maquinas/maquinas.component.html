@@ -1,45 +1,57 @@
 <div class='principal'>
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a [routerLink]="['/../usuarios']" class="nav-link active">
-          <i class="fa fa-users" aria-hidden="true"></i>
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a [routerLink]="['/../usuarios']" class="nav-link active">
+        <i class="fa fa-users" aria-hidden="true"></i>
           Lista de Usuários
-        </a>
-      </li>
-      <li class="nav-item">
-        <a [routerLink]="['/../novo-usuario']" class="nav-link active">
-          <i class="fa fa-user-plus" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="['/../novo-usuario']" class="nav-link active">
+        <i class="fa fa-user-plus" aria-hidden="true"></i>
           Cadastro
-        </a>
-        <li class="nav-item">
-          <a [routerLink]="['/../funcao']" class="nav-link active">
-            <i class="fa fa-user-plus" aria-hidden="true"></i>
-            Função
-          </a>
-      </li>
-      <li class="nav-item">
-        <a [routerLink]="['/../contrato']" class="nav-link active">
+      </a>
+    <li class="nav-item">
+      <a [routerLink]="['/../funcao']" class="nav-link active">
+        <i class="fa fa-user-plus" aria-hidden="true"></i>
+        Função
+      </a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="['/../contrato']" class="nav-link active">
           <i class="fa fa-user-plus" aria-hidden="true"></i>
-          Contrato
-        </a>
+            Contrato
+      </a>
     </li>
     <li class="nav-item">
       <a [routerLink]="['/../relatorio']" class="nav-link active">
         <i class="fa fa-user-plus" aria-hidden="true"></i>
         Relatório
       </a>
-  </li>
-  <li class="nav-item">
-    <a [routerLink]="['/../maquinas']" class="nav-link active">
-      <i class="fa fa-user-plus" aria-hidden="true"></i>
-      Maquinas
-    </a>
-  </li>
-    </ul>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="['/../maquinas']" class="nav-link active">
+        <i class="fa fa-user-plus" aria-hidden="true"></i>
+        Maquinas
+      </a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="['/../detalhesMaquinas']" class="nav-link active">
+        <i class="fa fa-user-plus" aria-hidden="true"></i>
+        Lista de Maquinas
+      </a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="['/../perfil']" class="nav-link active">
+        <i class="fa fa-user-plus" aria-hidden="true"></i>
+        Perfil
+      </a>
+    </li>
+</ul>
     <form [formGroup]='form'>
       <div class='container'>  
-          <div id="matricula">
-            <Label class="font-weight-bold">Matricula</Label>
+          <div id="codigoRe">
+            <Label class="font-weight-bold">Matrícula</Label>
             <input 
             formControlName='codigoRe' 
             [(ngModel)]="usuario.codigoRe" 
@@ -50,11 +62,13 @@
             maxlength="8"
             class='form-control' />
           </div>
+
           <div id="nome">
             <Label class="font-weight-bold">Nome</Label>
             <input 
+              id="nome"
               disabled class='form-control' 
-              value={{usuario?.nome?.toUpperCase()}} 
+              value={{usuario.nome?.toUpperCase()}} 
               type='text'
               class='form-control' />
           </div>
@@ -62,25 +76,30 @@
             <div id='modelo'>
               <label class="font-weight-bold">Modelo</label>
                 <select 
+                id="select-modelo"
                 formControlName='modelo' 
                 class='form-control' 
-                [(ngModel)]="usuario.modelo">
+                [(ngModel)]="historicoMaquinas.modelo">
                 <option [ngValue]="item"
+                  id="{{item.id}}"
+                  [selected]="historicoMaquinas.modelo &&historicoMaquinas.modelo.id == item.id"
                   type='text'
-                  [selected]=" usuario.modelo && usuario.modelo.id==item.id"
                   *ngFor='let item of this.listaModelo'>{{item.descricao}} </option>
                 </select>
             </div>
+
         <!-- input equipamento -->
             <div id='equipamento'>
                 <label class="font-weight-bold">Equipamento</label>
                 <select 
+                id="select-equipamento"
                 formControlName='equipamento' 
                 class='form-control' 
-                [(ngModel)]="usuario.equipamento">
+                [(ngModel)]="historicoMaquinas.equipamento">
                 <option [ngValue]="item"
+                id="{{item.id}}"
                 class='form-control' 
-                [selected]=" usuario.equipamento && usuario.equipamento.id==item.id"
+                [selected]="historicoMaquinas.equipamento && historicoMaquinas.equipamento.id==item.id"
                 *ngFor='let item of this.listaEquipamento'>{{item.descricao}}</option>
                 </select>
             </div>
@@ -88,12 +107,14 @@
           <div id='memoria'>
             <label class="font-weight-bold">Memória</label>
             <select 
+            id="select-memoria"
             formControlName='memoria' 
             class='form-control' 
-            [(ngModel)]="usuario.memoria">
+            [(ngModel)]="historicoMaquinas.memoria">
             <option [ngValue]="item"
+            id="{{item.id}}"
             class='form-control' 
-            [selected]=" usuario.memoria && usuario.memoria.id==item.id"
+            [selected]="historicoMaquinas.memoria && historicoMaquinas.memoria.id==item.id"
             *ngFor='let item of this.listaMemoria'>{{item.descricao}}</option>
             </select>
         </div>
@@ -101,7 +122,7 @@
               <Label class="font-weight-bold">Tag</Label>
               <input 
               formControlName='tag' 
-              [(ngModel)]='usuario.tag'
+              [(ngModel)]='historicoMaquinas.tag'
               type='text' 
               class='form-control' />
             </div>
@@ -109,7 +130,7 @@
                 <Label class="font-weight-bold">Patrimônio</Label>
                 <input 
                 formControlName='patrimonio' 
-                [(ngModel)]='usuario.patrimonio'
+                [(ngModel)]='historicoMaquinas.patrimonio'
                 type='text' 
                 class='form-control' />
               </div> 
@@ -118,52 +139,56 @@
                 <Label class="font-weight-bold">Data de Entrega</Label>
                 <input 
                 [(ngModel)]='historicoMaquinas.data_inicio' 
+                (change)="desabilitarDatafinal($event)" 
                 formControlName='data_inicio' 
                 type='date'
                 class='form-control' />
               </div>
                <!-- data devolução -->
-              <div id="data_final" *ngIf="mostrarAtualizar">
+              <div id="data_final" *ngIf="mostrarAtualizar"  >
                 <Label class="font-weight-bold">Data de Devolução</Label>
-                <input 
+                <input  *ngIf="aparecer"
                 [(ngModel)]='historicoMaquinas.data_final' 
                 formControlName='data_final' 
                 type='date'
+                value="data_devolucao"
+                class='form-control' />
+
+                <input *ngIf="!aparecer"
+                disabled
+                [(ngModel)]='historicoMaquinas.data_final' 
+                formControlName='data_final' 
+                type='date'
+                value="data_devolucao"
                 class='form-control' />
               </div>
 
               <section>
                 <div class="example-button-row">
-                  <button  mat-raised-button  *ngIf="mostrarAtualizar"
+
+                  <button  mat-raised-button 
+                  (click)='volta()' 
+                  class="button2"
+                  color="white"
+                  printTitle="voltar">
+                  <mat-icon>keyboard_backspace</mat-icon>
+                  Voltar</button>
+
+                  <button  mat-raised-button   *ngIf="mostrarAtualizar"
                   (click)='submitAtualizacao()' 
                   class="button2"
                   color="white"
                   printTitle="devolucao">
+                  <mat-icon>check_circle</mat-icon>
                   Atualizar</button>
   
-                  <button mat-raised-button
-                    (click)='PrintSimplesPDFs()' 
-                    class="button2"
-                    color="white"
-                    printTitle="entrega">
-                    <mat-icon>print</mat-icon>
-                    Entrega</button>
 
-                    <button mat-raised-button
+                    <button mat-raised-button  *ngIf="mostrarInserir"
                     (click)='submit()'
-                    (change)="atualizarTable($event)"
                     class="button1"
                     color="black">
                   <mat-icon>check_circle</mat-icon>
                     inserir</button>
-
-                    <button mat-raised-button
-                    (click)='PrintSimplesPdfDevo()' 
-                    class="button2"
-                    color="white"
-                    printTitle="entrega">
-                    <mat-icon>print</mat-icon>
-                    Devolução</button>
                 </div>
               </section>
         </div>
@@ -182,11 +207,11 @@
         </ng-container>
         <ng-container matColumnDef="patrimonio">
           <th mat-header-cell *matHeaderCellDef>Patrimônio</th>
-          <td mat-cell *matCellDef="let element"> {{element.usuario.patrimonio}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.patrimonio}} </td>
         </ng-container>
         <ng-container matColumnDef="tag">
           <th mat-header-cell *matHeaderCellDef>Service Tag/IMEI </th>
-          <td mat-cell *matCellDef="let element"> {{element.usuario.tag}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.tag}} </td>
         </ng-container>
         <ng-container matColumnDef="data_inicio">
           <th mat-header-cell *matHeaderCellDef> DATA ENTREGA</th>
@@ -202,114 +227,4 @@
     </table>
   </div>
   
-<!-------------------------------------------------------------------------------------------------------------- -->
-  <input type="hidden" id="dados-usuario" value="">
-  <div class='container-fluid' id="imprimirPDF" style="display: none;">
-      <div id="divTitulo" style="display: none;">
-        <img src="assets/qintesss.jpg" id="imgTitulo"> 
-        <span style="padding-left: 800px;"></span>
-      </div>
-    <div id="divDemandaOperacao" style="width: 100%;" class="divDemandaOperacao">
-    </div>
-  <div class="tabelaHistorico" *ngIf="mostrarTabela">
-      <p>Como colaborador da Qintess, eu <span id="nome-pdf"></span>, do CPF: <span id="cpf-pdf"></span>, usuário do(s) equipamento(s) abaixo, comprometo-me a:</p>
-      <br>
-      <h4>Dados do Equipamento:</h4>
-      <table class="tableok" border="1" mat-table [dataSource]=" historico"  matSort> 
-        <ng-container  style="height: 30px !important">
-          <ng-container  matColumnDef="equipamento">
-            <th mat-header-cell *matHeaderCellDef>Equipamento</th>
-            <td mat-cell *matCellDef="let element"> {{element.equipamento.descricao}} </td>
-          </ng-container>
-          <ng-container matColumnDef="modelo">
-            <th mat-header-cell *matHeaderCellDef>Modelo</th>
-            <td mat-cell *matCellDef="let element"> {{element.modelo.descricao}} </td>
-          </ng-container>
-          <ng-container matColumnDef="patrimonio">
-            <th mat-header-cell *matHeaderCellDef>Patrimônio</th>
-            <td mat-cell *matCellDef="let element"> {{element.usuario.patrimonio}} </td>
-          </ng-container>
-          <ng-container matColumnDef="tag">
-            <th mat-header-cell *matHeaderCellDef>Service Tag/IMEI </th>
-            <td mat-cell *matCellDef="let element"> {{element.usuario.tag }} </td>
-          </ng-container>
-          <ng-container matColumnDef="data_inicio">
-            <th mat-header-cell *matHeaderCellDef> DATA ENTREGA</th>
-            <td mat-cell *matCellDef="let element"> {{element.data_inicio | date : 'dd/MM/yyyy'}} </td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="colunas; sticky: true"></tr>
-          <tr style="border: 1px solid black;" class='custom-row' mat-row *matRowDef="let row;  columns: colunas;" [hidden]="row.vigente == 'Não'" ></tr>'
-        </ng-container>
-      </table>
-      <h1>Responsabilidade</h1>
-      <p>• Manter o equipamento em perfeitas condições de uso e utilizar conforme a Política de Uso Aceitável que conheço e aceito como prática de trabalho.</p>
-      <p>• Em caso de perda, roubo ou furto do ativo comunicar o fato, imediatamente, à área de Infraestrutura Corporativa.</p>
-      <p>• Estou ciente de que o mau uso, perda e/ou não devolução do equipamento, implicará no desconto de valores.</p>
-      <p>• Esse equipamento não pode ser transferido, emprestado, para terceiro, sem o conhecimento do seu Gestor e da Área de Infraestrutura.</p>
-      <p>• Em caso de desligamento, deverá ser devolvido imediatamente após a comunicação do fato.</p>
-      <p>• O colaborador autoriza, no ato da sua rescisão, o desconto referente ao valor de mercado do equipamento não devolvido no prazo acima mencionado.</p>
-      <p>Informo que recebi o equipamento descrito com:</p>
-      <img src="assets/equipamento.png" id="imgTermo">  
-      <P>SÃO PAULO</P>
-      <P>_____________________________</P>
-      <p>NOME DO COLABORADOR: <span id="nome-ass"></span>  </p>
-      <P>CPF: <span id="cpf-ass"></span> </P>
-      <P>RG: <span id="rg-ass"></span> </P>
-  </div>
 
-
-<!-- ----------------------------------------------------------------------------------------------------------------------------------- -->
-  <input type="hidden" id="dados-usuario" value="">
-  <div class='container-fluid' id="imprimirPDFs" style="display: none;">
-      <div id="divTitulos" style="display: none;">
-        <img src="assets/termo1.png" id="imgTitulos"> 
-        <span style="padding-left: 800px;"></span>
-      </div>
-    <div id="divDemandaOperacaos" style="width: 100%;" class="divDemandaOperacaos">
-    </div>
-    <div class="tabelaHistorico" *ngIf="mostrarTabela">
-      <p>A área de Infraestrutura Corporativa da Qintess confirma que os equipamentos abaixo foram recebidos e continuam com suas condições de uso adequadas.</p>
-      <h4>Dados do Equipamento:</h4>
-      <h1>Informo que recebi o(s) equipamento(s) descrito(s) abaixo:</h1>
-      <table id="tabelaDevolucao" border="1" class="tableok"  mat-table [dataSource]=" historico" matSort> 
-        <ng-container style="height: 30px !important;">
-          <ng-container matColumnDef="equipamento">
-            <th mat-header-cell *matHeaderCellDef>Equipamento</th>
-            <td mat-cell *matCellDef="let element"> {{element.equipamento.descricao}} </td>
-          </ng-container>
-          <ng-container matColumnDef="modelo">
-            <th mat-header-cell *matHeaderCellDef>Modelo</th>
-            <td mat-cell *matCellDef="let element"> {{element.modelo.descricao}} </td>
-          </ng-container>
-          <ng-container matColumnDef="patrimonio">
-            <th mat-header-cell *matHeaderCellDef>Patrimônio</th>
-            <td mat-cell *matCellDef="let element"> {{element.usuario.patrimonio}} </td>
-          </ng-container>
-          <ng-container matColumnDef="tag">
-            <th mat-header-cell *matHeaderCellDef>Service Tag/IMEI </th>
-            <td mat-cell *matCellDef="let element"> {{element.usuario.tag}} </td>
-          </ng-container>
-          <ng-container matColumnDef="data_inicio">
-            <th mat-header-cell *matHeaderCellDef> DATA ENTREGA</th>
-            <td mat-cell *matCellDef="let element"> {{element.data_inicio | date : 'dd/MM/yyyy'}} </td>
-          </ng-container>
-          <ng-container matColumnDef="data_final">
-            <th mat-header-cell *matHeaderCellDef> DATA FINAL</th>
-            <td mat-cell *matCellDef="let element"> {{element.data_final | date : 'dd/MM/yyyy'}} </td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="colunas1; sticky: true"></tr>
-          <tr style="border: 1px solid black;" class='custom-row' mat-row *matRowDef="let row; columns: colunas1;" [hidden]="row.vigente == 'Sim'" ></tr>'
-        </ng-container>
-      </table>
-      <img src="assets/equipamento1.png" id="imgTermo"> 
-      <P>SÃO PAULO</P>
-      <br>
-      <P>_____________________________</P>
-      <p>Responsável pelo recebimento:</p>                  
-      <P>Nome: <span id="nome-dev"></span></P>
-      <P>CPF: <span id="cpf-dev"></span></P>
-      <P>_____________________________</P>
-      <p>Responsável pela coleta:</p>                  
-      <P>Nome: <span id="nome-dev"></span></P>
-      <P>CPF: <span id="cpf-dev"></span></P>
-  </div>

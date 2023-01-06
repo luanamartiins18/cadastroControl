@@ -1,45 +1,57 @@
 <div class='principal'>
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a [routerLink]="['/../usuarios']" class="nav-link active">
-          <i class="fa fa-users" aria-hidden="true"></i>
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a [routerLink]="['/../usuarios']" class="nav-link active">
+        <i class="fa fa-users" aria-hidden="true"></i>
           Lista de Usuários
-        </a>
-      </li>
-      <li class="nav-item">
-        <a [routerLink]="['/../novo-usuario']" class="nav-link active">
-          <i class="fa fa-user-plus" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="['/../novo-usuario']" class="nav-link active">
+        <i class="fa fa-user-plus" aria-hidden="true"></i>
           Cadastro
-        </a>
-        <li class="nav-item">
-          <a [routerLink]="['/../funcao']" class="nav-link active">
-            <i class="fa fa-user-plus" aria-hidden="true"></i>
-            Função
-          </a>
-      </li>
-      <li class="nav-item">
-        <a [routerLink]="['/../contrato']" class="nav-link active">
+      </a>
+    <li class="nav-item">
+      <a [routerLink]="['/../funcao']" class="nav-link active">
+        <i class="fa fa-user-plus" aria-hidden="true"></i>
+        Função
+      </a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="['/../contrato']" class="nav-link active">
           <i class="fa fa-user-plus" aria-hidden="true"></i>
-          Contrato
-        </a>
+            Contrato
+      </a>
     </li>
     <li class="nav-item">
       <a [routerLink]="['/../relatorio']" class="nav-link active">
         <i class="fa fa-user-plus" aria-hidden="true"></i>
         Relatório
       </a>
-  </li>
-  <li class="nav-item">
-    <a [routerLink]="['/../maquinas']" class="nav-link active">
-      <i class="fa fa-user-plus" aria-hidden="true"></i>
-      Maquinas
-    </a>
-  </li>
-    </ul>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="['/../maquinas']" class="nav-link active">
+        <i class="fa fa-user-plus" aria-hidden="true"></i>
+        Maquinas
+      </a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="['/../detalhesMaquinas']" class="nav-link active">
+        <i class="fa fa-user-plus" aria-hidden="true"></i>
+        Lista de Maquinas
+      </a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="['/../perfil']" class="nav-link active">
+        <i class="fa fa-user-plus" aria-hidden="true"></i>
+        Perfil
+      </a>
+    </li>
+</ul>
     <form [formGroup]='form'>
       <div class='container'>  
           <div id="matricula">
-            <Label class="font-weight-bold">Matricula</Label>
+            <Label class="font-weight-bold">Matrícula</Label>
             <input 
             formControlName='codigoRe' 
             [(ngModel)]="usuario.codigoRe" 

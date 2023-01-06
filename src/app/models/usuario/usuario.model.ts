@@ -9,6 +9,8 @@ import { Operacao } from '../operacao/operacao.model';
 import { Modelo } from '../modelo/modelo.model';
 import { Memoria } from '../memoria/memoria.model';
 import { Equipamento } from '../equipamento/equipamento.model';
+import { HistoricoMaquinas } from '../historico/historicoMaquinas/historicoMaquinas.model';
+import { Perfil } from '../perfil/perfil.model';
 
 export class Usuario implements UsuarioInterface {
 
@@ -43,6 +45,8 @@ export class Usuario implements UsuarioInterface {
   equipamento?: Equipamento;
   tag?: string;
   patrimonio?: string;
+  historicomaquinas?: HistoricoMaquinas;
+  perfil?: Perfil;
 
   constructor(
     id?: number,
@@ -76,5 +80,7 @@ export class Usuario implements UsuarioInterface {
     equipamento?: Equipamento,
     tag?: string,
     patrimonio?: string,
+    historicomaquinas?: HistoricoMaquinas,
+    perfil?: Perfil,
   ) { }
 }

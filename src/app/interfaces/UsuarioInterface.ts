@@ -7,6 +7,7 @@ import { EquipamentoInterface } from './EquipamentoInterfaces';
 import { MemoriaInterface } from './MemoriaInterfaces';
 import { ModeloInterface } from './ModeloInterfaces';
 import { OperacaoInterface } from './OperacaoInterfaces';
+import { PerfilInterface } from './perfilInterface';
 import { TipoInterface } from './TipoInterface';
 
 
@@ -42,6 +43,6 @@ export interface UsuarioInterface {
   operacao?: OperacaoInterface;
   tag?: string;
   patrimonio?: string;
-  
+  perfil?: PerfilInterface;
 }
 

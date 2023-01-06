@@ -9,6 +9,12 @@ import { CargoComponent } from './modules/usuario/cargo/cargo.component';
 import { ContratoComponent } from './modules/usuario/contrato/contrato.component';
 import { RelatorioComponent } from './modules/usuario/relatorio/relatorio.component';
 import { MaquinasComponent } from './modules/usuario/maquinas/maquinas.component';
+import { DetalhesMaquinasComponent } from './modules/usuario/detalhes-maquinas/detalhes-maquinas.component';
+import { AtualizarMaquinasComponent } from './modules/usuario/atualizar-maquinas/atualizar-maquinas.component';
+import { PerfilComponent } from './modules/usuario/perfil/perfil.component';
+import { CandidatosComponent } from './modules/rh/candidatos/candidatos.component';
+import { CadastroCandidatosComponent } from './modules/rh/cadastro-candidatos/cadastro-candidatos.component';
+import { DetalhesCandidatosComponent } from './modules/rh/detalhes-candidatos/detalhes-candidatos.component';
 
 
 const routes: Routes = [
@@ -22,7 +28,15 @@ const routes: Routes = [
       {path: 'funcao', component:CargoComponent},
       {path: 'contrato', component:ContratoComponent},
       {path: 'relatorio', component:RelatorioComponent},
+      {path: 'detalhesMaquinas', component: DetalhesMaquinasComponent},
+      {path: 'detalhesMaquinas/:id',component: AtualizarMaquinasComponent},
+      {path: 'maquinas/:id', component: MaquinasComponent},
       {path: 'maquinas', component:MaquinasComponent},
+      {path: 'perfil', component: PerfilComponent},
+      {path: 'rh', component: CandidatosComponent},
+      {path: 'rh/:id', component: DetalhesCandidatosComponent},
+      {path:'cadastro-candidatos', component: CadastroCandidatosComponent},
+      {path:'cadastro-candidatos/:id', component: CadastroCandidatosComponent}
     ]
   }
 ];

@@ -23,8 +23,6 @@ export class NovoUsuarioComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public formBuilder: FormBuilder,
-
-
   ) { }
 
   ngOnInit() {

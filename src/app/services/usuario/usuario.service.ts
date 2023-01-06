@@ -3,10 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
 import { Historico } from 'src/app/models/historico/historico.model';
-import { Operacao } from 'src/app/models/operacao/operacao.model';
-import { Modelo } from 'src/app/models/modelo/modelo.model';
 import { HistoricoOperacao } from 'src/app/models/historico/historicoOperacao/historicoOperacao.model';
 import { HistoricoMaquinas } from 'src/app/models/historico/historicoMaquinas/historicoMaquinas.model';
+import { HistoricoPerfil } from 'src/app/models/historico/historicoPerfil/historicoPerfil.model';
 
 
 const httpOptions = {
@@ -43,6 +42,14 @@ export class UsuarioService {
     return this.http.get<Historico[]>(environment.api + 'historico/' + re);
   }
 
+  getListaHistoricoPerfilRe(re: string){
+    return this.http.get<HistoricoPerfil[]>(environment.api + 'historicoperfil/' + re);
+  }
+
+  getListaHistorico() {
+    return this.http.get<HistoricoMaquinas[]>(environment.api + 'historicomaquinas/');
+  }
+
   getListaHistoricoOperacaoRe(re: String) {
     return this.http.get<HistoricoOperacao[]>(environment.api + 'historicooperacao/' + re);
   }
@@ -53,6 +60,10 @@ export class UsuarioService {
 
   getUsuarioId(id) {
     return this.http.get<Usuario>(environment.api + 'usuarios/' + id);
+  }
+
+  getHistoricoMaquinas(id){
+    return this.http.get<HistoricoMaquinas>(environment.api + 'historicomaquinaslista/' + id);
   }
 
   atualizaUsuario(param: Usuario) {
@@ -67,18 +78,26 @@ export class UsuarioService {
     return this.http.post(environment.api + "funcao", param, { headers: httpOptions.headers, observe: 'response' });
   }
 
+  inserePerfil(param: Usuario){
+    return this.http.post(environment.api + "perfil", param, { headers: httpOptions.headers, observe: 'response' });
+  }
+
   insereContrato(param: Usuario){
     return this.http.post(environment.api + "contrato", param, { headers: httpOptions.headers, observe: 'response' });
   }
 
-  insereMaquinas(param: Usuario, historico: HistoricoMaquinas){
-    Object.assign(param, {data_inicio: historico.data_inicio, data_final: historico.data_final});
+  insereMaquinas(param: HistoricoMaquinas, usuario: Usuario){
+    Object.assign(param, {
+      codigoRe: usuario.codigoRe,
+    });
     return this.http.post(environment.api + "maquinas", param, { headers: httpOptions.headers, observe: 'response' });
 
   }
 
-  atualizarMaquinas(param: Usuario, historico: HistoricoMaquinas){
-    Object.assign(param, {data_inicio: historico.data_inicio, data_final: historico.data_final});
+  atualizarMaquinas(param: HistoricoMaquinas, usuario: Usuario){
+    Object.assign(param, {
+      codigoRe: usuario.codigoRe,
+    });
     return this.http.post(environment.api + "atualizarmaquinas", param, { headers: httpOptions.headers, observe: 'response' });
 
   }

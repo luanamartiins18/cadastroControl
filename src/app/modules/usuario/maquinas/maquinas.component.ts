@@ -9,9 +9,10 @@ import { Modelo } from 'src/app/models/modelo/modelo.model';
 import { Equipamento } from 'src/app/models/equipamento/equipamento.model';
 import { Memoria } from 'src/app/models/memoria/memoria.model';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
-import * as printJS from 'print-js';
-
 import { HistoricoMaquinas } from 'src/app/models/historico/historicoMaquinas/historicoMaquinas.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Alert } from 'selenium-webdriver';
+import { ListaUsuario } from 'src/app/models/ListaUsuario/lista-usuario.model';
 
 @Component({
   selector: 'app-maquinas',
@@ -20,15 +21,18 @@ import { HistoricoMaquinas } from 'src/app/models/historico/historicoMaquinas/hi
 })
 export class MaquinasComponent implements OnInit {
 
+
+  
   form: FormGroup;
+  historicoMaquinas: HistoricoMaquinas = new HistoricoMaquinas();
   usuario: Usuario = new Usuario();
   listaModelo: Array<Modelo>;
   listaEquipamento: Array<Equipamento>;
   listaMemoria: Array<Memoria>;
   usuarios: Usuario[] = [];
-  id: any;
+  id: String;
   historico: HistoricoMaquinas[] = [];
-  historicoMaquinas: HistoricoMaquinas = new HistoricoMaquinas();
+
 ;
   colunas = [
   'equipamento','modelo','patrimonio','tag', 'data_inicio'
@@ -37,50 +41,90 @@ export class MaquinasComponent implements OnInit {
     'equipamento','modelo','patrimonio','tag', 'data_inicio', 'data_final'
   ];
   mostrarTabela: boolean;
-  mostrarGerarPDF: boolean;
   mostrarAtualizar: boolean;
+  mostrarInserir: Boolean;
+  aparecer:boolean;
 
   constructor(
     public formBuilder: FormBuilder,
     private modeloService: ModeloService,
     private equipamentoService: EquipamentoService,
     private usuarioService: UsuarioService,
+    private route: ActivatedRoute,
+    private router: Router,
     private memoriaService: MemoriaService,
     private notifier: NotifierService,
   ) { }
 
   ngOnInit() {
+    this.carregaUsuarios();
     this.montaFormBuilder();
     this.getMemoria();
     this.getEquipamento();
     this.getModelo();
-    this.mostrarTabela = false;
-    this.mostrarGerarPDF = false;
+    setTimeout(()=>{
+      this.preencheCampos();
+    }, 1300);
+    // this.mostrarInserir= true;
+    this.mostrarAtualizar= true;
+    this.aparecer = true;
   }
 
 
-  atualizarTableHistorico() {
-    let listaHistorico = [];
-    let arrIdsHistorico = [];
+
+
+  desabilitarDatafinal(){
+    if(this.historicoMaquinas.data_inicio == undefined){
+      this.mostrarInserir= true;
+    }else{
+      this.mostrarAtualizar= true;
+      this.aparecer = false;
+    }
+  }
+
+
   
-    this.historico.forEach((historico) =>{
-      arrIdsHistorico.push(historico.id);
-    })
-    this.historico = listaHistorico;
+  
+  volta(){
+    this.router.navigate(['detalhesMaquinas/']);
   }
 
 
-  mostrarhistoricoMaquinas() {
-    this.mostrarGerarPDF = true;
-    this.mostrarTabela = true;
-    if(this.usuario.codigoRe == undefined) {
+
+    mostrarhistoricoMaquinas() {
+      this.mostrarAtualizar= false;
+      this.mostrarInserir =  true;
+    if(this.usuario.codigoRe == undefined){
       this.historico = [];
+      this.mostrarInserir =  true;
     }else{
       this.usuarioService.getListaHistoricoMaquinasRe(this.usuario.codigoRe).subscribe(
         data => {
         this.historico = data;
+        this.mostrarAtualizar = true;
+        this.mostrarInserir = true;
       });
     }
+  } 
+
+  preencheCampos(){
+    this.populaCampo('select-modelo', this.usuario.modelo);
+    this.populaCampo('select-equipamento', this.usuario.equipamento);
+    this.populaCampo('select-memoria', this.usuario.memoria);
+
+  }
+
+  populaCampo(id, obj){
+    if(obj != undefined){
+      for(let x in document.getElementById(id).options){
+        let item =   document.getElementById(id).options[x];
+        if(item.id == obj.id){
+          item.selected = true;
+          break;
+        }
+      }
+    }
+   
   } 
 
   getNome(event: any) {
@@ -89,10 +133,9 @@ export class MaquinasComponent implements OnInit {
       var url = this.usuarioService.getUsuario(value);
       url.subscribe(data => {
         if(data) {
-          (<HTMLInputElement>document.getElementById("nome")).value = data['nome'];
+          (<HTMLInputElement>document.getElementById("nome")).value = data.nome;
           this.usuario.nome = data['nome'];
-          (<HTMLInputElement>document.getElementById('dados-usuario')).value = JSON.stringify(data);
-
+          this.usuario.codigoRe = data.codigoRe;
         } else{
           (<HTMLInputElement>document.getElementById('nome')).value=("");
         }
@@ -103,12 +146,12 @@ export class MaquinasComponent implements OnInit {
 
   private montaFormBuilder() {
     this.form = this.formBuilder.group({
-      codigoRe: [this.usuario.codigoRe, [Validators.required]],
-      modelo:[this.usuario.modelo,[Validators.required]],
-      equipamento: [this.usuario.equipamento,[Validators.required]],
-      memoria:[this.usuario.memoria,[Validators.required]],
-      tag: [this.usuario.tag,[Validators.required]],
-      patrimonio: [this.usuario.patrimonio,[Validators.required]],
+      codigoRe: [this.usuario.codigoRe],
+      modelo:[this.historicoMaquinas.modelo,[Validators.required]],
+      equipamento: [this.historicoMaquinas.equipamento,[Validators.required]],
+      memoria:[this.historicoMaquinas.memoria,[Validators.required]],
+      tag: [this.historicoMaquinas.tag,[Validators.required]],
+      patrimonio: [this.historicoMaquinas.patrimonio,[Validators.required]],
       data_inicio:[this.historicoMaquinas.data_inicio,[Validators.required]],
       data_final: [this.historicoMaquinas.data_final]
 
@@ -121,45 +164,7 @@ export class MaquinasComponent implements OnInit {
     });
   }
 
-  PrintSimplesPDFs(){
-    let dadosUsuario = JSON.parse((<HTMLInputElement>document.getElementById('dados-usuario')).value);
-    let titulo = document.getElementById('divTitulo');
-    let divDemandaOperacao = document.getElementById('divDemandaOperacao');
-    let infoDemanda = document.createElement('b');
-    let infoOperacao = document.createElement('b');
-    let imprimirPDF = document.getElementById('imprimirPDF');
-    imprimirPDF.style.display = 'block';
-    document.getElementById('nome-pdf').innerHTML = dadosUsuario.nome;
-    document.getElementById('cpf-pdf').innerHTML = dadosUsuario.cpf;
-    document.getElementById('nome-ass').innerHTML = dadosUsuario.nome;
-    document.getElementById('cpf-ass').innerHTML = dadosUsuario.cpf;;
-    document.getElementById('rg-ass').innerHTML = dadosUsuario.rg;
-    titulo.style.display = 'block';
-    divDemandaOperacao.style.display = "block";
-    divDemandaOperacao.append(infoDemanda, infoOperacao) ;
-    printJS({printable:'imprimirPDF', type:'html', targetStyle: ['border-right-width', 'border-left-width', 'border-top-width', 'border-bottom-width', 'border-style','border-color', 'display', 'width'], honorColor: true});
-    titulo.style.display = 'none';
-    imprimirPDF.style.display = 'none';
-  } 
-
-  PrintSimplesPdfDevo(){
-    let dadosUsuario = JSON.parse((<HTMLInputElement>document.getElementById('dados-usuario')).value);
-    let titulo = document.getElementById('divTitulos');
-    let divDemandaOperacao = document.getElementById('divDemandaOperacaos');
-    let infoDemanda = document.createElement('b');
-    let infoOperacao = document.createElement('b');
-    let imprimirPDFs = document.getElementById('imprimirPDFs');
-    imprimirPDFs.style.display = 'block';
-    document.getElementById('nome-dev').innerHTML = dadosUsuario.nome;
-    document.getElementById('cpf-dev').innerHTML = dadosUsuario.cpf;
-    titulo.style.display = 'block';
-    divDemandaOperacao.style.display = "block";
-    divDemandaOperacao.append(infoDemanda, infoOperacao) ;
-    printJS({printable:'imprimirPDFs', type:'html', targetStyle: ['border-right-width', 'border-left-width','border-top-width', 'border-bottom-width', 'border-style','border-color', 'display', 'width'], honorColor: true});
-    titulo.style.display = 'none';
-    imprimirPDFs.style.display = 'none';
-  }
-
+ 
   private getEquipamento() {
     this.equipamentoService.getEquipamento().subscribe((lista) => {
       this.listaEquipamento = lista;
@@ -177,7 +182,6 @@ export class MaquinasComponent implements OnInit {
       this.notifier.notify("error", " Todos os campos devem ser preenchidos corretamente!");
     } else {
       this.insereMaquinas();
-      this.mostrarAtualizar =  true;
     }
   }
 
@@ -191,9 +195,10 @@ export class MaquinasComponent implements OnInit {
   }
 
   private insereMaquinas() {
-    this.usuarioService.insereMaquinas(this.usuario, this.historicoMaquinas).subscribe((data) => {
+    this.usuarioService.insereMaquinas(this.historicoMaquinas, this.usuario).subscribe((data) => {
       if (data.status == 200) {
-        this.notifier.notify("success", "Contrato criado com sucesso!");
+        this.notifier.notify("success", "Dados inseridos com sucesso");
+        this.router.navigate(['detalhesMaquinas/']);
       }
       else {
         this.notifier.notify("error", "Houve um erro no cadastro a Maquinas");
@@ -204,14 +209,30 @@ export class MaquinasComponent implements OnInit {
 
 
   private atualizaMaquinas(){
-    this.usuarioService.atualizarMaquinas(this.usuario, this.historicoMaquinas).subscribe((data) => {
+    this.usuarioService.atualizarMaquinas(this.historicoMaquinas, this.usuario).subscribe((data) => {
       if (data.status == 200) {
-        this.notifier.notify("success", "Contrato criado com sucesso!");
+        // alert( "Data de entrega alterada, gerar um termo de entrega");
+        this.notifier.notify("success", "Atualizado com sucesso");
+        this.router.navigate(['detalhesMaquinas/'+ this.id]);
       }
       else {
-        this.notifier.notify("error", "Houve um erro no cadastro a Maquinas");
+        this.notifier.notify("error", "Houve um erro no atualiza a Maquinas");
       }
     }, 
     );
   }
+
+  
+private carregaUsuarios() {
+  this.id = this.route.snapshot.paramMap.get('id');
+  if (this.id) {
+    this.usuarioService.getHistoricoMaquinas(this.id).subscribe(
+      (usuario) => {
+        this.historicoMaquinas = usuario;
+        this.usuario = this.historicoMaquinas.usuario;
+      }
+    );
+  }
+
+}
 }
