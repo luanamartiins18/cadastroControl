@@ -29,8 +29,8 @@
     cursor: pointer;
   }
   
-  tr.mat-header-row{
-    background-color: rgb(68, 68, 68);
+  tr.mat-header-row{  
+    background-color: black;
   }
   
   th.mat-header-cell{
@@ -38,17 +38,10 @@
     font-size: 0.8rem;
   }
   
-.button9 {
-  margin-top: 1rem;
-  background-color: rgb(204, 24, 240);
-  color: black;
-  margin-left: 70rem;
-  width: 8rem;
-  padding: 1px 10px 3px 2px;
-  border-radius: 2rem;
-  color: #ffff;
-}
-
-.scrollit {
-  overflow:auto;
+  button{
+    margin-right: -2vw;
+    font-size: 40px;
+    line-height: 4px;
+    height: 32px;
+    width: auto;
 }

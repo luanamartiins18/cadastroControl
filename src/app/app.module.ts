@@ -15,7 +15,7 @@ import { RhModule } from './modules/rh/rh.module';
 import localePt from '@angular/common/locales/pt';
 import {registerLocaleData} from '@angular/common';
 import {CurrencyPipe} from '@angular/common';
-import { CpfPipe } from 'src/pipe/cpf.pipe';
+
 
 
 

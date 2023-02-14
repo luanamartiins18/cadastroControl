@@ -1,7 +1,4 @@
 
-
-
-
 *{
     margin: 8;
   
@@ -75,11 +72,20 @@
     margin-top: 2rem;
     background-color: rgb(204, 24, 240);
     color: black;
-    margin-left: 19rem;
+    margin-left: 3rem;
     width: 8rem;
     padding: 1px 10px 3px 2px;
     border-radius: 2rem;
     color: #ffff;
+  }
+
+  .button3 {
+    background-color: rgb(204, 24, 240);
+    color: black;
+    width: 8rem;
+    border-radius: 2rem;
+    color: #ffff;
+    margin-left: 15rem;
   
   }
   

@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Rh } from 'src/app/models/rh/rh.model';
 import { environment } from 'src/environments/environment';
-
-
+import { Candidatos } from 'src/app/models/candidato/candidatos.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -14,34 +12,85 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class RhService {
+export class CandidatosService {
 
   constructor(private http: HttpClient) { }
 
-
-
-  insereCandidato(param: Rh) {
+  insereCandidatos(param: Candidatos) {
+    console.log(param);
     return this.http.post(environment.api + "candidatos", param, { headers: httpOptions.headers, observe: 'response' });
   }
 
-  atualizaCandidato(param: Rh) {
+  atualizaCandidatos(param: Candidatos) {
     return this.http.put(environment.api + "candidatos/" + param.id, param, { headers: httpOptions.headers, observe: 'response' });
   }
 
-  getListaRh() {
-    return this.http.get<Rh[]>(environment.api + 'candidatos');
+  
+  getListaCandidatos() {
+    return this.http.get<Candidatos[]>(environment.api + 'candidatos');
   }
 
   getCandidatosId(id) {
-    return this.http.get<Rh>(environment.api + 'candidatos/' + id);
+    return this.http.get<Candidatos>(environment.api + 'candidatos/' + id);
   }
 
-  deleteCandidatos(id) {
+  deleteVagas(id) {
     return this.http.delete(environment.api + "candidatos/" + id, { headers: httpOptions.headers, observe: 'response' });
   }
 
-  atualizaStatus(param: Rh) {
-    return this.http.put(environment.api + "candidatosStatus/" + param.id, param, { headers: httpOptions.headers, observe: 'response' });
+  getListaCandidatosPorVaga(id) {
+    return this.http.get<Candidatos[]>(environment.api + 'candidatosvaga/' + id);
   }
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// upload( formData = FormData){
+  //   return this.http.post(environment.api + "candidatos", formData, { headers: httpOptions.headers, reportProgress: true, observe: 'events'})
+  // }
+  

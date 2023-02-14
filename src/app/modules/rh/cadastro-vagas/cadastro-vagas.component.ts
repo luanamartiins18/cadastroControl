@@ -3,10 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Etapa } from 'src/app/models/etapa/etapa.model';
-import { Rh } from 'src/app/models/rh/rh.model';
+import { Vagas } from 'src/app/models/vagas/vagas.model';
 import { Status } from 'src/app/models/status/status.model';
 import { EtapaService } from 'src/app/services/etapa/etapa.service';
-import { RhService } from 'src/app/services/rh/rh.service';
+import { VagasService } from 'src/app/services/vagas/vagas.service';
 import { StatusService } from 'src/app/services/status/status.service';
 import { Funcao } from 'src/app/models/cargo/funcao.model';
 import { FuncaoService } from 'src/app/services/funcao/funcao.service';
@@ -20,14 +20,14 @@ import { RecrutadorService } from 'src/app/services/recrutador/recrutador.servic
 import { Recrutador } from 'src/app/models/recrutador/recrutador.model';
 
 @Component({
-  selector: 'app-cadastro-candidatos',
-  templateUrl: './cadastro-candidatos.component.html',
-  styleUrls: ['./cadastro-candidatos.component.css']
+  selector: 'app-cadastro-vagas',
+  templateUrl: './cadastro-vagas.component.html',
+  styleUrls: ['./cadastro-vagas.component.css']
 })
-export class CadastroCandidatosComponent implements OnInit {
-
-  mostrarAtualizar: boolean;
+export class CadastroVagasComponent implements OnInit {
+  
   mostrarEtapa: boolean;
+  mostrarAtualizar: boolean;
   mostrarInserir: boolean;
   listaOperacao: Array<Operacao>;
   listaBu: Array<Bu>;
@@ -38,10 +38,10 @@ export class CadastroCandidatosComponent implements OnInit {
   listaRecrutador: Array<Recrutador>;
 
   form: FormGroup;
-  rh: Rh = new Rh();
+  rh: Vagas = new Vagas();
   id: any;
   constructor(
-    private rhService: RhService,
+    private rhService: VagasService,
     private notifier: NotifierService,
     public formBuilder: FormBuilder,
     private statusService: StatusService,
@@ -76,11 +76,6 @@ export class CadastroCandidatosComponent implements OnInit {
   private montaFormBuilder() {
     this.mostrarInserir = true;
     this.form = this.formBuilder.group({
-      candidato: [this.rh.candidato, [Validators.required]],
-      telefone: [this.rh.telefone, [Validators.required]],
-      cpf: [this.rh.cpf, [Validators.required]],
-      rg: [this.rh.rg, [Validators.required]],
-      email: [this.rh.email, [Validators.required]],
       numero_zoro: [this.rh.numero_zoro, [Validators.required]],
       va: [this.rh.vale_alimentacao],
       vr: [this.rh.vale_refeicao],
@@ -105,33 +100,35 @@ export class CadastroCandidatosComponent implements OnInit {
     let cesta = document.getElementById('cesta');
 
     remuneracao.addEventListener('input', (event) =>{
-      (<HTMLInputElement>document.getElementById('remuneracao')).value = formataMoeda(event.target.value);      
+      (<HTMLInputElement>document.getElementById('remuneracao')).value = formataMoeda((event.target as HTMLInputElement).value);      
     });
     va.addEventListener('input', (event) =>{
-      (<HTMLInputElement>document.getElementById('va')).value = formataMoeda(event.target.value);      
+      (<HTMLInputElement>document.getElementById('va')).value = formataMoeda((event.target as HTMLInputElement).value); 
     });
     vr.addEventListener('input', (event) =>{
-      (<HTMLInputElement>document.getElementById('vr')).value = formataMoeda(event.target.value);      
+      (<HTMLInputElement>document.getElementById('vr')).value = formataMoeda((event.target as HTMLInputElement).value);   
     });
     bonus.addEventListener('input', (event) =>{
-      (<HTMLInputElement>document.getElementById('bonus')).value = formataMoeda(event.target.value);      
+      (<HTMLInputElement>document.getElementById('bonus')).value = formataMoeda((event.target as HTMLInputElement).value);     
     });
     flash.addEventListener('input', (event) =>{
-      (<HTMLInputElement>document.getElementById('flash')).value = formataMoeda(event.target.value);      
+      (<HTMLInputElement>document.getElementById('flash')).value = formataMoeda((event.target as HTMLInputElement).value);    
     });
     cesta.addEventListener('input', (event) =>{
-      (<HTMLInputElement>document.getElementById('cesta')).value = formataMoeda(event.target.value);      
+      (<HTMLInputElement>document.getElementById('cesta')).value = formataMoeda((event.target as HTMLInputElement).value);    
     })
 
     function formataMoeda(value){
       let valor = value;
+
       valor = valor + '';
-      valor = valor.replace(/[\D]+/g, '');
+      valor = parseInt(valor.replace(/[\D]+/g, ''));
       valor = valor + '';
-      valor = valor.replace(/([0-9]{2})$/g, ',$1');
-    
+      valor = valor.replace(/([0-9]{2})$/g, ",$1");
+
+
       if(valor.length > 6){
-        valor = valor.replace(/([0-9]{3}),([0-9]{2})/g, ".$1,$2");
+          valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
       }
       if(valor == 'NaN'){
         return '';
@@ -141,10 +138,11 @@ export class CadastroCandidatosComponent implements OnInit {
   }
 
 
+
   private carregaUsuarios() {
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {
-      this.rhService.getCandidatosId(this.id).subscribe(
+      this.rhService.getVagasId(this.id).subscribe(
         (rh) => {
           this.rh = rh;
           this.mostrarEtapa = true;
@@ -209,23 +207,21 @@ export class CadastroCandidatosComponent implements OnInit {
   }
 
   private insereRh() {
-    this.rhService.insereCandidato(this.rh).subscribe((data) => {
+    this.rhService.insereVagas(this.rh).subscribe((data) => {
       if (data.status == 200) {
-        this.notifier.notify("success", "Candidato criado com sucesso!");
+        this.notifier.notify("success", "VAGAS CADASTRADO COM SUCESSO!");
         this.router.navigate(['rh']);
       }
-      else {
-        this.notifier.notify("error", "Ocorreu um erro ao cadastrar, por favor tente novamente.");
+      else{
+        this.notifier.notify("error", "Ocorreu um erro ao cadastrar, por favor verificar os devidos dados, tente novamente.");
       }
-    }, 
-    );
+    });
   }
 
   private atualizaUsuario() {
-    this.rhService.atualizaCandidato(this.rh).subscribe((data) => {
+    this.rhService.atualizaVagas(this.rh).subscribe((data) => {
       if (data.status == 200) {
-        this.notifier.notify("success", "Candidato atualizado com sucesso!");
-
+        this.notifier.notify("success", "DADOS DA VAGA ATUALIZADO COM SUCESSO !");
         this.router.navigate(['rh']);
       }
       else {
@@ -248,13 +244,17 @@ export class CadastroCandidatosComponent implements OnInit {
 
   populaCampo(id, obj){
     if(obj != undefined){
-      for(let x in document.getElementById(id).options){
-        let item =   document.getElementById(id).options[x];
-        if(item.id == obj.id){
-          item.selected = true;
-          break;
-        }
-      }
+      // for(let x in document.getElementById(id).options){
+      //   let item =   document.getElementById(id).options[x];
+      //   if(item.id == obj.id){
+      //     item.selected = true;
+      //     break;
+      //   }
+      // }
     }
+  }
+
+  volta(){
+    this.router.navigate(['rh/']);
   }
 }

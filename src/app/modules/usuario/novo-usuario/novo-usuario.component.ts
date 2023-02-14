@@ -84,7 +84,6 @@ export class NovoUsuarioComponent implements OnInit {
         });
         return url
       } 
-      
   }
 
   private carregaUsuarios() {

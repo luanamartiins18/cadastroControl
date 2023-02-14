@@ -12,8 +12,11 @@ import { MaquinasComponent } from './modules/usuario/maquinas/maquinas.component
 import { DetalhesMaquinasComponent } from './modules/usuario/detalhes-maquinas/detalhes-maquinas.component';
 import { AtualizarMaquinasComponent } from './modules/usuario/atualizar-maquinas/atualizar-maquinas.component';
 import { PerfilComponent } from './modules/usuario/perfil/perfil.component';
+import { VagasComponent } from './modules/rh/vaga/vagas.component';
+import { CadastroVagasComponent } from './modules/rh/cadastro-vagas/cadastro-vagas.component';
+import { DetalhesVagasComponent } from './modules/rh/detalhes-vagas/detalhes-vagas.component';
+import { CadastroCandidatoComponent } from './modules/rh/cadastro-candidato/cadastro-candidato.component';
 import { CandidatosComponent } from './modules/rh/candidatos/candidatos.component';
-import { CadastroCandidatosComponent } from './modules/rh/cadastro-candidatos/cadastro-candidatos.component';
 import { DetalhesCandidatosComponent } from './modules/rh/detalhes-candidatos/detalhes-candidatos.component';
 
 
@@ -33,10 +36,14 @@ const routes: Routes = [
       {path: 'maquinas/:id', component: MaquinasComponent},
       {path: 'maquinas', component:MaquinasComponent},
       {path: 'perfil', component: PerfilComponent},
-      {path: 'rh', component: CandidatosComponent},
-      {path: 'rh/:id', component: DetalhesCandidatosComponent},
-      {path:'cadastro-candidatos', component: CadastroCandidatosComponent},
-      {path:'cadastro-candidatos/:id', component: CadastroCandidatosComponent}
+      {path: 'rh', component: VagasComponent},
+      {path: 'rh/:id', component: DetalhesVagasComponent},
+      {path: 'cadastro-vagas', component: CadastroVagasComponent},
+      {path: 'cadastro-vagas/:id', component: CadastroVagasComponent},
+      {path: 'cadastro-candidato', component: CadastroCandidatoComponent},
+      {path: 'cadastro-candidato/:id', component: CadastroCandidatoComponent},
+      {path: 'candidato/:id', component:DetalhesCandidatosComponent },
+      {path: 'candidato', component: CandidatosComponent},
     ]
   }
 ];

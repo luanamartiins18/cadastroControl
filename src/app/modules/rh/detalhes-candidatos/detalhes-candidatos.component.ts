@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Rh } from 'src/app/models/rh/rh.model';
-import { RhService } from 'src/app/services/rh/rh.service';
-
+import { Candidatos } from 'src/app/models/candidato/candidatos.model';
+import { CandidatosService } from 'src/app/services/candidatos/candidatos.service';
 @Component({
   selector: 'app-detalhes-candidatos',
   templateUrl: './detalhes-candidatos.component.html',
@@ -11,13 +10,13 @@ import { RhService } from 'src/app/services/rh/rh.service';
 export class DetalhesCandidatosComponent implements OnInit {
 
   id: String;
-  rh: Rh = new Rh();
+  rh: Candidatos = new Candidatos();
 
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private rhService: RhService,
+    private rhService: CandidatosService,
   ) { }
 
   ngOnInit() {
@@ -33,12 +32,12 @@ export class DetalhesCandidatosComponent implements OnInit {
     );
   }
 
-   
   volta(){
-    this.router.navigate(['rh/']);
+    this.router.navigate(['candidato/']);
   }
+  
   editaUsuario() {
     this.id = this.route.snapshot.paramMap.get('id');
-    this.router.navigate(['cadastro-candidatos/' + this.id]);
+    this.router.navigate(['cadastro-candidato/' + this.id]);
   }
 }

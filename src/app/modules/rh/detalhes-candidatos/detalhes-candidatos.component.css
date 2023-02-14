@@ -35,7 +35,7 @@ section {
 
 .button3 {
 
-    margin-top: 8rem;
+    margin-top: 2rem;
     background-color: rgb(204, 24, 240);
     color: black;
     margin-left: -24rem;
@@ -49,9 +49,29 @@ section {
     margin-top: 2rem;
     background-color: rgb(204, 24, 240);
     color: black;
-    margin-left: 3rem;
+    margin-left: 12rem;
     width: 10rem;
     padding: 1px 15px 3px 2px;
     border-radius: 3rem;
     color: #ffff;
+  }
+
+  .borda{
+    border: 1px solid black;
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    width: 838px;
+    min-width: 838px;
+    padding: 0;
+  }
+  
+  .borda2{
+    border: 1px solid black;
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    width: 838px;
+    min-width: 838px;
+    padding: 0;
   }

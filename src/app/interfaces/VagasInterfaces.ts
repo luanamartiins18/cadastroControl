@@ -6,14 +6,9 @@ import { Operacao } from "../models/operacao/operacao.model";
 import { Recrutador } from "../models/recrutador/recrutador.model";
 import { Status } from "../models/status/status.model";
 
-export interface RhInterface {
+export interface VagasInterface {
     id?: number;
-    candidato?: string;
-    cpf?: string;
-    rg?: string;
     numero_zoro?: string;
-    email?: string;
-    telefone?: string;
     vale_alimentacao?: string;
     vale_refeicao?: string;
     remuneracao?: string;
@@ -30,4 +25,5 @@ export interface RhInterface {
     operacao?: Operacao;
     recrutador?: Recrutador;
     data_inicio?: Date;
+
 }

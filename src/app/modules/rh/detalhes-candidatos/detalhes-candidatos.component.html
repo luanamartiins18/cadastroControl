@@ -1,30 +1,28 @@
 <div class='principal'>
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a [routerLink]="['/../rh']" class="nav-link active">
-            <i class="fa fa-users" aria-hidden="true"></i>
-              Candidatos
-          </a>
-        </li>
-        <li class="nav-item">
-          <a [routerLink]="['/../cadastro-candidatos']" class="nav-link active">
-            <i class="fa fa-users" aria-hidden="true"></i>
-              Cadastro
-          </a>
-        </li>
-    </ul>
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a [routerLink]="['/../cadastro-vagas']" class="nav-link active">
+        <i class="fa fa-users" aria-hidden="true"></i>
+          Cadastro de Vagas
+      </a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="['/../rh']" class="nav-link active">
+        <i class="fa fa-users" aria-hidden="true"></i>
+          Vagas 
+      </a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="['/../candidato']" class="nav-link active">
+        <i class="fa fa-users" aria-hidden="true"></i>
+          Candidatos
+      </a>
+    </li>
+</ul>
+<!-- ------------------------------------------------------ -->
     <div *ngIf='rh; else carregando'>
         <form>
           <div class='container '>
-              <div id="numero_zoro">
-                <Label class="font-weight-bold">Número Zoro</Label>
-                <input 
-                    disabled class='form-control' 
-                    value={{rh?.numero_zoro}} 
-                    type='text' 
-                    class='form-control' 
-                />
-              </div>
                  <div  id="cpf">
                   <Label class="font-weight-bold">CPF</Label>
                   <input 
@@ -44,145 +42,181 @@
                   class='form-control'
                 />
               </div>
+                 <!-- input celular -->
+                 <div id="telefone">
+                  <Label class="font-weight-bold">Telefone</Label>
+                  <input 
+                    disabled class='form-control' 
+                    value={{rh?.telefone}} 
+                    type='text'
+                    style="width: 20rem"
+                    class='form-control' />
+              </div> 
               <div id="candidato">
                 <Label class="font-weight-bold">Candidato</Label>
                 <input 
                     disabled class='form-control' 
-                    value={{rh?.candidato}}  
+                    value={{rh?.candidatos}}  
                     type='text'
-                    style="width: 730px;" 
+                    style="width:52rem;" 
                     class='form-control' />
               </div>
-      
-                <!-- input email -->
                 <div  id="email">
                   <Label class="font-weight-bold">E-mail</Label>
                   <input 
                     disabled class='form-control' 
                     value={{rh?.email}} 
                     type='text'
-                    style="width: 730px;" 
+                    style="width:52rem;" 
                     class='form-control' 
                   />
                 </div>
-             <!-- input celular -->
-                <div id="telefone">
-                    <Label class="font-weight-bold">Telefone</Label>
-                    <input 
-                      disabled class='form-control' 
-                      value={{rh?.telefone}} 
-                      type='text'
-                      class='form-control' />
-                </div> 
-                <div  id="cargo">
-                  <Label class="font-weight-bold">Cargo</Label>
+                <div  id="status_candidato">
+                  <Label class="font-weight-bold">STATUS</Label>
                   <input 
                     disabled class='form-control' 
-                    value={{rh?.cargo?.descricao}} 
-                    type='text' 
-                    class='form-control'
+                    value={{rh?.status_candidato?.descricao}} 
+                    type='text'
+                    class='form-control' 
                   />
                 </div>
-                <div  id="especialidade">
-                  <Label class="font-weight-bold">Especialidade</Label>
-                  <input 
-                    disabled class='form-control' 
-                    value={{rh?.especialidade?.descricao}} 
-                    type='text' 
-                    class='form-control'
-                  />
-                </div>
-                    <!-- input celular -->
-                <div id="remuneracao">
-                    <Label class="font-weight-bold">Remuneração</Label>
-                    <input 
-                      disabled class='form-control' 
-                      value={{rh?.remuneracao}} 
-                      type='text'
-                      class='form-control' />
-                </div> 
-                <div id="va">
-                    <Label class="font-weight-bold">Vale Alimentação</Label>
-                    <input 
+            <!-- atual -->
+            <div>
+              <legend >ATUAL</legend> 
+                <fieldset  class="borda">
+                  <div id="remuneracao">
+                      <Label class="font-weight-bold">Remuneração</Label>
+                      <input 
                         disabled class='form-control' 
-                        value={{rh?.vale_alimentacao}} 
+                        value={{rh?.remuneracao_atual}} 
+                        type='text'
+                        class='form-control' />
+                  </div> 
+                  <div id="va">
+                      <Label class="font-weight-bold">Vale Alimentação</Label>
+                      <input 
+                          disabled class='form-control' 
+                          value={{rh?.vale_alimentacao_atual}} 
+                          type='text'
+                          class='form-control'
+                        />
+                    </div>
+                    <div id="vr">
+                      <Label class="font-weight-bold">Vale Refeição</Label>
+                      <input 
+                          disabled class='form-control' 
+                          value={{rh?.vale_refeicao_atual}} 
+                          type='text'
+                          class='form-control'
+                        />
+                    </div>
+                    <div id="bonus">
+                      <Label class="font-weight-bold">Bônus</Label>
+                      <input 
+                          disabled class='form-control' 
+                          value={{rh?.bonus_atual}} 
+                          type='text'
+                          class='form-control'
+                        />
+                    </div>
+                    <div id="flash">
+                      <Label class="font-weight-bold">Flash</Label>
+                      <input 
+                        disabled class='form-control' 
+                        value={{rh?.flash_atual}} 
                         type='text'
                         class='form-control'
-                       />
-                  </div>
-                  <div id="vr">
-                    <Label class="font-weight-bold">Vale Refeição</Label>
-                    <input 
+                        />
+                    </div>
+                    <div id="cesta">
+                      <Label class="font-weight-bold">Cesta</Label>
+                      <input 
                         disabled class='form-control' 
-                        value={{rh?.vale_refeicao}} 
+                        value={{rh?.cesta_atual}}   
                         type='text'
                         class='form-control'
-                       />
-                  </div>
-                  <div id="bonus">
-                    <Label class="font-weight-bold">Bônus</Label>
-                    <input 
-                        disabled class='form-control' 
-                        value={{rh?.bonus}} 
-                        type='text'
-                        class='form-control'
-                       />
-                  </div>
-                  <div id="flash">
-                    <Label class="font-weight-bold">Flash</Label>
-                    <input 
-                      disabled class='form-control' 
-                      value={{rh?.flash}} 
-                      type='text'
-                      class='form-control'
-                       />
-                  </div>
-                  <div id="cesta">
-                    <Label class="font-weight-bold">Cesta</Label>
-                    <input 
-                      disabled class='form-control' 
-                      value={{rh?.cesta}}   
-                      type='text'
-                      class='form-control'
-                       />
-                  </div>
-                  <div id="plano_saude">
-                    <Label class="font-weight-bold">Plano de Saúde</Label>
-                    <input 
-                        disabled class='form-control' 
-                        value={{rh?.plano_saude}} 
-                        type='text'
-                        class='form-control'
-                       />
-                  </div>
-                  <div  id="status">
-                    <Label class="font-weight-bold">Status</Label>
-                    <input 
-                      disabled class='form-control' 
-                      value={{rh?.status?.descricao}} 
-                      type='text' 
-                      class='form-control'
-                    />
-                  </div>
-                  <div  id="etapa">
-                    <Label class="font-weight-bold">Etapa</Label>
-                    <input 
-                      disabled class='form-control' 
-                      value={{rh?.etapa?.descricao}} 
-                      type='text' 
-                      class='form-control'
-                    />
-                  </div>
-                  <div id="recrutadora">
-                    <Label class="font-weight-bold">Recrutador</Label>
-                    <input 
-                        disabled class='form-control' 
-                        value={{rh?.recrutador?.descricao}} 
-                        type='text'
-                        class='form-control'
-                       />
-                  </div>
-             
+                        />
+                    </div>
+                    <div id="plano_saude">
+                      <Label class="font-weight-bold">Plano de Saúde</Label>
+                      <input 
+                          disabled class='form-control' 
+                          value={{rh?.plano_saude_atual}} 
+                          type='text'
+                          class='form-control'
+                        />
+                    </div>
+                  </fieldset>
+              </div>
+                  <!-- pretensão -->
+                  <div>
+                    <legend >Pretensão</legend> 
+                      <fieldset  class="borda2">
+                        <div id="remuneracao_pretensao">
+                          <Label class="font-weight-bold">Remuneração</Label>
+                          <input 
+                            disabled class='form-control' 
+                            value={{rh?.remuneracao_pretensao}} 
+                            type='text'
+                            class='form-control' />
+                      </div> 
+                      <div id="va">
+                          <Label class="font-weight-bold">Vale Alimentação</Label>
+                          <input 
+                              disabled class='form-control' 
+                              value={{rh?.vale_alimentacao_pretensao}} 
+                              type='text'
+                              class='form-control'
+                            />
+                        </div>
+                        <div id="vr">
+                          <Label class="font-weight-bold">Vale Refeição</Label>
+                          <input 
+                              disabled class='form-control' 
+                              value={{rh?.vale_refeicao_pretensao}} 
+                              type='text'
+                              class='form-control'
+                            />
+                        </div>
+                        <div id="bonus">
+                          <Label class="font-weight-bold">Bônus</Label>
+                          <input 
+                              disabled class='form-control' 
+                              value={{rh?.bonus_pretensao}} 
+                              type='text'
+                              class='form-control'
+                            />
+                        </div>
+                        <div id="flash">
+                          <Label class="font-weight-bold">Flash</Label>
+                          <input 
+                            disabled class='form-control' 
+                            value={{rh?.flash_pretensao}} 
+                            type='text'
+                            class='form-control'
+                            />
+                        </div>
+                        <div id="cesta">
+                          <Label class="font-weight-bold">Cesta</Label>
+                          <input 
+                            disabled class='form-control' 
+                            value={{rh?.cesta_pretensao}}   
+                            type='text'
+                            class='form-control'
+                            />
+                        </div>
+                        <div id="plano_saude">
+                          <Label class="font-weight-bold">Plano de Saúde</Label>
+                          <input 
+                              disabled class='form-control' 
+                              value={{rh?.plano_saude_pretensao}} 
+                              type='text'
+                              class='form-control'
+                            />
+                        </div>
+                      </fieldset>
+                    </div>
+
               <section>
                   <div class="example-button-row">
                     <button mat-raised-button 
@@ -190,9 +224,8 @@
                       class="button2"
                       color="blue">
                       <mat-icon>create</mat-icon>
-                      Editar usuário
+                      Editar Candidato
                     </button>
-                     
                       <button  mat-raised-button 
                       (click)='volta()' 
                       class="button3"

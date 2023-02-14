@@ -1,18 +1,24 @@
 <div class='principal'>
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a [routerLink]="['/../rh']" class="nav-link active">
-          <i class="fa fa-users" aria-hidden="true"></i>
-            Candidatos
-        </a>
-      </li>
-      <li class="nav-item">
-        <a [routerLink]="['/../cadastro-candidatos']" class="nav-link active">
-          <i class="fa fa-users" aria-hidden="true"></i>
-            Cadastro
-        </a>
-      </li>
-  </ul>
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a [routerLink]="['/../cadastro-vagas']" class="nav-link active">
+        <i class="fa fa-users" aria-hidden="true"></i>
+          Cadastro de Vagas
+      </a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="['/../rh']" class="nav-link active">
+        <i class="fa fa-users" aria-hidden="true"></i>
+          Vagas 
+      </a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="['/../candidato']" class="nav-link active">
+        <i class="fa fa-users" aria-hidden="true"></i>
+          Candidatos
+      </a>
+    </li>
+</ul>
 <!-- ------------------------------------------------------------------------------------ -->
   <form [formGroup]='form'>
     <div class='container'>  
@@ -21,61 +27,10 @@
           <input 
           formControlName='numero_zoro' 
           [(ngModel)]="rh.numero_zoro" 
+          maxlength="5"
           type='text' 
           class='form-control' />
         </div>
-        <div id="cpf">
-          <Label class="font-weight-bold">CPF</Label>
-          <input 
-          mask="000.000.000-00" 
-          [showMaskTyped]="true" 
-          formControlName='cpf' 
-          [(ngModel)]='rh.cpf'
-          type='text' 
-          class='form-control' />
-        </div>
-        <div id="rg" >
-          <Label class="font-weight-bold">RG</Label>
-          <input 
-          formControlName='rg' 
-          [(ngModel)]='rh.rg'
-          type='text' 
-          maxlength="7"
-          class='form-control' />
-        </div>
-
-        <div id="candidato">
-          <Label class="font-weight-bold">Candidato</Label>
-          <input 
-            formControlName='candidato' 
-            [(ngModel)]="rh.candidato"  
-            type='text'
-            style="width: 791px;" 
-            class='form-control' />
-        </div>
-                   <!-- input email -->
-          <div id="email">
-            <Label class="font-weight-bold">E-mail</Label>
-            <input 
-              formControlName='email'
-              [(ngModel)]='rh.email' 
-              type='email' 
-              style="width: 791px;" 
-              class='form-control'
-               />
-          </div>
-          <div id="telefone">
-            <Label class="font-weight-bold">Telefone</Label>
-            <input 
-              id="telefone"
-              mask="(00) 00000-0000" 
-              [showMaskTyped]="true" 
-              [dropSpecialCharacters]="false" 
-              formControlName='telefone'
-              [(ngModel)]='rh.telefone' 
-              type='text' 
-              class='form-control input-cd' />
-          </div> 
           <div id="cargo" >
             <label class="font-weight-bold">Cargo</label>
             <select 
@@ -105,7 +60,7 @@
             </select>
           </div>
           <div >
-            <Label class="font-weight-bold">Remuneração</Label>
+            <Label class="font-weight-bold">Budget Base</Label>
             <input id="remuneracao"
               formControlName='remuneracao'
               [(ngModel)]="rh.remuneracao"
@@ -231,7 +186,6 @@
         </div>
             <section>
               <div class="example-button-row">
-
                 <button mat-icon-button  *ngIf="mostrarInserir"
                   (click)='submit()' 
                   id="refresh"
@@ -240,6 +194,13 @@
                   <mat-icon>check_circle</mat-icon>
                   INSERIR
                 </button>
+                <button  mat-raised-button *ngIf="mostrarAtualizar"
+                (click)='volta()' 
+                class="button3"
+                color="white"
+                printTitle="voltar">
+                <mat-icon>keyboard_backspace</mat-icon>
+                Voltar</button>
 
                 <button  mat-raised-button   *ngIf="mostrarAtualizar"
                 (click)='submit()' 

@@ -1,5 +1,6 @@
-import { RhInterface } from "src/app/interfaces/RhInterfaces";
+import { VagasInterface } from "src/app/interfaces/VagasInterfaces";
 import { Bu } from "../bu/bu.model";
+import { Candidatos } from "../candidato/candidatos.model";
 import { Funcao } from "../cargo/funcao.model";
 import { Especialidade } from "../especialidade/Especialidade.model";
 import { Etapa } from "../etapa/etapa.model";
@@ -7,15 +8,10 @@ import { Operacao } from "../operacao/operacao.model";
 import { Recrutador } from "../recrutador/recrutador.model";
 import { Status } from "../status/status.model";
 
-export class Rh implements RhInterface {
+export class Vagas implements VagasInterface {
 
     id?: number;
-    candidato?: string;
-    cpf?: string;
-    rg?: string;
     numero_zoro?: string;
-    email?: string;
-    telefone?: string;
     vale_alimentacao?: string;
     vale_refeicao?: string;
     remuneracao?: string;
@@ -31,16 +27,13 @@ export class Rh implements RhInterface {
     bu?: Bu;
     operacao?: Operacao;
     data_inicio?: Date;
+    candidato?: Candidatos;
 
 
     constructor( 
         id?: number,
-        candidato?: string,
-        cpf?: string,
-        rg?: string,
+        candidato?: Candidatos,
         numero_zoro?: string,
-        email?: string,
-        telefone?: string,
         vale_alimentacao?: string,
         vale_refeicao?: string,
         remuneracao?: string,

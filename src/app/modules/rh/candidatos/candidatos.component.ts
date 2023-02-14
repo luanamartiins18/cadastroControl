@@ -1,13 +1,10 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { NotifierService } from 'angular-notifier';
-import { Rh } from 'src/app/models/rh/rh.model';
-import { RhService } from 'src/app/services/rh/rh.service';
-import {MatDialog} from '@angular/material/dialog';
-import { DialogComponent } from '../dialog/dialog.component';
-import { Status } from 'src/app/models/status/status.model';
-import { StatusService } from 'src/app/services/status/status.service';
 import { MatTableDataSource } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NotifierService } from 'angular-notifier';
+import { Candidatos } from 'src/app/models/candidato/candidatos.model';
+import { CandidatosService } from 'src/app/services/candidatos/candidatos.service';
 
 
 @Component({
@@ -17,78 +14,87 @@ import { MatTableDataSource } from '@angular/material';
 })
 export class CandidatosComponent implements OnInit {
 
-  listaStatus: Array<Status>;
-  id: String;
-  rh: Rh[] = [];
-  rh1:  Rh= new Rh(); 
-  colunas = [
-    'candidato','cpf', 'rg','cargo','especialidade','remuneracao',  'status' , 'etapa', 'recrutador', 'data_inicio', 'acoes'
-  ];
-  
-  dataSource = new MatTableDataSource<Rh>();
+  mostrarInserir: boolean;
+  dataSource = new MatTableDataSource<Candidatos>();
+  selection = new SelectionModel<Candidatos>(true, []);
+  idVaga1: any;
+  candidatos: Candidatos[] = [];
 
+  candidatos1:  Candidatos= new Candidatos(); 
+  colunas = [
+   'acoes','candidatos','cpf','rg',  'email' , 'telefone','status', 'vaga'
+  ];
   constructor(
-    private rhService: RhService,
-    private statusService: StatusService,
+    private rhService: CandidatosService,
     private router: Router,
     private notifier: NotifierService,
-    public dialog: MatDialog
+    private route: ActivatedRoute,
   ) { }
 
-  ngOnInit(): void {
-    this.getStatus();
+  ngOnInit() {
     this.listaRh();
+    this.idVaga1 =  this.route.snapshot.queryParamMap.get('idVaga');
+    console.log(this.idVaga1);
   }
-
   listaRh(){
-    this.rhService.getListaRh().subscribe(
+    this.rhService.getListaCandidatos().subscribe(
       data => {
-      this.rh = data;
+      this.candidatos = data;
     });
   }
 
   detalhesCandidato(row: { id: string; }) {
-    this.router.navigate(['/../rh/' + row.id]);
+    this.router.navigate(['/../candidato/' + row.id]);
   }
 
+
   searchAllField(event: any) {
-    this.rh = this.rh.filter(obj => {
+    this.candidatos = this.candidatos.filter(obj => {
       return Object.keys(obj).find((key) => {
         return obj[key] ? ((obj[key].descricao ? obj[key].descricao : obj[key]).toString().toUpperCase()).includes(event.target.value.toUpperCase()) : false;
       });
     })
   }
 
-  Dialog(): void {
-    const dialogRef = this.dialog.open(DialogComponent, {
-      minWidth: '400px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-    });
-  }
-
-  private getStatus() {
-    this.statusService.getStatus().subscribe((lista) => {
-      this.listaStatus = lista;
-    });
-  }
-
-  cancelarStatus(candidato) {
-    this.rhService.atualizaStatus(candidato).subscribe((data) => {
+  vincularCandidato() {
+    this.idVaga1 = this.route.snapshot.paramMap.get('id');
+    this.rhService.atualizaCandidatos(this.candidatos1).subscribe((data) => {
       if (data.status == 200) {
-        this.notifier.notify("success", "Status do candidato alterado pra cancelado com sucesso!");
-        this.router.navigate(['rh']);
+        this.notifier.notify("success", "CANDIDATO VINCULADO COM SUCESSO!");
+        this.router.navigate(['candidato']);
       }
       else {
-        this.notifier.notify("error", "Ocorreu um erro ao cancelar o status do candidato, por favor tente novamente.");
+        this.notifier.notify("error", "Ocorreu um erro na atualização, por favor tente novamente.");
       }
     }, 
-    );
+   );
   }
 
-  onChange(getStatus){
-    console.log(getStatus);
-    this.dataSource.filter = getStatus.trim().toLowerCase();
-    console.log(this.dataSource);
+  Idvaga(){
+    if(this.idVaga1){
+      return Number(this.idVaga1);
+    }else{
+      return Number(this.candidatos1.vagas);
+    }
   }
+
+
+
+  isAllSelected() {
+    this.mostrarInserir = true;
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected()  ?
+        this.selection.clear() :
+        this.dataSource.data.forEach(row => this.selection.select(row))
+  }
+
 }
+
+
+
