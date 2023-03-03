@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NotifierService } from 'angular-notifier';
 import { Candidatos} from 'src/app/models/candidato/candidatos.model';
 import { Vagas } from 'src/app/models/vagas/vagas.model';
 import { CandidatosService } from 'src/app/services/candidatos/candidatos.service';
@@ -14,13 +15,12 @@ export class DetalhesVagasComponent implements OnInit {
 
   id: String;
   idVaga: String;
-  idVaga1: String;
   rh: Vagas = new Vagas();
   candidatos: Candidatos[] = [];
   candidato1:  Candidatos= new Candidatos(); 
 
   colunas = [
-  'candidatos', 'cpf', 'status_candidato'
+  'candidatos', 'cpf', 'status_candidato', "acoes"
   ];
 
   constructor(
@@ -28,6 +28,7 @@ export class DetalhesVagasComponent implements OnInit {
     private router: Router,
     private rhService: VagasService,
     private candidatoService: CandidatosService,
+    private notifier: NotifierService,
     
   ) { }
 
@@ -64,18 +65,31 @@ export class DetalhesVagasComponent implements OnInit {
   }
 
   vincularCandidatoNovo(){
-    this.idVaga = this.route.snapshot.paramMap.get('idVaga');
+    this.idVaga = this.route.snapshot.paramMap.get('id');
     this.router.navigate(['cadastro-candidato/'],{queryParams: {"idVaga": this.idVaga}});
   }
 
 
-  vincularCandidatoPesquisa(){
-    this.idVaga1 = this.route.snapshot.paramMap.get('idVaga1');
-    this.router.navigate(['/../candidato/'],{queryParams: {"idVaga1": this.idVaga}});
+  vincularCandidatoPesquisa(id: any){
+    this.router.navigate(['/../candidato/'],{ queryParams:{id: JSON.stringify(id) }});
   }
 
+  
   detalhesCandidato(row: { id: string; }) {
-    this.router.navigate(['/../candidato/' + row.id]);
+    this.router.navigate(['cadastro-candidato/' +  row.id]);
   }
 
+
+  desvincularCandidato(candidato: any) {
+    this.candidatoService.desvincularCandidato(candidato).subscribe((data) => {
+      if (data.status == 200) {
+        this.notifier.notify("success", "Candidato desvinculado a vaga");
+        this.router.navigate(['rh']);
+      }
+      else {
+        this.notifier.notify("error", "Ocorreu um erro ao desvincular candidato, por favor tente novamente.");
+      }
+    }, 
+    );
+  }
 }

@@ -3,9 +3,13 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Candidatos } from 'src/app/models/candidato/candidatos.model';
+import { PlanoPretensao } from 'src/app/models/PlanoPretensao/planoPretensao.model';
+import { PlanoSaude } from 'src/app/models/planoSaude/planoSaude.model';
 import { StatusCandidato } from 'src/app/models/statusCandidato/statusCandidato.model';
 import { Vagas } from 'src/app/models/vagas/vagas.model';
 import { CandidatosService } from 'src/app/services/candidatos/candidatos.service';
+import { PlanoPretensaoService } from 'src/app/services/planoSaude/PlanoPretensao/PlanoPretensao.service';
+import { PlanoService } from 'src/app/services/planoSaude/planoSaude.service';
 import { StatusCandidatoService } from 'src/app/services/statusCandidato/statusCandidato.service';
 import { VagasService } from 'src/app/services/vagas/vagas.service';
 
@@ -17,9 +21,12 @@ import { VagasService } from 'src/app/services/vagas/vagas.service';
 })
 export class CadastroCandidatoComponent implements OnInit {
 
+  mostrarObservacao: boolean;
   mostrarStatus: boolean;
-  listaStatusCandidato: Array<StatusCandidato>;
   listaVagas: Array<Vagas>;
+  listaStatusCandidato: Array<StatusCandidato>;
+  listaPlano: Array<PlanoSaude>;
+  listaPlanoSaudePretensao: Array<PlanoPretensao>
   mostrarAtualizar: boolean;
   mostrarInserir: boolean
   mensagem: string = '';
@@ -28,7 +35,6 @@ export class CadastroCandidatoComponent implements OnInit {
   id: any;
   form: FormGroup;
   candidato: Candidatos = new Candidatos();
-  candidatos: Candidatos [] = [];
   idVaga: string;
 
   constructor(
@@ -39,17 +45,23 @@ export class CadastroCandidatoComponent implements OnInit {
     private route: ActivatedRoute,
     private statusCandidatoService: StatusCandidatoService,
     private vagasService: VagasService,
+    private planoService: PlanoService,
+    private planoPretensaoService: PlanoPretensaoService,
   ) { }
 
   ngOnInit() {
     this.montaFormBuilder();
     this.carregaUsuarios();
     this.getStatusCandidato();
-    this.getVagas();
+    this.getPlanoSaude();
+    this.getPlanoSaudePretensao();
     this.mostrarStatus = false;
     this.mostrarInserir = true;
+    this.getVagas();
     this.idVaga =  this.route.snapshot.queryParamMap.get('idVaga');
-    console.log(this.idVaga);
+    setTimeout(()=>{
+      this.preencheCampos();
+    }, 1300);
   }
 
 
@@ -65,7 +77,7 @@ export class CadastroCandidatoComponent implements OnInit {
       vr_atual: [this.candidato.vale_refeicao_atual],
       bonus_atual: [this.candidato.bonus_atual],
       remuneracao_atual: [this.candidato.remuneracao_atual, [Validators.required]],
-      plano_saude_atual: [this.candidato.plano_saude_atual, [Validators.required]],
+      planoSaude: [this.candidato.planoSaude, [Validators.required]],
       cesta_atual: [this.candidato.cesta_atual],
       flash_atual: [this.candidato.flash_atual],
       arquivos: [ this.candidato.arquivos],
@@ -75,10 +87,11 @@ export class CadastroCandidatoComponent implements OnInit {
       vr_pretensao: [this.candidato.vale_refeicao_pretensao],
       bonus_pretensao: [this.candidato.bonus_pretensao],
       remuneracao_pretensao: [this.candidato.remuneracao_pretensao, [Validators.required]],
-      plano_saude_pretensao: [this.candidato.plano_saude_pretensao, [Validators.required]],
+      planoPretensao: [this.candidato.planoPretensao, [Validators.required]],
       cesta_pretensao: [this.candidato.cesta_pretensao],
       flash_pretensao: [this.candidato.flash_pretensao],
-      vagas: [this.candidato.vagas]
+      vagas: [this.candidato.vagas == this.idVaga],
+      observacao: [this.candidato.observacao]
     });
     let remuneracao_atual = document.getElementById('remuneracao_atual');
     let va_atual = document.getElementById('va_atual');
@@ -149,6 +162,17 @@ export class CadastroCandidatoComponent implements OnInit {
     }
   }
 
+  private getPlanoSaude() {
+    this.planoService.getPlanoSaude().subscribe((lista) => {
+      this.listaPlano = lista;
+    });
+  }
+
+  private getPlanoSaudePretensao() {
+    this.planoPretensaoService.getPlanoSaudePretensao().subscribe((lista) => {
+      this.listaPlanoSaudePretensao = lista;
+    });
+  }
  
 
   private carregaUsuarios() {
@@ -164,6 +188,16 @@ export class CadastroCandidatoComponent implements OnInit {
       );
     }
   }
+
+  observacao(event: any){
+  if(event.target.value !== 5 ){
+    this.mostrarObservacao = true;
+  }else{
+    this.mostrarObservacao = false;
+  };
+  }
+
+
 
   submit() {
     if (this.form.invalid) {
@@ -191,7 +225,7 @@ export class CadastroCandidatoComponent implements OnInit {
     this.candidatoService.insereCandidatos(this.candidato).subscribe((data) => {
       if (data.status == 200) {
         this.notifier.notify("success", "CANDIDATO CADASTRADO COM SUCESSO!");
-        this.router.navigate(['candidato']);
+        this.router.navigate(['rh']);
       }
       if (data.status == 500){
         this.notifier.notify("error", "ERRO AO CADASTRAR, CONFIRAR OS DADOS ");
@@ -227,14 +261,21 @@ export class CadastroCandidatoComponent implements OnInit {
     this.router.navigate(['rh/']);
   }
 
-
-  Idvaga(){
-    if(this.idVaga){
-      return Number(this.idVaga);
-    }else{
-      return Number(this.candidato.vagas);
+  preencheCampos(){
+    this.populaCampo('select-planoSaude', this.candidato.planoSaude);
+    this.populaCampo('select-planoPretensao', this.candidato.planoPretensao);
+  }
+  
+  populaCampo(id, obj){
+    if(obj != undefined){
+      // for(let x in document.getElementById(id).options){
+      //   let item =   document.getElementById(id).options[x];
+      //   if(item.id == obj.id){
+      //     item.selected = true;
+      //     break;
+      //   }
+      // }
     }
   }
  
 }
-

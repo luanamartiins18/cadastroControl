@@ -5,17 +5,18 @@ import { Funcao } from "../cargo/funcao.model";
 import { Especialidade } from "../especialidade/Especialidade.model";
 import { Etapa } from "../etapa/etapa.model";
 import { Operacao } from "../operacao/operacao.model";
+import { PlanoSaude } from "../planoSaude/planoSaude.model";
 import { Recrutador } from "../recrutador/recrutador.model";
 import { Status } from "../status/status.model";
 
 export class Vagas implements VagasInterface {
 
     id?: number;
-    numero_zoro?: string;
+    qualitor?: string;
     vale_alimentacao?: string;
     vale_refeicao?: string;
     remuneracao?: string;
-    plano_saude?: string;
+    planoSaude?: PlanoSaude;
     cesta?: string;
     flash?: string;
     bonus?: string;
@@ -27,17 +28,18 @@ export class Vagas implements VagasInterface {
     bu?: Bu;
     operacao?: Operacao;
     data_inicio?: Date;
+    data_final?: Date;
     candidato?: Candidatos;
 
 
     constructor( 
         id?: number,
         candidato?: Candidatos,
-        numero_zoro?: string,
+        qualitor?: string,
         vale_alimentacao?: string,
         vale_refeicao?: string,
         remuneracao?: string,
-        plano_saude?: string,
+        planoSaude?: PlanoSaude,
         cesta?: string,
         flash?: string,
         bonus?: string,
@@ -47,6 +49,7 @@ export class Vagas implements VagasInterface {
         especialidade?: Especialidade,
         recrutadora?: string,
         bu?: Bu,
+        data_final?: Date,
         operacao?: Operacao,
         recrutador?: Recrutador,
         data_inicio?: Date,

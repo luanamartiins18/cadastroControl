@@ -18,6 +18,8 @@ import { OperacaoService } from 'src/app/services/operacao/operacao.service';
 import { Operacao } from 'src/app/models/operacao/operacao.model';
 import { RecrutadorService } from 'src/app/services/recrutador/recrutador.service';
 import { Recrutador } from 'src/app/models/recrutador/recrutador.model';
+import { PlanoService } from 'src/app/services/planoSaude/planoSaude.service';
+import { PlanoSaude } from 'src/app/models/planoSaude/planoSaude.model';
 
 @Component({
   selector: 'app-cadastro-vagas',
@@ -30,6 +32,7 @@ export class CadastroVagasComponent implements OnInit {
   mostrarAtualizar: boolean;
   mostrarInserir: boolean;
   listaOperacao: Array<Operacao>;
+  listaPlano: Array<PlanoSaude>;
   listaBu: Array<Bu>;
   listaEtapa: Array<Etapa>;
   listaStatus: Array<Status>;
@@ -53,6 +56,7 @@ export class CadastroVagasComponent implements OnInit {
     private operacaoService: OperacaoService,
     private especialidadeService: EspecialidadeService,
     private recrutadorService: RecrutadorService,
+    private planoService: PlanoService,
 
   ) { }
 
@@ -61,6 +65,7 @@ export class CadastroVagasComponent implements OnInit {
     this.carregaUsuarios();
     this.getStatus();
     this.getRecrutador();
+    this.getPlanoSaude();
     this.getOperacao();
     this.getEtapa();
     this.getBu();
@@ -71,17 +76,15 @@ export class CadastroVagasComponent implements OnInit {
     }, 1300);
   }
 
-
-  
   private montaFormBuilder() {
     this.mostrarInserir = true;
     this.form = this.formBuilder.group({
-      numero_zoro: [this.rh.numero_zoro, [Validators.required]],
+      qualitor: [this.rh.qualitor, [Validators.required]],
       va: [this.rh.vale_alimentacao],
       vr: [this.rh.vale_refeicao],
       bonus: [this.rh.bonus],
       remuneracao: [this.rh.remuneracao, [Validators.required]],
-      plano_saude: [this.rh.plano_saude, [Validators.required]],
+      planoSaude: [this.rh.planoSaude, [Validators.required]],
       cesta: [this.rh.cesta],
       flash: [this.rh.flash],
       etapa:[this.rh.etapa],
@@ -137,8 +140,6 @@ export class CadastroVagasComponent implements OnInit {
     }
   }
 
-
-
   private carregaUsuarios() {
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {
@@ -152,7 +153,7 @@ export class CadastroVagasComponent implements OnInit {
       );
     }
   }
- 
+  
   private getStatus() {
     this.statusService.getStatus().subscribe((lista) => {
       this.listaStatus = lista;
@@ -195,7 +196,12 @@ export class CadastroVagasComponent implements OnInit {
     });
   }
 
-  
+  private getPlanoSaude() {
+    this.planoService.getPlanoSaude().subscribe((lista) => {
+      this.listaPlano = lista;
+    });
+  }
+
   submit() {
     if (this.form.invalid) {
       this.notifier.notify("error", " Todos os campos devem ser preenchidos corretamente!");
@@ -211,6 +217,7 @@ export class CadastroVagasComponent implements OnInit {
       if (data.status == 200) {
         this.notifier.notify("success", "VAGAS CADASTRADO COM SUCESSO!");
         this.router.navigate(['rh']);
+        console.log(this.rh);
       }
       else{
         this.notifier.notify("error", "Ocorreu um erro ao cadastrar, por favor verificar os devidos dados, tente novamente.");
@@ -223,6 +230,7 @@ export class CadastroVagasComponent implements OnInit {
       if (data.status == 200) {
         this.notifier.notify("success", "DADOS DA VAGA ATUALIZADO COM SUCESSO !");
         this.router.navigate(['rh']);
+        console.log(this.rh);
       }
       else {
         this.notifier.notify("error", "Ocorreu um erro na atualização, por favor tente novamente.");
@@ -232,14 +240,14 @@ export class CadastroVagasComponent implements OnInit {
   }
 
   preencheCampos(){
+    this.populaCampo('select-plano', this.rh.planoSaude);
+    this.populaCampo('select-bu', this.rh.bu);
     this.populaCampo('select-operacao', this.rh.operacao);
     this.populaCampo('select-especialidade', this.rh.especialidade);
     this.populaCampo('select-recrutador', this.rh.recrutador);
     this.populaCampo('select-cargo', this.rh.cargo);
     this.populaCampo('select-etapa', this.rh.etapa);
     this.populaCampo('select-status', this.rh.status);
-    this.populaCampo('select-bu', this.rh.bu);
-
   }
 
   populaCampo(id, obj){

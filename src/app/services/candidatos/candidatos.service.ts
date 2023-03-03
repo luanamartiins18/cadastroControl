@@ -41,6 +41,14 @@ export class CandidatosService {
   getListaCandidatosPorVaga(id) {
     return this.http.get<Candidatos[]>(environment.api + 'candidatosvaga/' + id);
   }
+
+  getListaCandidatosPorStatus(idStatus: number) {
+    return this.http.get<Candidatos[]>(environment.api + 'candidatosstatus/' + idStatus);
+  }
+
+  desvincularCandidato(param: Candidatos){
+    return this.http.put(environment.api + "desvincular/" + param.id, param, { headers: httpOptions.headers, observe: 'response' });
+  }
 }
 
 
@@ -48,49 +56,3 @@ export class CandidatosService {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// upload( formData = FormData){
-  //   return this.http.post(environment.api + "candidatos", formData, { headers: httpOptions.headers, reportProgress: true, observe: 'events'})
-  // }
-  

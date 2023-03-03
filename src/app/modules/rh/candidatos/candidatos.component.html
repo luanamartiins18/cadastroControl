@@ -13,6 +13,12 @@
       </a>
     </li>
     <li class="nav-item">
+      <a [routerLink]="['/../cadastro-candidato']" class="nav-link active">
+        <i class="fa fa-users" aria-hidden="true"></i>
+        Cadastro Candidatos
+      </a>
+    </li>
+    <li class="nav-item">
       <a [routerLink]="['/../candidato']" class="nav-link active">
         <i class="fa fa-users" aria-hidden="true"></i>
           Candidatos
@@ -20,13 +26,23 @@
     </li>
 </ul>
 <!-- ------------------------------------------------------------------ -->
-  <div class='container-fluid'>
-    <div class="input-group mt-3 p">
-      <input (keyup)="searchAllField($event)" class="form-control" placeholder="Consultar - NOME">
-        <div class="input-group-append">
-          <span class="input-group-text"><i class="fa fa-search fa-fw"></i></span>
-        </div>
-    </div>
+<div class='container-fluid'>
+    <form [formGroup]='form'>
+      <div id="status_candidato" >
+        <label class="font-weight-bold">Status</label>
+        <select 
+        id='select-statusCandidato'
+        formControlName='status' 
+        class='form-control' 
+        (blur)="listaUsuariosPorStatus($event)"
+        [(ngModel)]=" candidatos1.status_candidato">
+        <option [value]="item.id"  
+        class='form-control' 
+        [selected]="  candidatos1.status_candidato &&  candidatos1.status_candidato.id==item.id"
+            *ngFor='let item of this.listaStatusCandidato'>{{item.descricao}}</option>
+        </select>
+      </div>
+    </form>
     <section>
       <button mat-icon-button
         (click)="vincularCandidato()" 
@@ -63,17 +79,19 @@
           </ng-container>
           <ng-container matColumnDef="vaga">
             <th mat-header-cell *matHeaderCellDef>VAGA VINCULADA</th>
-            <td mat-cell *matCellDef="let element"> {{element.vagas?.numero_zoro}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.vagas?.qualitor}} </td>
           </ng-container>
           <ng-container matColumnDef="acoes">
             <th mat-header-cell *matHeaderCellDef>
-              <mat-checkbox (change)="$event ? masterToggle() : null"
-                            [checked]="selection.hasValue() && isAllSelected()"
-                            [indeterminate]="selection.hasValue() && !isAllSelected()">
+              <mat-checkbox 
+                (change)="$event ? masterToggle() : null"          
+                [checked]="selection.hasValue() && isAllSelected()" 
+                [indeterminate]="selection.hasValue() && !isAllSelected()">
               </mat-checkbox>
             </th>
             <td mat-cell *matCellDef="let row">
               <mat-checkbox (click)="$event.stopPropagation()"
+                            (click)=" MensagemdeAlerta(row)" 
                             (change)="$event ? selection.toggle(row) : null"
                             [checked]="selection.isSelected(row)">
               </mat-checkbox>
@@ -89,4 +107,5 @@
           </div>
         </ng-template>
     </div>
+  </div>
 </div>

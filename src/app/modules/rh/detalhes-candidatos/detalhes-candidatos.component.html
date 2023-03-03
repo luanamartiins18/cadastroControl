@@ -13,6 +13,12 @@
       </a>
     </li>
     <li class="nav-item">
+      <a [routerLink]="['/../cadastro-candidato']" class="nav-link active">
+        <i class="fa fa-users" aria-hidden="true"></i>
+        Cadastro Candidatos
+      </a>
+    </li>
+    <li class="nav-item">
       <a [routerLink]="['/../candidato']" class="nav-link active">
         <i class="fa fa-users" aria-hidden="true"></i>
           Candidatos
@@ -68,15 +74,6 @@
                     value={{rh?.email}} 
                     type='text'
                     style="width:52rem;" 
-                    class='form-control' 
-                  />
-                </div>
-                <div  id="status_candidato">
-                  <Label class="font-weight-bold">STATUS</Label>
-                  <input 
-                    disabled class='form-control' 
-                    value={{rh?.status_candidato?.descricao}} 
-                    type='text'
                     class='form-control' 
                   />
                 </div>
@@ -137,14 +134,14 @@
                         class='form-control'
                         />
                     </div>
-                    <div id="plano_saude">
+                    <div id="planoSaude">
                       <Label class="font-weight-bold">Plano de Saúde</Label>
                       <input 
                           disabled class='form-control' 
-                          value={{rh?.plano_saude_atual}} 
+                          value={{rh?.planoSaude?.descricao}} 
                           type='text'
                           class='form-control'
-                        />
+                         />
                     </div>
                   </fieldset>
               </div>
@@ -205,18 +202,50 @@
                             class='form-control'
                             />
                         </div>
-                        <div id="plano_saude">
+                        <div id=" planoPretensao">
                           <Label class="font-weight-bold">Plano de Saúde</Label>
                           <input 
                               disabled class='form-control' 
-                              value={{rh?.plano_saude_pretensao}} 
+                              value={{rh?.planoPretensao?.descricao}} 
                               type='text'
                               class='form-control'
-                            />
+                             />
                         </div>
                       </fieldset>
                     </div>
-
+                    <div  id="status_candidato">
+                      <Label class="font-weight-bold">STATUS</Label>
+                      <input 
+                        disabled class='form-control' 
+                        value={{rh?.status_candidato?.descricao}} 
+                        type='text'
+                        class='form-control' 
+                      />
+                    </div>
+                    <div>
+                      <fieldset  class="borda2">
+                        <div id="observacao" >
+                          <Label class="font-weight-bold">Motivo</Label>
+                          <textarea 
+                          disabled class='motivo' 
+                          value={{rh?.observacao}} 
+                          type='text'
+                        ></textarea>
+                      </div> 
+                      </fieldset>
+                    </div>
+                    <div>
+                      <fieldset  class="borda2">
+                        <div id="observacao">
+                          <Label class="font-weight-bold">Observação</Label>
+                          <textarea 
+                          disabled class='motivo' 
+                          value={{rh?.motivo}} 
+                          type='text'
+                          ></textarea>
+                      </div> 
+                      </fieldset>
+                      </div>
               <section>
                   <div class="example-button-row">
                     <button mat-raised-button 

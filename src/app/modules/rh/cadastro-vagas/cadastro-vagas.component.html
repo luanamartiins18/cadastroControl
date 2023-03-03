@@ -13,6 +13,12 @@
       </a>
     </li>
     <li class="nav-item">
+      <a [routerLink]="['/../cadastro-candidato']" class="nav-link active">
+        <i class="fa fa-users" aria-hidden="true"></i>
+        Cadastro Candidatos
+      </a>
+    </li>
+    <li class="nav-item">
       <a [routerLink]="['/../candidato']" class="nav-link active">
         <i class="fa fa-users" aria-hidden="true"></i>
           Candidatos
@@ -22,11 +28,11 @@
 <!-- ------------------------------------------------------------------------------------ -->
   <form [formGroup]='form'>
     <div class='container'>  
-        <div id="numero_zoro">
-          <Label class="font-weight-bold">Número Zoho</Label>
+        <div id="qualitor">
+          <Label class="font-weight-bold">Nr Qualitor</Label>
           <input 
-          formControlName='numero_zoro' 
-          [(ngModel)]="rh.numero_zoro" 
+          formControlName='qualitor' 
+          [(ngModel)]="rh.qualitor" 
           maxlength="5"
           type='text' 
           class='form-control' />
@@ -119,14 +125,19 @@
               class='form-control'
                />
           </div>
-          <div id="plano_saude">
-            <Label class="font-weight-bold">Plano de Saúde</Label>
-            <input 
-              formControlName='plano_saude'
-              [(ngModel)]='rh.plano_saude' 
-              type='plano_saude' 
-              class='form-control'
-               />
+          <div id="planoSaude">
+            <label class="font-weight-bold">Plano de Saúde</label>
+            <select 
+            id='select-plano'
+            formControlName='planoSaude' 
+            class='form-control' 
+            [(ngModel)]="rh.planoSaude">
+            <option [ngValue]="item"
+            id="{{item.id}}"
+            class='form-control' 
+            [selected]=" rh.planoSaude && rh.planoSaude .id==item.id"
+                *ngFor='let item of this.listaPlano '>{{item.descricao}}</option>
+            </select>
           </div>
           <div id='bu'>
             <label class="font-weight-bold">Área Negócio</label>

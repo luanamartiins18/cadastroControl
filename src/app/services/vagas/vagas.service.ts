@@ -49,5 +49,8 @@ export class VagasService {
     return this.http.get<Array<Vagas>>(environment.api + "vagas");
   }
 
- 
+
+  getListaVagasPorEtapa(idEtapa: number) {
+    return this.http.get<Vagas[]>(environment.api + 'vagasetapa/' + idEtapa);
+  }
 }
