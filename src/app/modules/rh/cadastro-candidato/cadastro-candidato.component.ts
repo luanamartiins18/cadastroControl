@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
@@ -32,10 +34,11 @@ export class CadastroCandidatoComponent implements OnInit {
   mensagem: string = '';
   nomeArquivo: string = '';
   formData = new FormData();
-  id: any;
   form: FormGroup;
   candidato: Candidatos = new Candidatos();
-  idVaga: string;
+  id: string;
+  selectedFile: File = null;
+  message: string = null;
 
   constructor(
     public formBuilder: FormBuilder,
@@ -47,6 +50,7 @@ export class CadastroCandidatoComponent implements OnInit {
     private vagasService: VagasService,
     private planoService: PlanoService,
     private planoPretensaoService: PlanoPretensaoService,
+    private http: HttpClient
   ) { }
 
   ngOnInit() {
@@ -58,10 +62,11 @@ export class CadastroCandidatoComponent implements OnInit {
     this.mostrarStatus = false;
     this.mostrarInserir = true;
     this.getVagas();
-    this.idVaga =  this.route.snapshot.queryParamMap.get('idVaga');
+    this.id =  this.route.snapshot.queryParamMap.get('id');
+    console.log(this.id);
     setTimeout(()=>{
       this.preencheCampos();
-    }, 1300);
+    }, 1300); 
   }
 
 
@@ -90,7 +95,7 @@ export class CadastroCandidatoComponent implements OnInit {
       planoPretensao: [this.candidato.planoPretensao, [Validators.required]],
       cesta_pretensao: [this.candidato.cesta_pretensao],
       flash_pretensao: [this.candidato.flash_pretensao],
-      vagas: [this.candidato.vagas == this.idVaga],
+      vagas: [this.candidato == this.id],
       observacao: [this.candidato.observacao]
     });
     let remuneracao_atual = document.getElementById('remuneracao_atual');
@@ -227,6 +232,7 @@ export class CadastroCandidatoComponent implements OnInit {
         this.notifier.notify("success", "CANDIDATO CADASTRADO COM SUCESSO!");
         this.router.navigate(['rh']);
       }
+      console.log(this.candidato);
       if (data.status == 500){
         this.notifier.notify("error", "ERRO AO CADASTRAR, CONFIRAR OS DADOS ");
       }
@@ -246,16 +252,23 @@ export class CadastroCandidatoComponent implements OnInit {
    );
   }
 
-  onFileSelected(event) {
-    const arquivoSelecionado: File = <File>event.target.files[0];
-    if (arquivoSelecionado) {
-      this.uploadArquivo(arquivoSelecionado);
-    }
+  onFileSelected(event): void {
+    this.selectedFile = event.target.files[0];
   }
 
-  private uploadArquivo(arquivoSelecionado: File) {
-    this.formData.append("file", arquivoSelecionado);
+  onUpload(): void {
+    const fd = new FormData();
+    fd.append('file', this.selectedFile, this.selectedFile.name);
+    this.http.post(environment.api + 'upload', fd).subscribe(
+      () => {
+        this.message = 'Arquivo enviado com sucesso';
+      },
+      () => {
+        this.message = 'Erro ao enviar arquivo';
+      }
+    );
   }
+  
 
   volta(){
     this.router.navigate(['rh/']);
@@ -277,5 +290,5 @@ export class CadastroCandidatoComponent implements OnInit {
       // }
     }
   }
- 
+
 }

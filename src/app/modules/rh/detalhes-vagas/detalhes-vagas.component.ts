@@ -14,7 +14,6 @@ import { VagasService } from 'src/app/services/vagas/vagas.service';
 export class DetalhesVagasComponent implements OnInit {
 
   id: String;
-  idVaga: String;
   rh: Vagas = new Vagas();
   candidatos: Candidatos[] = [];
   candidato1:  Candidatos= new Candidatos(); 
@@ -65,8 +64,8 @@ export class DetalhesVagasComponent implements OnInit {
   }
 
   vincularCandidatoNovo(){
-    this.idVaga = this.route.snapshot.paramMap.get('id');
-    this.router.navigate(['cadastro-candidato/'],{queryParams: {"idVaga": this.idVaga}});
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.router.navigate(['cadastro-candidato/'],{queryParams: {"id": this.id}});
   }
 
 

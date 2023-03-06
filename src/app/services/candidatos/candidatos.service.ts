@@ -14,6 +14,8 @@ const httpOptions = {
 })
 export class CandidatosService {
 
+  selectedFile: File = null;
+  message: string = null;
   constructor(private http: HttpClient) { }
 
   insereCandidatos(param: Candidatos) {
@@ -24,7 +26,6 @@ export class CandidatosService {
   atualizaCandidatos(param: Candidatos) {
     return this.http.put(environment.api + "candidatos/" + param.id, param, { headers: httpOptions.headers, observe: 'response' });
   }
-
   
   getListaCandidatos() {
     return this.http.get<Candidatos[]>(environment.api + 'candidatos');
@@ -49,6 +50,7 @@ export class CandidatosService {
   desvincularCandidato(param: Candidatos){
     return this.http.put(environment.api + "desvincular/" + param.id, param, { headers: httpOptions.headers, observe: 'response' });
   }
+
 }
 
 

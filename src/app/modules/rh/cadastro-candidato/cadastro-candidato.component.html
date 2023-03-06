@@ -274,13 +274,12 @@
       <Label class="font-weight-bold">Inclusão do Currículo</Label>
       </div>
       <div>
-        <label classe="picture" tabindex="0"> 
-          <input type="file" accept="image/*" 
-          formControlName='arquivos'
-          (change)="onFileSelected($event)" 
-          [(ngModel)]='candidato.arquivos' 
-          class="picture__input"/>
-          <span class="pincture__image"></span>
+        <label> 
+          <input class="upload" type="file" 
+              (change)="onFileSelected($event)"
+          >
+          <button class="button6" (click)="onUpload()"> Upload</button>
+          <p *ngIf="message">{{ message }}</p>
         </label>
       </div>
       <section>
