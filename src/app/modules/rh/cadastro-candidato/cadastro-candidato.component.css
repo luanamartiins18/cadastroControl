@@ -24,15 +24,15 @@
 } 
 
 .picture__input{
-margin-top: 2rem;
-margin-left: -11rem;
+  margin-top: 2rem;
+  margin-left: -11rem;
 }
 
 .button1 {
   margin-top: 12rem;
   background-color: rgb(204, 24, 240);
   color: black;
-  margin-left: -20rem;
+  margin-left: -7rem;
   width: 8rem;
   padding: 1px 10px 3px 2px;
   border-radius: 2rem;
@@ -42,20 +42,19 @@ margin-left: -11rem;
 
 .button2 {
 
-margin-top: 8rem;
-background-color: rgb(204, 24, 240);
-color: black;
-margin-left: -19rem;
-width: 8rem;
-padding: 1px 10px 3px 2px;
-border-radius: 2rem;
-color: #ffff;
+  margin-top: 8rem;
+  background-color: rgb(204, 24, 240);
+  color: black;
+  margin-left: -19rem;
+  width: 8rem;
+  padding: 1px 10px 3px 2px;
+  border-radius: 2rem;
+  color: #ffff;
 
 }
 
 .button3 {
 background-color: rgb(204, 24, 240);
-color: black;
 width: 8rem;
 border-radius: 2rem;
 color: #ffff;
@@ -89,14 +88,18 @@ width: 50rem;
 
 .upload{
   margin-top: 3rem;
-  margin-left: -11rem;
+  margin-left: -10rem;
 }
 
 
 .button6 {
-  margin-left: 4rem;
+  color: #ffff;
   border-radius: 2rem;
   background-color: rgb(204, 24, 240);
-  color: black;
   width: 8rem;
+  margin-left: 1rem;
+}
+
+.invalid {
+  border-color: red;
 }

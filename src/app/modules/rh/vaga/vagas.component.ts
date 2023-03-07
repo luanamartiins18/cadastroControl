@@ -18,7 +18,6 @@ import { EtapaService } from 'src/app/services/etapa/etapa.service';
 export class VagasComponent implements OnInit {
 
   listaEtapaVagas: Array<Etapa>;
-  id: String;
   form: FormGroup;
   rh: Vagas[] = [];
   vagas:  Vagas= new Vagas(); 
@@ -26,8 +25,6 @@ export class VagasComponent implements OnInit {
     'qualitor','cargo','especialidade','remuneracao',  'status' , 'etapa', 'recrutador', 'data_inicio', 'data_final', 'acoes'
   ];
   
-  dataSource = new MatTableDataSource<Vagas>();
-
   constructor(
     private rhService: VagasService,
     private etapa: EtapaService,

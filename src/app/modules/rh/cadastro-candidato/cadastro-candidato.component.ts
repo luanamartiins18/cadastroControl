@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -32,10 +32,10 @@ export class CadastroCandidatoComponent implements OnInit {
   mostrarAtualizar: boolean;
   mostrarInserir: boolean
   mensagem: string = '';
-  nomeArquivo: string = '';
-  formData = new FormData();
   form: FormGroup;
   candidato: Candidatos = new Candidatos();
+  vagas: Vagas;
+  id_vaga: string;
   id: string;
   selectedFile: File = null;
   message: string = null;
@@ -50,7 +50,8 @@ export class CadastroCandidatoComponent implements OnInit {
     private vagasService: VagasService,
     private planoService: PlanoService,
     private planoPretensaoService: PlanoPretensaoService,
-    private http: HttpClient
+    private http: HttpClient,
+    private el: ElementRef,
   ) { }
 
   ngOnInit() {
@@ -62,12 +63,13 @@ export class CadastroCandidatoComponent implements OnInit {
     this.mostrarStatus = false;
     this.mostrarInserir = true;
     this.getVagas();
-    this.id =  this.route.snapshot.queryParamMap.get('id');
-    console.log(this.id);
     setTimeout(()=>{
       this.preencheCampos();
+      this.vagas = this.recuperarVagaPorId(this.route.snapshot.queryParamMap.get('id_vaga'), this.listaVagas);
     }, 1300); 
+
   }
+
 
 
 
@@ -87,7 +89,7 @@ export class CadastroCandidatoComponent implements OnInit {
       flash_atual: [this.candidato.flash_atual],
       arquivos: [ this.candidato.arquivos],
       status_candidato:[this.candidato.status_candidato],
-// -------------------------------------------------------------
+// --------------------------------------------------------------
       va_pretensao: [this.candidato.vale_alimentacao_pretensao],
       vr_pretensao: [this.candidato.vale_refeicao_pretensao],
       bonus_pretensao: [this.candidato.bonus_pretensao],
@@ -95,7 +97,7 @@ export class CadastroCandidatoComponent implements OnInit {
       planoPretensao: [this.candidato.planoPretensao, [Validators.required]],
       cesta_pretensao: [this.candidato.cesta_pretensao],
       flash_pretensao: [this.candidato.flash_pretensao],
-      vagas: [this.candidato == this.id],
+      vagas: [ this.candidato.vagas],
       observacao: [this.candidato.observacao]
     });
     let remuneracao_atual = document.getElementById('remuneracao_atual');
@@ -155,8 +157,6 @@ export class CadastroCandidatoComponent implements OnInit {
       valor = parseInt(valor.replace(/[\D]+/g, ''));
       valor = valor + '';
       valor = valor.replace(/([0-9]{2})$/g, ",$1");
-
-
       if(valor.length > 6){
           valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
       }
@@ -201,9 +201,6 @@ export class CadastroCandidatoComponent implements OnInit {
     this.mostrarObservacao = false;
   };
   }
-
-
-
   submit() {
     if (this.form.invalid) {
       this.notifier.notify("error", " Todos os campos devem ser preenchidos corretamente!");
@@ -226,13 +223,22 @@ export class CadastroCandidatoComponent implements OnInit {
     });
   }
 
+  private recuperarVagaPorId(id_vaga, listaVagas){
+    for(let x in listaVagas ){
+      let vaga = listaVagas[x];
+      if(parseInt(id_vaga) == vaga.id){
+        return vaga;
+      }
+    }
+  }
+
   private insereCandidatos() {
+    this.candidato.vagas = this.vagas;
     this.candidatoService.insereCandidatos(this.candidato).subscribe((data) => {
       if (data.status == 200) {
         this.notifier.notify("success", "CANDIDATO CADASTRADO COM SUCESSO!");
         this.router.navigate(['rh']);
       }
-      console.log(this.candidato);
       if (data.status == 500){
         this.notifier.notify("error", "ERRO AO CADASTRAR, CONFIRAR OS DADOS ");
       }
@@ -269,14 +275,23 @@ export class CadastroCandidatoComponent implements OnInit {
     );
   }
   
-
-  volta(){
-    this.router.navigate(['rh/']);
-  }
-
   preencheCampos(){
     this.populaCampo('select-planoSaude', this.candidato.planoSaude);
     this.populaCampo('select-planoPretensao', this.candidato.planoPretensao);
+  }
+
+  verIMG(){
+    const fileInput = document.getElementById('myFileInput') as HTMLInputElement;
+    fileInput.addEventListener('change', (event) => {
+    const selectedFile = (event.target as HTMLInputElement).files[0];
+    const reader = new FileReader();
+      reader.onload = () => {
+        const fileContent = reader.result as string;
+        const fileOutput = document.getElementById('fileOutput') as HTMLDivElement;
+        fileOutput.textContent = fileContent;
+      };
+      reader.readAsText(selectedFile);
+    });
   }
   
   populaCampo(id, obj){
@@ -291,4 +306,7 @@ export class CadastroCandidatoComponent implements OnInit {
     }
   }
 
+  volta(){
+    this.router.navigate(['rh/']);
+  }
 }

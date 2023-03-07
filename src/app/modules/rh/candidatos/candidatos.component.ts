@@ -7,8 +7,10 @@ import { NotifierService } from 'angular-notifier';
 import { CandidatosInterface } from 'src/app/interfaces/CandidatosInterface';
 import { Candidatos } from 'src/app/models/candidato/candidatos.model';
 import { StatusCandidato } from 'src/app/models/statusCandidato/statusCandidato.model';
+import { Vagas } from 'src/app/models/vagas/vagas.model';
 import { CandidatosService } from 'src/app/services/candidatos/candidatos.service';
 import { StatusCandidatoService } from 'src/app/services/statusCandidato/statusCandidato.service';
+import { VagasService } from 'src/app/services/vagas/vagas.service';
 
 
 @Component({
@@ -19,8 +21,7 @@ import { StatusCandidatoService } from 'src/app/services/statusCandidato/statusC
 export class CandidatosComponent implements OnInit {
 
 
-  
-  id: String;
+  listaVagas: Array<Vagas>;
   listaStatusCandidato: Array<StatusCandidato>;
   form: FormGroup;
   mostrarInserir: boolean;
@@ -29,6 +30,7 @@ export class CandidatosComponent implements OnInit {
   selection = new SelectionModel<CandidatosInterface>(true, []);
   candidatos: Candidatos[] = [];
   candidatos1:  Candidatos= new Candidatos(); 
+  vagas: Vagas;
   colunas = [
    'acoes','candidatos','cpf','rg',  'email' , 'telefone','status', 'vaga'
   ];
@@ -39,15 +41,18 @@ export class CandidatosComponent implements OnInit {
     private notifier: NotifierService,
     private route: ActivatedRoute,
     public formBuilder: FormBuilder,
+    private vagasService: VagasService,
   ) { }
 
   ngOnInit() {
     this.montaFormBuilder();
     this.getStatusCandidato();
     this.listaRh();
-    const idString = this.route.snapshot.queryParams['id'];
-    this.id = JSON.parse(idString);
     this.mostrarVincular =  false;
+    this.getVagas();
+    setTimeout(()=>{
+      this.vagas = this.recuperarVagaPorId(this.route.snapshot.queryParamMap.get('id_vaga'), this.listaVagas);
+    }, 1300);
   }
   listaRh(){
     this.rhService.getListaCandidatos().subscribe(
@@ -69,16 +74,37 @@ export class CandidatosComponent implements OnInit {
   }
 
   vincularCandidato(){
+    this.candidatos1.vagas = this.vagas;
+    if(this.vagas == undefined){
+      alert("VINCULAR CANDIDATO SOMENTE NA ABA DE VAGA");
+    }else{
+      this.rhService.atualizaCandidatos(this.candidatos1).subscribe((data) => {
+        if (data.status == 200) {
+          this.notifier.notify("success", "CANDIDATO VINCULADO COM SUCESSO !");
+          this.router.navigate(['rh']);
+        }
+        else{
+            alert("Erro em cadastrar atualizar o candidato")
+        }
+        console.log(this.candidatos1);
+      });
+    }
+  }
 
-    // this.rhService.atualizaCandidatos(this.id).subscribe((data) => {
-    //   if (data.status == 200) {
-    //      this.notifier.notify("success", "CANDIDATO VINCULADO COM SUCESSO !");
-    //     this.router.navigate(['rh']);
-    //   }
-    //   else{
-    //       alert("VINCULAR CANDIDATO SOMENTE NA ABA DE VAGA")
-    //   }
-    // });
+
+  private getVagas() {
+    this.vagasService.getVagas().subscribe((lista) => {
+      this.listaVagas = lista;
+    });
+  }
+
+  private recuperarVagaPorId(id_vaga, listaVagas){
+    for(let x in listaVagas ){
+      let vaga = listaVagas[x];
+      if(parseInt(id_vaga) == vaga.id){
+        return vaga;
+      }
+    }
   }
 
   private getStatusCandidato() {
@@ -120,7 +146,6 @@ export class CandidatosComponent implements OnInit {
     this.rhService.getCandidatosId(row.id).subscribe(
     (rh) => {
       this.candidatos1 = rh;
-      console.log(this.candidatos1);
     });
   }else{
     alert("Por favor, desmarcar o candidato que já esta vinculado a uma vaga ");

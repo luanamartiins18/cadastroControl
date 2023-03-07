@@ -19,7 +19,6 @@ export class CandidatosService {
   constructor(private http: HttpClient) { }
 
   insereCandidatos(param: Candidatos) {
-    console.log(param);
     return this.http.post(environment.api + "candidatos", param, { headers: httpOptions.headers, observe: 'response' });
   }
 

@@ -95,6 +95,7 @@
             *ngFor='let item of this.listaStatusCandidato'>{{item.descricao}}</option>
         </select>
       </div>
+      
 <!-- -------------------------------------------------------------------------------- -->
 <div>
   <legend >ATUAL</legend> 
@@ -267,9 +268,9 @@
           cols="50"></textarea>
     </div>
   </Div>
-
-
 <!-- ----------------------------------------------------------------------------------- -->
+
+
       <div>
       <Label class="font-weight-bold">Inclusão do Currículo</Label>
       </div>
@@ -291,7 +292,7 @@
             <mat-icon>check_circle</mat-icon>
             INSERIR
           </button>
-          <button  mat-icon-button *ngIf="mostrarAtualizar"
+          <button  mat-icon-button 
           (click)='volta()' 
           class="button2"
           color="white">

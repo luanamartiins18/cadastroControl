@@ -217,7 +217,6 @@ export class CadastroVagasComponent implements OnInit {
       if (data.status == 200) {
         this.notifier.notify("success", "VAGAS CADASTRADO COM SUCESSO!");
         this.router.navigate(['rh']);
-        console.log(this.rh);
       }
       else{
         this.notifier.notify("error", "Ocorreu um erro ao cadastrar, por favor verificar os devidos dados, tente novamente.");
@@ -230,7 +229,6 @@ export class CadastroVagasComponent implements OnInit {
       if (data.status == 200) {
         this.notifier.notify("success", "DADOS DA VAGA ATUALIZADO COM SUCESSO !");
         this.router.navigate(['rh']);
-        console.log(this.rh);
       }
       else {
         this.notifier.notify("error", "Ocorreu um erro na atualização, por favor tente novamente.");
