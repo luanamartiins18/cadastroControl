@@ -26,10 +26,13 @@ export class CandidatosComponent implements OnInit {
   form: FormGroup;
   mostrarInserir: boolean;
   mostrarVincular:boolean;
-  dataSource = new MatTableDataSource<CandidatosInterface>();
-  selection = new SelectionModel<CandidatosInterface>(true, []);
-  candidatos: Candidatos[] = [];
-  candidatos1:  Candidatos= new Candidatos(); 
+  dataSource = new MatTableDataSource<Candidatos>();
+  selection = new SelectionModel<Candidatos>(true, []);
+  candidatos:  Candidatos[] = [];
+  candidatos1:  Candidatos = new Candidatos(); 
+
+  candidatoTeste: Candidatos[] = [];
+
   vagas: Vagas;
   colunas = [
    'acoes','candidatos','cpf','rg',  'email' , 'telefone','status', 'vaga'
@@ -74,20 +77,38 @@ export class CandidatosComponent implements OnInit {
   }
 
   vincularCandidato(){
+    this.candidatoTeste.map((cadidato) => {
+      cadidato.vagas = this.vagas;
+    })
+
     this.candidatos1.vagas = this.vagas;
     if(this.vagas == undefined){
       alert("VINCULAR CANDIDATO SOMENTE NA ABA DE VAGA");
     }else{
-      this.rhService.atualizaCandidatos(this.candidatos1).subscribe((data) => {
-        if (data.status == 200) {
-          this.notifier.notify("success", "CANDIDATO VINCULADO COM SUCESSO !");
-          this.router.navigate(['rh']);
-        }
-        else{
-            alert("Erro em cadastrar atualizar o candidato")
-        }
-        console.log(this.candidatos1);
-      });
+      
+      this.candidatoTeste.map((c) => {
+        this.rhService.atualizaCandidatos(c).subscribe((data) => {
+          if (data.status == 200) {
+            this.notifier.notify("success", "CANDIDATO VINCULADO COM SUCESSO !");
+            this.router.navigate(['rh']);
+          }
+          else{
+              alert("Erro em cadastrar atualizar o candidato")
+          }
+          console.log(this.candidatos1);
+        });
+      })
+
+      // this.rhService.atualizaCandidatos(this.candidatos1).subscribe((data) => {
+      //   if (data.status == 200) {
+      //     this.notifier.notify("success", "CANDIDATO VINCULADO COM SUCESSO !");
+      //     this.router.navigate(['rh']);
+      //   }
+      //   else{
+      //       alert("Erro em cadastrar atualizar o candidato")
+      //   }
+      //   console.log(this.candidatos1);
+      // });
     }
   }
 
@@ -112,27 +133,7 @@ export class CandidatosComponent implements OnInit {
       this.listaStatusCandidato = lista;
     });
   }
-
-  isAllSelected() {
-    this.mostrarVincular = true;
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;  
-    return numSelected === numRows;
-  }
-
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSource.data.forEach(row => this.selection.select(row));
-  }
-
-  private montaFormBuilder() {
-    this.form = this.formBuilder.group({
-      status: [this.candidatos1.status_candidato,[Validators.required]],
-    });
-  }
-
+  
   listaUsuariosPorStatus(event: any){
     this.rhService.getListaCandidatosPorStatus(event.target.value).subscribe(
       data => {
@@ -141,11 +142,33 @@ export class CandidatosComponent implements OnInit {
   }
 
 
+  isAllSelected() {
+    this.mostrarVincular = true;
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;  
+    return numSelected === numRows;
+  }
+
+  masterToggle() {
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.dataSource.data.forEach(row => this.selection.select(row));
+        console.log(this.searchAllField);
+  }
+
+  private montaFormBuilder() {
+    this.form = this.formBuilder.group({
+      status: [this.candidatos1.status_candidato,[Validators.required]],
+    });
+  }
+
  MensagemdeAlerta(row: { id: string;}){
   if(this.candidatos1.vagas == null){
     this.rhService.getCandidatosId(row.id).subscribe(
     (rh) => {
       this.candidatos1 = rh;
+      this.candidatoTeste.push(this.candidatos1)
+      console.log(this.candidatoTeste);
     });
   }else{
     alert("Por favor, desmarcar o candidato que já esta vinculado a uma vaga ");

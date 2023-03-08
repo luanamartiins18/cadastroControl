@@ -71,8 +71,6 @@ export class CadastroCandidatoComponent implements OnInit {
   }
 
 
-
-
   private montaFormBuilder() {
     this.form = this.formBuilder.group({
       candidatos: [this.candidato.candidatos, [Validators.required]],
@@ -296,13 +294,13 @@ export class CadastroCandidatoComponent implements OnInit {
   
   populaCampo(id, obj){
     if(obj != undefined){
-      // for(let x in document.getElementById(id).options){
-      //   let item =   document.getElementById(id).options[x];
-      //   if(item.id == obj.id){
-      //     item.selected = true;
-      //     break;
-      //   }
-      // }
+      for(let x in document.getElementById(id).options){
+        let item =   document.getElementById(id).options[x];
+        if(item.id == obj.id){
+          item.selected = true;
+          break;
+        }
+      }
     }
   }
 
