@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
-import { CandidatosInterface } from 'src/app/interfaces/CandidatosInterface';
 import { Candidatos } from 'src/app/models/candidato/candidatos.model';
 import { StatusCandidato } from 'src/app/models/statusCandidato/statusCandidato.model';
 import { Vagas } from 'src/app/models/vagas/vagas.model';
@@ -80,12 +79,10 @@ export class CandidatosComponent implements OnInit {
     this.candidatoTeste.map((cadidato) => {
       cadidato.vagas = this.vagas;
     })
-
     this.candidatos1.vagas = this.vagas;
     if(this.vagas == undefined){
       alert("VINCULAR CANDIDATO SOMENTE NA ABA DE VAGA");
     }else{
-      
       this.candidatoTeste.map((c) => {
         this.rhService.atualizaCandidatos(c).subscribe((data) => {
           if (data.status == 200) {
@@ -95,20 +92,8 @@ export class CandidatosComponent implements OnInit {
           else{
               alert("Erro em cadastrar atualizar o candidato")
           }
-          console.log(this.candidatos1);
         });
       })
-
-      // this.rhService.atualizaCandidatos(this.candidatos1).subscribe((data) => {
-      //   if (data.status == 200) {
-      //     this.notifier.notify("success", "CANDIDATO VINCULADO COM SUCESSO !");
-      //     this.router.navigate(['rh']);
-      //   }
-      //   else{
-      //       alert("Erro em cadastrar atualizar o candidato")
-      //   }
-      //   console.log(this.candidatos1);
-      // });
     }
   }
 
@@ -168,7 +153,6 @@ export class CandidatosComponent implements OnInit {
     (rh) => {
       this.candidatos1 = rh;
       this.candidatoTeste.push(this.candidatos1)
-      console.log(this.candidatoTeste);
     });
   }else{
     alert("Por favor, desmarcar o candidato que já esta vinculado a uma vaga ");

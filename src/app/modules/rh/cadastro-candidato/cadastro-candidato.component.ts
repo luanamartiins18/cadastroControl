@@ -39,6 +39,8 @@ export class CadastroCandidatoComponent implements OnInit {
   id: string;
   selectedFile: File = null;
   message: string = null;
+  mostrarUpload: boolean;
+
 
   constructor(
     public formBuilder: FormBuilder,
@@ -51,7 +53,6 @@ export class CadastroCandidatoComponent implements OnInit {
     private planoService: PlanoService,
     private planoPretensaoService: PlanoPretensaoService,
     private http: HttpClient,
-    private el: ElementRef,
   ) { }
 
   ngOnInit() {
@@ -67,7 +68,6 @@ export class CadastroCandidatoComponent implements OnInit {
       this.preencheCampos();
       this.vagas = this.recuperarVagaPorId(this.route.snapshot.queryParamMap.get('id_vaga'), this.listaVagas);
     }, 1300); 
-
   }
 
 
@@ -276,22 +276,9 @@ export class CadastroCandidatoComponent implements OnInit {
   preencheCampos(){
     this.populaCampo('select-planoSaude', this.candidato.planoSaude);
     this.populaCampo('select-planoPretensao', this.candidato.planoPretensao);
+    this.populaCampo('select-statusCandidato', this.candidato.status_candidato);
   }
 
-  verIMG(){
-    const fileInput = document.getElementById('myFileInput') as HTMLInputElement;
-    fileInput.addEventListener('change', (event) => {
-    const selectedFile = (event.target as HTMLInputElement).files[0];
-    const reader = new FileReader();
-      reader.onload = () => {
-        const fileContent = reader.result as string;
-        const fileOutput = document.getElementById('fileOutput') as HTMLDivElement;
-        fileOutput.textContent = fileContent;
-      };
-      reader.readAsText(selectedFile);
-    });
-  }
-  
   populaCampo(id, obj){
     if(obj != undefined){
       for(let x in document.getElementById(id).options){
@@ -307,4 +294,6 @@ export class CadastroCandidatoComponent implements OnInit {
   volta(){
     this.router.navigate(['rh/']);
   }
+
+
 }

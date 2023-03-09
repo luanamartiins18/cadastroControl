@@ -86,10 +86,6 @@ padding: 0;
 width: 50rem;
 }
 
-.upload{
-  margin-top: 3rem;
-  margin-left: -10rem;
-}
 
 
 .button6 {
@@ -102,4 +98,8 @@ width: 50rem;
 
 .invalid {
   border-color: red;
+}
+
+.status{
+  margin-left: -1rem;
 }

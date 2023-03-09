@@ -80,21 +80,6 @@
           class='form-control'
           style="width: 52rem" />
       </div> 
-      <div id="status_candidato"  *ngIf="mostrarStatus">
-        <label class="font-weight-bold">Status</label>
-        <select 
-        id='select-statusCandidato'
-        (blur)="observacao($event)"
-        formControlName='status_candidato' 
-        class='form-control' 
-        [(ngModel)]="candidato.status_candidato">
-        <option [ngValue]="item"  
-        id="{{item.id}}"
-        class='form-control' 
-        [selected]=" candidato.status_candidato && candidato.status_candidato.id==item.id"
-            *ngFor='let item of this.listaStatusCandidato'>{{item.descricao}}</option>
-        </select>
-      </div>
       
 <!-- -------------------------------------------------------------------------------- -->
 <div>
@@ -255,6 +240,20 @@
           </select>
         </div>
       </fieldset>
+      <div class="status" id="status_candidato"  *ngIf="mostrarStatus">
+        <label class="font-weight-bold">Status</label>
+        <select 
+        id='select-statusCandidato'
+        (blur)="observacao($event)"
+        formControlName='status_candidato' 
+        class='form-control' 
+        [(ngModel)]="candidato.status_candidato">
+        <option [ngValue]="item"  
+        id="{{item.id}}"
+        [selected]=" candidato.status_candidato && candidato.status_candidato.id==item.id"
+            *ngFor='let item of this.listaStatusCandidato'>{{item.descricao}}</option>
+        </select>
+      </div>
     </div>
 <!-- ----------------------------------------------------------------------------------- -->
   <Div *ngIf="mostrarObservacao" >
@@ -269,12 +268,9 @@
     </div>
   </Div>
 <!-- ----------------------------------------------------------------------------------- -->
-
-
-      <div>
-      <Label class="font-weight-bold">Inclusão do Currículo</Label>
-      </div>
-      <div>
+      <div >
+        <Label class="font-weight-bold">Inclusão do Currículo</Label>
+      <div class="upload">
         <label> 
           <input class="upload" type="file" 
               (change)="onFileSelected($event)"
@@ -283,31 +279,34 @@
           <p *ngIf="message">{{ message }}</p>
         </label>
       </div>
+    </div>
+    <div>
       <section>
         <div class="">
           <button mat-icon-button *ngIf="mostrarInserir"
-            (click)='submit()' 
-            class="button1"
-            color="white">
-            <mat-icon>check_circle</mat-icon>
-            INSERIR
-          </button>
+              (click)='submit()' 
+              class="button1"
+              color="white">
+              <mat-icon>check_circle</mat-icon>
+              INSERIR
+            </button>
           <button  mat-icon-button 
-          (click)='volta()' 
-          class="button2"
-          color="white">
-          <mat-icon>keyboard_backspace</mat-icon>
-          Voltar
+            (click)='volta()' 
+            class="button2"
+            color="white">
+            <mat-icon>keyboard_backspace</mat-icon>
+            Voltar
         </button>
         <button  mat-raised-button  *ngIf="mostrarAtualizar"
-        (click)='submit()' 
-        class="button3"
-        color="white"
-        printTitle="atualizar">
-        <mat-icon>check_circle</mat-icon>
-        Atualizar</button>
+          (click)='submit()' 
+          class="button3"
+          color="white"
+          printTitle="atualizar">
+          <mat-icon>check_circle</mat-icon>
+          Atualizar</button>
         </div>
       </section>
+    </div>
     </div>
 </form>
 </div>
@@ -356,39 +355,3 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-      <!-- <div id="vagas">
-        <Label class="font-weight-bold">VAGA</Label>
-        <input 
-        formControlName='vagas'
-        [(ngModel)]='candidato.vagas' 
-        type='vagas' 
-        value={{idVaga}} 
-        class='form-control'
-        style="width: 52rem" />
-    </div>  -->
-      <!-- <div id="vagas" >
-        <label class="font-weight-bold">VAGAS</label>
-        <select 
-        id='select-vagas'
-        formControlName='vagas' 
-        class='form-control' 
-        [(ngModel)]="candidato.vagas"
-        value={{idVaga}}
-        >
-        <option [ngValue]="item"  
-        id="{{item.id}}"
-        class='form-control' 
-          [selected]=" candidato.vagas && candidato.vagas.id==item.id"
-            *ngFor='let item of this.listaVagas'>{{item.numero_zoro}}</option>
-        </select>
-      </div> -->
