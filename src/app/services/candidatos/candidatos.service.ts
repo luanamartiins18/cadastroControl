@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Candidatos } from 'src/app/models/candidato/candidatos.model';
+import { Observable } from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -28,6 +29,10 @@ export class CandidatosService {
   
   getListaCandidatos() {
     return this.http.get<Candidatos[]>(environment.api + 'candidatos');
+  }
+
+  getListaCandidatosDisponivel(){
+    return this.http.get<Candidatos[]>(environment.api + 'candidatosdisponivel');
   }
 
   getCandidatosId(id) {

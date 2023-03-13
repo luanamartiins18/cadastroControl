@@ -1,29 +1,24 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatTableDataSource } from '@angular/material';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Candidatos } from 'src/app/models/candidato/candidatos.model';
-import { StatusCandidato } from 'src/app/models/statusCandidato/statusCandidato.model';
 import { Vagas } from 'src/app/models/vagas/vagas.model';
 import { CandidatosService } from 'src/app/services/candidatos/candidatos.service';
 import { StatusCandidatoService } from 'src/app/services/statusCandidato/statusCandidato.service';
 import { VagasService } from 'src/app/services/vagas/vagas.service';
-import { DialogComponent } from '../dialog/dialog.component';
-
 
 @Component({
-  selector: 'app-candidatos',
-  templateUrl: './candidatos.component.html',
-  styleUrls: ['./candidatos.component.css']
+  selector: 'app-candidatos-disponivel',
+  templateUrl: './candidatos-disponivel.component.html',
+  styleUrls: ['./candidatos-disponivel.component.css']
 })
-export class CandidatosComponent implements OnInit {
+export class CandidatosDisponivelComponent implements OnInit {
 
 
   listaVagas: Array<Vagas>;
-  listaStatusCandidato: Array<StatusCandidato>;
-  form: FormGroup;
   mostrarInserir: boolean;
   mostrarVincular:boolean;
   dataSource = new MatTableDataSource<Candidatos>();
@@ -40,36 +35,25 @@ export class CandidatosComponent implements OnInit {
   constructor(
     private rhService: CandidatosService,
     private router: Router,
-    private statusCandidatoService: StatusCandidatoService,
     private notifier: NotifierService,
     private route: ActivatedRoute,
     public formBuilder: FormBuilder,
     private vagasService: VagasService,
-    public dialog: MatDialog,
   ) { }
 
   ngOnInit() {
-    this.montaFormBuilder();
-    this.getStatusCandidato();
-    this.listaRh();
+    this.listaCandidatosDisponivel();
     this.mostrarVincular =  false;
     this.getVagas();
     setTimeout(()=>{
       this.vagas = this.recuperarVagaPorId(this.route.snapshot.queryParamMap.get('id_vaga'), this.listaVagas);
     }, 1300);
   }
-  listaRh(){
-    this.rhService.getListaCandidatos().subscribe(
+  listaCandidatosDisponivel(){
+    this.rhService.getListaCandidatosDisponivel().subscribe(
       data => {
       this.candidatos = data;
     });
-  }
-
-  listaUsuariosPorStatus(event: any){
-    this.rhService.getListaCandidatosPorStatus(event.target.value.select).subscribe(
-      data => {
-      this.candidatos = data;
-    })
   }
 
   detalhesCandidato(row: { id: string; }) {
@@ -85,12 +69,14 @@ export class CandidatosComponent implements OnInit {
   }
 
   vincularCandidato(){
+    const url = window.location.href;
+    const newUrl = url.replace("http://localhost:4200", "");
     this.candidatoTeste.map((cadidato) => {
       cadidato.vagas = this.vagas;
     })
     this.candidatos1.vagas = this.vagas;
     if(this.vagas === undefined){
-      this.addLive();
+      alert(newUrl);
     }else{
       this.candidatoTeste.map((c) => {
         this.rhService.atualizaCandidatos(c).subscribe((data) => {
@@ -99,13 +85,12 @@ export class CandidatosComponent implements OnInit {
             this.router.navigate(['rh']);
           }
           else{
-              alert("Erro em cadastrar atualizar o candidato");
+              alert("Erro em cadastrar atualizar o candidato")
           }
         });
       })
     }
   }
-
 
   private getVagas() {
     this.vagasService.getVagas().subscribe((lista) => {
@@ -121,12 +106,6 @@ export class CandidatosComponent implements OnInit {
       }
     }
   }
-
-  private getStatusCandidato() {
-    this.statusCandidatoService.getStatusCandidato().subscribe((lista) => {
-      this.listaStatusCandidato = lista;
-    });
-  }
   
   isAllSelected() {
     this.mostrarVincular = true;
@@ -141,38 +120,14 @@ export class CandidatosComponent implements OnInit {
         this.dataSource.data.forEach(row => this.selection.select(row))
   }
 
-  private montaFormBuilder() {
-    this.form = this.formBuilder.group({
-      status: [this.candidatos1.status_candidato,[Validators.required]],
-    });
-  }
-
  MensagemdeAlerta(row: { id: string;}){
-  if(this.candidatos1.vagas == null){
     this.rhService.getCandidatosId(row.id).subscribe(
     (rh) => {
       this.candidatos1 = rh;
       this.candidatoTeste.push(this.candidatos1)
-      console.log(this.candidatoTeste);
-      console.log(this.candidatos1);
     });
-  }else{
-    alert("Por favor, desmarcar o candidato que já esta vinculado a uma vaga ");
+
   }
- }
-
- 
- addLive(): void {
-  const dialogRef = this.dialog.open(DialogComponent, {
-  });
-
-  dialogRef.afterClosed().subscribe(result => {
-    console.log('The dialog was closed');
-
-  });
 }
-}
-
-
 
 

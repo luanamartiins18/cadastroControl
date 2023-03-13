@@ -240,7 +240,7 @@
           </select>
         </div>
       </fieldset>
-      <div class="status" id="status_candidato"  *ngIf="mostrarStatus">
+      <div class="" id="status_candidato"  *ngIf="mostrarStatus">
         <label class="font-weight-bold">Status</label>
         <select 
         id='select-statusCandidato'
@@ -268,18 +268,17 @@
     </div>
   </Div>
 <!-- ----------------------------------------------------------------------------------- -->
-      <div >
-        <Label class="font-weight-bold">Inclusão do Currículo</Label>
-      <div class="upload">
-        <label> 
-          <input class="upload" type="file" 
-              (change)="onFileSelected($event)"
-          >
-          <button class="button6" (click)="onUpload()"> Upload</button>
-          <p *ngIf="message">{{ message }}</p>
-        </label>
-      </div>
-    </div>
+<div>
+  <Label class="font-weight-bold">Inclusão do Currículo</Label>
+  <div class="upload">
+    <label> 
+      <input class="upload" type="file" (change)="onFileSelected($event)">
+      <button class="button6" (click)="onUpload()">Upload</button>
+      <div *ngIf="message">{{ message }}</div>
+    </label>
+  </div>
+</div>
+
     <div>
       <section>
         <div class="">

@@ -23,23 +23,25 @@ import { VagasService } from 'src/app/services/vagas/vagas.service';
 })
 export class CadastroCandidatoComponent implements OnInit {
 
+  form: FormGroup;
   mostrarObservacao: boolean;
   mostrarStatus: boolean;
+  mostrarAtualizar: boolean;
+  mostrarInserir: boolean
+  selectedFile: File = null;
+  message: string = null;
+  mostrarUpload: boolean;
+  documents: string [] 
   listaVagas: Array<Vagas>;
   listaStatusCandidato: Array<StatusCandidato>;
   listaPlano: Array<PlanoSaude>;
   listaPlanoSaudePretensao: Array<PlanoPretensao>
-  mostrarAtualizar: boolean;
-  mostrarInserir: boolean
-  mensagem: string = '';
-  form: FormGroup;
   candidato: Candidatos = new Candidatos();
   vagas: Vagas;
+  mensagem: string = '';
   id_vaga: string;
   id: string;
-  selectedFile: File = null;
-  message: string = null;
-  mostrarUpload: boolean;
+
 
 
   constructor(
@@ -265,14 +267,28 @@ export class CadastroCandidatoComponent implements OnInit {
     fd.append('file', this.selectedFile, this.selectedFile.name);
     this.http.post(environment.api + 'upload', fd).subscribe(
       () => {
-        this.message = 'Arquivo enviado com sucesso';
+        this.notifier.notify("success",'Arquivo enviado com sucesso');
       },
       () => {
-        this.message = 'Erro ao enviar arquivo';
+        this.notifier.notify("error", 'Erro ao enviar arquivo');
       }
     );
   }
+
+  // onDelete(): void {
+  //   const fileName = this.selectedFile.name;
+  //   this.http.delete(environment.api + '/arquivos' + fileName).subscribe(
+  //     () => {
+  //       this.notifier.notify("success", 'Arquivo deletado com sucesso');
+  //     },
+  //     () => {
+  //       this.notifier.notify("error", 'Erro ao deletar arquivo');
+  //     }
+  //   );
+  // }
+
   
+ 
   preencheCampos(){
     this.populaCampo('select-planoSaude', this.candidato.planoSaude);
     this.populaCampo('select-planoPretensao', this.candidato.planoPretensao);
@@ -281,13 +297,13 @@ export class CadastroCandidatoComponent implements OnInit {
 
   populaCampo(id, obj){
     if(obj != undefined){
-      for(let x in document.getElementById(id).options){
-        let item =   document.getElementById(id).options[x];
-        if(item.id == obj.id){
-          item.selected = true;
-          break;
-        }
-      }
+      // for(let x in document.getElementById(id).options){
+      //   let item =   document.getElementById(id).options[x];
+      //   if(item.id == obj.id){
+      //     item.selected = true;
+      //     break;
+      //   }
+      // }
     }
   }
 

@@ -1,4 +1,5 @@
 import { CandidatosInterface } from "src/app/interfaces/CandidatosInterface";
+import { Curriculo } from "../curriculo/curriculo.model";
 import { PlanoPretensao } from "../PlanoPretensao/planoPretensao.model";
 import { PlanoSaude } from "../planoSaude/planoSaude.model";
 import { StatusCandidato } from "../statusCandidato/statusCandidato.model";
@@ -31,6 +32,7 @@ export class Candidatos implements CandidatosInterface {
     vagas?: Vagas;
     observacao?: string;
     motivo?: string;
+    curriculo?: Curriculo;
 
     constructor( 
         id?: number,
@@ -58,5 +60,6 @@ export class Candidatos implements CandidatosInterface {
         vagas?: Vagas,
         observacao?: string,
         motivo?: string,
+        curriculo?: Curriculo,
     ) { }
 }

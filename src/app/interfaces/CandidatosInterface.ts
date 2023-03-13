@@ -1,3 +1,4 @@
+import { Curriculo } from "../models/curriculo/curriculo.model";
 import { PlanoPretensao } from "../models/PlanoPretensao/planoPretensao.model";
 import { PlanoSaude } from "../models/planoSaude/planoSaude.model";
 import { StatusCandidato } from "../models/statusCandidato/statusCandidato.model";
@@ -29,4 +30,5 @@ export interface CandidatosInterface {
     vagas?: Vagas;
     observacao?: string;
     motivo?: String;
+    curriculo?: Curriculo;
 }

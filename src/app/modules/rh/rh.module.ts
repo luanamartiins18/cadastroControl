@@ -28,7 +28,8 @@ import { DetalhesCandidatosComponent } from './detalhes-candidatos/detalhes-cand
 import { CandidatosComponent } from './candidatos/candidatos.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { CandidatosDisponivelComponent } from './candidatos/candidatosDisponivel/candidatos-disponivel/candidatos-disponivel.component';
+import { DialogComponent } from './dialog/dialog.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 @NgModule({
@@ -40,6 +41,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     CadastroCandidatoComponent,
     DetalhesCandidatosComponent,
     CandidatosComponent,
+    CandidatosDisponivelComponent,
+    DialogComponent,
   ],
   imports: [
     CommonModule,
@@ -66,7 +69,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     BrowserAnimationsModule,
     NgMultiSelectDropDownModule.forRoot()
   ],
-  entryComponents: [CandidatosComponent],
+  entryComponents: [DialogComponent],
 })
 
 export class RhModule { }

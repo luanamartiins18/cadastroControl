@@ -18,6 +18,7 @@ import { DetalhesVagasComponent } from './modules/rh/detalhes-vagas/detalhes-vag
 import { CadastroCandidatoComponent } from './modules/rh/cadastro-candidato/cadastro-candidato.component';
 import { CandidatosComponent } from './modules/rh/candidatos/candidatos.component';
 import { DetalhesCandidatosComponent } from './modules/rh/detalhes-candidatos/detalhes-candidatos.component';
+import { CandidatosDisponivelComponent } from './modules/rh/candidatos/candidatosDisponivel/candidatos-disponivel/candidatos-disponivel.component';
 
 
 const routes: Routes = [
@@ -44,6 +45,7 @@ const routes: Routes = [
       {path: 'cadastro-candidato/:id', component: CadastroCandidatoComponent},
       {path: 'candidato/:id', component:DetalhesCandidatosComponent },
       {path: 'candidato', component: CandidatosComponent},
+      {path: 'candidatodisponivel', component: CandidatosDisponivelComponent},
     ]
   }
 ];

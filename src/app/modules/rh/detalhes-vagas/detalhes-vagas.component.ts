@@ -72,7 +72,7 @@ export class DetalhesVagasComponent implements OnInit {
 
   vincularCandidatoPesquisa(id: any){
     this.id_vaga = this.route.snapshot.paramMap.get('id');
-    this.router.navigate(['/../candidato/'],{ queryParams:{"id_vaga": this.id_vaga}});
+    this.router.navigate(['/../candidatodisponivel/'],{ queryParams:{"id_vaga": this.id_vaga}});
   }
 
   

@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Candidatos } from 'src/app/models/candidato/candidatos.model';
@@ -16,6 +17,7 @@ export class DetalhesCandidatosComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private http: HttpClient,
     private rhService: CandidatosService,
   ) { }
 
@@ -40,4 +42,38 @@ export class DetalhesCandidatosComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id');
     this.router.navigate(['cadastro-candidato/' + this.id]);
   }
+
+  downloadFile = (id: number, fileName: string) => {
+    const url = `http://localhost:8080/download/${id}`;
+  
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => {
+        // Verifica se a resposta foi bem sucedida
+        if (!response.ok) {
+          throw new Error('Erro ao fazer download do arquivo');
+        }
+  
+        // Converte a resposta em um blob
+        return response.blob();
+      })
+      .then((blob) => {
+        // Cria um link para fazer o download do arquivo
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = fileName;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      })
+      .catch((error) => {
+        console.error(error);
+        // Trata o erro
+      });
+  };
 }
