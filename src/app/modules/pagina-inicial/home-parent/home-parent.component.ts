@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Usuario } from 'src/app/models/usuario/usuario.model';
 
 
 @Component({
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home-parent.component.css']
 })
 export class HomeParentComponent implements OnInit {
+
+  usuario: Usuario;
   constructor() {}
   ngOnInit() {}
 }

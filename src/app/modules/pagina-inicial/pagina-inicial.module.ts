@@ -6,9 +6,10 @@ import { DefaultComponent } from './default/default.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
-  declarations: [HomeParentComponent, NavbarComponent, DefaultComponent],
+  declarations: [HomeParentComponent, NavbarComponent, DefaultComponent, HeaderComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

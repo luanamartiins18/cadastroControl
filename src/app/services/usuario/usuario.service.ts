@@ -107,4 +107,9 @@ export class UsuarioService {
     return this.http.post(environment.api + 'usuario-status', param, { headers: httpOptions.headers, observe: 'response' });
   }
 
+
+  alteraSenha() {
+    return this.http.put(environment.api + "altera-senha/",{ headers: httpOptions.headers, observe: 'response' });
+  }
+
 }

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -98,7 +98,7 @@ export class CadastroCandidatoComponent implements OnInit {
       cesta_pretensao: [this.candidato.cesta_pretensao],
       flash_pretensao: [this.candidato.flash_pretensao],
       vagas: [ this.candidato.vagas],
-      observacao: [this.candidato.observacao]
+      observacao: [this.candidato.observacao, [Validators.required]]
     });
     let remuneracao_atual = document.getElementById('remuneracao_atual');
     let va_atual = document.getElementById('va_atual');
@@ -275,19 +275,6 @@ export class CadastroCandidatoComponent implements OnInit {
     );
   }
 
-  // onDelete(): void {
-  //   const fileName = this.selectedFile.name;
-  //   this.http.delete(environment.api + '/arquivos' + fileName).subscribe(
-  //     () => {
-  //       this.notifier.notify("success", 'Arquivo deletado com sucesso');
-  //     },
-  //     () => {
-  //       this.notifier.notify("error", 'Erro ao deletar arquivo');
-  //     }
-  //   );
-  // }
-
-  
  
   preencheCampos(){
     this.populaCampo('select-planoSaude', this.candidato.planoSaude);

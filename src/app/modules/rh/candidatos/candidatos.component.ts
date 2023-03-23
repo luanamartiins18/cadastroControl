@@ -35,7 +35,7 @@ export class CandidatosComponent implements OnInit {
 
   vagas: Vagas;
   colunas = [
-   'acoes','candidatos','cpf','rg',  'email' , 'telefone','status', 'vaga'
+   'candidatos','cpf','rg',  'email' , 'telefone','status', 'vaga'
   ];
   constructor(
     private rhService: CandidatosService,

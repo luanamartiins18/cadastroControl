@@ -268,7 +268,7 @@
     </div>
   </Div>
 <!-- ----------------------------------------------------------------------------------- -->
-<div>
+<div  *ngIf="mostrarInserir">
   <Label class="font-weight-bold">Inclusão do Currículo</Label>
   <div class="upload">
     <label> 
@@ -278,7 +278,13 @@
     </label>
   </div>
 </div>
-
+  <div id="anexo" *ngIf="mostrarAtualizar" >
+    <label class="font-weight-bold">Link do Curriculo:</label>
+    <a class="link" href="{{candidato?.curriculo?.link}}" 
+    target="_blank" id="download-link">
+      {{candidato?.curriculo?.link}}
+    </a>
+  </div>
     <div>
       <section>
         <div class="">

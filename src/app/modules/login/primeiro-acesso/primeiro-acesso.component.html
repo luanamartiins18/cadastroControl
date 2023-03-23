@@ -1,0 +1,60 @@
+<div class='wrapper d-flex justify-content-center align-items-center flex-column'>
+    <div class='juntaLogo'>
+      <div class='d-flex justify-content-center test'>
+        <img [src]="logoQintess" />
+      </div>
+      <div class='mat-elevation-z8 recuperar-box'>
+        <div class='d-flex justify-content-center mb-3'>
+          <h3 class='text-secondary'>Primeiro Acesso</h3>
+        </div>
+       <div>
+       </div>
+        <form [formGroup]='formPrimeiroAcesso'>
+            <div  id="codigoRe">
+                <Label class="font-weight-bold">Matrícula:</Label>  
+                <input 
+                class="form-control"
+                maxlength="8"
+                style="width: 320px"
+                placeholder="RExxxxxx"
+                type="codigoRe">
+            </div>
+            <div id="cpf">
+                <Label class="font-weight-bold">CPF</Label>
+                <input 
+                mask="000.000.000-00" 
+                [showMaskTyped]="true" 
+                formControlName='cpf' 
+                style="width: 320px"
+                type='text' 
+                class='form-control' />
+              </div>
+            <div>
+            <label class="font-weight-bold">Email:</label>
+            <input 
+                type='email' 
+                class="form-control"
+                style="width: 320px"
+                placeholder="xxxxx@qintess.com" 
+                autofocus="1"
+            >
+            </div>
+        </form>
+        <section>
+          <div class="example-button-row">
+            <button mat-raised-button 
+              (click)='volta()' 
+              class="button1"
+              color="white">
+              Voltar</button>
+            <button 
+              mat-raised-button
+              type="reset" 
+              class="button2"
+              color="black">
+              Enviar</button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>

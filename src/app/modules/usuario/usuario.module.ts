@@ -30,13 +30,19 @@ import { DetalhesMaquinasComponent } from './detalhes-maquinas/detalhes-maquinas
 import { AtualizarMaquinasComponent } from './atualizar-maquinas/atualizar-maquinas.component';
 import { PerfilComponent } from './perfil/perfil.component'
 import { CepPipe } from 'src/pipe/cep.pipe';
+import { LoginComponent } from '../login/login.component';
+import { EsqueceuSenhaComponent } from '../login/esqueceu-senha/esqueceu-senha.component';
+import { PrimeiroAcessoComponent } from '../login/primeiro-acesso/primeiro-acesso.component';
 
 
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 @NgModule({
   declarations: [
+    LoginComponent,
+    EsqueceuSenhaComponent,
     NovoUsuarioComponent, 
+    PrimeiroAcessoComponent,
     UsuariosComponent, 
     DetalhaUsuarioComponent, 
     CargoComponent,

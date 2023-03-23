@@ -34,8 +34,6 @@ export class Usuario implements UsuarioInterface {
   tipo?: Tipo;
   bu?: Bu;
   celular?: string;
-  primeiroAcesso: boolean;
-  senha?: string;
   demanda?: Demanda;
   centro?: CentroCusto;
   cliente?: Cliente;
@@ -47,6 +45,9 @@ export class Usuario implements UsuarioInterface {
   patrimonio?: string;
   historicomaquinas?: HistoricoMaquinas;
   perfil?: Perfil;
+  primeiroAcesso: boolean;
+  senha?: string;
+
 
   constructor(
     id?: number,
