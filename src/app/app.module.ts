@@ -15,8 +15,6 @@ import { RhModule } from './modules/rh/rh.module';
 import localePt from '@angular/common/locales/pt';
 import {registerLocaleData} from '@angular/common';
 import {CurrencyPipe} from '@angular/common';
-import { EsqueceuSenhaComponent } from './modules/login/esqueceu-senha/esqueceu-senha.component';
-import { PrimeiroAcessoComponent } from './modules/login/primeiro-acesso/primeiro-acesso.component';
 
 
 registerLocaleData(localePt, 'pt');

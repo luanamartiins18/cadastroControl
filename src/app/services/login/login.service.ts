@@ -20,12 +20,12 @@ export class LoginService {
 
   
   usuarioLogado() {
-    let colaborador = sessionStorage.getItem('Analista administrativo JR');
+    let colaborador = sessionStorage.getItem('colaborador');
     return colaborador === null ? false : true;
   }
 
   deslogaUsuario() {
-    sessionStorage.removeItem('Analista administrativo JR');
+    sessionStorage.removeItem('colaborador');
   }
 
   autenticaUsuario(codigoRe, senha): any {

@@ -11,6 +11,7 @@ import { Memoria } from '../memoria/memoria.model';
 import { Equipamento } from '../equipamento/equipamento.model';
 import { HistoricoMaquinas } from '../historico/historicoMaquinas/historicoMaquinas.model';
 import { Perfil } from '../perfil/perfil.model';
+import { ListaUsuario } from '../ListaUsuario/lista-usuario.model';
 
 export class Usuario implements UsuarioInterface {
 
@@ -47,6 +48,7 @@ export class Usuario implements UsuarioInterface {
   perfil?: Perfil;
   primeiroAcesso: boolean;
   senha?: string;
+ 
 
 
   constructor(

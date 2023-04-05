@@ -33,6 +33,7 @@ import { CepPipe } from 'src/pipe/cep.pipe';
 import { LoginComponent } from '../login/login.component';
 import { EsqueceuSenhaComponent } from '../login/esqueceu-senha/esqueceu-senha.component';
 import { PrimeiroAcessoComponent } from '../login/primeiro-acesso/primeiro-acesso.component';
+import { RedefinirSenhaComponent } from '../login/esqueceu-senha/redefinir-senha/redefinir-senha.component';
 
 
 
@@ -54,6 +55,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     PerfilComponent, 
     CpfPipe,
     CepPipe,
+    RedefinirSenhaComponent,
 
   ],
   imports: [

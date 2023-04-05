@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeParentComponent } from './modules/pagina-inicial/home-parent/home-parent.component';
 import { UsuariosComponent } from './modules/usuario/usuarios/usuarios.component';
 import { DefaultComponent } from './modules/pagina-inicial/default/default.component';
 import { NovoUsuarioComponent } from './modules/usuario/novo-usuario/novo-usuario.component';
@@ -21,31 +20,34 @@ import { DetalhesCandidatosComponent } from './modules/rh/detalhes-candidatos/de
 import { CandidatosDisponivelComponent } from './modules/rh/candidatos/candidatosDisponivel/candidatos-disponivel/candidatos-disponivel.component';
 import { LoginComponent } from './modules/login/login.component';
 import { EsqueceuSenhaComponent } from './modules/login/esqueceu-senha/esqueceu-senha.component';
-import { LoginGuardService } from './services/guards/AuthLogin/login-guard.service';
 import { AuthGuardService } from './services/guards/AuthGuard/auth-guard.service';
 import { PrimeiroAcessoComponent } from './modules/login/primeiro-acesso/primeiro-acesso.component';
+import { HomeParentComponent } from './modules/pagina-inicial/home-parent/home-parent.component';
+import { LoginGuardService } from './services/guards/AuthLogin/login-guard.service';
+import { RedefinirSenhaComponent } from './modules/login/esqueceu-senha/redefinir-senha/redefinir-senha.component';
 
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate:[LoginGuardService]},
   {path: 'esqueceuSenha', component: EsqueceuSenhaComponent},
   {path: 'primeiroAcesso', component: PrimeiroAcessoComponent},
-  {path: '', component: HomeParentComponent,  canActivate:[AuthGuardService],
+  {path: 'redefinirSenha', component:RedefinirSenhaComponent},
+  {path: '', component: HomeParentComponent ,canActivate:[AuthGuardService],
     children: [
       {path: 'home', component: DefaultComponent, canActivate:[AuthGuardService] },
-      {path: 'usuarios', component: UsuariosComponent, canActivate:[AuthGuardService]},
-      {path: 'usuarios/:id', component: DetalhaUsuarioComponent, canActivate:[AuthGuardService]},
-      {path: 'novo-usuario/:id', component: NovoUsuarioComponent, canActivate:[AuthGuardService]},
-      {path: 'novo-usuario', component: NovoUsuarioComponent, canActivate:[AuthGuardService]},
+      {path: 'usuarios', component: UsuariosComponent,canActivate:[AuthGuardService] },
+      {path: 'usuarios/:id', component: DetalhaUsuarioComponent,canActivate:[AuthGuardService]},
+      {path: 'novo-usuario/:id', component: NovoUsuarioComponent,canActivate:[AuthGuardService]},
+      {path: 'novo-usuario', component: NovoUsuarioComponent,canActivate:[AuthGuardService]},
       {path: 'funcao', component:CargoComponent, canActivate:[AuthGuardService]},
       {path: 'contrato', component:ContratoComponent, canActivate:[AuthGuardService]},
-      {path: 'relatorio', component:RelatorioComponent, canActivate:[AuthGuardService]},
-      {path: 'detalhesMaquinas', component: DetalhesMaquinasComponent, canActivate:[AuthGuardService]},
-      {path: 'detalhesMaquinas/:id',component: AtualizarMaquinasComponent, canActivate:[AuthGuardService]},
-      {path: 'maquinas/:id', component: MaquinasComponent, canActivate:[AuthGuardService]},
-      {path: 'maquinas', component:MaquinasComponent, canActivate:[AuthGuardService]},
-      {path: 'perfil', component: PerfilComponent, canActivate:[AuthGuardService]},
-      {path: 'rh', component: VagasComponent, canActivate:[AuthGuardService]},
+      {path: 'relatorio', component:RelatorioComponent,canActivate:[AuthGuardService]},
+      {path: 'detalhesMaquinas', component: DetalhesMaquinasComponent,canActivate:[AuthGuardService]},
+      {path: 'detalhesMaquinas/:id',component: AtualizarMaquinasComponent,canActivate:[AuthGuardService]},
+      {path: 'maquinas/:id', component: MaquinasComponent,canActivate:[AuthGuardService] },
+      {path: 'maquinas', component:MaquinasComponent ,canActivate:[AuthGuardService]},
+      {path: 'perfil', component: PerfilComponent,canActivate:[AuthGuardService]},
+      {path: 'rh', component: VagasComponent,canActivate:[AuthGuardService]},
       {path: 'rh/:id', component: DetalhesVagasComponent, canActivate:[AuthGuardService]},
       {path: 'cadastro-vagas', component: CadastroVagasComponent, canActivate:[AuthGuardService]},
       {path: 'cadastro-vagas/:id', component: CadastroVagasComponent, canActivate:[AuthGuardService]},
@@ -54,7 +56,6 @@ const routes: Routes = [
       {path: 'candidato/:id', component:DetalhesCandidatosComponent, canActivate:[AuthGuardService]},
       {path: 'candidato', component: CandidatosComponent, canActivate:[AuthGuardService]},
       {path: 'candidatodisponivel', component: CandidatosDisponivelComponent, canActivate:[AuthGuardService]},
-
     ]
   }
 ];

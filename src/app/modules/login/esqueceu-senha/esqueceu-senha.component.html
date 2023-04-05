@@ -10,16 +10,18 @@
 
      <div>
       <p>	
-        Insira seu email para enviarmos sua senha temporária</p>
+        Insira sua matrícula para enviarmos um link para seu email cadastrado</p>
      </div>
       <form [formGroup]='formRecuperar'>
-        <label class="font-weight-bold">Email:</label>
+        <label class="font-weight-bold">Matrícula:</label>
         <input 
-          type='email' 
-          class="email" 
+          id="codigoRe"
+          type='codigoRe' 
+          class="codigoRe" 
           style="width: 320px"
-          placeholder="xxxxxx@qintess.com" 
+          placeholder="RExxxxxx" 
           autofocus="1"
+          formControlName="codigoRe"
         >
       </form>
       <section>
@@ -33,7 +35,8 @@
             mat-raised-button
             type="reset" 
             class="button2"
-            color="black">
+            color="black"
+            (click)="recuperarSenha()">
             Enviar</button>
         </div>
       </section>

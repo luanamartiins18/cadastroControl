@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 
 
 @Component({
@@ -10,6 +11,12 @@ import { Usuario } from 'src/app/models/usuario/usuario.model';
 export class HomeParentComponent implements OnInit {
 
   usuario: Usuario;
-  constructor() {}
-  ngOnInit() {}
+
+  constructor(
+  ) {}
+
+ 
+
+  ngOnInit() {
+  }
 }

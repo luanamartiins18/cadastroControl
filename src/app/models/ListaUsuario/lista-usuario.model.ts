@@ -1,3 +1,4 @@
+import { Perfil } from '../perfil/perfil.model';
 import { Usuario } from '../usuario/usuario.model';
 
 export class ListaUsuario {
@@ -6,4 +7,5 @@ export class ListaUsuario {
   dtExclusao: Date;
   status: number;
   usuario: Usuario;
+  perfil: Perfil
 }

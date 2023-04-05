@@ -54,11 +54,7 @@ export class LoginComponent implements OnInit {
       data => {
         if (data.status == 200) {
           this.usuario = data.body;
-          if (this.usuario.primeiroAcesso) {
-            this.modalService.open(this.modalContent);
-          } else {
             this.loginSucess();
-          }
         }
       },
       err => {
@@ -73,7 +69,7 @@ export class LoginComponent implements OnInit {
   }
 
   private loginSucess() {
-    sessionStorage.setItem('Analista administrativo JR', this.formLogin.get('codigoRe').value);
+    sessionStorage.setItem('colaborador', this.formLogin.get('codigoRe').value);
     this.router.navigate(['home']);
     this.senhaErrada = false;
   }

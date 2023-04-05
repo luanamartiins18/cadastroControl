@@ -11,8 +11,7 @@ import { Memoria } from 'src/app/models/memoria/memoria.model';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { HistoricoMaquinas } from 'src/app/models/historico/historicoMaquinas/historicoMaquinas.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Alert } from 'selenium-webdriver';
-import { ListaUsuario } from 'src/app/models/ListaUsuario/lista-usuario.model';
+
 
 @Component({
   selector: 'app-maquinas',
