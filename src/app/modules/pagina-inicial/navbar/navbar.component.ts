@@ -11,8 +11,7 @@ import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 })
 export class NavbarComponent {
 
-  @Input() usuario: Usuario;
-  usuarios: Usuario 
+  @Input() usuario: Usuario = new Usuario;
   lisPerfil;
   logoQintess: string = './assets/Qintess-logo-alt.jpg';
   logoQintessRed: string = './assets/qintes-logo-reduzido.jpg';
@@ -28,12 +27,14 @@ export class NavbarComponent {
 
   ngOnInit() {
     let re = sessionStorage.getItem('colaborador');
-    this.usuarioService.getUsuario(re).subscribe(
-      (usuario: Usuario) => {
+    this.usuarioService.getUsuarioRe(re).subscribe(
+      (usuario) => {
         this.usuario = usuario;
-      });
+        console.log(this.usuario);
+      }
+    );
   }
-
+ 
 
 
   adm(id: number): boolean {
@@ -59,7 +60,6 @@ export class NavbarComponent {
   colaborador(id: number): boolean {
     return id === 4;
   }
-
 
   admRhGestor(id: number): boolean {
     return id ===1 || id === 3 || id === 2 ;

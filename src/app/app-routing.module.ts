@@ -27,11 +27,12 @@ import { LoginGuardService } from './services/guards/AuthLogin/login-guard.servi
 import { RedefinirSenhaComponent } from './modules/login/esqueceu-senha/redefinir-senha/redefinir-senha.component';
 
 
+
 const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate:[LoginGuardService]},
   {path: 'esqueceuSenha', component: EsqueceuSenhaComponent},
   {path: 'primeiroAcesso', component: PrimeiroAcessoComponent},
-  {path: 'redefinirSenha', component:RedefinirSenhaComponent},
+  {path: 'redefinirSenha/:token', component:RedefinirSenhaComponent},
   {path: '', component: HomeParentComponent ,canActivate:[AuthGuardService],
     children: [
       {path: 'home', component: DefaultComponent, canActivate:[AuthGuardService] },

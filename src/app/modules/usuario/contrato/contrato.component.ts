@@ -73,7 +73,7 @@ export class ContratoComponent implements OnInit {
   getNome(event: any) {
     if(event){
       var value = event.target.value;
-      var url = this.usuarioService.getUsuario(value);
+      var url = this.usuarioService.getUsuarioRe(value);
       url.subscribe(data => {
         if(data) {
           (<HTMLInputElement>document.getElementById("nome")).value = data['nome'];

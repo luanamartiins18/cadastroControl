@@ -22,7 +22,7 @@ export class UsuarioService {
   constructor(private http: HttpClient) { }
 
 
-  getUsuario(re: string) {
+  getUsuarioRe(re: string) {
     return this.http.get<Usuario>(environment.api + 'usuario/' + re);
   }
 

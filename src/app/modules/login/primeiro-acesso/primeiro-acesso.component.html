@@ -7,37 +7,47 @@
         <div class='d-flex justify-content-center mb-3'>
           <h3 class='text-secondary'>Primeiro Acesso</h3>
         </div>
-       <div>
-       </div>
+        <div>
+          <p>	
+            Insira sua matrícula para enviarmos um link para seu email cadastrado</p>
         <form [formGroup]='formPrimeiroAcesso'>
-            <div  id="codigoRe">
-                <Label class="font-weight-bold">Matrícula:</Label>  
-                <input 
-                class="form-control"
-                maxlength="8"
-                style="width: 320px"
-                placeholder="RExxxxxx"
-                type="codigoRe">
+          <label class="font-weight-bold">Matrícula:</label>
+          <input 
+            id="codigoRe"
+            type='codigoRe' 
+            class="form-control" 
+            style="width: 494px"
+            placeholder="RExxxxxx" 
+            autofocus="1"
+            formControlName="codigoRe"
+            (blur)="buscaDados($event.target.value)"
+          >
+            <div id="nome">
+              <Label class="font-weight-bold">Nome</Label>
+              <input 
+                disabled class='form-control' 
+                value={{usuario?.nome?.toUpperCase()}} 
+                type='text'
+                style="width: 494px"
+                class='form-control' />
             </div>
             <div id="cpf">
-                <Label class="font-weight-bold">CPF</Label>
-                <input 
-                mask="000.000.000-00" 
-                [showMaskTyped]="true" 
-                formControlName='cpf' 
-                style="width: 320px"
-                type='text' 
+              <Label class="font-weight-bold">CPF</Label>
+              <input 
+                disabled class='form-control' 
+                value={{usuario?.cpf}} 
+                type='text'
+                style="width: 494px"
                 class='form-control' />
-              </div>
-            <div>
-            <label class="font-weight-bold">Email:</label>
-            <input 
-                type='email' 
-                class="form-control"
-                style="width: 320px"
-                placeholder="xxxxx@qintess.com" 
-                autofocus="1"
-            >
+            </div>
+            <div id="email">
+              <Label class="font-weight-bold">Email</Label>
+              <input 
+                disabled class='form-control' 
+                value={{usuario?.email}} 
+                type='text'
+                style="width: 494px"
+                class='form-control' />
             </div>
         </form>
         <section>
@@ -49,6 +59,7 @@
               Voltar</button>
             <button 
               mat-raised-button
+              (click)="recuperarSenha()"
               type="reset" 
               class="button2"
               color="black">

@@ -54,7 +54,11 @@ export class LoginComponent implements OnInit {
       data => {
         if (data.status == 200) {
           this.usuario = data.body;
+          if (this.usuario.primeiroAcesso) {
+            this.router.navigate(['primeiroAcesso']);
+          } else {
             this.loginSucess();
+          }
         }
       },
       err => {

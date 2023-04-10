@@ -82,7 +82,7 @@
       </ng-container>
       <ng-container matColumnDef="cargo">
         <th mat-header-cell *matHeaderCellDef> CARGO</th>
-        <td mat-cell *matCellDef="let element"> {{element.cargo.descricao}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.cargo?.descricao}} </td>
        </ng-container>
         <tr mat-header-row *matHeaderRowDef="colunas; sticky: true"></tr>
         <tr (click)='detalhaUsuarios(row);' class='custom-row' mat-row *matRowDef="let row; columns: colunas;"></tr>

@@ -31,12 +31,14 @@ img{
     position: relative !important;
 }
 
+
+
 .button1 {
     font-size: 12px;
     background-color: blue;
     color: #ffff;
     margin-top: 2rem;
-    margin-left: 5rem;
+    margin-left: -1rem;
 }
   
 .button2 {
@@ -46,10 +48,7 @@ img{
     margin-left: 13rem;
 }
 
-
-.codigoRe{
-    margin-left: 1rem;
-    padding: 0.25rem;
-    text-transform: uppercase;
+.button3 {
+    margin-left: 21rem;
+    margin-top: -5rem;
 }
-
