@@ -96,13 +96,26 @@
                     *ngFor='let item of this.listaTipo'>{{item.descricao}}</option>
                 </select>
               </div>
+              <!-- input perfil -->
+              <div id='perfil'>
+                <label class="font-weight-bold">Perfil</label>
+                <select 
+                formControlName='perfil' 
+                class='form-control' 
+                [(ngModel)]="usuario.perfil">
+                <option [ngValue]="item"
+                 class='form-control' 
+                 [selected]=" usuario.perfil && usuario.perfil.id==item.id"
+                    *ngFor='let item of this.listaPerfil'>{{item.descricao}}</option>
+                </select>
+              </div>
               <!-- input bu -->
               <div id='bu'>
                 <label class="font-weight-bold">Área Negócio</label>
                 <select 
                 formControlName='bu' 
                 class='form-control' 
-                style="width: 520px" 
+                style="width: 250px" 
                 [(ngModel)]="usuario.bu">
                 <option [ngValue]="item"
                  class='form-control' 

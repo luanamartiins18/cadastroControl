@@ -153,8 +153,6 @@ export class CandidatosComponent implements OnInit {
     (rh) => {
       this.candidatos1 = rh;
       this.candidatoTeste.push(this.candidatos1)
-      console.log(this.candidatoTeste);
-      console.log(this.candidatos1);
     });
   }else{
     alert("Por favor, desmarcar o candidato que já esta vinculado a uma vaga ");

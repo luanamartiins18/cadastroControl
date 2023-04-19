@@ -10,15 +10,18 @@
       <form [formGroup]='formLogin'>
         <div [ngClass]="{'val-false':this.senhaErrada}" class='login'>
           <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-          <input type='text' placeholder='Matricula' spellcheck="false" formControlName="codigoRe" />
+          <input type='text' placeholder='Matrícula' spellcheck="false"   maxlength="8" formControlName="codigoRe" autocomplete="username" />
         </div>
 
         <div [ngClass]="{'val-false':this.senhaErrada}" class='senha mt-3'>
           <i class="fa fa-lock" aria-hidden="true"></i>
-          <input type="{{ showPassword ? 'text' : 'password' }}" 
+          <input
+          type="{{ showPassword ? 'text' : 'password' }}" 
           name="password" id="password" 
-          placeholder='Senha' formControlName="senha"
-          maxlength="8" />
+          placeholder='Senha' 
+          formControlName="senha"
+          maxlength="8"
+          autocomplete="current-password" />
           <button mat-icon-button (click)="togglePasswordVisibility()">
             <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>

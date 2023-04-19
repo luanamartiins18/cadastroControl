@@ -9,7 +9,7 @@
         </div>
         <div>
           <p>	
-            Insira sua matrícula para enviarmos um link para seu email cadastrado</p>
+            Insira sua matrícula para enviarmos a instrução pelo email cadastrado</p>
         <form [formGroup]='formPrimeiroAcesso'>
           <label class="font-weight-bold">Matrícula:</label>
           <input 
@@ -19,6 +19,7 @@
             style="width: 494px"
             placeholder="RExxxxxx" 
             autofocus="1"
+            maxlength="8"
             formControlName="codigoRe"
             (blur)="buscaDados($event.target.value)"
           >
@@ -27,15 +28,6 @@
               <input 
                 disabled class='form-control' 
                 value={{usuario?.nome?.toUpperCase()}} 
-                type='text'
-                style="width: 494px"
-                class='form-control' />
-            </div>
-            <div id="cpf">
-              <Label class="font-weight-bold">CPF</Label>
-              <input 
-                disabled class='form-control' 
-                value={{usuario?.cpf}} 
                 type='text'
                 style="width: 494px"
                 class='form-control' />

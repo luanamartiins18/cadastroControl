@@ -11,6 +11,7 @@ img{
 i{
     padding-right: 0.5rem;
     width: 24px;
+   
 }
 
 .login-box{
@@ -23,21 +24,26 @@ i{
 .login input[type = 'text']{
     border: none;
     padding-bottom: 0.25rem;;
+    text-transform: uppercase
 } 
 
 .senha input[type = 'password']{
     border: none;
     padding-bottom: 0.25rem;;
+    text-transform: uppercase
 } 
 
 .login{
     border-bottom: 1px solid rgba(0, 0, 0, 0.4);
     padding: 0.25rem;
+ 
 }
 
 .senha {
     border-bottom: 1px solid rgba(0, 0, 0, 0.4);
     padding: 0.25rem;
+ 
+
 }
 
 img{
@@ -75,4 +81,3 @@ a {
 .fa-eye-slash:before {
     content: "\f070";
   }
-

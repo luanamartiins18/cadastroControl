@@ -1,9 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
+import { DialogComponent } from '../dialog/dialog.component';
+import { DialogSucessComponent } from '../dialog/dialog-sucess/dialog-sucess.component';
 
 @Component({
   selector: 'app-primeiro-acesso',
@@ -21,6 +24,7 @@ export class PrimeiroAcessoComponent implements OnInit {
     private router: Router,
     private usuarioService: UsuarioService,
     private http: HttpClient,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -44,8 +48,6 @@ export class PrimeiroAcessoComponent implements OnInit {
     if(data) {
       (<HTMLInputElement>document.getElementById("nome")).value = data['nome'];
       this.usuario.nome = data['nome'];
-      (<HTMLInputElement>document.getElementById("cpf")).value = data['cpf'];
-      this.usuario.cpf = data['cpf'];
       (<HTMLInputElement>document.getElementById("email")).value = data['email'];
       this.usuario.email = data['email']
     } else{
@@ -61,10 +63,31 @@ export class PrimeiroAcessoComponent implements OnInit {
     const url = `http://127.0.0.1:8080/redefinirsenha`;
     const body = { codigoRe };
     this.http.post(url, body).subscribe(() => {
-      alert('Um e-mail foi enviado com as instruções para recuperar a senha.');
+     this.addLive1()
     }, (error) => {
-      alert('Não foi possível recuperar a senha. Por favor, tente novamente mais tarde.');
-      console.error(error);
+      if (error.status === 500) {
+      this.addLive()
+      }
+    });
+  }
+
+
+  addLive(): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+  
+    });
+  }
+
+  addLive1(): void {
+    const dialogRef = this.dialog.open(DialogSucessComponent, {
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+  
     });
   }
 

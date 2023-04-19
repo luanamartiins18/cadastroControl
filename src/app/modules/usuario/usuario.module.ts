@@ -34,6 +34,9 @@ import { LoginComponent } from '../login/login.component';
 import { EsqueceuSenhaComponent } from '../login/esqueceu-senha/esqueceu-senha.component';
 import { PrimeiroAcessoComponent } from '../login/primeiro-acesso/primeiro-acesso.component';
 import { RedefinirSenhaComponent } from '../login/esqueceu-senha/redefinir-senha/redefinir-senha.component';
+import { DialogComponent } from '../login/dialog/dialog.component';
+import { DialogSucessComponent } from '../login/dialog/dialog-sucess/dialog-sucess.component';
+
 
 
 
@@ -56,6 +59,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     CpfPipe,
     CepPipe,
     RedefinirSenhaComponent,
+    DialogComponent,
+    DialogSucessComponent,
 
   ],
   imports: [
@@ -79,7 +84,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     HttpClientModule,
     NgxMaskModule.forRoot(options),
     NgMultiSelectDropDownModule.forRoot()
-  ]
+  ],
+  entryComponents: [DialogComponent,DialogSucessComponent],
 })
 
 export class UsuarioModule { }

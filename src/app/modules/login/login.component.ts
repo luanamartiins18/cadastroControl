@@ -5,8 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotifierService } from 'angular-notifier';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
 import { LoginService } from 'src/app/services/login/login.service';
-import * as CryptoJS from 'crypto-js';
-import { UsuarioService } from 'src/app/services/usuario/usuario.service';
+
 
 
 @Component({
@@ -31,7 +30,6 @@ export class LoginComponent implements OnInit {
     private loginService: LoginService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private modalService: NgbModal,
     private nt: NotifierService,
   ) { }
 
@@ -74,6 +72,11 @@ export class LoginComponent implements OnInit {
 
   private loginSucess() {
     sessionStorage.setItem('colaborador', this.formLogin.get('codigoRe').value);
+    const message = {
+      type: 'login',
+      colaborador: this.formLogin.get('codigoRe').value
+    };
+    window.postMessage(JSON.stringify(message), '*');
     this.router.navigate(['home']);
     this.senhaErrada = false;
   }

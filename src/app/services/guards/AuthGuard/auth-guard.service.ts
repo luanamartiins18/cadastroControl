@@ -12,13 +12,12 @@ export class AuthGuardService {
     private loginService: LoginService
   ) { }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-   
-    if (this.loginService.usuarioLogado())
+  canActivate() {
+    if (this.loginService.usuarioLogado()) {
       return true;
-    else
+    } else {
       this.router.navigate(['login']);
       return false;
-
+    }
   }
 }

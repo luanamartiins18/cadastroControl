@@ -3,38 +3,36 @@
     <div class='d-flex justify-content-center test'>
       <img [src]="logoQintess" />
     </div>
-    <div class='mat-elevation-z8 recuperar-box'>
+    <div class='mat-elevation-z8 login-box'>
       <div class='d-flex justify-content-center mb-3'>
-        <h3 class='text-secondary'>Redefinir Senha</h3>
+        <h3 class='text-secondary'>Redefinir Senha </h3>
       </div>
-     <div>
-     </div>
       <form [formGroup]='formRedefinirSenha'>
         <div class='senha mt-3'>
-          <Label class="font-weight-bold">Senha:</Label>
-          <input 
+          <i class="fa fa-lock" aria-hidden="true"></i>
+          <input
           type="{{ showPassword ? 'text' : 'password' }}" 
-          name="password" 
-          id="password" 
+          name="password" id="password" 
           placeholder='Senha' 
-          formControlName="senha" 
-          maxlength="8"
-          style="width: 320px"
-          class='form-control'/>
+          formControlName="senha"
+          maxlength="8" />
+          <button mat-icon-button (click)="togglePasswordVisibility()">
+            <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
       </div>
-      <button mat-icon-button (click)="togglePasswordVisibility()">
-        <mat-icon class="button3">{{ showPassword ? 'visibility_off' : 'visibility' }}
-        </mat-icon>
-      </button>
-          <div id="senha">
-              <Label class="font-weight-bold">Confimar Senha:</Label>
-              <input 
-              style="width: 320px"
-              type='senha' 
-              class='form-control' />
-            </div>
+      <div class='senha mt-3'>
+        <i class="fa fa-lock" aria-hidden="true"></i>
+        <input
+        type="{{ showPassword ? 'text' : 'password' }}" 
+        name="password" id="password" 
+        placeholder='confirma Senha' 
+        maxlength="8" />
+        <button mat-icon-button (click)="togglePasswordVisibility()">
+          <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+    </div>
       </form>
-      <section>
+   <section>
         <div class="example-button-row">
           <button mat-raised-button 
             (click)='volta()' 

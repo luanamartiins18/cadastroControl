@@ -56,7 +56,7 @@ export class RedefinirSenhaComponent implements OnInit {
       this.http.get( environment.api + 'usuario/token/' + this.token).subscribe(
         (usuario) => {
           this.usuario = usuario;
-          console.log(usuario);
+    
         },
         (error) => {
           console.error(error);
@@ -75,15 +75,13 @@ export class RedefinirSenhaComponent implements OnInit {
 
   private enviar() {
     const novoUsuario = { ...this.usuario, senha: this.formRedefinirSenha.get('senha').value };
-  
-    this.usuarioService.atualizaUsuario(novoUsuario).subscribe((data) => {
+    this.usuarioService.atualizaUsuarioSenha(novoUsuario).subscribe((data) => {
       if (data.status == 200) {
-        this.notifier.notify("success", "Usuario atualizado com sucesso!");
+        this.notifier.notify("success", "Senha cadastrada com sucesso!");
         this.router.navigate(['usuarios']);
-        console.log(this.usuario);
       }
       else {
-        this.notifier.notify("error", "Ocorreu um erro na atualização, por favor tente novamente.");
+        this.notifier.notify("error", "Ocorreu um erro no cadastro de senha, por favor tente novamente.");
       }
     }, 
    );

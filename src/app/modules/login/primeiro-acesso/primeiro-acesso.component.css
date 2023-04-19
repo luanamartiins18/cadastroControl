@@ -11,6 +11,7 @@ img{
 i{
     padding-right: 0.5rem;
     width: 24px;
+    
 }
 
 .recuperar-box{
@@ -29,12 +30,14 @@ img{
 
 .juntaLogo{
     position: relative !important;
+
 }
 
 
 .email {
     margin-left: 1rem;
     padding: 0.25rem;
+    text-transform: uppercase;
 }
 
 .button1 {
@@ -53,3 +56,6 @@ img{
 }
 
 
+.form-control{
+    text-transform: uppercase;
+}

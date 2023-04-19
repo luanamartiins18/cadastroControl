@@ -12,7 +12,7 @@ export class LoginGuardService implements CanActivate {
     private router: Router
     ){}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  canActivate() {
     if (this.loginService.usuarioLogado()){
       this.router.navigate(['home']);
       return false;      

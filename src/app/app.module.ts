@@ -17,6 +17,7 @@ import {registerLocaleData} from '@angular/common';
 import {CurrencyPipe} from '@angular/common';
 
 
+
 registerLocaleData(localePt, 'pt');
 
 @NgModule({

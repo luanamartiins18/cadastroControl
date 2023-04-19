@@ -70,6 +70,10 @@ export class UsuarioService {
     return this.http.put(environment.api + "usuarios/" + param.id, param, { headers: httpOptions.headers, observe: 'response' });
   }
 
+  atualizaUsuarioSenha(param: Usuario) {
+    return this.http.put(environment.api + "usuariosenha/" + param.id, param, { headers: httpOptions.headers, observe: 'response' });
+  }
+
   insereUsuario(param: Usuario) {
     return this.http.post(environment.api + "usuarios", param, { headers: httpOptions.headers, observe: 'response' });
   }

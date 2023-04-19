@@ -4,10 +4,12 @@ import { NotifierService } from 'angular-notifier';
 import { Bu } from 'src/app/models/bu/bu.model';
 import { Funcao } from 'src/app/models/cargo/funcao.model';
 import { Historico } from 'src/app/models/historico/historico.model';
+import { Perfil } from 'src/app/models/perfil/perfil.model';
 import { Tipo } from 'src/app/models/tipo/tipo.model';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
 import { BuService } from 'src/app/services/bu/bu.service';
 import { FuncaoService } from 'src/app/services/funcao/funcao.service';
+import { PerfilService } from 'src/app/services/perfil/perfil.service';
 import { TipoService } from 'src/app/services/tipo/tipo.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 
@@ -27,6 +29,7 @@ export class CargoComponent implements OnInit {
   listaCargo: Array<Funcao>;
   listaBu: Array<Bu>;
   listaTipo: Array<Tipo>;
+  listaPerfil: Array<Perfil>;
   listaCargoHistorico: Array<{id: number, descricao: string}>;
   historico: Historico[] = [];
   id: any;
@@ -41,6 +44,7 @@ export class CargoComponent implements OnInit {
     private buService: BuService,
     private usuarioService: UsuarioService,
     private tipoService: TipoService,
+    private perfilService: PerfilService,
     private notifier: NotifierService,
   ) { }
 
@@ -49,6 +53,7 @@ export class CargoComponent implements OnInit {
     this.getCargos();
     this.getBu();
     this.getTipo();
+    this.getPerfil();
     this.mostrarhistorico();
     this.mostrarTabela = false;
   }
@@ -105,7 +110,8 @@ export class CargoComponent implements OnInit {
       codigoRe: [this.usuario.codigoRe, [Validators.required]],
       cargo:[this.usuario.cargo,[Validators.required]],
       bu: [this.usuario.bu,[Validators.required]],
-      tipo:[this.usuario.tipo,[Validators.required]]
+      tipo:[this.usuario.tipo,[Validators.required]],
+      perfil:[this.usuario.perfil,[Validators.required]]
       
     });
   }
@@ -127,6 +133,15 @@ export class CargoComponent implements OnInit {
       this.listaTipo = lista;
     });
   }
+
+  private getPerfil() {
+    this.perfilService.getPerfil().subscribe((lista) => {
+      this.listaPerfil = lista;
+    });
+  }
+
+
+
 
   submit() {
     if (this.form.invalid) {

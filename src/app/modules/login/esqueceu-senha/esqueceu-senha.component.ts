@@ -3,6 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
+import { DialogComponent } from '../dialog/dialog.component';
+import { LoginService } from 'src/app/services/login/login.service';
+import { NotifierService } from 'angular-notifier';
+import { DialogSucessComponent } from '../dialog/dialog-sucess/dialog-sucess.component';
 
 
 
@@ -21,6 +25,7 @@ export class EsqueceuSenhaComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     public dialog: MatDialog,
+
 
   ) { }
 
@@ -43,11 +48,31 @@ export class EsqueceuSenhaComponent implements OnInit {
     const url = `http://127.0.0.1:8080/redefinirsenha`;
     const body = { codigoRe };
     this.http.post(url, body).subscribe(() => {
-      alert('Um e-mail foi enviado com as instruções para recuperar a senha.');
+     this.addLive1()
     }, (error) => {
-      alert('Não foi possível recuperar a senha. Por favor, tente novamente mais tarde.');
-      console.error(error);
+      if (error.status === 500) {
+      this.addLive()
+      }
     });
   }
 
+
+  addLive(): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+  
+    });
+  }
+
+  addLive1(): void {
+    const dialogRef = this.dialog.open(DialogSucessComponent, {
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+  
+    });
+  }
 }

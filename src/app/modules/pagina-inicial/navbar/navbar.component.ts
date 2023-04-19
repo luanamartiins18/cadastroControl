@@ -26,15 +26,22 @@ export class NavbarComponent {
   
 
   ngOnInit() {
+    window.addEventListener('message', this.handleMessageEvent.bind(this));
     let re = sessionStorage.getItem('colaborador');
     this.usuarioService.getUsuarioRe(re).subscribe(
       (usuario) => {
         this.usuario = usuario;
-        console.log(this.usuario);
       }
     );
   }
  
+  handleMessageEvent(event: MessageEvent) {
+    // Verifica se a mensagem é do tipo 'login'
+    if (event.data.type === 'login') {
+      // Atualiza informações de sessão com as informações enviadas na mensagem
+      sessionStorage.setItem('colaborador', event.data.colaborador);
+    }
+  }
 
 
   adm(id: number): boolean {
