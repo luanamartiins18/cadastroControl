@@ -7,6 +7,7 @@ import { Usuario } from 'src/app/models/usuario/usuario.model';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { DialogComponent } from '../dialog/dialog.component';
 import { DialogSucessComponent } from '../dialog/dialog-sucess/dialog-sucess.component';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-primeiro-acesso',
@@ -25,6 +26,7 @@ export class PrimeiroAcessoComponent implements OnInit {
     private usuarioService: UsuarioService,
     private http: HttpClient,
     public dialog: MatDialog,
+    private nt: NotifierService,
   ) { }
 
   ngOnInit() {
@@ -53,6 +55,8 @@ export class PrimeiroAcessoComponent implements OnInit {
     } else{
       (<HTMLInputElement>document.getElementById('nome')).value=("");
     }
+  }, error => {
+    this.nt.notify("error", "Matrícula não cadastrada");
   });
   return url;
   }
