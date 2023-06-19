@@ -25,6 +25,7 @@ import { PrimeiroAcessoComponent } from './modules/login/primeiro-acesso/primeir
 import { HomeParentComponent } from './modules/pagina-inicial/home-parent/home-parent.component';
 import { LoginGuardService } from './services/guards/AuthLogin/login-guard.service';
 import { RedefinirSenhaComponent } from './modules/login/esqueceu-senha/redefinir-senha/redefinir-senha.component';
+import { PropostaComponent } from './modules/rh/proposta/proposta.component';
 
 
 
@@ -48,8 +49,8 @@ const routes: Routes = [
       {path: 'maquinas/:id', component: MaquinasComponent,canActivate:[AuthGuardService] },
       {path: 'maquinas', component:MaquinasComponent ,canActivate:[AuthGuardService]},
       {path: 'perfil', component: PerfilComponent,canActivate:[AuthGuardService]},
-      {path: 'rh', component: VagasComponent,canActivate:[AuthGuardService]},
-      {path: 'rh/:id', component: DetalhesVagasComponent, canActivate:[AuthGuardService]},
+      {path: 'vagas', component: VagasComponent,canActivate:[AuthGuardService]},
+      {path: 'vagas/:id', component: DetalhesVagasComponent, canActivate:[AuthGuardService]},
       {path: 'cadastro-vagas', component: CadastroVagasComponent, canActivate:[AuthGuardService]},
       {path: 'cadastro-vagas/:id', component: CadastroVagasComponent, canActivate:[AuthGuardService]},
       {path: 'cadastro-candidato', component: CadastroCandidatoComponent, canActivate:[AuthGuardService]},
@@ -57,6 +58,7 @@ const routes: Routes = [
       {path: 'candidato/:id', component:DetalhesCandidatosComponent, canActivate:[AuthGuardService]},
       {path: 'candidato', component: CandidatosComponent, canActivate:[AuthGuardService]},
       {path: 'candidatodisponivel', component: CandidatosDisponivelComponent, canActivate:[AuthGuardService]},
+      {path: 'proposta', component: PropostaComponent, canActivate:[AuthGuardService],}
     ]
   }
 ];

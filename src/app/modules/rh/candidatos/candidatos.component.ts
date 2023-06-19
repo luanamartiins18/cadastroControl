@@ -96,7 +96,7 @@ export class CandidatosComponent implements OnInit {
         this.rhService.atualizaCandidatos(c).subscribe((data) => {
           if (data.status == 200) {
             this.notifier.notify("success", "CANDIDATO VINCULADO COM SUCESSO !");
-            this.router.navigate(['rh']);
+            this.router.navigate(['vagas']);
           }
           else{
               alert("Erro em cadastrar atualizar o candidato");

@@ -16,6 +16,11 @@ export class VagasService {
 
   constructor(private http: HttpClient) { }
 
+
+  getVagasQualitor(nr: string) {
+    return this.http.get<Vagas>(environment.api + 'vagasqualitor/' + nr);
+  }
+
   insereVagas(param: Vagas) {
     return this.http.post(environment.api + "vagas", param, { headers: httpOptions.headers, observe: 'response' });
   }

@@ -7,7 +7,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a [routerLink]="['/../rh']" class="nav-link active">
+      <a [routerLink]="['/../vagas']" class="nav-link active">
         <i class="fa fa-users" aria-hidden="true"></i>
           Vagas 
       </a>
@@ -32,7 +32,7 @@
           <Label class="font-weight-bold">Nr Qualitor</Label>
           <input 
           formControlName='qualitor' 
-          [(ngModel)]="rh.qualitor" 
+          [(ngModel)]="vagas.qualitor" 
           maxlength="5"
           type='text' 
           class='form-control' />
@@ -43,11 +43,11 @@
             id='select-cargo'
             formControlName='cargo' 
             class='form-control' 
-            [(ngModel)]="rh.cargo">
+            [(ngModel)]="vagas.cargo">
             <option [ngValue]="item"
             id="{{item.id}}"
             class='form-control' 
-            [selected]=" rh.cargo && rh.cargo.id==item.id"
+            [selected]=" vagas.cargo && vagas.cargo.id==item.id"
                 *ngFor='let item of this.listaCargo'>{{item.descricao}}</option>
             </select>
           </div>
@@ -57,11 +57,11 @@
             id='select-especialidade'
             formControlName='especialidade' 
             class='form-control' 
-            [(ngModel)]="rh.especialidade">
+            [(ngModel)]="vagas.especialidade">
             <option [ngValue]="item"
             id="{{item.id}}"
             class='form-control' 
-            [selected]=" rh.especialidade && rh.especialidade.id==item.id"
+            [selected]=" vagas.especialidade && vagas.especialidade.id==item.id"
                 *ngFor='let item of this.listaEspecialidade'>{{item.descricao}}</option>
             </select>
           </div>
@@ -69,7 +69,7 @@
             <Label class="font-weight-bold">Budget Base</Label>
             <input id="remuneracao"
               formControlName='remuneracao'
-              [(ngModel)]="rh.remuneracao"
+              [(ngModel)]="vagas.remuneracao"
               maxlength="10"
               type='remuneracao' 
               class='form-control'
@@ -79,7 +79,7 @@
             <Label class="font-weight-bold">Vale Alimentação</Label>
             <input id="va"
               formControlName='va'
-              [(ngModel)]='rh.vale_alimentacao' 
+              [(ngModel)]='vagas.vale_alimentacao' 
               type='va' 
               maxlength="10"
               class='form-control'
@@ -89,7 +89,7 @@
             <Label class="font-weight-bold">Vale Refeição</Label>
             <input  id="vr"
               formControlName='vr'
-              [(ngModel)]='rh.vale_refeicao' 
+              [(ngModel)]='vagas.vale_refeicao' 
               type='vr' 
               maxlength="8"
               class='form-control'
@@ -99,7 +99,7 @@
             <Label class="font-weight-bold">Bônus</Label>
             <input id="bonus"
               formControlName='bonus'
-              [(ngModel)]='rh.bonus' 
+              [(ngModel)]='vagas.bonus' 
               type='bonus' 
               maxlength="10"
               class='form-control'
@@ -109,7 +109,7 @@
             <Label class="font-weight-bold">Flash</Label>
             <input id="flash"
               formControlName='flash'
-              [(ngModel)]='rh.flash' 
+              [(ngModel)]='vagas.flash' 
               type='flash'
               maxlength="10" 
               class='form-control'
@@ -119,7 +119,7 @@
             <Label class="font-weight-bold">Cesta</Label>
             <input  id="cesta"
               formControlName='cesta'
-              [(ngModel)]='rh.cesta' 
+              [(ngModel)]='vagas.cesta' 
               type='cesta' 
               maxlength="10"
               class='form-control'
@@ -131,11 +131,11 @@
             id='select-plano'
             formControlName='planoSaude' 
             class='form-control' 
-            [(ngModel)]="rh.planoSaude">
+            [(ngModel)]="vagas.planoSaude">
             <option [ngValue]="item"
             id="{{item.id}}"
             class='form-control' 
-            [selected]=" rh.planoSaude && rh.planoSaude .id==item.id"
+            [selected]=" vagas.planoSaude && vagas.planoSaude .id==item.id"
                 *ngFor='let item of this.listaPlano '>{{item.descricao}}</option>
             </select>
           </div>
@@ -145,26 +145,24 @@
             id='select-bu'
             formControlName='bu' 
             class='form-control' 
-            [(ngModel)]="rh.bu">
+            [(ngModel)]="vagas.bu">
             <option [ngValue]="item"
               id="{{item.id}}"
              class='form-control' 
-             [selected]=" rh.bu && rh.bu.id==item.id"
+             [selected]=" vagas.bu && vagas.bu.id==item.id"
                 *ngFor='let item of this.listaBu'>{{item.descricao}}</option>
             </select>
         </div>
         <div id='operacao'>
-          <label class="font-weight-bold">Operação</label>
+          <label class="font-weight-bold">Operacão</label>
           <select 
-          id='select-operacao'
           formControlName='operacao' 
           class='form-control' 
-          [(ngModel)]="rh.operacao">
+          [(ngModel)]="vagas.contrato">
           <option [ngValue]="item"
            class='form-control' 
-           id="{{item.id}}"
-           [selected]=" rh.operacao && rh.operacao.id==item.id"
-              *ngFor='let item of this.listaOperacao'>{{item.descricao}}</option>
+           [selected]=" vagas.contrato && vagas.contrato.id==item.id"
+              *ngFor='let item of this.listaOperacao'>{{item.operacao}}</option>
           </select>
         </div>
         <div id="etapa" *ngIf="mostrarEtapa">
@@ -173,11 +171,11 @@
             id='select-etapa'
             formControlName='etapa' 
             class='form-control' 
-            [(ngModel)]="rh.etapa">
+            [(ngModel)]="vagas.etapa">
             <option [ngValue]="item"
               id="{{item.id}}"
               type='text'
-              [selected]=" rh.etapa && rh.etapa.id==item.id"
+              [selected]=" vagas.etapa && vagas.etapa.id==item.id"
               *ngFor='let item of this.listaEtapa'>{{item.descricao}} </option>
             </select>
         </div> 
@@ -187,11 +185,11 @@
             id='select-recrutador'
             formControlName='recrutador' 
             class='form-control' 
-            [(ngModel)]="rh.recrutador">
+            [(ngModel)]="vagas.recrutador">
             <option [ngValue]="item"
               id="{{item.id}}"
               type='text'
-              [selected]=" rh.recrutador && rh.recrutador.id==item.id"
+              [selected]=" vagas.recrutador && vagas.recrutador.id==item.id"
               *ngFor='let item of this.listaRecrutador'>{{item.descricao}} </option>
             </select>
         </div>

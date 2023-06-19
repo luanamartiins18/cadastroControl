@@ -55,7 +55,7 @@
           <input 
             formControlName='codigoRe' 
             class="form-control"
-            [(ngModel)]="usuario.codigoRe "
+            [(ngModel)]="usuario.codigoRe"
             maxlength="8"
             placeholder="RExxxxxx"
             type="text">
@@ -210,10 +210,26 @@
               formControlName='complemento' 
               type='text' 
               class='form-control' 
-              style="width: 520px" 
+              style="width: 250px" 
               [(ngModel)]='usuario.complemento'
               />
           </div>   
+          <div id="data_inicio">
+            <Label class="font-weight-bold">Data Inicio</Label>
+            <input 
+            formControlName='data_inicio' 
+            [(ngModel)]='usuario.data_inicio' 
+            type='date'
+            class='form-control' />
+          </div>
+          <div id="data_final" *ngIf="mostrarDatafinal">
+            <Label class="font-weight-bold">Data Final</Label>
+            <input 
+            formControlName='data_final' 
+            [(ngModel)]='usuario.data_final' 
+            type='date'
+            class='form-control' />
+          </div>
           <section>
             <div class="example-button-row">
               <button mat-raised-button 

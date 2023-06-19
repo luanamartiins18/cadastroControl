@@ -2,20 +2,17 @@ import { UsuarioInterface } from 'src/app/interfaces/UsuarioInterface';
 import { Funcao } from '../cargo/funcao.model';
 import { Tipo } from '../tipo/tipo.model';
 import { Bu } from '../bu/bu.model';
-import { Demanda } from '../demanda/demanda.model';
-import { CentroCusto } from '../centroCusto/centroCusto.model';
-import { Cliente } from '../cliente/cliente.model';
-import { Operacao } from '../operacao/operacao.model';
 import { Modelo } from '../modelo/modelo.model';
 import { Memoria } from '../memoria/memoria.model';
 import { Equipamento } from '../equipamento/equipamento.model';
 import { HistoricoMaquinas } from '../historico/historicoMaquinas/historicoMaquinas.model';
 import { Perfil } from '../perfil/perfil.model';
-import { ListaUsuario } from '../ListaUsuario/lista-usuario.model';
+import { Contrato } from '../contrato/contrato.model';
 
 export class Usuario implements UsuarioInterface {
 
   id?: number;
+  contrato?: Contrato;
   nome?: string;
   cep?: string;
   endereco?: string;
@@ -35,10 +32,6 @@ export class Usuario implements UsuarioInterface {
   tipo?: Tipo;
   bu?: Bu;
   celular?: string;
-  demanda?: Demanda;
-  centro?: CentroCusto;
-  cliente?: Cliente;
-  operacao?: Operacao;
   modelo?: Modelo;
   memoria?: Memoria;
   equipamento?: Equipamento;
@@ -48,6 +41,8 @@ export class Usuario implements UsuarioInterface {
   perfil?: Perfil;
   primeiroAcesso: boolean;
   senha?: string;
+  data_inicio?: Date;
+  data_final?: Date;
  
 
 
@@ -74,10 +69,6 @@ export class Usuario implements UsuarioInterface {
     celular: string = "",
     primeiroAcesso?: boolean,
     senha?: string,
-    demanda?: Demanda,
-    centro?: CentroCusto,
-    cliente?: Cliente,
-    operacao?: Operacao,
     modelo?: Modelo,
     memoria?: Memoria,
     equipamento?: Equipamento,
@@ -85,5 +76,8 @@ export class Usuario implements UsuarioInterface {
     patrimonio?: string,
     historicomaquinas?: HistoricoMaquinas,
     perfil?: Perfil,
+    contrato?: Contrato,
+    data_inicio?: Date,
+    data_final?: Date,
   ) { }
 }

@@ -7,7 +7,7 @@ import { PaginaInicialModule } from './modules/pagina-inicial/pagina-inicial.mod
 import { HttpClientModule } from '@angular/common/http';
 import { NotifierModule } from "angular-notifier";
 import { NgSelectModule } from '@ng-select/ng-select';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { MatDialogModule } from '@angular/material';
@@ -15,6 +15,7 @@ import { RhModule } from './modules/rh/rh.module';
 import localePt from '@angular/common/locales/pt';
 import {registerLocaleData} from '@angular/common';
 import {CurrencyPipe} from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -33,6 +34,9 @@ registerLocaleData(localePt, 'pt');
     RhModule, 
     NgSelectModule,
     MatDialogModule,
+    FormsModule,
+    RouterModule,
+    ReactiveFormsModule,
     FormsModule,
     NgbModule,
     NotifierModule.withConfig({

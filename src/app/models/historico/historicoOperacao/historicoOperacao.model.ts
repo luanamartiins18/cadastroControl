@@ -1,21 +1,21 @@
 import { HistoricoOperacaoInterface } from "src/app/interfaces/HistoricoOperacaoInterface";
-import { Operacao } from "../../operacao/operacao.model";
 import { Usuario } from "../../usuario/usuario.model";
+import { Contrato } from "../../contrato/contrato.model";
 
 export class HistoricoOperacao implements HistoricoOperacaoInterface {
     id?: number;
     data_inicio?: Date;
     data_final?: Date;
     vigente?: string;
-    operacao?: Operacao;
     usuario?: Usuario
+    contrato?: Contrato;
   
     constructor(
       id?: number,
       data_final?: Date,
       data_inicio?: Date,
       vigente?: string,
-      operacao?: Operacao,
-      usuario?: Usuario
+      usuario?: Usuario,
+      contrato?: Contrato,
     ) { }
   }

@@ -32,25 +32,32 @@ section {
   margin-left: 200px;
 
 }
-
-.button3 {
-
-  margin-top: 2rem;
+.button1{
   background-color: rgb(204, 24, 240);
   color: black;
-  margin-left: -24rem;
-  width: 10rem;
+  margin-left: 17rem;
+  width: 13rem;
   padding: 1px 15px 3px 2px;
   border-radius: 3rem;
   color: #ffff;
 }
 
+.button3 {
+  margin-top: 1rem;
+  background-color: rgb(204, 24, 240);
+  margin-left: -23rem;
+  width: 8rem;
+  padding: 1px 15px 3px 2px;
+  border-radius: 3rem;
+  color: #ffff;
+
+}
+
 .button2{
-  margin-top: 2rem;
   background-color: rgb(204, 24, 240);
   color: black;
-  margin-left: 12rem;
-  width: 10rem;
+  margin-left: 17rem;
+  width: 14rem;
   padding: 1px 15px 3px 2px;
   border-radius: 3rem;
   color: #ffff;

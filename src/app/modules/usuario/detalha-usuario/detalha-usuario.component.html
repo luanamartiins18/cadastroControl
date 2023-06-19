@@ -194,9 +194,27 @@
                 disabled class='form-control' 
                 value={{usuario?.complemento}} 
                 type='text'
-                style="width: 480px" 
+                style="width: 232px" 
                 class='form-control' />
             </div> 
+            <div  id="data_inicio" >
+              <Label class="font-weight-bold">Data Inicio</Label>
+              <input 
+                disabled class='form-control'
+                [value]="usuario?.data_inicio | date: 'dd/MM/yyyy'" 
+                type='text'
+                class='form-control' 
+              />
+            </div>
+            <div  id="data_final" >
+              <Label class="font-weight-bold">Data Final</Label>
+              <input 
+                disabled class='form-control'
+                [value]="usuario?.data_final | date: 'dd/MM/yyyy'" 
+                type='text'
+                class='form-control' 
+              />
+            </div>
             <div class="container">
               <div class="example-button-row">
                 <Label class="font-weight-bold">Status {{usuario?.status}}</Label>

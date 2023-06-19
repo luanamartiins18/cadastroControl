@@ -16,6 +16,7 @@ export class NovoUsuarioComponent implements OnInit {
   form: FormGroup;
   usuario: Usuario = new Usuario();
   id: any;
+  mostrarDatafinal: boolean;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -49,6 +50,8 @@ export class NovoUsuarioComponent implements OnInit {
       codigoRe: [this.usuario.codigoRe, [Validators.required]],
       numero: [this.usuario.numero, [Validators.required]],
       complemento: [this.usuario.complemento, [Validators.required]],
+      data_inicio:[this.usuario.data_inicio, [Validators.required]],
+      data_final: [this.usuario.data_inicio],
     });
   }
 
@@ -92,6 +95,7 @@ export class NovoUsuarioComponent implements OnInit {
       this.usuarioService.getUsuarioId(this.id).subscribe(
         (usuario) => {
           this.usuario = usuario;
+          this.mostrarDatafinal= true
         }
       );
     }

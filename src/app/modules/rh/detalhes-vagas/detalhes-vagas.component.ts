@@ -55,9 +55,8 @@ export class DetalhesVagasComponent implements OnInit {
       }
     );
   }
-
   volta(){
-    this.router.navigate(['rh/']);
+    this.router.navigate(['vagas/']);
   }
   editaVaga() {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -85,7 +84,7 @@ export class DetalhesVagasComponent implements OnInit {
     this.candidatoService.desvincularCandidato(candidato).subscribe((data) => {
       if (data.status == 200) {
         this.notifier.notify("success", "Candidato desvinculado a vaga");
-        this.router.navigate(['rh']);
+        this.router.navigate(['vagas']);
       }
       else {
         this.notifier.notify("error", "Ocorreu um erro ao desvincular candidato, por favor tente novamente.");

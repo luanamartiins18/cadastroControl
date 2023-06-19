@@ -84,6 +84,14 @@
         <th mat-header-cell *matHeaderCellDef> CARGO</th>
         <td mat-cell *matCellDef="let element"> {{element.cargo?.descricao}} </td>
        </ng-container>
+       <ng-container matColumnDef="data_inicio">
+        <th mat-header-cell *matHeaderCellDef> DATA INICIO</th>
+        <td mat-cell *matCellDef="let element"> {{element.data_inicio | date: 'dd/MM/yyyy'}} </td>
+       </ng-container>
+       <ng-container matColumnDef="data_final">
+        <th mat-header-cell *matHeaderCellDef> DATA FINAL</th>
+        <td mat-cell *matCellDef="let element"> {{element.data_final | date: 'dd/MM/yyyy'}} </td>
+       </ng-container>
         <tr mat-header-row *matHeaderRowDef="colunas; sticky: true"></tr>
         <tr (click)='detalhaUsuarios(row);' class='custom-row' mat-row *matRowDef="let row; columns: colunas;"></tr>
     </table>

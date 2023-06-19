@@ -48,24 +48,23 @@
       </a>
     </li>
 </ul>
-<form [formGroup]='form'>
-  <div class='container-fluid'>  
-        <div id='operacao'>
-        <label class="font-weight-bold">Operação</label>
-        <select 
-        id="selOperacao"
-        formControlName='operacao' 
-        class='form-control' 
-        (blur)="listaUsuariosPorOperacao($event)"
-        [(ngModel)]="usuario.operacao">
-        <option [value]="item.id"
-          class='form-control' 
-          [selected]=" usuario.operacao && usuario.operacao.id==item.id"
-            *ngFor='let item of this.listaOperacao'>{{item.descricao}}</option>
-        </select>
-      </div>
-  </div>
-</form>
+<div class='container-fluid'>
+  <form [formGroup]='form'>
+    <div id="contrato" >
+      <label class="font-weight-bold">Operação</label>
+      <select 
+      formControlName='contrato' 
+      class='form-control' 
+      (blur)="listaUsuariosPorOperacao($event)"
+      [(ngModel)]=" usuario.contrato">
+      <option [value]="item.id"  
+      class='form-control' 
+      [selected]=" usuario.contrato && usuario.contrato.id==item.id"
+      *ngFor='let item of this.listaContrato'>{{item.operacao}}</option>
+      </select>
+    </div>
+  </form>
+</div>
   <div *ngIf="mostrarGerarPDF">
     <button mat-icon-button 
       class="buton1"

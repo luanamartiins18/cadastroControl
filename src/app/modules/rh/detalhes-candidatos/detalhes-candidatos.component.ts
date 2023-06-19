@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Candidatos } from 'src/app/models/candidato/candidatos.model';
 import { CandidatosService } from 'src/app/services/candidatos/candidatos.service';
+
 @Component({
   selector: 'app-detalhes-candidatos',
   templateUrl: './detalhes-candidatos.component.html',
@@ -12,12 +13,11 @@ export class DetalhesCandidatosComponent implements OnInit {
 
   id: String;
   rh: Candidatos = new Candidatos();
-
+  id_candidatos: String;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private http: HttpClient,
     private rhService: CandidatosService,
   ) { }
 
@@ -76,4 +76,12 @@ export class DetalhesCandidatosComponent implements OnInit {
         // Trata o erro
       });
   };
+
+  vincularProposta() {
+    this.id_candidatos = this.route.snapshot.paramMap.get('id');
+    this.router.navigate(['proposta'], { queryParams: { id_candidatos: this.id_candidatos }});
+  }
+
+ 
+
 }

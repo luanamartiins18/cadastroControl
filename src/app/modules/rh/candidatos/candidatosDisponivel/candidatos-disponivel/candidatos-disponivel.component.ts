@@ -26,7 +26,7 @@ export class CandidatosDisponivelComponent implements OnInit {
   candidatos:  Candidatos[] = [];
   candidatos1:  Candidatos = new Candidatos(); 
 
-  candidatoTeste: Candidatos[] = [];
+  candidatoVinculado: Candidatos[] = [];
 
   vagas: Vagas;
   colunas = [
@@ -71,18 +71,18 @@ export class CandidatosDisponivelComponent implements OnInit {
   vincularCandidato(){
     const url = window.location.href;
     const newUrl = url.replace("http://localhost:4200", "");
-    this.candidatoTeste.map((cadidato) => {
+    this.candidatoVinculado.map((cadidato) => {
       cadidato.vagas = this.vagas;
     })
     this.candidatos1.vagas = this.vagas;
     if(this.vagas === undefined){
       alert(newUrl);
     }else{
-      this.candidatoTeste.map((c) => {
+      this.candidatoVinculado.map((c) => {
         this.rhService.atualizaCandidatos(c).subscribe((data) => {
           if (data.status == 200) {
             this.notifier.notify("success", "CANDIDATO VINCULADO COM SUCESSO !");
-            this.router.navigate(['rh']);
+            this.router.navigate(['vagas']);
           }
           else{
               alert("Erro em cadastrar atualizar o candidato")
@@ -124,7 +124,7 @@ export class CandidatosDisponivelComponent implements OnInit {
     this.rhService.getCandidatosId(row.id).subscribe(
     (rh) => {
       this.candidatos1 = rh;
-      this.candidatoTeste.push(this.candidatos1)
+      this.candidatoVinculado.push(this.candidatos1)
     });
 
   }

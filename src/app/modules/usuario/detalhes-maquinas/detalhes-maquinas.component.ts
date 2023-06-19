@@ -13,7 +13,7 @@ import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 export class DetalhesMaquinasComponent implements OnInit {
 
   historico: HistoricoMaquinas[] = [];
-  
+  historicoOriginal: HistoricoMaquinas[] = [];
   usuarios: Usuario[] = [];
   colunas = [
    'nome', 'codigoRe','memoria','equipamento','modelo','patrimonio','tag', 'data_inicio', 'data_final'
@@ -29,6 +29,7 @@ export class DetalhesMaquinasComponent implements OnInit {
   ngOnInit() {
     this.us.getListaHistorico().subscribe(
       data => {
+      this.historicoOriginal = data;
       this.historico = data;
     });
   }
@@ -37,12 +38,18 @@ export class DetalhesMaquinasComponent implements OnInit {
     this.router.navigate(['/../detalhesMaquinas/' + row.id]);
   }
 
+ 
   searchAllField(event: any) {
-    this.historico = this.historico.filter(obj => {
+    const searchTerm = event.target.value.toUpperCase();
+    if (searchTerm === '') {
+      this.historico = this.historicoOriginal; // Atribui o histórico original de volta à variável 'historico'
+      return;
+    }
+    this.historico = this.historicoOriginal.filter(obj => {
       return Object.keys(obj).find((key) => {
-        return obj[key] ? ((obj[key].descricao ? obj[key].descricao : obj[key]).toString().toUpperCase()).includes(event.target.value.toUpperCase()) : false;
+        return obj[key] ? ((obj[key].descricao ? obj[key].descricao : obj[key]).toString().toUpperCase()).includes(searchTerm) : false;
       });
-    })
+    });
   }
 }
 

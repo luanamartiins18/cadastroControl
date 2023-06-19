@@ -4,10 +4,10 @@ import { Candidatos } from "../candidato/candidatos.model";
 import { Funcao } from "../cargo/funcao.model";
 import { Especialidade } from "../especialidade/Especialidade.model";
 import { Etapa } from "../etapa/etapa.model";
-import { Operacao } from "../operacao/operacao.model";
 import { PlanoSaude } from "../planoSaude/planoSaude.model";
 import { Recrutador } from "../recrutador/recrutador.model";
 import { Status } from "../status/status.model";
+import { Contrato } from "../contrato/contrato.model";
 
 export class Vagas implements VagasInterface {
 
@@ -26,10 +26,10 @@ export class Vagas implements VagasInterface {
     especialidade?: Especialidade;
     recrutador?: Recrutador;
     bu?: Bu;
-    operacao?: Operacao;
     data_inicio?: Date;
     data_final?: Date;
     candidato?: Candidatos;
+    contrato?: Contrato;
 
 
     constructor( 
@@ -50,8 +50,8 @@ export class Vagas implements VagasInterface {
         recrutadora?: string,
         bu?: Bu,
         data_final?: Date,
-        operacao?: Operacao,
         recrutador?: Recrutador,
         data_inicio?: Date,
+        contrato?: Contrato,
     ) { }
 }

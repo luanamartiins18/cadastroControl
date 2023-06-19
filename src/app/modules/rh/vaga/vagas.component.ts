@@ -48,7 +48,7 @@ export class VagasComponent implements OnInit {
   }
 
   detalhesCandidato(row: { id: string; }) {
-    this.router.navigate(['/../rh/' + row.id]);
+    this.router.navigate(['/../vagas/' + row.id]);
   }
 
   searchAllField(event: any) {
@@ -69,7 +69,7 @@ export class VagasComponent implements OnInit {
     this.rhService.atualizaStatus(candidato).subscribe((data) => {
       if (data.status == 200) {
         this.notifier.notify("success", "STATUS DO VAGA ALTERADO PRA CANCELADO COM SUCESSO !", '5000');
-        this.router.navigate(['rh']);
+        this.router.navigate(['vagas']);
       }
       else {
         this.notifier.notify("error", "Ocorreu um erro ao cancelar o status do candidato, por favor tente novamente.");

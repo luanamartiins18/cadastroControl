@@ -10,9 +10,11 @@ import { Usuario } from 'src/app/models/usuario/usuario.model';
 })
 export class UsuariosComponent implements OnInit {
 
+
+  usuariosOriginal: Usuario[] = [];
   usuarios: Usuario[] = [];
   colunas = [
-    'nome', 'cpf',  'codigoRe',  'status', 'cargo'
+    'nome', 'cpf',  'codigoRe',  'status', 'cargo', "data_inicio", "data_final"
   ];
   
 
@@ -25,6 +27,7 @@ export class UsuariosComponent implements OnInit {
   ngOnInit() {
     this.us.getListaUsuarios().subscribe(
       data => {
+      this.usuariosOriginal = data; 
       this.usuarios = data;
     });
   }
@@ -35,10 +38,16 @@ export class UsuariosComponent implements OnInit {
 
 
   searchAllField(event: any) {
-    this.usuarios = this.usuarios.filter(obj => {
+    const searchTerm = event.target.value.toUpperCase();
+    if (searchTerm === '') {
+      this.usuarios = this.usuariosOriginal; // Atribui os usuários originais de volta à variável 'usuarios'
+      return;
+    }
+
+    this.usuarios = this.usuariosOriginal.filter(obj => {
       return Object.keys(obj).find((key) => {
-        return obj[key] ? ((obj[key].descricao ? obj[key].descricao : obj[key]).toString().toUpperCase()).includes(event.target.value.toUpperCase()) : false;
+        return obj[key] ? ((obj[key].descricao ? obj[key].descricao : obj[key]).toString().toUpperCase()).includes(searchTerm) : false;
       });
-    })
+    });
   }
 }

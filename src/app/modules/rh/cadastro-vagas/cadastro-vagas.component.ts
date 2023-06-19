@@ -14,12 +14,12 @@ import { Especialidade } from 'src/app/models/especialidade/Especialidade.model'
 import { EspecialidadeService } from 'src/app/services/especialidade/especialidade.service';
 import { BuService } from 'src/app/services/bu/bu.service';
 import { Bu } from 'src/app/models/bu/bu.model';
-import { OperacaoService } from 'src/app/services/operacao/operacao.service';
-import { Operacao } from 'src/app/models/operacao/operacao.model';
 import { RecrutadorService } from 'src/app/services/recrutador/recrutador.service';
 import { Recrutador } from 'src/app/models/recrutador/recrutador.model';
 import { PlanoService } from 'src/app/services/planoSaude/planoSaude.service';
 import { PlanoSaude } from 'src/app/models/planoSaude/planoSaude.model';
+import { Contrato } from 'src/app/models/contrato/contrato.model';
+import { ContratoService } from 'src/app/services/contrato/contrato.service';
 
 @Component({
   selector: 'app-cadastro-vagas',
@@ -31,7 +31,6 @@ export class CadastroVagasComponent implements OnInit {
   mostrarEtapa: boolean;
   mostrarAtualizar: boolean;
   mostrarInserir: boolean;
-  listaOperacao: Array<Operacao>;
   listaPlano: Array<PlanoSaude>;
   listaBu: Array<Bu>;
   listaEtapa: Array<Etapa>;
@@ -39,12 +38,13 @@ export class CadastroVagasComponent implements OnInit {
   listaCargo: Array<Funcao>;
   listaEspecialidade: Array<Especialidade>;
   listaRecrutador: Array<Recrutador>;
+  listaOperacao: Array<Contrato>;
 
   form: FormGroup;
-  rh: Vagas = new Vagas();
+  vagas: Vagas = new Vagas();
   id: any;
   constructor(
-    private rhService: VagasService,
+    private vagasService: VagasService,
     private notifier: NotifierService,
     public formBuilder: FormBuilder,
     private statusService: StatusService,
@@ -53,20 +53,20 @@ export class CadastroVagasComponent implements OnInit {
     private router: Router,
     private buService: BuService,
     private route: ActivatedRoute,
-    private operacaoService: OperacaoService,
     private especialidadeService: EspecialidadeService,
     private recrutadorService: RecrutadorService,
     private planoService: PlanoService,
+    private contratoService: ContratoService,
 
   ) { }
 
   ngOnInit() {
     this.montaFormBuilder();
     this.carregaUsuarios();
+    this.getContrato();
     this.getStatus();
     this.getRecrutador();
     this.getPlanoSaude();
-    this.getOperacao();
     this.getEtapa();
     this.getBu();
     this.getEspecialidade();
@@ -79,21 +79,21 @@ export class CadastroVagasComponent implements OnInit {
   private montaFormBuilder() {
     this.mostrarInserir = true;
     this.form = this.formBuilder.group({
-      qualitor: [this.rh.qualitor, [Validators.required]],
-      va: [this.rh.vale_alimentacao],
-      vr: [this.rh.vale_refeicao],
-      bonus: [this.rh.bonus],
-      remuneracao: [this.rh.remuneracao, [Validators.required]],
-      planoSaude: [this.rh.planoSaude, [Validators.required]],
-      cesta: [this.rh.cesta],
-      flash: [this.rh.flash],
-      etapa:[this.rh.etapa],
-      status: [this.rh.status],
-      cargo: [this.rh.cargo,[Validators.required]],
-      especialidade: [this.rh.especialidade, [Validators.required]],
-      recrutador: [this.rh.recrutador, [Validators.required]],
-      operacao: [this.rh.operacao,[Validators.required]],
-      bu: [this.rh.bu,[Validators.required]],
+      qualitor: [this.vagas.qualitor, [Validators.required]],
+      va: [this.vagas.vale_alimentacao],
+      vr: [this.vagas.vale_refeicao],
+      bonus: [this.vagas.bonus],
+      remuneracao: [this.vagas.remuneracao, [Validators.required]],
+      planoSaude: [this.vagas.planoSaude, [Validators.required]],
+      cesta: [this.vagas.cesta],
+      flash: [this.vagas.flash],
+      etapa:[this.vagas.etapa],
+      status: [this.vagas.status],
+      cargo: [this.vagas.cargo,[Validators.required]],
+      especialidade: [this.vagas.especialidade, [Validators.required]],
+      recrutador: [this.vagas.recrutador, [Validators.required]],
+      bu: [this.vagas.bu,[Validators.required]],
+      operacao: [this.vagas.contrato, [Validators.required]],
     });
     let remuneracao = document.getElementById('remuneracao');
     let va = document.getElementById('va');
@@ -143,9 +143,9 @@ export class CadastroVagasComponent implements OnInit {
   private carregaUsuarios() {
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {
-      this.rhService.getVagasId(this.id).subscribe(
-        (rh) => {
-          this.rh = rh;
+      this.vagasService.getVagasId(this.id).subscribe(
+        (vagas) => {
+          this.vagas = vagas;
           this.mostrarEtapa = true;
           this.mostrarAtualizar= true;
           this.mostrarInserir = false;
@@ -166,9 +166,10 @@ export class CadastroVagasComponent implements OnInit {
     });
   }
 
-  private getOperacao() {
-    this.operacaoService.getOperacao().subscribe((lista) => {
+  private getContrato() {
+    this.contratoService.getContrato().subscribe((lista) => {
       this.listaOperacao = lista;
+     
     });
   }
 
@@ -208,15 +209,15 @@ export class CadastroVagasComponent implements OnInit {
     }  else if(this.id){
         this.atualizaUsuario();
       } else {
-        this.insereRh();
+        this.inserevagas();
     }
   }
 
-  private insereRh() {
-    this.rhService.insereVagas(this.rh).subscribe((data) => {
+  private inserevagas() {
+    this.vagasService.insereVagas(this.vagas).subscribe((data) => {
       if (data.status == 200) {
         this.notifier.notify("success", "VAGAS CADASTRADO COM SUCESSO!");
-        this.router.navigate(['rh']);
+        this.router.navigate(['vagas']);
       }
       else{
         this.notifier.notify("error", "Ocorreu um erro ao cadastrar, por favor verificar os devidos dados, tente novamente.");
@@ -225,10 +226,10 @@ export class CadastroVagasComponent implements OnInit {
   }
 
   private atualizaUsuario() {
-    this.rhService.atualizaVagas(this.rh).subscribe((data) => {
+    this.vagasService.atualizaVagas(this.vagas).subscribe((data) => {
       if (data.status == 200) {
         this.notifier.notify("success", "DADOS DA VAGA ATUALIZADO COM SUCESSO !");
-        this.router.navigate(['rh']);
+        this.router.navigate(['vagas']);
       }
       else {
         this.notifier.notify("error", "Ocorreu um erro na atualização, por favor tente novamente.");
@@ -238,14 +239,13 @@ export class CadastroVagasComponent implements OnInit {
   }
 
   preencheCampos(){
-    this.populaCampo('select-plano', this.rh.planoSaude);
-    this.populaCampo('select-bu', this.rh.bu);
-    this.populaCampo('select-operacao', this.rh.operacao);
-    this.populaCampo('select-especialidade', this.rh.especialidade);
-    this.populaCampo('select-recrutador', this.rh.recrutador);
-    this.populaCampo('select-cargo', this.rh.cargo);
-    this.populaCampo('select-etapa', this.rh.etapa);
-    this.populaCampo('select-status', this.rh.status);
+    this.populaCampo('select-plano', this.vagas.planoSaude);
+    this.populaCampo('select-bu', this.vagas.bu);
+    this.populaCampo('select-especialidade', this.vagas.especialidade);
+    this.populaCampo('select-recrutador', this.vagas.recrutador);
+    this.populaCampo('select-cargo', this.vagas.cargo);
+    this.populaCampo('select-etapa', this.vagas.etapa);
+    this.populaCampo('select-status', this.vagas.status);
   }
 
   populaCampo(id, obj){
@@ -261,6 +261,6 @@ export class CadastroVagasComponent implements OnInit {
   }
 
   volta(){
-    this.router.navigate(['rh/']);
+    this.router.navigate(['vagas/']);
   }
 }

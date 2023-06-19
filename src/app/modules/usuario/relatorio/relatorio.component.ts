@@ -1,10 +1,10 @@
 import {Component,OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Operacao } from 'src/app/models/operacao/operacao.model';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
-import { OperacaoService } from 'src/app/services/operacao/operacao.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import * as printJS from 'print-js';
+import { Contrato } from 'src/app/models/contrato/contrato.model';
+import { ContratoService } from 'src/app/services/contrato/contrato.service';
 
 @Component({
   selector: 'app-relatorio',
@@ -13,7 +13,7 @@ import * as printJS from 'print-js';
 })
 export class RelatorioComponent implements OnInit {
   
-  listaOperacao: Array<Operacao>;
+  listaContrato: Array<Contrato>;
   usuario: Usuario = new Usuario();
   usuarios: Usuario[] = [];
   form: FormGroup;
@@ -23,13 +23,13 @@ export class RelatorioComponent implements OnInit {
 
   constructor(
     public formBuilder: FormBuilder,
-    private operacaoService: OperacaoService,
-    private us: UsuarioService
+    private us: UsuarioService,
+    private contratoService: ContratoService,
   ) {}
 
   ngOnInit() {
     this.montaFormBuilder();
-    this.getOperacao();
+    this.getContrato();
     this.mostrarGerarPDF = false;
   }
 
@@ -51,8 +51,8 @@ export class RelatorioComponent implements OnInit {
     titulo.style.display = 'block';
     divDemandaOperacao.style.display = "block";
     totalUsuario.style.display = 'block';
-    infoDemanda.innerHTML = this.usuarios[0].demanda.descricao + "&ensp; &ensp; &ensp; &ensp; &ensp; &ensp;";
-    infoOperacao.innerHTML = this.usuarios[0].operacao.descricao;
+    infoDemanda.innerHTML = this.usuarios[0].contrato.demanda + "&ensp; &ensp; &ensp; &ensp; &ensp; &ensp;";
+    infoOperacao.innerHTML = this.usuarios[0].contrato.operacao;
     divDemandaOperacao.append(infoDemanda, infoOperacao);
     printJS({printable:'teste', type:'html', style:'.divDemandaOperacao {color: #cc18f0}'});
     titulo.style.display = 'none';
@@ -63,13 +63,15 @@ export class RelatorioComponent implements OnInit {
              
   private montaFormBuilder() {
     this.form = this.formBuilder.group({
-      operacao: [this.usuario.operacao,[Validators.required]],
+      contrato: [this.usuario.contrato, [Validators.required]],
     });
   }
 
-  private getOperacao() {
-    this.operacaoService.getOperacao().subscribe((lista) => {
-      this.listaOperacao = lista;
+  private getContrato() {
+    this.contratoService.getContrato().subscribe((lista) => {
+      this.listaContrato = lista;
+     
     });
   }
+
 }

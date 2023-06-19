@@ -30,6 +30,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CandidatosDisponivelComponent } from './candidatos/candidatosDisponivel/candidatos-disponivel/candidatos-disponivel.component';
 import { DialogComponent } from './dialog/dialog.component';
+import { PropostaComponent } from './proposta/proposta.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 @NgModule({
@@ -43,6 +44,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     CandidatosComponent,
     CandidatosDisponivelComponent,
     DialogComponent,
+    PropostaComponent,
   ],
   imports: [
     CommonModule,

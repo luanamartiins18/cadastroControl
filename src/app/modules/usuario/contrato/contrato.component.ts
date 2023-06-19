@@ -1,16 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotifierService } from 'angular-notifier';
-import { CentroCusto } from 'src/app/models/centroCusto/centroCusto.model';
-import { Cliente } from 'src/app/models/cliente/cliente.model';
-import { Demanda } from 'src/app/models/demanda/demanda.model';
+import { Contrato } from 'src/app/models/contrato/contrato.model';
 import { HistoricoOperacao } from 'src/app/models/historico/historicoOperacao/historicoOperacao.model';
-import { Operacao } from 'src/app/models/operacao/operacao.model';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
-import { CentroService } from 'src/app/services/centroCusto/centroCusto.service';
-import { ClienteService } from 'src/app/services/cliente/cliente.service';
-import { DemandaService } from 'src/app/services/demanda/demanda.service';
-import { OperacaoService } from 'src/app/services/operacao/operacao.service';
+import { ContratoService } from 'src/app/services/contrato/contrato.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 
 @Component({
@@ -20,11 +14,7 @@ import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 })
 export class ContratoComponent implements OnInit {
 
-
-  listaCliente: Array<Cliente>;
-  listaOperacao: Array<Operacao>;
-  listaCentro: Array<CentroCusto>;
-  listaDemanda: Array<Demanda>;
+  listaContrato: Array<Contrato>;
   form: FormGroup;
   usuario: Usuario = new Usuario();
   id: any;
@@ -40,19 +30,13 @@ export class ContratoComponent implements OnInit {
     public formBuilder: FormBuilder,
     private usuarioService: UsuarioService,
     private notifier: NotifierService,
-    private clienteService: ClienteService,
-    private operacaoService: OperacaoService,
-    private centroService:  CentroService,
-    private demandaService: DemandaService,
+    private contratoService: ContratoService,
   ) { }
 
   ngOnInit() {
     this.montaFormBuilder();
-    this.getCliente();
-    this.getOperacao();
-    this.getDemanda();
-    this.getCentro();
     this.mostrarhistoricoOperacao();
+    this.getContrato();
     this.mostrarTabela = false;
   }
 
@@ -86,44 +70,20 @@ export class ContratoComponent implements OnInit {
     }
   }
 
+  private getContrato() {
+    this.contratoService.getContrato().subscribe((lista) => {
+      this.listaContrato = lista;
+     
+    });
+  }
 
 
   private montaFormBuilder() {
     this.form = this.formBuilder.group({
       codigoRe: [this.usuario.codigoRe, [Validators.required]],
-      demanda: [this.usuario.demanda, [Validators.required]],
-      cliente:[this.usuario.cliente,[Validators.required]],
-      operacao: [this.usuario.operacao,[Validators.required]],
-      centro: [this.usuario.centro,[Validators.required]],
+      contrato: [this.usuario.contrato, [Validators.required]],
     });
   }
-
-
-  private getCliente() {
-    this.clienteService.getCliente().subscribe((lista) => {
-      this.listaCliente = lista;
-    });
-  }
-
-  private getOperacao() {
-    this.operacaoService.getOperacao().subscribe((lista) => {
-      this.listaOperacao = lista;
-    });
-  }
-
-  private getCentro() {
-    this.centroService.getCentro().subscribe((lista) => {
-      this.listaCentro = lista;
-    });
-  }
-
-  private getDemanda() {
-    this.demandaService.getDemanda().subscribe((lista) => {
-      this.listaDemanda = lista;
-    });
-  }
-
-
   submit() {
     if (this.form.invalid) {
       this.notifier.notify("error", " Todos os campos devem ser preenchidos corretamente!");

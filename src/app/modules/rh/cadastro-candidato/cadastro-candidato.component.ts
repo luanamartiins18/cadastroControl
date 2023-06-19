@@ -75,10 +75,10 @@ export class CadastroCandidatoComponent implements OnInit {
 
   private montaFormBuilder() {
     this.form = this.formBuilder.group({
-      candidatos: [this.candidato.candidatos, [Validators.required]],
-      telefone: [this.candidato.telefone, [Validators.required]],
       cpf: [this.candidato.cpf, [Validators.required]],
       rg: [this.candidato.rg, [Validators.required]],
+      telefone: [this.candidato.telefone, [Validators.required]],
+      nome: [this.candidato.candidatos, [Validators.required]],
       email: [this.candidato.email, [Validators.required]],
       va_atual: [this.candidato.vale_alimentacao_atual],
       vr_atual: [this.candidato.vale_refeicao_atual],
@@ -98,7 +98,7 @@ export class CadastroCandidatoComponent implements OnInit {
       cesta_pretensao: [this.candidato.cesta_pretensao],
       flash_pretensao: [this.candidato.flash_pretensao],
       vagas: [ this.candidato.vagas],
-      observacao: [this.candidato.observacao, [Validators.required]]
+      observacao: [this.candidato.observacao]
     });
     let remuneracao_atual = document.getElementById('remuneracao_atual');
     let va_atual = document.getElementById('va_atual');
@@ -237,7 +237,7 @@ export class CadastroCandidatoComponent implements OnInit {
     this.candidatoService.insereCandidatos(this.candidato).subscribe((data) => {
       if (data.status == 200) {
         this.notifier.notify("success", "CANDIDATO CADASTRADO COM SUCESSO!");
-        this.router.navigate(['rh']);
+        this.router.navigate(['vagas']);
       }
       if (data.status == 500){
         this.notifier.notify("error", "ERRO AO CADASTRAR, CONFIRAR OS DADOS ");
@@ -295,7 +295,7 @@ export class CadastroCandidatoComponent implements OnInit {
   }
 
   volta(){
-    this.router.navigate(['rh/']);
+    this.router.navigate(['vagas/']);
   }
 
 

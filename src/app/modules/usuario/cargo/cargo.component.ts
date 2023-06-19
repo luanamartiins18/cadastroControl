@@ -133,7 +133,6 @@ export class CargoComponent implements OnInit {
       this.notifier.notify("error", " Todos os campos devem ser preenchidos corretamente!");
     } else {
       this.insereFuncao();
-      location.reload()
     }
   }
 
@@ -142,6 +141,7 @@ export class CargoComponent implements OnInit {
     this.usuarioService.insereFuncao(this.usuario).subscribe((data) => {
       if (data.status == 200) {
         this.notifier.notify("success", "Função criado com sucesso!");
+        location.reload()
       }
       else {
         this.notifier.notify("error", "Houve um erro no cadastro a Função");

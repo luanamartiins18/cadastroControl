@@ -70,54 +70,42 @@
               type='text'
               class='form-control' />
           </div>
-          
-          <div id='demanda'>
-            <label class="font-weight-bold">Demanda</label>
-              <select 
-              formControlName='demanda' 
-              class='form-control' 
-              [(ngModel)]="usuario.demanda">
-              <option [ngValue]="item"
-                type='text'
-                [selected]="usuario.demanda && usuario.demanda.id==item.id"
-                *ngFor='let item of this.listaDemanda'>{{item.descricao}} </option>
-              </select>
-          </div>
-          <div id='centro'>
-            <label class="font-weight-bold">Centro de Custo</label>
-              <select 
-              formControlName='centro' 
-              class='form-control' 
-              [(ngModel)]="usuario.centro">
-              <option [ngValue]="item"
-                type='text'
-                [selected]="usuario.centro && usuario.centro.id==item.id"
-                *ngFor='let item of this.listaCentro'>{{item.descricao}} </option>
-              </select>
-          </div>
-      <div id='cliente'>
-        <label class="font-weight-bold">CLiente</label>
-          <select 
-          formControlName='cliente' 
-          class='form-control' 
-          [(ngModel)]="usuario.cliente">
-          <option [ngValue]="item"
-            type='text'
-            [selected]="usuario.cliente && usuario.cliente.id==item.id"
-            *ngFor='let item of this.listaCliente'>{{item.descricao}} </option>
-          </select>
-      </div>
-           <div id='operacao'>
-            <label class="font-weight-bold">Operação</label>
+           <!-- input contrato/operacao -->
+           <div id='contrato'>
+            <label class="font-weight-bold">Operacão</label>
             <select 
-            formControlName='operacao' 
+            formControlName='contrato' 
             class='form-control' 
-            [(ngModel)]="usuario.operacao">
+            [(ngModel)]="usuario.contrato">
             <option [ngValue]="item"
              class='form-control' 
-             [selected]=" usuario.operacao && usuario.operacao.id==item.id"
-                *ngFor='let item of this.listaOperacao'>{{item.descricao}}</option>
+             [selected]=" usuario.contrato && usuario.contrato.id==item.id"
+                *ngFor='let item of this.listaContrato'>{{item.operacao}}</option>
             </select>
+          </div>
+          <div id="cliente">
+            <Label class="font-weight-bold">Cliente</Label>
+            <input 
+              disabled class='form-control' 
+              value={{usuario?.contrato?.cliente}} 
+              type='text'
+              class='form-control' />
+          </div>
+          <div id="demanda">
+            <Label class="font-weight-bold">Demanda</Label>
+            <input 
+              disabled class='form-control' 
+              value={{usuario?.contrato?.demanda}} 
+              type='text'
+              class='form-control' />
+          </div>
+          <div id="centro">
+            <Label class="font-weight-bold">Centro de Custo</Label>
+            <input 
+              disabled class='form-control' 
+              value={{usuario?.contrato?.centro}} 
+              type='text'
+              class='form-control' />
           </div>
               <section>
                 <div class="example-button-row">
@@ -132,7 +120,7 @@
               </section>
         </div>
     </form>
-    <div class="tabelaHistorico" *ngIf="mostrarTabela">
+    <!-- <div class="tabelaHistorico" *ngIf="mostrarTabela">
       <table class="tableok" mat-table [dataSource]=" historico" matSort> 
         <ng-container style="height: 30px !important;">
           <ng-container matColumnDef="operacao">
@@ -151,5 +139,5 @@
           <tr class='custom-row' mat-row *matRowDef="let row; columns: colunas;"></tr>'
         </ng-container>
       </table>
-    </div>
+    </div> -->
 </div>
