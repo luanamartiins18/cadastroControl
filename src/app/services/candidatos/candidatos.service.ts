@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Candidatos } from 'src/app/models/candidato/candidatos.model';
-import { Observable } from 'rxjs';
+import { HistoricoCandidatos } from 'src/app/models/historico/historicoCandidatos/historicoCandidatos.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -26,6 +26,7 @@ export class CandidatosService {
   atualizaCandidatos(param: Candidatos) {
     return this.http.put(environment.api + "candidatos/" + param.id, param, { headers: httpOptions.headers, observe: 'response' });
   }
+
   
   getListaCandidatos() {
     return this.http.get<Candidatos[]>(environment.api + 'candidatos');
@@ -53,6 +54,10 @@ export class CandidatosService {
 
   desvincularCandidato(param: Candidatos){
     return this.http.put(environment.api + "desvincular/" + param.id, param, { headers: httpOptions.headers, observe: 'response' });
+  }
+
+  getHistoricoCandidatos(id){
+    return this.http.get<HistoricoCandidatos[]>(environment.api + 'historicocandidatos/' + id);
   }
 
 }

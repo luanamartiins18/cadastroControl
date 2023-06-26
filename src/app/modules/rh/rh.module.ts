@@ -31,6 +31,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CandidatosDisponivelComponent } from './candidatos/candidatosDisponivel/candidatos-disponivel/candidatos-disponivel.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { PropostaComponent } from './proposta/proposta.component';
+import { ErrorDialogComponent } from './dialog/ErrorDialogComponent/erroDialog.component';
+import { ErrorDialogVagaComponent } from './dialog/ErroDialogVaga/ErroDialogVaga.component';
+import { ErrorDialogPropostaComponent } from './dialog/ErroDialogProposta/erroDialogProposta.component';
+import { AtualizarPropostaComponent } from './proposta/atualizar-proposta/atualizar-proposta.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 @NgModule({
@@ -43,8 +47,13 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     DetalhesCandidatosComponent,
     CandidatosComponent,
     CandidatosDisponivelComponent,
+    ErrorDialogComponent,
+    ErrorDialogVagaComponent,
+    ErrorDialogPropostaComponent,
+    ErrorDialogComponent,
     DialogComponent,
     PropostaComponent,
+    AtualizarPropostaComponent,
   ],
   imports: [
     CommonModule,
@@ -71,7 +80,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     BrowserAnimationsModule,
     NgMultiSelectDropDownModule.forRoot()
   ],
-  entryComponents: [DialogComponent],
+  entryComponents: [DialogComponent, ErrorDialogComponent, ErrorDialogVagaComponent, ErrorDialogPropostaComponent, ErrorDialogComponent],
 })
 
 export class RhModule { }

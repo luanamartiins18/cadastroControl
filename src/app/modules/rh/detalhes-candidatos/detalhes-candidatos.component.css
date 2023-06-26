@@ -95,3 +95,41 @@ section {
 .label {
   margin-left: -3rem;
 }
+
+
+
+
+
+
+.tabelaHistorico{
+  width: 121%;
+  margin-left: 4rem;
+  overflow: scroll;
+  margin-right: -15rem;
+}
+
+table{
+  width: 58%;
+  margin-left:5rem;
+  overflow: scroll;
+  border: 1px solid black;
+
+}
+
+
+.tableok {
+    overflow: auto !important;
+}
+
+.custom-row{
+  cursor: pointer;
+}
+
+tr.mat-header-row{
+  background-color: rgb(16, 15, 15);
+}
+
+th.mat-header-cell{
+  color: white;
+  font-size: 0.8rem;
+}

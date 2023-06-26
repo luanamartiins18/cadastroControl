@@ -228,6 +228,7 @@ export class CadastroCandidatoComponent implements OnInit {
       let vaga = listaVagas[x];
       if(parseInt(id_vaga) == vaga.id){
         return vaga;
+
       }
     }
   }
@@ -282,18 +283,20 @@ export class CadastroCandidatoComponent implements OnInit {
     this.populaCampo('select-statusCandidato', this.candidato.status_candidato);
   }
 
-  populaCampo(id, obj){
-    if(obj != undefined){
-      // for(let x in document.getElementById(id).options){
-      //   let item =   document.getElementById(id).options[x];
-      //   if(item.id == obj.id){
-      //     item.selected = true;
-      //     break;
-      //   }
-      // }
+  populaCampo(id: string, obj: any) {
+    if (obj != undefined) {
+      const selectElement = document.getElementById(id) as HTMLSelectElement;
+      if (selectElement) {
+        for (let x = 0; x < selectElement.options.length; x++) {
+          let item = selectElement.options[x];
+          if (item.id == obj.id) {
+            item.selected = true;
+            break;
+          }
+        }
+      }
     }
   }
-
   volta(){
     this.router.navigate(['vagas/']);
   }

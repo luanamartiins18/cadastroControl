@@ -10,6 +10,6 @@ export interface PropostaInterface {
     seguro_vida?: boolean;
     vale_alimentacao?: boolean;
     vale_refeicao?: boolean;
-    status_candidatos: StatusCandidato;
-    candidato?: Candidatos;
+    status_candidatos?: StatusCandidato;
+    candidatos?: Candidatos;
 }

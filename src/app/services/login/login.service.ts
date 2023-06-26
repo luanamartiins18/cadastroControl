@@ -25,6 +25,7 @@ export class LoginService {
     return colaborador === null ? false : true;
   }
 
+
   deslogaUsuario() {
     sessionStorage.removeItem('colaborador');
   }

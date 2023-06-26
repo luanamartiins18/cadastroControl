@@ -11,6 +11,7 @@ import { CandidatosService } from 'src/app/services/candidatos/candidatos.servic
 import { StatusCandidatoService } from 'src/app/services/statusCandidato/statusCandidato.service';
 import { VagasService } from 'src/app/services/vagas/vagas.service';
 import { DialogComponent } from '../dialog/dialog.component';
+import { HistoricoCandidatos } from 'src/app/models/historico/historicoCandidatos/historicoCandidatos.model';
 
 
 @Component({
@@ -30,8 +31,8 @@ export class CandidatosComponent implements OnInit {
   selection = new SelectionModel<Candidatos>(true, []);
   candidatos:  Candidatos[] = [];
   candidatos1:  Candidatos = new Candidatos(); 
-
   candidatoTeste: Candidatos[] = [];
+
 
   vagas: Vagas;
   colunas = [
@@ -169,7 +170,11 @@ export class CandidatosComponent implements OnInit {
 
   });
 }
+
+
 }
+
+
 
 
 

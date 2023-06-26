@@ -103,11 +103,11 @@
       </div>
       <div>
         <label class="font-weight-bold">Vale Alimentação</label>
-        <mat-checkbox [(ngModel)]="proposta.vale_alimentacao" [disabled]="selectAllOption1"></mat-checkbox>
+        <mat-checkbox [(ngModel)]="proposta.vale_alimentacao"></mat-checkbox>
       </div>
       <div>
         <label class="font-weight-bold">Vale Refeição</label>
-        <mat-checkbox  class="borda1" [(ngModel)]="proposta.vale_refeicao" [disabled]="selectAllOption1"></mat-checkbox>
+        <mat-checkbox  class="borda1" [(ngModel)]="proposta.vale_refeicao"></mat-checkbox>
       </div>
       <div>
         <label class="font-weight-bold">Plano Saúde</label>
@@ -132,14 +132,12 @@
           class="button1"
           color="white"
           printTitle="voltar">
-          <mat-icon>keyboard_backspace</mat-icon>
           Voltar
         </button>
         <button  mat-raised-button 
-        (click)='vincularProposta()' 
+        (click)=' ValidacaoProposta()' 
         class="button2"
         color="white">
-        <mat-icon>create</mat-icon>
         Vincular 
       </button>
     </div>

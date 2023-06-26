@@ -113,17 +113,19 @@ export class MaquinasComponent implements OnInit {
 
   }
 
-  populaCampo(id, obj){
-    if(obj != undefined){
-      // for(let x in document.getElementById(id).options){
-      //   let item =   document.getElementById(id).options[x];
-      //   if(item.id == obj.id){
-      //     item.selected = true;
-      //     break;
-      //   }
-      // }
+  populaCampo(id: string, obj: any) {
+    if (obj != undefined) {
+      const selectElement = document.getElementById(id) as HTMLSelectElement;
+      if (selectElement) {
+        for (let x = 0; x < selectElement.options.length; x++) {
+          let item = selectElement.options[x];
+          if (item.id == obj.id) {
+            item.selected = true;
+            break;
+          }
+        }
+      }
     }
-   
   } 
 
   getNome(event: any) {

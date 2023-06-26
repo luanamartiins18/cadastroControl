@@ -1,68 +1,57 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Candidatos } from 'src/app/models/candidato/candidatos.model';
+import { HistoricoCandidatos } from 'src/app/models/historico/historicoCandidatos/historicoCandidatos.model';
+import { HistoricoProposta } from 'src/app/models/historico/historicoProposta/historicoProposta.model';
 import { Proposta } from 'src/app/models/proposta/proposta.model';
 import { StatusCandidato } from 'src/app/models/statusCandidato/statusCandidato.model';
-import { Vagas } from 'src/app/models/vagas/vagas.model';
 import { CandidatosService } from 'src/app/services/candidatos/candidatos.service';
 import { PropostaService } from 'src/app/services/proposta/proposta.service';
 import { StatusCandidatoService } from 'src/app/services/statusCandidato/statusCandidato.service';
-import { UsuarioService } from 'src/app/services/usuario/usuario.service';
-import { VagasService } from 'src/app/services/vagas/vagas.service';
-import { Usuario } from 'src/app/models/usuario/usuario.model';
-import { Input} from '@angular/core';
-import { ErrorDialogPropostaComponent } from '../dialog/ErroDialogProposta/erroDialogProposta.component';
+import { ErrorDialogComponent } from '../../dialog/ErrorDialogComponent/erroDialog.component';
 import { MatDialog } from '@angular/material';
-import { HistoricoProposta } from 'src/app/models/historico/historicoProposta/historicoProposta.model';
+import { Usuario } from 'src/app/models/usuario/usuario.model';
+import { ErrorDialogPropostaComponent } from '../../dialog/ErroDialogProposta/erroDialogProposta.component';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 
 @Component({
-  selector: 'app-proposta',
-  templateUrl: './proposta.component.html',
-  styleUrls: ['./proposta.component.css']
+  selector: 'app-atualizar-proposta',
+  templateUrl: './atualizar-proposta.component.html',
+  styleUrls: ['./atualizar-proposta.component.css']
 })
+export class AtualizarPropostaComponent implements OnInit {
 
-export class PropostaComponent implements OnInit {
-
-id: string;
-id_proposta: string;
-proposta: Proposta = new Proposta();
-id_candidatos: string;
-form: FormGroup;
-vagas: Vagas[] = [];
-candidato: Candidatos
-listaCandidatos: Array<Candidatos>;
-listaStatusCandidato: Array<StatusCandidato>;
-vagas1:  Vagas= new Vagas(); 
-candidatos: Candidatos = new Candidatos();
-colunas = [
-  'qualitor','cargo','especialidade',  'status' 
-]
-selectAllOption1: boolean = false;
-historicoProposta: HistoricoProposta;
-
-@Input() usuario: Usuario = new Usuario;
+  @Input() usuario: Usuario = new Usuario;
+  historicoCandidatos: HistoricoCandidatos[] = [];
+  listaStatusCandidato: Array<StatusCandidato>;
+  selectAllOption1: boolean = false;
+  form: FormGroup;
+  id: string;
+  candidato: Candidatos
+  id_candidatos: string;
+  id_proposta: String;
+  historicoProposta: HistoricoProposta;
+  proposta: Proposta = new Proposta();
   constructor(
-    private vagasService: VagasService,
     public formBuilder: FormBuilder,
+    private candidatosService: CandidatosService,
     private route: ActivatedRoute,
     private router: Router,
-    private candidatosService: CandidatosService,
-    private statusCandidatoService: StatusCandidatoService,
     private propostaService: PropostaService,
     private notifier: NotifierService,
-    private usuarioService: UsuarioService,
+    private statusCandidatoService: StatusCandidatoService,
     public dialog: MatDialog,
+    private usuarioService: UsuarioService,
   ) { }
 
   ngOnInit() {
     this.montaFormBuilder();
-    this.listaRh();
-    this.getStatusCandidato();
     this.carregaUsuarios();
+    this.carregaProposta();
+    this.getStatusCandidato();
     setTimeout(()=>{
-      // this.preencheCampos();
   }, 200); 
   window.addEventListener('message', this.handleMessageEvent.bind(this));
   let re = sessionStorage.getItem('colaborador');
@@ -81,7 +70,8 @@ historicoProposta: HistoricoProposta;
     }
   }
 
-  
+
+
   carregaUsuarios() {
     this.id_candidatos = this.route.snapshot.queryParamMap.get('id_candidatos'); 
     this.candidatosService.getCandidatosId(this.id_candidatos).subscribe(
@@ -91,18 +81,19 @@ historicoProposta: HistoricoProposta;
     );
   }
 
-  listaRh(){
-    this.vagasService.getListaVagas().subscribe(
-      data => {
-      this.vagas = data;
-    });
+  private carregaProposta() {
+    this.id_proposta= this.route.snapshot.queryParamMap.get('id_proposta'); 
+    this.propostaService.getPropostaId(this.id_proposta).subscribe(
+      (candidato) => {
+        this.proposta = {...candidato!};
+      }
+    );
   }
 
   selectAllOptions1() {
     if (this.proposta.vale_refeicao) {
       this.proposta.vale_alimentacao = false; // Desabilita o campo "Vale Alimentação"
     }
-    this.proposta.vale_refeicao = this.selectAllOption1;
     this.proposta.seguro_vida = this.selectAllOption1;
     this.proposta.plano_odonto = this.selectAllOption1;
     this.proposta.plano_saude = this.selectAllOption1;
@@ -149,32 +140,6 @@ historicoProposta: HistoricoProposta;
     }
   }
 
-  
-  getDados(event: any) {
-    if(event){
-      var value = event.target.value;
-      var url = this.vagasService.getVagasQualitor(value);
-      url.subscribe(data => {
-        if(data) {
-          (<HTMLInputElement>document.getElementById("cargo")).value = data['cargo'].toString();;
-          this.vagas1.cargo = data['cargo'];
-          (<HTMLInputElement>document.getElementById("etapa")).value = data['etapa'].toString();;
-          this.vagas1.etapa = data['etapa'];
-          (<HTMLInputElement>document.getElementById("data_inicio")).value = data['data_inicio'].toString();;
-          this.vagas1.data_inicio = data['data_inicio'];
-        } else{
-          (<HTMLInputElement>document.getElementById('cargo')).value=("");
-          (<HTMLInputElement>document.getElementById('etapa')).value=("");
-          (<HTMLInputElement>document.getElementById('data_inicio')).value=("");
-        }
-      });
-      return url;
-    } 
-  }
-
-  volta(){
-    this.router.navigate(['candidato/']);
-  }
 
   private getStatusCandidato() {
     this.statusCandidatoService.getStatusCandidato().subscribe((lista) => {
@@ -182,15 +147,46 @@ historicoProposta: HistoricoProposta;
     });
   }
 
-  openErrorDialogProposta(message: string): void {
-    this.dialog.open(ErrorDialogPropostaComponent, {
-      data: { message },
-      width: '400px',
-    });
+  volta(){
+    this.router.navigate(['candidato/']);
   }
 
 
-  vincularProposta() {
+  openErrorDialog(message: string): void {
+    this.dialog.open(ErrorDialogComponent, {
+      data: { message },
+      width: '400px',
+    });
+}
+
+
+openErrorDialogProposta(message: string): void {
+  this.dialog.open(ErrorDialogPropostaComponent, {
+    data: { message },
+    width: '400px',
+  });
+}
+
+
+
+  // atualizei aqui
+
+  private atualizaProposta() {
+    this.propostaService.atualizaProposta(this.proposta).subscribe((data) => {
+      if (data.status == 200) {
+        this.notifier.notify("success", "DADOS DO CANDIDATO ATUALIZADO COM SUCESSO !");
+        this.router.navigate(['candidato']);
+      }
+      else {
+        this.notifier.notify("error", "Ocorreu um erro na atualização, por favor tente novamente.");
+      }
+    }, 
+   );
+  }
+
+
+  ValidacaoProposta() {
+   
     // Verifica se o ID do status é igual a 10 (aprovação de proposta)
     if (this.proposta.status_candidatos.id === 10) {
       const usuarioLogado = this.usuario; // Obtém o usuário logado do serviço
@@ -199,9 +195,9 @@ historicoProposta: HistoricoProposta;
       if (usuarioLogado.perfil.id === 168 || usuarioLogado.perfil.id === 169) {
         // Restante do código para vincular a proposta
         this.proposta.candidatos = this.candidato;
-        this.propostaService.insereProposta(this.proposta).subscribe((data) => {
+        this.propostaService.atualizaProposta(this.proposta).subscribe((data) => {
           if (data.status == 200) {
-            this.notifier.notify("success", "PROPOSTA VINCULADA COM SUCESSO!");
+            this.notifier.notify("success", "PROPOSTA ATUALIZADA COM SUCESSO!");
             this.router.navigate(['candidato']);
           } else {
             this.notifier.notify("error", "Ocorreu um erro ao cadastrar. Por favor, verifique os dados e tente novamente.");
@@ -214,9 +210,9 @@ historicoProposta: HistoricoProposta;
     } else {
       // Código para inserir a proposta sem a validação de perfil
       this.proposta.candidatos = this.candidato;
-      this.propostaService.insereProposta(this.proposta).subscribe((data) => {
+      this.propostaService.atualizaProposta(this.proposta).subscribe((data) => {
         if (data.status == 200) {
-          this.notifier.notify("success", "PROPOSTA VINCULADA COM SUCESSO!");
+          this.notifier.notify("success", "PROPOSTA ATUALIZADA COM SUCESSO!");
           this.router.navigate(['candidato']);
         } else {
           this.notifier.notify("error", "Ocorreu um erro ao cadastrar. Por favor, verifique os dados e tente novamente.");
@@ -226,6 +222,8 @@ historicoProposta: HistoricoProposta;
   }
 
 
+
+  
   preencheCampos(){
     this.populaCampo('select-statusCandidatos', this.proposta.status_candidatos);
     this.populaCampo('remuneracao', this.proposta.remuneracao);
@@ -246,7 +244,6 @@ historicoProposta: HistoricoProposta;
       }
     }
   }
+
+
 }
-
-
-

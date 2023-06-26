@@ -26,6 +26,7 @@ import { HomeParentComponent } from './modules/pagina-inicial/home-parent/home-p
 import { LoginGuardService } from './services/guards/AuthLogin/login-guard.service';
 import { RedefinirSenhaComponent } from './modules/login/esqueceu-senha/redefinir-senha/redefinir-senha.component';
 import { PropostaComponent } from './modules/rh/proposta/proposta.component';
+import { AtualizarPropostaComponent } from './modules/rh/proposta/atualizar-proposta/atualizar-proposta.component';
 
 
 
@@ -58,7 +59,8 @@ const routes: Routes = [
       {path: 'candidato/:id', component:DetalhesCandidatosComponent, canActivate:[AuthGuardService]},
       {path: 'candidato', component: CandidatosComponent, canActivate:[AuthGuardService]},
       {path: 'candidatodisponivel', component: CandidatosDisponivelComponent, canActivate:[AuthGuardService]},
-      {path: 'proposta', component: PropostaComponent, canActivate:[AuthGuardService],}
+      {path: 'proposta', component: PropostaComponent, canActivate:[AuthGuardService]},
+      {path: 'propostas', component: AtualizarPropostaComponent, canActivate:[AuthGuardService]},
     ]
   }
 ];
