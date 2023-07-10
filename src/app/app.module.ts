@@ -17,8 +17,6 @@ import {registerLocaleData} from '@angular/common';
 import {CurrencyPipe} from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-
-
 registerLocaleData(localePt, 'pt');
 
 @NgModule({

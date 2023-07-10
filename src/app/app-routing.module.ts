@@ -28,8 +28,6 @@ import { RedefinirSenhaComponent } from './modules/login/esqueceu-senha/redefini
 import { PropostaComponent } from './modules/rh/proposta/proposta.component';
 import { AtualizarPropostaComponent } from './modules/rh/proposta/atualizar-proposta/atualizar-proposta.component';
 
-
-
 const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate:[LoginGuardService]},
   {path: 'esqueceuSenha', component: EsqueceuSenhaComponent},

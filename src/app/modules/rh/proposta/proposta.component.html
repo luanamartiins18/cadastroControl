@@ -55,6 +55,22 @@
             type='text'
             class='form-control' />
         </div>
+        <div id="remuneracaoVagas">
+          <Label class="font-weight-bold">Remuneração</Label>
+          <input 
+            disabled class='form-control' 
+            [value]="candidato?.vagas?.remuneracao" 
+            type='text'
+            class='form-control' />
+        </div>
+        <div id="flashVagas">
+          <Label class="font-weight-bold">Flash</Label>
+          <input 
+            disabled class='form-control' 
+            [value]="candidato?.vagas?.flash" 
+            type='text'
+            class='form-control' />
+        </div>
         <div >
           <label class="font-weight-bold">Status</label>
           <select 
