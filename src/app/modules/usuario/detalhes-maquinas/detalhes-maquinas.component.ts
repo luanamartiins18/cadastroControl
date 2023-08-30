@@ -45,12 +45,8 @@ export class DetalhesMaquinasComponent implements OnInit {
       this.historico = this.historicoOriginal; // Atribui o histórico original de volta à variável 'historico'
       return;
     }
-<<<<<<< HEAD
   
     this.historico = this.historicoOriginal.filter((obj) => {
-=======
-    this.historico = this.historicoOriginal.filter(obj => {
->>>>>>> 39f8f100ff2870ec14e1f7575b1dacfc04ab1b1e
       return Object.keys(obj).find((key) => {
         return obj[key] ? ((obj[key].descricao ? obj[key].descricao : obj[key]).toString().toUpperCase()).includes(searchTerm) : false;
       });

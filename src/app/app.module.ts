@@ -11,7 +11,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { MatDialogModule } from '@angular/material';
-import { RhModule } from './modules/rh/rh.module';
 import localePt from '@angular/common/locales/pt';
 import {registerLocaleData} from '@angular/common';
 import {CurrencyPipe} from '@angular/common';
@@ -29,7 +28,6 @@ registerLocaleData(localePt, 'pt');
     UsuarioModule,
     PaginaInicialModule,
     HttpClientModule,  
-    RhModule, 
     NgSelectModule,
     MatDialogModule,
     FormsModule,
