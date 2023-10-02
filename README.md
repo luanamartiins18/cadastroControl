@@ -11,7 +11,7 @@ vscode instalado - https://code.visualstudio.com/download
 
 3- Abrir o projeto dentro do Vscode, e inicializar dando um NPM INSTALL.
 
-4-Após efetuado o NPM INSTALl com sucesso, Efetuar o NPM START. 
+4-Após efetuado o NPM INSTALL com sucesso, Efetuar o NPM START. 
 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.23.
