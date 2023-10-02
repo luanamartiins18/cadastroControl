@@ -1,4 +1,4 @@
-import { PlanoInterface } from "src/app/interfaces/PlanoInterface";
+import { PlanoInterface } from "src/app/interfaces/planoInterface";
 
 
 export class PlanoSaude implements PlanoInterface {

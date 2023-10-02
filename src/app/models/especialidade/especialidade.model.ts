@@ -1,4 +1,4 @@
-import { EspecialidadeInterface } from "src/app/interfaces/EspecialidadeInterfaces";
+import { EspecialidadeInterface } from "src/app/interfaces/EspecialidadeINterfaces";
 
 export class Especialidade implements EspecialidadeInterface {
     id: number;

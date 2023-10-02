@@ -45,7 +45,7 @@ export class EsqueceuSenhaComponent implements OnInit {
 
   recuperarSenha() {
     const codigoRe = (<HTMLInputElement>document.getElementById("codigoRe")).value ; // código de recuperação da senha, obtido a partir de um formulário na página
-    const url = `http://127.0.0.1:8080/redefinirsenha`;
+    const url = `http://192.168.2.157:4200/redefinirsenha`;
     const body = { codigoRe };
     this.http.post(url, body).subscribe(() => {
      this.addLive1()
