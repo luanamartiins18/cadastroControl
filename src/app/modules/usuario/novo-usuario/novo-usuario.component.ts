@@ -4,6 +4,15 @@ import { UsuarioService } from '../../../services/usuario/usuario.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Usuario } from 'src/app/models/usuario/usuario.model';
+import { Funcao } from 'src/app/models/cargo/funcao.model';
+import { Bu } from 'src/app/models/bu/bu.model';
+import { Tipo } from 'src/app/models/tipo/tipo.model';
+import { FuncaoService } from 'src/app/services/funcao/funcao.service';
+import { BuService } from 'src/app/services/bu/bu.service';
+import { TipoService } from 'src/app/services/tipo/tipo.service';
+import { Historico } from 'src/app/models/historico/historico.model';
+import { ContratoService } from 'src/app/services/contrato/contrato.service';
+import { Contrato } from 'src/app/models/contrato/contrato.model';
 
 @Component({
   selector: 'app-novo-usuario',
@@ -12,7 +21,11 @@ import { Usuario } from 'src/app/models/usuario/usuario.model';
 })
 export class NovoUsuarioComponent implements OnInit {
 
-
+  //historico: Historico[] = [];
+  listaContrato: Array<Contrato>;
+  listaCargo: Array<Funcao>;
+  listaBu: Array<Bu>;
+  listaTipo: Array<Tipo>;
   form: FormGroup;
   usuario: Usuario = new Usuario();
   id: any;
@@ -24,34 +37,48 @@ export class NovoUsuarioComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public formBuilder: FormBuilder,
+    private funcaoService: FuncaoService,
+    private buService: BuService,
+    private tipoService: TipoService,
+    private contratoService: ContratoService,
   ) { }
 
   ngOnInit() {
     this.montaFormBuilder();
     this.carregaUsuarios();
     this.getCEP(this.usuario.cep);
+    this.getCargos();
+    this.getBu();
+    this.getTipo();
+    this.getContrato();
+
   }
 
 
   private montaFormBuilder() {
     this.form = this.formBuilder.group({
-      nome: [this.usuario.nome, [Validators.required]],
-      celular: [this.usuario.celular, [Validators.required]],
-      cpf: [this.usuario.cpf, [Validators.required]],
-      data_nascimento:[this.usuario.data_nascimento, [Validators.required]],
-      rg: [this.usuario.rg, [Validators.required]],
-      data_emissao: [this.usuario.data_emissao, [Validators.required]],
-      org_emissor:[this.usuario.org_emissor, [Validators.required]],
-      cep: [this.usuario.cep, [Validators.required, ]],
-      endereco: [this.usuario.endereco, [Validators.required]],
-      cidade: [this.usuario.cidade, [Validators.required]],
-      uf: [this.usuario.uf, [Validators.required]],
-      email: [this.usuario.email, [Validators.required]],
-      codigoRe: [this.usuario.codigoRe, [Validators.required]],
-      numero: [this.usuario.numero, [Validators.required]],
-      complemento: [this.usuario.complemento, [Validators.required]],
-      data_inicio:[this.usuario.data_inicio, [Validators.required]],
+      nome: [this.usuario.nome],
+      celular: [this.usuario.celular],
+      cpf: [this.usuario.cpf],
+      data_nascimento:[this.usuario.data_nascimento],
+      rg: [this.usuario.rg],
+      data_emissao: [this.usuario.data_emissao],
+      org_emissor:[this.usuario.org_emissor],
+      cep: [this.usuario.cep],
+      endereco: [this.usuario.endereco],
+      cidade: [this.usuario.cidade],
+      uf: [this.usuario.uf ],
+      email: [this.usuario.email, ],
+      emailPessoal: [this.usuario.emailPessoal, ],
+      codigoRe: [this.usuario.codigoRe],
+      numero: [this.usuario.numero],
+      complemento: [this.usuario.complemento],
+      data_inicio:[this.usuario.data_inicio],
       data_final: [this.usuario.data_inicio],
+      cargo:[this.usuario.cargo],
+      bu: [this.usuario.bu],
+      tipo:[this.usuario.tipo],
+      contrato: [this.usuario.contrato],
     });
   }
 
@@ -100,6 +127,25 @@ export class NovoUsuarioComponent implements OnInit {
       );
     }
   }
+
+
+  private getCargos() {
+    this.funcaoService.getCargo().subscribe((lista) => {
+      this.listaCargo = lista;
+    });
+  }
+
+  private getBu() {
+    this.buService.getBu().subscribe((lista) => {
+      this.listaBu = lista;
+    });
+  }
+
+  private getTipo() {
+    this.tipoService.getTipo().subscribe((lista) => {
+      this.listaTipo = lista;
+    });
+  }
  
   submit() {
     if (this.form.invalid) {
@@ -136,4 +182,28 @@ export class NovoUsuarioComponent implements OnInit {
     }, 
    );
   }
+
+  private getContrato() {
+    this.contratoService.getContrato().subscribe((lista) => {
+      this.listaContrato = lista;
+     
+    });
+  }
+
+
+  //atualizarListaCargos() {
+    //let listaCargoHistorico = [];
+    //let arrIdsHistorico = [];
+  
+    //this.historico.forEach((historico) =>{
+      //arrIdsHistorico.push(historico.cargo.id);
+    //})
+     //this.listaCargo.forEach((cargo) => {
+      //if(!arrIdsHistorico.includes(cargo.id)){
+        //listaCargoHistorico.push(cargo);
+      //}
+    //})
+    //this.listaCargo = listaCargoHistorico;
+  //}
+ 
 }

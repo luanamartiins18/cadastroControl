@@ -18,10 +18,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { CpfPipe } from '../../../pipe/cpf.pipe';
 import { MatGridListModule } from '@angular/material';
-import { CargoComponent } from './cargo/cargo.component';
 import { MatIconModule } from '@angular/material/icon';
 import { RelatorioComponent } from './relatorio/relatorio.component';
-import { ContratoComponent } from './contrato/contrato.component';
 import { NgxPrintModule } from 'ngx-print';
 import { HttpClientModule } from '@angular/common/http';
 import { MaquinasComponent } from './maquinas/maquinas.component'
@@ -49,8 +47,6 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     PrimeiroAcessoComponent,
     UsuariosComponent, 
     DetalhaUsuarioComponent, 
-    CargoComponent,
-    ContratoComponent, 
     RelatorioComponent, 
     MaquinasComponent,
     DetalhesMaquinasComponent,

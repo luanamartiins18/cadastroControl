@@ -32,10 +32,11 @@ export class RelatorioComponent implements OnInit {
     this.getContrato();
     this.mostrarGerarPDF = false;
   }
-
-  listaUsuariosPorOperacao(event: any) {
+  
+  listaUsuariosPorOperacao() {
     this.mostrarGerarPDF = true;
-    this.us.getListaUsuariosPorOperacao(event.target.value).subscribe(
+    const selectedContratoId = this.form.get('contrato').value;
+    this.us.getListaUsuariosPorOperacao(selectedContratoId).subscribe(
       data => {
         if (Array.isArray(data) && data.length > 0) {
           this.usuarios = data; // Se houver dados, popula o array 'usuarios'
@@ -50,8 +51,8 @@ export class RelatorioComponent implements OnInit {
       }
     );
   }
-  
 
+  
   PrintSimplesPDF(){
     let titulo = document.getElementById('divTitulo');
     let divDemandaOperacao = document.getElementById('divDemandaOperacao');

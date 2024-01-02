@@ -12,6 +12,7 @@ import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 })
 export class DetalhesMaquinasComponent implements OnInit {
 
+  usuariosOriginal: Usuario[] = [];
   historico: HistoricoMaquinas[] = [];
   historicoOriginal: HistoricoMaquinas[] = [];
   usuarios: Usuario[] = [];
@@ -26,19 +27,18 @@ export class DetalhesMaquinasComponent implements OnInit {
 
     }
 
-  ngOnInit() {
-    this.us.getListaHistorico().subscribe(
-      data => {
-      this.historicoOriginal = data;
-      this.historico = data;
-    });
-  }
-
+    ngOnInit() {
+      this.us.getListaHistorico().subscribe(
+        data => {
+        this.historicoOriginal = data;
+        this.historico = data;
+      });
+    }
+  
   AtualizarMaquinas(row: { id: string; }) {
     this.router.navigate(['/../detalhesMaquinas/' + row.id]);
   }
 
- 
   searchAllField(event: any) {
     const searchTerm = event.target.value.toUpperCase();
     if (searchTerm === '') {
@@ -53,6 +53,7 @@ export class DetalhesMaquinasComponent implements OnInit {
     });
   }
 }
+
 
 
 

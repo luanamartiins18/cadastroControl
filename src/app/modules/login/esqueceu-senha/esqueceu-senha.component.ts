@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
@@ -42,18 +42,39 @@ export class EsqueceuSenhaComponent implements OnInit {
   volta(){
     this.router.navigate(['login/']);
   }
-
+  
   recuperarSenha() {
-    const codigoRe = (<HTMLInputElement>document.getElementById("codigoRe")).value ; // código de recuperação da senha, obtido a partir de um formulário na página
-    const url = `http://192.168.2.157:4200/redefinirsenha`;
-    const body = { codigoRe };
-    this.http.post(url, body).subscribe(() => {
-     this.addLive1()
-    }, (error) => {
-      if (error.status === 500) {
-      this.addLive()
+    const codigoRe = (<HTMLInputElement>document.getElementById("codigoRe")).value;
+    console.log("console1", codigoRe);
+  
+    const url = `http://192.168.2.55:4200/redefinirsenha`;
+  
+    // Enviar o valor diretamente como string
+    this.http.post(url, { codigoRe: codigoRe }).subscribe(
+      (response) => {
+        console.log("Resposta do backend:", response);
+        this.addLive1();
+      },
+      (error) => {
+        console.error("Erro durante a requisição:", error);
+        if (error.status === 500) {
+          console.log("Erro 500 no backend");
+          this.addLive();
+        }
+      },
+      () => {
+        console.log("Executado mesmo sem resposta do servidor");
       }
-    });
+    );
+  }
+  
+  
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.recuperarSenha();
+    }
   }
 
 

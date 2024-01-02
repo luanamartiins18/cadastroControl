@@ -11,17 +11,6 @@
         <i class="fa fa-user-plus" aria-hidden="true"></i>
           Cadastro
       </a>
-    <li class="nav-item">
-      <a [routerLink]="['/../funcao']" class="nav-link active">
-        <i class="fa fa-user-plus" aria-hidden="true"></i>
-        Função
-      </a>
-    </li>
-    <li class="nav-item">
-      <a [routerLink]="['/../contrato']" class="nav-link active">
-          <i class="fa fa-user-plus" aria-hidden="true"></i>
-            Contrato
-      </a>
     </li>
     <li class="nav-item">
       <a [routerLink]="['/../relatorio']" class="nav-link active">
@@ -222,7 +211,7 @@
           <td mat-cell *matCellDef="let element"> {{element.data_final | date : 'dd/MM/yyyy'}} </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="colunas1; sticky: true"></tr>
-        <tr class='custom-row' mat-row *matRowDef="let row; columns: colunas1;"></tr>'
+        <tr (click)='AtualizarMaquinas(row);' class='custom-row' mat-row *matRowDef="let row; columns: colunas1;"></tr>'
       </ng-container>
     </table>
   </div>

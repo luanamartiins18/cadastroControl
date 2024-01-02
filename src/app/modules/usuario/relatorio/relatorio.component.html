@@ -11,17 +11,6 @@
         <i class="fa fa-user-plus" aria-hidden="true"></i>
           Cadastro
       </a>
-    <li class="nav-item">
-      <a [routerLink]="['/../funcao']" class="nav-link active">
-        <i class="fa fa-user-plus" aria-hidden="true"></i>
-        Função
-      </a>
-    </li>
-    <li class="nav-item">
-      <a [routerLink]="['/../contrato']" class="nav-link active">
-          <i class="fa fa-user-plus" aria-hidden="true"></i>
-            Contrato
-      </a>
     </li>
     <li class="nav-item">
       <a [routerLink]="['/../relatorio']" class="nav-link active">
@@ -55,7 +44,7 @@
       <select 
       formControlName='contrato' 
       class='form-control' 
-      (blur)="listaUsuariosPorOperacao($event)"
+      (change)="listaUsuariosPorOperacao()"
       [(ngModel)]=" usuario.contrato">
       <option [value]="item.id"  
       class='form-control' 

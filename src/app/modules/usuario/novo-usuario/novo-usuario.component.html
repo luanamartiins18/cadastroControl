@@ -11,17 +11,6 @@
         <i class="fa fa-user-plus" aria-hidden="true"></i>
           Cadastro
       </a>
-    <li class="nav-item">
-      <a [routerLink]="['/../funcao']" class="nav-link active">
-        <i class="fa fa-user-plus" aria-hidden="true"></i>
-        Função
-      </a>
-    </li>
-    <li class="nav-item">
-      <a [routerLink]="['/../contrato']" class="nav-link active">
-          <i class="fa fa-user-plus" aria-hidden="true"></i>
-            Contrato
-      </a>
     </li>
     <li class="nav-item">
       <a [routerLink]="['/../relatorio']" class="nav-link active">
@@ -48,7 +37,7 @@
       </a>
     </li>
 </ul>
-  <form [formGroup]='form'>
+ <form [formGroup]='form'>
     <div class='container'>  
         <div  id="codigoRe">
           <Label class="font-weight-bold">Matrícula</Label>  
@@ -130,6 +119,16 @@
             class='form-control'
             style="width: 790px" />
         </div> 
+            <!-- input email -->
+            <div id="email">
+              <Label class="font-weight-bold">E-mail Pessoal</Label>
+              <input 
+                formControlName='emailPessoal'
+                [(ngModel)]='usuario.emailPessoal' 
+                type='email' 
+                class='form-control'
+                style="width: 790px" />
+            </div> 
     </div>
     <div class='container '>  
       <!-- input celular -->
@@ -217,8 +216,8 @@
           <div id="data_inicio">
             <Label class="font-weight-bold">Data Inicio</Label>
             <input 
-            formControlName='data_inicio' 
-            [(ngModel)]='usuario.data_inicio' 
+            formControlName= "data_inicio" 
+            [ngModel]="usuario.data_inicio | date:'dd/MM/yyyy'"
             type='date'
             class='form-control' />
           </div>
@@ -230,6 +229,86 @@
             type='date'
             class='form-control' />
           </div>
+               <!-- input tipo -->
+               <div id='tipo'>
+                <label class="font-weight-bold">Tipo</label>
+                <select 
+                formControlName='tipo' 
+                class='form-control' 
+                [(ngModel)]="usuario.tipo">
+                <option [ngValue]="item"
+                 class='form-control' 
+                 [selected]=" usuario.tipo && usuario.tipo.id==item.id"
+                    *ngFor='let item of this.listaTipo'>{{item.descricao}}</option>
+                </select>
+              </div>
+              <!-- input bu -->
+              <div id='bu'>
+                <label class="font-weight-bold">Área Negócio</label>
+                <select 
+                formControlName='bu' 
+                class='form-control' 
+                [(ngModel)]="usuario.bu">
+                <option [ngValue]="item"
+                 class='form-control' 
+                 [selected]=" usuario.bu && usuario.bu.id==item.id"
+                    *ngFor='let item of this.listaBu'>{{item.descricao}}</option>
+                </select>
+            </div>
+            <div id='cargo'>
+              <label class="font-weight-bold">Cargo</label>
+                <select 
+                formControlName='cargo' 
+                class='form-control' 
+                [(ngModel)]="usuario.cargo">
+                <option [ngValue]="item"
+                  type='text'
+                  [selected]=" usuario.cargo && usuario.cargo.id==item.id"
+                  *ngFor='let item of this.listaCargo'>{{item.descricao}} </option>
+                </select>
+            </div>
+
+                       <!-- input contrato/operacao -->
+           <div id='contrato'>
+            <label class="font-weight-bold">Operacão</label>
+            <select 
+            formControlName='contrato' 
+            class='form-control' 
+            [(ngModel)]="usuario.contrato">
+            <option [ngValue]="item"
+             class='form-control' 
+             [selected]=" usuario.contrato && usuario.contrato.id==item.id"
+                *ngFor='let item of this.listaContrato'>{{item.operacao}}</option>
+            </select>
+          </div>
+          <div id="cliente">
+            <Label class="font-weight-bold">Cliente</Label>
+            <input 
+              disabled class='form-control' 
+              value={{usuario?.contrato?.cliente}} 
+              type='text'
+              class='form-control' />
+          </div>
+          <div id="demanda">
+            <Label class="font-weight-bold">Demanda</Label>
+            <input 
+              disabled class='form-control' 
+              value={{usuario?.contrato?.demanda}} 
+              type='text'
+              class='form-control' />
+          </div>
+          <div id="centro">
+            <Label class="font-weight-bold">Centro de Custo</Label>
+            <input 
+              disabled class='form-control' 
+              value={{usuario?.contrato?.centro}} 
+              type='text'
+              class='form-control' />
+          </div>
+
+
+
+
           <section>
             <div class="example-button-row">
               <button mat-raised-button 

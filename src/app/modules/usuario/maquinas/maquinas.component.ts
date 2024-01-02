@@ -97,8 +97,8 @@ export class MaquinasComponent implements OnInit {
       this.usuarioService.getListaHistoricoMaquinasRe(this.usuario.codigoRe).subscribe(
         data => {
         this.historico = data;
-        this.mostrarAtualizar = true;
-        this.mostrarInserir = false;
+        this.mostrarAtualizar = false;
+        this.mostrarInserir = true;
         this.mostrarTabela= true;
       });
     }
@@ -146,12 +146,12 @@ export class MaquinasComponent implements OnInit {
   private montaFormBuilder() {
     this.form = this.formBuilder.group({
       codigoRe: [this.usuario.codigoRe],
-      modelo:[this.historicoMaquinas.modelo,[Validators.required]],
-      equipamento: [this.historicoMaquinas.equipamento,[Validators.required]],
-      memoria:[this.historicoMaquinas.memoria,[Validators.required]],
-      tag: [this.historicoMaquinas.tag,[Validators.required]],
-      patrimonio: [this.historicoMaquinas.patrimonio,[Validators.required]],
-      data_inicio:[this.historicoMaquinas.data_inicio,[Validators.required]],
+      modelo:[this.historicoMaquinas.modelo],
+      equipamento: [this.historicoMaquinas.equipamento],
+      memoria:[this.historicoMaquinas.memoria],
+      tag: [this.historicoMaquinas.tag],
+      patrimonio: [this.historicoMaquinas.patrimonio],
+      data_inicio:[this.historicoMaquinas.data_inicio],
       data_final: [this.historicoMaquinas.data_final]
 
     });
@@ -231,6 +231,9 @@ private carregaUsuarios() {
       }
     );
   }
-
-}
+  }
+  
+  AtualizarMaquinas(row: { id: string; }) {
+    this.router.navigate(['/../detalhesMaquinas/' + row.id]);
+  }
 }

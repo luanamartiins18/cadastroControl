@@ -11,17 +11,6 @@
         <i class="fa fa-user-plus" aria-hidden="true"></i>
           Cadastro
       </a>
-    <li class="nav-item">
-      <a [routerLink]="['/../funcao']" class="nav-link active">
-        <i class="fa fa-user-plus" aria-hidden="true"></i>
-        Função
-      </a>
-    </li>
-    <li class="nav-item">
-      <a [routerLink]="['/../contrato']" class="nav-link active">
-          <i class="fa fa-user-plus" aria-hidden="true"></i>
-            Contrato
-      </a>
     </li>
     <li class="nav-item">
       <a [routerLink]="['/../relatorio']" class="nav-link active">
@@ -133,6 +122,17 @@
                   class='form-control' 
                 />
               </div>
+                   <!-- input email pessoal-->
+              <div  id="emailPessoal">
+                <Label class="font-weight-bold">E-mail Pessoal</Label>
+                <input 
+                  disabled class='form-control' 
+                  value={{usuario?.emailPessoal}} 
+                  type='text' 
+                  style="width: 730px" 
+                  class='form-control' 
+                />
+              </div>
            <!-- input celular -->
                 <div  >
                   <Label class="font-weight-bold">Celular</Label>
@@ -214,6 +214,63 @@
                 type='text'
                 class='form-control' 
               />
+            </div>
+            <div >
+              <Label class="font-weight-bold">Tipo</Label>
+              <input 
+                disabled class='form-control' 
+                value={{usuario?.tipo?.descricao}} 
+                type='text'
+                class='form-control' />
+            </div> 
+            <div >
+              <Label class="font-weight-bold">Área Negócio</Label>
+              <input 
+                disabled class='form-control' 
+                value={{usuario?.bu?.descricao}} 
+                type='text'
+                class='form-control' />
+            </div> 
+            <div >
+              <Label class="font-weight-bold">Cargo</Label>
+              <input 
+                disabled class='form-control' 
+                value={{usuario?.cargo?.descricao}} 
+                type='text'
+                class='form-control' />
+            </div> 
+            <div >
+              <Label class="font-weight-bold">Operação</Label>
+              <input 
+                disabled class='form-control' 
+                style="width: 730px" 
+                value={{usuario?.contrato?.operacao}} 
+                type='text'
+                class='form-control' />
+            </div> 
+            <div id="cliente">
+              <Label class="font-weight-bold">Cliente</Label>
+              <input 
+                disabled class='form-control' 
+                value={{usuario?.contrato?.cliente}} 
+                type='text'
+                class='form-control' />
+            </div>
+            <div id="demanda">
+              <Label class="font-weight-bold">Demanda</Label>
+              <input 
+                disabled class='form-control' 
+                value={{usuario?.contrato?.demanda}} 
+                type='text'
+                class='form-control' />
+            </div>
+            <div id="centro">
+              <Label class="font-weight-bold">Centro de Custo</Label>
+              <input 
+                disabled class='form-control' 
+                value={{usuario?.contrato?.centro}} 
+                type='text'
+                class='form-control' />
             </div>
             <div class="container">
               <div class="example-button-row">

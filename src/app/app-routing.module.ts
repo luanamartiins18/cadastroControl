@@ -4,8 +4,6 @@ import { UsuariosComponent } from './modules/usuario/usuarios/usuarios.component
 import { DefaultComponent } from './modules/pagina-inicial/default/default.component';
 import { NovoUsuarioComponent } from './modules/usuario/novo-usuario/novo-usuario.component';
 import { DetalhaUsuarioComponent } from './modules/usuario/detalha-usuario/detalha-usuario.component';
-import { CargoComponent } from './modules/usuario/cargo/cargo.component';
-import { ContratoComponent } from './modules/usuario/contrato/contrato.component';
 import { RelatorioComponent } from './modules/usuario/relatorio/relatorio.component';
 import { MaquinasComponent } from './modules/usuario/maquinas/maquinas.component';
 import { DetalhesMaquinasComponent } from './modules/usuario/detalhes-maquinas/detalhes-maquinas.component';
@@ -32,8 +30,6 @@ const routes: Routes = [
       {path: 'usuarios/:id', component: DetalhaUsuarioComponent,canActivate:[AuthGuardService]},
       {path: 'novo-usuario/:id', component: NovoUsuarioComponent,canActivate:[AuthGuardService]},
       {path: 'novo-usuario', component: NovoUsuarioComponent,canActivate:[AuthGuardService]},
-      {path: 'funcao', component:CargoComponent, canActivate:[AuthGuardService]},
-      {path: 'contrato', component:ContratoComponent, canActivate:[AuthGuardService]},
       {path: 'relatorio', component:RelatorioComponent,canActivate:[AuthGuardService]},
       {path: 'detalhesMaquinas', component: DetalhesMaquinasComponent,canActivate:[AuthGuardService]},
       {path: 'detalhesMaquinas/:id',component: AtualizarMaquinasComponent,canActivate:[AuthGuardService]},
