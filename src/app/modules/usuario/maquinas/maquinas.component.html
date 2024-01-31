@@ -133,6 +133,20 @@
                 type='date'
                 class='form-control' />
               </div>
+              <div id='statusMaquina'>
+                <label class="font-weight-bold">Status</label>
+                <select 
+                id="select-StausMaquina"
+                formControlName='statusMaquina' 
+                class='form-control' 
+                [(ngModel)]="historicoMaquinas.statusMaquina">
+                <option [ngValue]="item"
+                id="{{item.id}}"
+                class='form-control' 
+                [selected]="historicoMaquinas.statusMaquina && historicoMaquinas.statusMaquina.id==item.id"
+                *ngFor='let item of this.ListaStatusMaquina'>{{item.descricao}}</option>
+                </select>
+            </div>
                <!-- data devolução -->
               <div id="data_final" *ngIf="mostrarAtualizar"  >
                 <Label class="font-weight-bold">Data de Devolução</Label>

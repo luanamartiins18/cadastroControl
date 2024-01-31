@@ -3,6 +3,7 @@ import { Equipamento } from "../../equipamento/equipamento.model";
 import { Memoria } from "../../memoria/memoria.model";
 import { Modelo } from "../../modelo/modelo.model";
 import { Usuario } from "../../usuario/usuario.model";
+import { StatusMaquina } from "../../statusMaquina/statusMaquina.model";
 
 export class HistoricoMaquinas implements HistoricoMaquinasInterface {
     id?: number;
@@ -14,7 +15,8 @@ export class HistoricoMaquinas implements HistoricoMaquinasInterface {
     memoria?: Memoria;
     patrimonio?: string;
     tag?: string;
-    usuario?: Usuario
+    usuario?: Usuario;
+    statusMaquina?: StatusMaquina;
   
     constructor(
       id?: number,
@@ -26,7 +28,8 @@ export class HistoricoMaquinas implements HistoricoMaquinasInterface {
       memoria?: Memoria,
       patrimonio?: string,
       tag?: string,
-      usuario?: Usuario
+      usuario?: Usuario,
+      statusMaquina?: StatusMaquina
      
     ) { }
   }

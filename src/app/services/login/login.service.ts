@@ -37,4 +37,10 @@ export class LoginService {
     return this.http.post(environment.api + "validaUsuario", parametros, { headers: httpOptions.headers, observe: 'response' });
   }
 
+  redefinirSenha(codigo: string) {
+    const body = { codigo: codigo };
+    return this.http.post(environment.api + "redefinirsenha", body, { headers: httpOptions.headers, observe: 'response' });
+  }
+  
+  
 }

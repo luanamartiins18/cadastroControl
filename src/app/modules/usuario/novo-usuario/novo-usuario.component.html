@@ -213,11 +213,11 @@
               [(ngModel)]='usuario.complemento'
               />
           </div>   
-          <div id="data_inicio">
+          <div id="data_inicio" >
             <Label class="font-weight-bold">Data Inicio</Label>
             <input 
-            formControlName= "data_inicio" 
-            [ngModel]="usuario.data_inicio | date:'dd/MM/yyyy'"
+            formControlName='data_inicio' 
+            [(ngModel)]='usuario.data_inicio' 
             type='date'
             class='form-control' />
           </div>

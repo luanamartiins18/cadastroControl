@@ -11,6 +11,8 @@ import { Memoria } from 'src/app/models/memoria/memoria.model';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { HistoricoMaquinas } from 'src/app/models/historico/historicoMaquinas/historicoMaquinas.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { StatusMaquina } from 'src/app/models/statusMaquina/statusMaquina.model';
+import { StatusMaquinaService } from 'src/app/services/statusMaquina/statusMaquina.service';
 
 
 @Component({
@@ -26,6 +28,7 @@ export class MaquinasComponent implements OnInit {
   historicoMaquinas: HistoricoMaquinas = new HistoricoMaquinas();
   usuario: Usuario = new Usuario();
   listaModelo: Array<Modelo>;
+  ListaStatusMaquina: Array<StatusMaquina>;
   listaEquipamento: Array<Equipamento>;
   listaMemoria: Array<Memoria>;
   usuarios: Usuario[] = [];
@@ -53,6 +56,7 @@ export class MaquinasComponent implements OnInit {
     private router: Router,
     private memoriaService: MemoriaService,
     private notifier: NotifierService,
+    private statusService: StatusMaquinaService,
   ) { }
 
   ngOnInit() {
@@ -61,6 +65,7 @@ export class MaquinasComponent implements OnInit {
     this.getMemoria();
     this.getEquipamento();
     this.getModelo();
+    this.getStatusMaquina();
     this.mostrarhistoricoMaquinas();
     this.mostrarInserir= true;
     this.aparecer = true;
@@ -152,7 +157,8 @@ export class MaquinasComponent implements OnInit {
       tag: [this.historicoMaquinas.tag],
       patrimonio: [this.historicoMaquinas.patrimonio],
       data_inicio:[this.historicoMaquinas.data_inicio],
-      data_final: [this.historicoMaquinas.data_final]
+      data_final: [this.historicoMaquinas.data_final],
+      statusMaquina: [this.historicoMaquinas.statusMaquina],
 
     });
   }
@@ -163,7 +169,13 @@ export class MaquinasComponent implements OnInit {
     });
   }
 
- 
+  private getStatusMaquina() {
+    this.statusService.getStatusMaquinas().subscribe((lista) => {
+      this.ListaStatusMaquina = lista;
+    });
+  }
+
+  
   private getEquipamento() {
     this.equipamentoService.getEquipamento().subscribe((lista) => {
       this.listaEquipamento = lista;

@@ -74,7 +74,7 @@ export class NovoUsuarioComponent implements OnInit {
       numero: [this.usuario.numero],
       complemento: [this.usuario.complemento],
       data_inicio:[this.usuario.data_inicio],
-      data_final: [this.usuario.data_inicio],
+      data_final:[this.usuario.data_final],
       cargo:[this.usuario.cargo],
       bu: [this.usuario.bu],
       tipo:[this.usuario.tipo],
@@ -175,6 +175,7 @@ export class NovoUsuarioComponent implements OnInit {
       if (data.status == 200) {
         this.notifier.notify("success", "Usuario atualizado com sucesso!");
         this.router.navigate(['usuarios']);
+
       }
       else {
         this.notifier.notify("error", "Ocorreu um erro na atualização, por favor tente novamente.");

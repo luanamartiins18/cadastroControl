@@ -1,6 +1,7 @@
 import { Equipamento } from "../models/equipamento/equipamento.model";
 import { Memoria } from "../models/memoria/memoria.model";
 import { Modelo } from "../models/modelo/modelo.model";
+import { StatusMaquina } from "../models/statusMaquina/statusMaquina.model";
 import { Usuario } from "../models/usuario/usuario.model";
 
 export interface HistoricoMaquinasInterface {
@@ -14,5 +15,6 @@ export interface HistoricoMaquinasInterface {
     memoria?: Memoria;
     tag?: string;
     usuario?: Usuario;
+    statusMaquina?: StatusMaquina;
     
 }
