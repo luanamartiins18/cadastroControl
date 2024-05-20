@@ -48,23 +48,23 @@
         </ng-container>
         <ng-container matColumnDef="codigoRe">
           <th mat-header-cell *matHeaderCellDef>MATRÍCULA</th>
-          <td mat-cell *matCellDef="let element"> {{element.usuario.codigoRe}} </td>
+          <td mat-cell *matCellDef="let element"> {{element?.usuario.codigoRe}} </td>
         </ng-container>
         <ng-container matColumnDef="equipamento">
           <th mat-header-cell *matHeaderCellDef>EQUIPAMENTO</th>
-          <td mat-cell *matCellDef="let element"> {{element.equipamento?.descricao}} </td>
+          <td mat-cell *matCellDef="let element"> {{element?.usuario?.equipamento?.descricao}} </td>
         </ng-container>
         <ng-container matColumnDef="modelo">
           <th mat-header-cell *matHeaderCellDef>MODELO</th>
-          <td mat-cell *matCellDef="let element"> {{element.modelo?.descricao}} </td>
+          <td mat-cell *matCellDef="let element"> {{element?.usuario?.modelo?.descricao}} </td>
         </ng-container>
         <ng-container matColumnDef="memoria">
           <th mat-header-cell *matHeaderCellDef>MEMÓRIA</th>
-          <td mat-cell *matCellDef="let element"> {{element.memoria?.descricao}} </td>
+          <td mat-cell *matCellDef="let element"> {{element?.usuario?.memoria?.descricao}} </td>
         </ng-container>
         <ng-container matColumnDef="patrimonio">
           <th mat-header-cell *matHeaderCellDef>PATRIMÔNIO</th>
-          <td mat-cell *matCellDef="let element"> {{element?.patrimonio}} </td>
+          <td mat-cell *matCellDef="let element"> {{element?.usuario?.patrimonio}} </td>
         </ng-container>
         <ng-container matColumnDef="tag">
           <th mat-header-cell *matHeaderCellDef>Service Tag/IMEI </th>

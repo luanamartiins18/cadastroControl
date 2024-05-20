@@ -23,7 +23,7 @@ export class Usuario implements UsuarioInterface {
   data_nascimento?: Date;
   data_emissao?: Date;
   email?: string;
-  emailPessoal?: string;
+  email_pessoal?: string;
   cpf?: string;
   codigoRe?: string;
   status?: string;
@@ -59,7 +59,7 @@ export class Usuario implements UsuarioInterface {
     data_emissao?: Date,
     endereco?: string,
     email?: string,
-    emailPessol?: string,
+    email_pessol?: string,
     cpf: string = "",
     codigoRe?: string,
     status?: string,

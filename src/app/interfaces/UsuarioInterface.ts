@@ -20,6 +20,7 @@ export interface UsuarioInterface {
   data_emissao?: Date;
   cep?: string;
   email?: string;
+  email_pessoal?: string;
   cpf?: string;
   codigoRe?: string;
   status?: string;

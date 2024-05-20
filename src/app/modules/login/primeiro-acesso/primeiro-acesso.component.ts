@@ -64,7 +64,7 @@ export class PrimeiroAcessoComponent implements OnInit {
 
   recuperarSenha() {
     const codigoRe = (<HTMLInputElement>document.getElementById("codigoRe")).value ; // código de recuperação da senha, obtido a partir de um formulário na página
-    const url = `http://192.168.2.55:4200/redefinirsenha`;
+    const url = `http://10.55.49.19:4200/redefinirsenha`;
     const body = { codigoRe };
     this.http.post(url, body).subscribe(() => {
      this.addLive1()

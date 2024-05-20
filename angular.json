@@ -76,7 +76,7 @@
           "options": {
             "browserTarget": "ger-demandas-ui:build",
             "port": 8080,
-            "host": "192.168.2.55",
+            "host": "10.55.49.19",
             "disableHostCheck": true
           },
           "configurations": {

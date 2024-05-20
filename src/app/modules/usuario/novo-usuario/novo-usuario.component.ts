@@ -69,7 +69,7 @@ export class NovoUsuarioComponent implements OnInit {
       cidade: [this.usuario.cidade],
       uf: [this.usuario.uf ],
       email: [this.usuario.email, ],
-      emailPessoal: [this.usuario.emailPessoal, ],
+      email_pessoal: [this.usuario.email_pessoal],
       codigoRe: [this.usuario.codigoRe],
       numero: [this.usuario.numero],
       complemento: [this.usuario.complemento],
@@ -148,9 +148,7 @@ export class NovoUsuarioComponent implements OnInit {
   }
  
   submit() {
-    if (this.form.invalid) {
-      this.notifier.notify("error", " Todos os ampos devem ser preenchidos corretamente!");
-    }  else if(this.id){
+     if(this.id){
         this.atualizaUsuario();
       } else {
         this.insereUsuario();
